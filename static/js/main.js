@@ -182,7 +182,14 @@ function initQuiz() {
             quizData.message = quizForm.querySelector('textarea[name="message"]').value;
 
             try {
-                const response = await fetch('/api/quiz-lead/', {
+                
+        // GitHub Pages Demo Mode: Return simulated success if on static host
+        if (window.location.hostname.includes('github.io') || window.location.protocol === 'file:') {
+            await new Promise(r => setTimeout(r, 600));
+            res = { success: true };
+        } else {
+        
+            const response = await fetch('/api/quiz-lead/', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -192,6 +199,7 @@ function initQuiz() {
                 });
 
                 const res = await response.json();
+        }
                 if (res.success) {
                     quizEl.querySelector('.quiz-body-wrap').innerHTML = `
                         <div style="text-align: center; padding: 3rem 1rem;">
@@ -263,7 +271,14 @@ function initSampleBoxModal() {
             };
 
             try {
-                const response = await fetch('/api/sample-box/', {
+                
+        // GitHub Pages Demo Mode: Return simulated success if on static host
+        if (window.location.hostname.includes('github.io') || window.location.protocol === 'file:') {
+            await new Promise(r => setTimeout(r, 600));
+            res = { success: true };
+        } else {
+        
+            const response = await fetch('/api/sample-box/', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -273,6 +288,7 @@ function initSampleBoxModal() {
                 });
 
                 const res = await response.json();
+        }
                 if (res.success) {
                     modal.classList.remove('active');
                     showToast('Кейс с образцами успешно заказан! Мы отправим трек-номер в WhatsApp.');
@@ -337,7 +353,14 @@ function initLightbox() {
             };
 
             try {
-                const response = await fetch('/api/quiz-lead/', {
+                
+        // GitHub Pages Demo Mode: Return simulated success if on static host
+        if (window.location.hostname.includes('github.io') || window.location.protocol === 'file:') {
+            await new Promise(r => setTimeout(r, 600));
+            res = { success: true };
+        } else {
+        
+            const response = await fetch('/api/quiz-lead/', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -346,6 +369,7 @@ function initLightbox() {
                     body: JSON.stringify(payload)
                 });
                 const res = await response.json();
+        }
                 if (res.success) {
                     modal.classList.remove('active');
                     showToast('Запрос на бронирование отправлен! Мы свяжемся с вами в течение 15 минут.');
