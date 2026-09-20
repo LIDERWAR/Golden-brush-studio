@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="KrduMHW0QNWY02cBN6uTl5X69VxGSY1UPMCAGozQCc7SqfLhmBmc8J0vSnyp3vlM">
+    <title>Арт-Галерея Александра Попыкина — Оригинальная живопись и скульптурная керамика</title>
+    <meta name="description" content="Официальная онлайн-экспозиция художника Александра Попыкина. Коллекционные полотна, скульптурная керамика, графика. Условия приобретения для частных коллекций.">
+    
+    <!-- Design System CSS -->
+    <link rel="stylesheet" href="static/css/style.css?v=20260919-2120">
+    
+    <!-- Favicon / FontAwesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-inner">
+            <a href="index.html" class="brand-logo">
+                <span class="brand-title">GB STUDIO</span>
+                <span class="brand-subtitle">Atelier & Fit-Out</span>
+            </a>
+
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html#cases" class="nav-link">Объекты & Fit-Out</a></li>
+                    <li><a href="index.html#sectors" class="nav-link">Для предприятий</a></li>
+                    <li><a href="index.html#sample-box" class="nav-link">Sample Box</a></li>
+                    <li><a href="gallery.html" class="nav-link active">Арт-Галерея</a></li>
+                    <li><a href="index.html#atelier" class="nav-link">О мастере</a></li>
+                    <li><a href="index.html#contacts" class="nav-link">Контакты</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a href="tel:+74958904422" class="header-phone">
+                    <i class="fas fa-phone-alt"></i> +7 (495) 890-44-22
+                </a>
+                <a href="index.html#quiz" class="btn btn-primary btn-header-cta">
+                    Обсудить проект
+                </a>
+                <button class="burger-btn" aria-label="Открыть меню"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer" style="display: none;">
+        <!-- mobile menu toggled via js -->
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        
+<div style="padding-top: 8rem; padding-bottom: 6rem; background-color: var(--bg-primary);">
+    <div class="gallery-fluid-container">
+        <!-- Gallery Header -->
+        <div style="text-align: center; max-width: 1200px; margin: 0 auto 4rem;">
+            <div class="eyebrow">Atelier & Private Collection</div>
+            <h1 style="font-size: clamp(2.5rem, 4.5vw, 4rem); color: #fff; margin: 0 0 1rem; white-space: nowrap;">Арт-Галерея Александра Попыкина</h1>
+            <p style="font-size: 1.15rem; color: var(--text-muted); line-height: 1.8;">
+                Оригинальные станковые полотна, скульптурная керамика и авторская графика Александра Попыкина. Каждое произведение создано вручную в мастерской и сопровождается сертификатом подлинности автора.
+            </p>
+        </div>
+
+        <!-- Filter Bar -->
+        <div style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 4rem; flex-wrap: wrap;" id="galleryFilters">
+            <button class="btn btn-secondary active" data-filter="all" style="font-size: 0.85rem; padding: 0.65rem 1.6rem;">Все медиумы</button>
+            
+            <button class="btn btn-secondary" data-filter="paintings" style="font-size: 0.85rem; padding: 0.65rem 1.6rem;">Живопись на холсте</button>
+            
+            <button class="btn btn-secondary" data-filter="ceramics" style="font-size: 0.85rem; padding: 0.65rem 1.6rem;">Скульптурная керамика</button>
+            
+            <button class="btn btn-secondary" data-filter="graphics" style="font-size: 0.85rem; padding: 0.65rem 1.6rem;">Авторская графика</button>
+            
+        </div>
+
+        <!-- Artworks Grid -->
+        <div class="artworks-grid">
+            
+            <div class="artwork-card gallery-item" data-category="paintings">
+                <div class="artwork-img-wrap btn-view-artwork"
+                     data-title="Композиция №14: Терра"
+                     data-medium="Холст, масло, фактурная паста, мастихин"
+                     data-dimensions="165 × 140 см"
+                     data-price="380 000 ₽"
+                     data-desc="Крупноформатная станковая работа с плотной рельефной поверхностью. Многослойное нанесение охристых, песочных и графитовых оттенков создает глубокую осязаемую фактуру."
+                     data-img="/static/images/art_canvas.jpg">
+                    <img src="static/images/art_canvas.jpg" alt="Композиция №14: Терра">
+                    <div class="artwork-overlay-reveal">
+                        <span class="artwork-reveal-badge">Рассмотреть фактуру</span>
+                        <span class="artwork-reveal-btn">Экспликация →</span>
+                    </div>
+                </div>
+                <div class="artwork-info">
+                    <div class="artwork-info-top">
+                        <span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-bronze); font-weight: 600;">Живопись на холсте</span>
+                        <span style="font-size: 0.75rem; color: var(--text-muted);">2024 г.</span>
+                    </div>
+                    <h3 class="artwork-title">Композиция №14: Терра</h3>
+                    <p class="artwork-medium">Холст, масло, фактурная паста, мастихин</p>
+                    <p class="artwork-dimensions">165 × 140 см</p>
+
+                    <div class="artwork-curator-note">
+                        Крупноформатная станковая работа с плотной рельефной поверхностью. Многослойное нанесение охристых, песочных и графитовых оттенков создает глубокую осязаемую фактуру.
+                    </div>
+
+                    <div class="artwork-price-row">
+                        <span class="artwork-price">380 000 ₽</span>
+                        <button class="btn btn-outline-gold btn-view-artwork" 
+                                style="padding: 0.5rem 1.1rem; font-size: 0.8rem;"
+                                data-title="Композиция №14: Терра"
+                                data-medium="Холст, масло, фактурная паста, мастихин"
+                                data-dimensions="165 × 140 см"
+                                data-price="380 000 ₽"
+                                data-desc="Крупноформатная станковая работа с плотной рельефной поверхностью. Многослойное нанесение охристых, песочных и графитовых оттенков создает глубокую осязаемую фактуру."
+                                data-img="/static/images/art_canvas.jpg">
+                            Экспликация
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="artwork-card gallery-item" data-category="ceramics">
+                <div class="artwork-img-wrap btn-view-artwork"
+                     data-title="Ваза «Фактура земли»"
+                     data-medium="Шамотная глина, ручная лепка, кракле-глазурь, обжиг 1250°C"
+                     data-dimensions="h: 46 см, d: 34 см"
+                     data-price="195 000 ₽"
+                     data-desc="Авторский скульптурный объект из крупнозернистого шамота. Естественные микротрещины и минеральный цвет глины подчеркивают первозданную красоту материала."
+                     data-img="/static/images/art_ceramic.jpg">
+                    <img src="static/images/art_ceramic.jpg" alt="Ваза «Фактура земли»">
+                    <div class="artwork-overlay-reveal">
+                        <span class="artwork-reveal-badge">Рассмотреть фактуру</span>
+                        <span class="artwork-reveal-btn">Экспликация →</span>
+                    </div>
+                </div>
+                <div class="artwork-info">
+                    <div class="artwork-info-top">
+                        <span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-bronze); font-weight: 600;">Скульптурная керамика</span>
+                        <span style="font-size: 0.75rem; color: var(--text-muted);">2025 г.</span>
+                    </div>
+                    <h3 class="artwork-title">Ваза «Фактура земли»</h3>
+                    <p class="artwork-medium">Шамотная глина, ручная лепка, кракле-глазурь, обжиг 1250°C</p>
+                    <p class="artwork-dimensions">h: 46 см, d: 34 см</p>
+
+                    <div class="artwork-curator-note">
+                        Авторский скульптурный объект из крупнозернистого шамота. Естественные микротрещины и минеральный цвет глины подчеркивают первозданную красоту материала.
+                    </div>
+
+                    <div class="artwork-price-row">
+                        <span class="artwork-price">195 000 ₽</span>
+                        <button class="btn btn-outline-gold btn-view-artwork" 
+                                style="padding: 0.5rem 1.1rem; font-size: 0.8rem;"
+                                data-title="Ваза «Фактура земли»"
+                                data-medium="Шамотная глина, ручная лепка, кракле-глазурь, обжиг 1250°C"
+                                data-dimensions="h: 46 см, d: 34 см"
+                                data-price="195 000 ₽"
+                                data-desc="Авторский скульптурный объект из крупнозернистого шамота. Естественные микротрещины и минеральный цвет глины подчеркивают первозданную красоту материала."
+                                data-img="/static/images/art_ceramic.jpg">
+                            Экспликация
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="artwork-card gallery-item" data-category="graphics">
+                <div class="artwork-img-wrap btn-view-artwork"
+                     data-title="Графический лист №08"
+                     data-medium="Хлопковая бумага ручного отлива, тушь, графит"
+                     data-dimensions="70 × 50 см (дубовый багет, музейное стекло)"
+                     data-price="85 000 ₽"
+                     data-desc="Камерная графическая серия на фактурной бумаге с необрезным краем. Четкие линейные ритмы и тональные заливки тушью."
+                     data-img="/static/images/art_graphics.jpg">
+                    <img src="static/images/art_graphics.jpg" alt="Графический лист №08">
+                    <div class="artwork-overlay-reveal">
+                        <span class="artwork-reveal-badge">Рассмотреть фактуру</span>
+                        <span class="artwork-reveal-btn">Экспликация →</span>
+                    </div>
+                </div>
+                <div class="artwork-info">
+                    <div class="artwork-info-top">
+                        <span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-bronze); font-weight: 600;">Авторская графика</span>
+                        <span style="font-size: 0.75rem; color: var(--text-muted);">2024 г.</span>
+                    </div>
+                    <h3 class="artwork-title">Графический лист №08</h3>
+                    <p class="artwork-medium">Хлопковая бумага ручного отлива, тушь, графит</p>
+                    <p class="artwork-dimensions">70 × 50 см (дубовый багет, музейное стекло)</p>
+
+                    <div class="artwork-curator-note">
+                        Камерная графическая серия на фактурной бумаге с необрезным краем. Четкие линейные ритмы и тональные заливки тушью.
+                    </div>
+
+                    <div class="artwork-price-row">
+                        <span class="artwork-price">85 000 ₽</span>
+                        <button class="btn btn-outline-gold btn-view-artwork" 
+                                style="padding: 0.5rem 1.1rem; font-size: 0.8rem;"
+                                data-title="Графический лист №08"
+                                data-medium="Хлопковая бумага ручного отлива, тушь, графит"
+                                data-dimensions="70 × 50 см (дубовый багет, музейное стекло)"
+                                data-price="85 000 ₽"
+                                data-desc="Камерная графическая серия на фактурной бумаге с необрезным краем. Четкие линейные ритмы и тональные заливки тушью."
+                                data-img="/static/images/art_graphics.jpg">
+                            Экспликация
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <!-- Exhibitions Timeline section -->
+        <div style="max-width: 1200px; margin: 6rem auto 0; padding-top: 4rem; border-top: 1px solid var(--border-subtle);">
+            <div class="section-header" style="text-align: center;">
+                <div class="eyebrow">Хроника признания</div>
+                <h2 class="section-title">Выставки и музейные экспозиции</h2>
+            </div>
+
+            <div style="max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.5rem;">
+                
+                <div style="padding: 1.75rem; background: var(--bg-card); border-left: 3px solid var(--accent-gold); border-radius: 0 var(--radius-md) var(--radius-md) 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                    <div>
+                        <span style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 800; color: var(--accent-gold); margin-right: 1rem;">2025</span>
+                        <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--accent-bronze); font-weight: 600;">Персональная выставка</span>
+                        <h3 style="font-size: 1.4rem; color: #fff; margin: 0.35rem 0;">«Материал и форма»</h3>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">Центр современного искусства «Винзавод» • Москва (Май — июнь 2025)</p>
+                    </div>
+                    <div>
+                        <span style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-gold); font-weight: 600;">Предстоящая выставка</span>
+                    </div>
+                </div>
+                
+                <div style="padding: 1.75rem; background: var(--bg-card); border-left: 3px solid var(--accent-gold); border-radius: 0 var(--radius-md) var(--radius-md) 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                    <div>
+                        <span style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 800; color: var(--accent-gold); margin-right: 1rem;">2024</span>
+                        <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--accent-bronze); font-weight: 600;">Групповая выставка</span>
+                        <h3 style="font-size: 1.4rem; color: #fff; margin: 0.35rem 0;">«Современные фактуры»</h3>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">Галерея «Триумф» • Москва (Октябрь 2024)</p>
+                    </div>
+                    <div>
+                        <span style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-gold); font-weight: 600;">Архив / Прошедшая</span>
+                    </div>
+                </div>
+                
+                <div style="padding: 1.75rem; background: var(--bg-card); border-left: 3px solid var(--accent-gold); border-radius: 0 var(--radius-md) var(--radius-md) 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                    <div>
+                        <span style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 800; color: var(--accent-gold); margin-right: 1rem;">2023</span>
+                        <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--accent-bronze); font-weight: 600;">Кураторский проект</span>
+                        <h3 style="font-size: 1.4rem; color: #fff; margin: 0.35rem 0;">«Уличная волна: От эскиза к монументу»</h3>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">Севкабель Порт • Санкт-Петербург (Июль 2023)</p>
+                    </div>
+                    <div>
+                        <span style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-gold); font-weight: 600;">Архив / Прошедшая</span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const filterBtns = document.querySelectorAll('#galleryFilters button');
+    const items = document.querySelectorAll('.gallery-item');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const filter = btn.dataset.filter;
+            items.forEach(item => {
+                if (filter === 'all' || item.dataset.category === filter) {
+                    item.classList.remove('is-hidden');
+                } else {
+                    item.classList.add('is-hidden');
+                }
+            });
+        });
+    });
+});
+</script>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" id="contacts">
+        <div class="container">
+            <div class="footer-top">
+                <div>
+                    <div class="brand-logo" style="margin-bottom: 1.25rem;">
+                        <span class="brand-title">GB STUDIO</span>
+                        <span class="brand-subtitle">Architectural Fit-Out & Popykin Atelier</span>
+                    </div>
+                    <p style="font-size: 0.95rem; color: var(--text-muted); max-width: 380px; line-height: 1.7; margin-bottom: 1.5rem;">
+                        Генеральный подряд, комплексная отделка коммерческих предприятий и создание авторских архитектурных поверхностей с 2011 года.
+                    </p>
+                    <div style="display: flex; gap: 1rem; font-size: 1.25rem;">
+                        <a href="https://t.me/" target="_blank" style="color: var(--accent-gold);"><i class="fab fa-telegram"></i></a>
+                        <a href="https://wa.me/" target="_blank" style="color: #25D366;"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://instagram.com/" target="_blank" style="color: #E1306C;"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="footer-col-title">Направления</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html#sectors">Для предприятий и заводов</a></li>
+                        <li><a href="index.html#sectors">Корпоративные офисы</a></li>
+                        <li><a href="index.html#sectors">Отели и рестораны (HoReCa)</a></li>
+                        <li><a href="index.html#sectors">Входные группы и девелопмент</a></li>
+                        <li><a href="index.html#sample-box">Заказ кейса образцов</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="footer-col-title">Искусство</h4>
+                    <ul class="footer-links">
+                        <li><a href="gallery.html">Станковая живопись</a></li>
+                        <li><a href="gallery.html">Скульптурная керамика</a></li>
+                        <li><a href="gallery.html">Авторская графика</a></li>
+                        <li><a href="index.html#atelier">Манифест Саши Попыкина</a></li>
+                        <li><a href="/admin/" style="color: var(--accent-gold);"><i class="fas fa-lock" style="font-size: 0.75rem;"></i> Личный кабинет</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="footer-col-title">Контакты B2B-отдела</h4>
+                    <p style="font-size: 0.95rem; margin-bottom: 0.5rem; color: #fff;"><strong>Наталья Попыкина</strong></p>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">Директор по развитию коммерческих проектов</p>
+                    <p style="font-size: 0.95rem; margin-bottom: 0.4rem;"><i class="fas fa-phone" style="color: var(--accent-gold);"></i> <a href="tel:+74958904422">+7 (495) 890-44-22</a></p>
+                    <p style="font-size: 0.95rem; margin-bottom: 0.4rem;"><i class="fas fa-envelope" style="color: var(--accent-gold);"></i> <a href="mailto:tender@gbstudio.ru">tender@gbstudio.ru</a></p>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem;">Мастерская и офис: Москва, арт-кластер «Кристалл»</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2026 GB STUDIO. Все права защищены. Член ассоциации строителей, допуски СРО.</p>
+                <p><a href="/admin/">Панель управления CMS / CRM</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Sample Box Modal -->
+    <div class="modal-backdrop" id="sampleBoxModal">
+        <div class="modal-box">
+            <button class="modal-close">&times;</button>
+            <div class="eyebrow">Для архитекторов и дизайнеров</div>
+            <h3 style="font-size: 1.8rem; color: #fff; margin-bottom: 0.75rem;">Заказ «Architect Sample Box»</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+                Мы бесплатно доставим фирменный деревянный кейс с живыми выкрасами авторских штукатурок, микроцемента и минеральных текстур в ваше бюро.
+            </p>
+            <form id="sampleBoxForm">
+                <div class="form-group">
+                    <label class="form-label">Ваше имя и фамилия</label>
+                    <input type="text" name="name" class="form-input" placeholder="Константин Архипов" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Архитектурное бюро / Компания</label>
+                    <input type="text" name="company" class="form-input" placeholder="Бюро «Меганом»" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Телефон для связи</label>
+                    <input type="tel" name="phone" class="form-input" placeholder="+7 (999) 000-00-00" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Адрес доставки образцов</label>
+                    <input type="text" name="address" class="form-input" placeholder="г. Москва, ул. Арбат 10, офис 4" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Заказать кейс образцов</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Artwork Lightbox Modal -->
+    <div class="modal-backdrop" id="artworkModal">
+        <div class="modal-box" style="max-width: 820px; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center;">
+            <button class="modal-close">&times;</button>
+            <div>
+                <img src="" alt="" class="art-modal-img" style="border-radius: var(--radius-sm); width: 100%; max-height: 480px; object-fit: cover;">
+            </div>
+            <div>
+                <div class="eyebrow">Коллекционная работа</div>
+                <h3 class="art-modal-title" style="font-size: 1.6rem; color: #fff; margin-bottom: 0.35rem;"></h3>
+                <p class="art-modal-medium" style="font-size: 0.85rem; color: var(--accent-bronze); margin-bottom: 0.35rem;"></p>
+                <p class="art-modal-dim" style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.75rem;"></p>
+                <div style="font-size: 1.4rem; font-weight: 700; color: var(--accent-gold); margin-bottom: 0.75rem;" class="art-modal-price"></div>
+                <p class="art-modal-desc" style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1rem; max-height: 120px; overflow-y: auto;"></p>
+                
+                <form id="artInquiryForm" style="border-top: 1px solid var(--border-subtle); padding-top: 0.85rem;">
+                    <input type="hidden" name="artwork_title" id="artModalInputTitle" value="">
+                    <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--accent-gold); display: block; margin-bottom: 0.5rem; font-weight: 600;">Запрос условий приобретения</span>
+                    <div style="display: flex; gap: 0.5rem; margin-bottom: 0.65rem;">
+                        <input type="text" name="name" class="form-input" placeholder="Ваше имя" style="padding: 0.6rem 0.8rem; font-size: 0.85rem;" required>
+                        <input type="tel" name="phone" class="form-input" placeholder="+7 (___) ___-__-__" style="padding: 0.6rem 0.8rem; font-size: 0.85rem;" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 0.85rem; padding: 0.7rem;">Забронировать работу</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main JavaScript -->
+    <script src="static/js/main.js"></script>
+</body>
+</html>
