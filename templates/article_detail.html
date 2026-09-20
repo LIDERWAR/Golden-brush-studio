@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ article.title }} — GB STUDIO Экспертиза{% endblock %}
+{% block meta_desc %}{{ article.summary }}{% endblock %}
+
+{% block content %}
+<article style="padding-top: 8rem; padding-bottom: 6rem; background-color: var(--bg-primary);">
+    <div class="container" style="max-width: 860px;">
+        <a href="/#articles" style="display: inline-flex; align-items: center; gap: 0.5rem; color: var(--accent-gold); font-size: 0.85rem; font-weight: 600; margin-bottom: 2rem;">
+            <i class="fas fa-arrow-left"></i> Назад к статьям
+        </a>
+
+        <div class="eyebrow">{{ article.tag }} • {{ article.read_time }}</div>
+        <h1 style="font-size: clamp(2.2rem, 4.5vw, 3.4rem); color: #fff; line-height: 1.2; margin-bottom: 1.5rem;">{{ article.title }}</h1>
+        <p style="font-size: 1.2rem; color: var(--accent-gold); line-height: 1.6; font-style: italic; margin-bottom: 2.5rem; border-left: 2px solid var(--accent-bronze); padding-left: 1.5rem;">
+            {{ article.summary }}
+        </p>
+
+        <div style="margin-bottom: 2.5rem; border-radius: var(--radius-md); overflow: hidden;">
+            <img src="{{ article.image_url }}" alt="{{ article.title }}" style="width: 100%;">
+        </div>
+
+        <div style="font-size: 1.1rem; color: var(--text-main); line-height: 1.8;" class="article-body">
+            {{ article.content|safe }}
+        </div>
+
+        <div style="margin-top: 4rem; padding: 2.5rem; background: var(--bg-card); border: 1px solid var(--border-active); border-radius: var(--radius-md); text-align: center;">
+            <h3 style="font-size: 1.6rem; color: #fff; margin-bottom: 0.75rem;">Планируете отделку коммерческого объекта?</h3>
+            <p style="font-size: 1rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+                Получите техническую консультацию главного инженера и предварительный расчет сметы.
+            </p>
+            <a href="/#quiz" class="btn btn-primary">Рассчитать смету проекта</a>
+        </div>
+    </div>
+</article>
+{% endblock %}

@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% block title %}Арт-Галерея Александра Попыкина — Оригинальная живопись и скульптурная керамика{% endblock %}
+{% block meta_desc %}Официальная онлайн-экспозиция художника Александра Попыкина. Коллекционные полотна, скульптурная керамика, графика. Условия приобретения для частных коллекций.{% endblock %}
+
+{% block content %}
+<div style="padding-top: 8rem; padding-bottom: 6rem; background-color: var(--bg-primary);">
+    <div class="gallery-fluid-container">
+        <!-- Gallery Header -->
+        <div style="text-align: center; max-width: 1200px; margin: 0 auto 4rem;">
+            <div class="eyebrow">Atelier & Private Collection</div>
+            <h1 style="font-size: clamp(2.5rem, 4.5vw, 4rem); color: #fff; margin: 0 0 1rem; white-space: nowrap;">Арт-Галерея Александра Попыкина</h1>
+            <p style="font-size: 1.15rem; color: var(--text-muted); line-height: 1.8;">
+                Оригинальные станковые полотна, скульптурная керамика и авторская графика Александра Попыкина. Каждое произведение создано вручную в мастерской и сопровождается сертификатом подлинности автора.
+            </p>
+        </div>
+
+        <!-- Filter Bar -->
+        <div style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 4rem; flex-wrap: wrap;" id="galleryFilters">
+            <button class="btn btn-secondary active" data-filter="all" style="font-size: 0.85rem; padding: 0.65rem 1.6rem;">Все медиумы</button>
+            {% for cat in categories %}
+            <button class="btn btn-secondary" data-filter="{{ cat.slug }}" style="font-size: 0.85rem; padding: 0.65rem 1.6rem;">{{ cat.name }}</button>
+            {% endfor %}
+        </div>
+
+        <!-- Artworks Grid -->
+        <div class="artworks-grid">
+            {% for artwork in artworks %}
+            <div class="artwork-card gallery-item" data-category="{{ artwork.category.slug }}">
+                <div class="artwork-img-wrap btn-view-artwork"
+                     data-title="{{ artwork.title }}"
+                     data-medium="{{ artwork.medium }}"
+                     data-dimensions="{{ artwork.dimensions }}"
+                     data-price="{{ artwork.price }}"
+                     data-desc="{{ artwork.curator_note }}"
+                     data-img="{{ artwork.image_url }}">
+                    <img src="{{ artwork.image_url }}" alt="{{ artwork.title }}">
+                    <div class="artwork-overlay-reveal">
+                        <span class="artwork-reveal-badge">Рассмотреть фактуру</span>
+                        <span class="artwork-reveal-btn">Экспликация →</span>
+                    </div>
+                </div>
+                <div class="artwork-info">
+                    <div class="artwork-info-top">
+                        <span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-bronze); font-weight: 600;">{{ artwork.category.name }}</span>
+                        <span style="font-size: 0.75rem; color: var(--text-muted);">{{ artwork.year }} г.</span>
+                    </div>
+                    <h3 class="artwork-title">{{ artwork.title }}</h3>
+                    <p class="artwork-medium">{{ artwork.medium }}</p>
+                    <p class="artwork-dimensions">{{ artwork.dimensions }}</p>
+
+                    <div class="artwork-curator-note">
+                        {{ artwork.curator_note }}
+                    </div>
+
+                    <div class="artwork-price-row">
+                        <span class="artwork-price">{{ artwork.price }}</span>
+                        <button class="btn btn-outline-gold btn-view-artwork" 
+                                style="padding: 0.5rem 1.1rem; font-size: 0.8rem;"
+                                data-title="{{ artwork.title }}"
+                                data-medium="{{ artwork.medium }}"
+                                data-dimensions="{{ artwork.dimensions }}"
+                                data-price="{{ artwork.price }}"
+                                data-desc="{{ artwork.curator_note }}"
+                                data-img="{{ artwork.image_url }}">
+                            Экспликация
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Exhibitions Timeline section -->
+        <div style="max-width: 1200px; margin: 6rem auto 0; padding-top: 4rem; border-top: 1px solid var(--border-subtle);">
+            <div class="section-header" style="text-align: center;">
+                <div class="eyebrow">Хроника признания</div>
+                <h2 class="section-title">Выставки и музейные экспозиции</h2>
+            </div>
+
+            <div style="max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.5rem;">
+                {% for exh in exhibitions %}
+                <div style="padding: 1.75rem; background: var(--bg-card); border-left: 3px solid var(--accent-gold); border-radius: 0 var(--radius-md) var(--radius-md) 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                    <div>
+                        <span style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 800; color: var(--accent-gold); margin-right: 1rem;">{{ exh.year }}</span>
+                        <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--accent-bronze); font-weight: 600;">{{ exh.exhibition_type }}</span>
+                        <h3 style="font-size: 1.4rem; color: #fff; margin: 0.35rem 0;">«{{ exh.title }}»</h3>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">{{ exh.venue }} • {{ exh.city }} {% if exh.dates %}({{ exh.dates }}){% endif %}</p>
+                    </div>
+                    <div>
+                        <span style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-gold); font-weight: 600;">{{ exh.get_status_display }}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const filterBtns = document.querySelectorAll('#galleryFilters button');
+    const items = document.querySelectorAll('.gallery-item');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const filter = btn.dataset.filter;
+            items.forEach(item => {
+                if (filter === 'all' || item.dataset.category === filter) {
+                    item.classList.remove('is-hidden');
+                } else {
+                    item.classList.add('is-hidden');
+                }
+            });
+        });
+    });
+});
+</script>
+{% endblock %}

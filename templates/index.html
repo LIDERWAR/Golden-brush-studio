@@ -1,0 +1,501 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- 1. HERO SECTION WITH SHOWCASE SLIDER -->
+<section class="hero">
+    <!-- Background Slider Slides -->
+    <div class="hero-slider">
+        <div class="hero-slide active" style="background-image: url('/static/images/hero.jpg');"></div>
+        <div class="hero-slide" style="background-image: url('/static/images/case_office.jpg');"></div>
+        <div class="hero-slide" style="background-image: url('/static/images/case_hotel.jpg');"></div>
+        <div class="hero-slide" style="background-image: url('/static/images/art_canvas.jpg');"></div>
+    </div>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-container">
+        <!-- Main Row: Split Layout (Left Content + Right Showcase Card) -->
+        <div class="hero-main-row">
+            <div class="hero-content-col">
+                <div class="eyebrow">Генподряд и fit-out коммерческих объектов с 2011 года</div>
+                <h1 class="hero-title">
+                    Авторские поверхности и <span class="accent">премиальный fit-out</span> крупных предприятий и коммерческих пространств
+                </h1>
+                <p class="hero-desc">
+                    Реализуем комплексную отделку под ключ для корпоративных штаб-квартир, отелей, девелоперов и промышленных предприятий. Собственная лаборатория авторских фактур и архитектурного декора под руководством художника Александра Попыкина.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="#quiz" class="btn btn-primary">Рассчитать смету объекта</a>
+                    <button class="btn btn-secondary btn-open-samplebox">Заказать Sample Box для архитекторов</button>
+                </div>
+            </div>
+
+            <!-- Right Column: Showcase Project Card & Art Link -->
+            <div class="hero-showcase-col">
+                <div class="hero-project-card">
+                    <div class="card-header-row">
+                        <div class="card-counter">
+                            <span id="heroSlideNum">01</span>
+                            <span class="card-counter-total">/ 04</span>
+                        </div>
+                        <div class="card-nav">
+                            <button type="button" class="card-nav-btn prev" id="heroPrevBtn" aria-label="Предыдущий проект">&#8249;</button>
+                            <button type="button" class="card-nav-btn next" id="heroNextBtn" aria-label="Следующий проект">&#8250;</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-category" id="heroSlideCat">Лаборатория фактур & Рельефы</div>
+                        <h4 class="card-title" id="heroSlideTitle">Авторские минеральные поверхности и арт-декор</h4>
+                        <p class="card-meta" id="heroSlideMeta">Собственная лаборатория • Барельефы, микроцемент, латунь</p>
+                    </div>
+                    <div class="card-progress">
+                        <div class="card-progress-bar" id="heroProgressBar"></div>
+                    </div>
+                </div>
+
+                <div class="hero-art-link-box">
+                    <a href="/gallery/" class="hero-art-link">
+                        <span>Арт-Галерея Александра Попыкина</span>
+                        <span class="hero-art-arrow">→</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Architectural Specification Strip (Technical Ledger) -->
+        <div class="hero-spec-strip">
+            <div class="spec-item">
+                <div class="spec-idx">01 / Масштаб генподряда</div>
+                <div class="spec-title">Объекты до 15 000 м²</div>
+                <div class="spec-desc">АБК заводов, корпоративные штаб-квартиры, отели</div>
+            </div>
+            <div class="spec-item">
+                <div class="spec-idx">02 / Стандарты & Финансы</div>
+                <div class="spec-title">Допуски СРО, безнал с НДС</div>
+                <div class="spec-desc">Полный комплект исполнительной документации по СНиП</div>
+            </div>
+            <div class="spec-item">
+                <div class="spec-idx">03 / Ответственность</div>
+                <div class="spec-title">5 лет по договору генподряда</div>
+                <div class="spec-desc">Фиксированная смета и гарантийный надзор объекта</div>
+            </div>
+            <div class="spec-item">
+                <div class="spec-idx">04 / Мастерская & Школа</div>
+                <div class="spec-title">В искусстве материи с 1998 г.</div>
+                <div class="spec-desc">Собственная лаборатория авторских фактур и декора</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 2. B2B SECTORS SECTION -->
+<section class="b2b-sectors-section" id="sectors">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Отраслевые решения для предприятий и бизнеса</h2>
+            <p class="section-desc">
+                Мы берем объекты целиком: от инженерного проектирования и чернового монтажа до уникальных авторских фактур и заказной интерьерной мебели.
+            </p>
+        </div>
+
+        <div class="sectors-grid">
+            <div class="sector-card">
+                <div class="sector-icon"><i class="fas fa-industry"></i></div>
+                <h3 class="sector-title">Предприятия и Заводы</h3>
+                <p class="sector-text">
+                    Реновация административно-бытовых корпусов (АБК), представительских холлов, лабораторий и переговорных залов производственных комплексов.
+                </p>
+                <ul class="sector-features">
+                    <li>Антивандальные износостойкие покрытия стен</li>
+                    <li>Промышленные полы терраццо и полимер-бетон</li>
+                    <li>Полная инженерная инфраструктура (ОВ, ВК, ЭОМ)</li>
+                    <li>Строгое соблюдение техники безопасности и графика</li>
+                </ul>
+                <a href="#quiz" class="btn btn-secondary" style="font-size: 0.8rem; margin-top: auto;">Рассчитать для предприятия</a>
+            </div>
+
+            <div class="sector-card">
+                <div class="sector-icon"><i class="fas fa-hotel"></i></div>
+                <h3 class="sector-title">Гостиничный сектор (HoReCa)</h3>
+                <p class="sector-text">
+                    Комплексный fit-out отелей 4–5 звезд, спа-комплексов и ресторанов высокой кухни. Создание незабываемой визуальной атмосферы.
+                </p>
+                <ul class="sector-features">
+                    <li>Скульптурные криволинейные рельефы лобби</li>
+                    <li>Антибактериальные моющиеся фактурные покрытия</li>
+                    <li>Акустические панели и звукоизоляция номеров</li>
+                    <li>Работа в действующих объектах без шума для гостей</li>
+                </ul>
+                <a href="#quiz" class="btn btn-secondary" style="font-size: 0.8rem; margin-top: auto;">Рассчитать для отеля</a>
+            </div>
+
+            <div class="sector-card">
+                <div class="sector-icon"><i class="fas fa-briefcase"></i></div>
+                <h3 class="sector-title">Корпоративные Офисы</h3>
+                <p class="sector-text">
+                    Представительские зоны, залы заседаний советов директоров, open-space и кабинеты топ-менеджмента крупных компаний.
+                </p>
+                <ul class="sector-features">
+                    <li>Акцентные стены с графитовыми и минеральными срезами</li>
+                    <li>Изготовление конференц-столов из массива и латуни</li>
+                    <li>Стеклянные перегородки и скрытое мультимедиа</li>
+                    <li>Фиксированная смета без скрытых доплат</li>
+                </ul>
+                <a href="#quiz" class="btn btn-secondary" style="font-size: 0.8rem; margin-top: auto;">Рассчитать для офиса</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 3. INTERACTIVE B2B QUIZ (NATALIA'S LEAD FUNNEL) -->
+<section class="quiz-section" id="quiz">
+    <div class="container">
+        <div class="section-header" style="text-align: center; max-width: 780px; margin: 0 auto 3rem;">
+            <h2 class="section-title">Предварительный расчет сметы объекта</h2>
+            <p class="section-desc" style="margin: 0.75rem auto 0;">
+                Ответьте на 4 вопроса о параметрах вашего объекта. Руководитель направления <strong>Наталья Попыкина</strong> подготовит сметный расчет и согласует выезд главного инженера на замер.
+            </p>
+        </div>
+
+        <div class="quiz-container" id="b2bQuiz">
+            <div class="quiz-progress-bar">
+                <div class="quiz-progress-fill"></div>
+            </div>
+
+            <div class="quiz-body-wrap">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <span class="quiz-step-counter" style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-gold); font-weight: 600;">Шаг 1 из 4</span>
+                    <span style="font-size: 0.85rem; color: var(--text-muted);">Конфиденциально по NDA</span>
+                </div>
+
+                <!-- STEP 1: OBJECT TYPE -->
+                <div class="quiz-step" data-step="1">
+                    <h3 class="quiz-step-title">Какой тип коммерческого объекта планируется к отделке?</h3>
+                    <p class="quiz-step-subtitle">Выберите основной профиль здания или помещений</p>
+                    <div class="quiz-options-grid">
+                        <div class="quiz-option selected" data-key="object_type" data-value="Предприятие / Завод (АБК, цеха)">
+                            <div class="opt-title">Предприятие / Завод</div>
+                            <div class="opt-desc">АБК, холлы, лаборатории, производственные комплексы</div>
+                        </div>
+                        <div class="quiz-option" data-key="object_type" data-value="Бизнес-центр / Корпоративный офис">
+                            <div class="opt-title">Офис / Штаб-квартира</div>
+                            <div class="opt-desc">Представительские зоны, залы заседаний, open-space</div>
+                        </div>
+                        <div class="quiz-option" data-key="object_type" data-value="Отель / Гостиница / Ресторан">
+                            <div class="opt-title">Отель / HoReCa</div>
+                            <div class="opt-desc">Лобби, номерной фонд, рестораны, спа-зоны</div>
+                        </div>
+                        <div class="quiz-option" data-key="object_type" data-value="Девелопмент / Входные группы и МОП ЖК">
+                            <div class="opt-title">Девелопмент / МОП</div>
+                            <div class="opt-desc">Лобби жилых комплексов, шоу-румы, пентхаусы</div>
+                        </div>
+                    </div>
+                    <div class="quiz-nav-row">
+                        <div></div>
+                        <button type="button" class="btn btn-primary btn-quiz-next">Далее: Площадь</button>
+                    </div>
+                </div>
+
+                <!-- STEP 2: AREA RANGE -->
+                <div class="quiz-step" data-step="2" style="display: none;">
+                    <h3 class="quiz-step-title">Какова ориентировочная площадь помещений?</h3>
+                    <p class="quiz-step-subtitle">Укажите метраж для предварительного сметного норматива</p>
+                    <div class="quiz-options-grid">
+                        <div class="quiz-option" data-key="area_range" data-value="до 500 м²">
+                            <div class="opt-title">до 500 м²</div>
+                            <div class="opt-desc">Кабинет руководства, представительский холл, бутик</div>
+                        </div>
+                        <div class="quiz-option selected" data-key="area_range" data-value="500–1500 м²">
+                            <div class="opt-title">500 – 1 500 м²</div>
+                            <div class="opt-desc">Этаж бизнес-центра, этаж отеля, офисный кластер</div>
+                        </div>
+                        <div class="quiz-option" data-key="area_range" data-value="1500–5000 м²">
+                            <div class="opt-title">1 500 – 5 000 м²</div>
+                            <div class="opt-desc">АБК предприятия, гостиничный комплекс, центральный офис</div>
+                        </div>
+                        <div class="quiz-option" data-key="area_range" data-value="более 5000 м²">
+                            <div class="opt-title">более 5 000 м²</div>
+                            <div class="opt-desc">Крупные промышленные объекты, масштабный девелопмент</div>
+                        </div>
+                    </div>
+                    <div class="quiz-nav-row">
+                        <button type="button" class="btn btn-secondary btn-quiz-prev">Назад</button>
+                        <button type="button" class="btn btn-primary btn-quiz-next">Далее: Задачи</button>
+                    </div>
+                </div>
+
+                <!-- STEP 3: SCOPE OF WORK -->
+                <div class="quiz-step" data-step="3" style="display: none;">
+                    <h3 class="quiz-step-title">Какие работы требуются на объекте?</h3>
+                    <p class="quiz-step-subtitle">Широкий спектр услуг под ключ или авторские поверхности</p>
+                    <div class="quiz-options-grid">
+                        <div class="quiz-option selected" data-key="service_needed" data-value="Комплексный fit-out под ключ">
+                            <div class="opt-title">Fit-Out под ключ</div>
+                            <div class="opt-desc">Инженерия + черновой монтаж + авторская чистовая отделка</div>
+                        </div>
+                        <div class="quiz-option" data-key="service_needed" data-value="Авторские покрытия и рельефы стен">
+                            <div class="opt-title">Авторские фактуры и декор</div>
+                            <div class="opt-desc">Бесшовные монументальные штукатурки, микроцемент, рельефы</div>
+                        </div>
+                        <div class="quiz-option" data-key="service_needed" data-value="Монументальная роспись и арт-мебель">
+                            <div class="opt-title">Роспись и арт-мебель</div>
+                            <div class="opt-desc">Художественная роспись, переговорные столы из слэбов и латуни</div>
+                        </div>
+                        <div class="quiz-option" data-key="service_needed" data-value="Инженерия + общестрой">
+                            <div class="opt-title">Инженерия + отделка</div>
+                            <div class="opt-desc">Вентиляция, электрика, перегородки, чистовая подготовка</div>
+                        </div>
+                    </div>
+                    <div class="quiz-nav-row">
+                        <button type="button" class="btn btn-secondary btn-quiz-prev">Назад</button>
+                        <button type="button" class="btn btn-primary btn-quiz-next">Далее: Расчет сметы</button>
+                    </div>
+                </div>
+
+                <!-- STEP 4: CONTACT & ESTIMATE -->
+                <div class="quiz-step" data-step="4" style="display: none;">
+                    <div style="background: rgba(197, 155, 109, 0.08); border: 1px solid var(--accent-bronze); border-radius: var(--radius-md); padding: 1.5rem; margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                        <div>
+                            <span style="font-size: 0.85rem; text-transform: uppercase; color: var(--text-muted);">Ориентировочная стоимость реализации:</span>
+                            <div class="quiz-estimate-val" style="font-family: var(--font-display); font-size: 2rem; font-weight: 800; color: var(--accent-gold);">от 18 000 000 ₽</div>
+                        </div>
+                        <div style="font-size: 0.85rem; color: var(--text-muted); max-width: 320px;">
+                            Точная смета формируется после аудита объекта главным инженером и изучения чертежей/ТЗ.
+                        </div>
+                    </div>
+
+                    <h3 class="quiz-step-title">Куда направить детальный расчет и коммерческое предложение?</h3>
+                    <p class="quiz-step-subtitle">Заполните контакты представителя компании для связи</p>
+
+                    <form id="quizContactForm">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
+                            <div class="form-group">
+                                <label class="form-label">Ваше имя и должность *</label>
+                                <input type="text" name="name" class="form-input" placeholder="Алексей Смирнов, Руководитель АХО" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Компания / Предприятие</label>
+                                <input type="text" name="company" class="form-input" placeholder="ООО «ПромХолдинг»">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Номер телефона для связи *</label>
+                                <input type="tel" name="phone" class="form-input" placeholder="+7 (999) 000-00-00" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Корпоративный Email</label>
+                                <input type="email" name="email" class="form-input" placeholder="smirnov@company.ru">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Комментарий к объекту или ссылка на диск с ТЗ / чертежами</label>
+                            <textarea name="message" class="form-input" rows="2" placeholder="Укажите адрес объекта, планируемые сроки старта или особые пожелания..."></textarea>
+                        </div>
+
+                        <div class="quiz-nav-row" style="margin-top: 1.5rem;">
+                            <button type="button" class="btn btn-secondary btn-quiz-prev">Назад</button>
+                            <button type="submit" class="btn btn-primary" style="padding: 1rem 2.5rem;">Получить смету и ТКП</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 4. CASES / PORTFOLIO SECTION -->
+<section class="portfolio-section" id="cases">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Реализованные объекты</h2>
+            <p class="section-desc">
+                Сдача по актам Госкомиссии и технадзора, гарантия и строгое соответствие СНиП и проектной документации.
+            </p>
+        </div>
+
+        <div class="cases-grid">
+            {% for project in projects %}
+            <article class="case-card">
+                <div class="case-img-wrap">
+                    <img src="{{ project.image_url }}" alt="{{ project.title }}">
+                    <div class="case-category-badge">{{ project.category.name }}</div>
+                </div>
+                <div class="case-content">
+                    <div class="case-meta">
+                        <div>Площадь: <span>{{ project.area_sqm }} м²</span></div>
+                        <div>Срок: <span>{{ project.duration }}</span></div>
+                        <div>Год: <span>{{ project.year }}</span></div>
+                    </div>
+                    <h3 class="case-title">{{ project.title }}</h3>
+                    <p class="case-desc">{{ project.short_description }}</p>
+
+                    <div class="case-scope-tags">
+                        {% for scope in project.get_scope_list %}
+                        <span class="scope-tag">{{ scope }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- 5. ARCHITECT SAMPLE BOX SECTION -->
+<section class="sample-box-section" id="sample-box">
+    <div class="container">
+        <div class="sample-box-card">
+            <div>
+                <h2 style="font-size: clamp(2rem, 3.5vw, 2.8rem); color: #fff; line-height: 1.2; margin-bottom: 1.25rem;">
+                    Фирменный «Architect Sample Box» с живыми выкрасами фактур
+                </h2>
+                <p style="font-size: 1.05rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 2rem;">
+                    Доставляем в архитектурные бюро и проектные отделы девелоперов деревянный кейс с планшетами авторских покрытий: архитектурный микроцемент, скульптурная штукатурка, минеральные оксиды и латунная расшивка.
+                </p>
+                <div style="display: flex; gap: 1.5rem; margin-bottom: 2.5rem; flex-wrap: wrap;">
+                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                        <i class="fas fa-check" style="color: var(--accent-gold); font-size: 1rem;"></i>
+                        <span style="font-size: 0.9rem; color: #fff;">12 тактильных выкрасов</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                        <i class="fas fa-check" style="color: var(--accent-gold); font-size: 1rem;"></i>
+                        <span style="font-size: 0.9rem; color: #fff;">Сертификаты пожарной безопасности КМ-0</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                        <i class="fas fa-check" style="color: var(--accent-gold); font-size: 1rem;"></i>
+                        <span style="font-size: 0.9rem; color: #fff;">Курьерская доставка в офис</span>
+                    </div>
+                </div>
+                <button class="btn btn-primary btn-open-samplebox">Заказать кейс образцов в офис</button>
+            </div>
+            <div class="sample-box-img">
+                <img src="/static/images/sample_box.jpg" alt="Architect Sample Box Popykin Atelier">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 6. THE MASTER ARTIST & ATELIER (SASHA'S PERSONA) -->
+<section class="atelier-section" id="atelier">
+    <div class="container">
+        <div class="atelier-grid">
+            <div>
+                <img src="/static/images/art_canvas.jpg" alt="Александр Попыкин в мастерской" style="border-radius: var(--radius-lg); box-shadow: 0 20px 50px rgba(0,0,0,0.6);">
+            </div>
+            <div>
+                <h2 style="font-size: clamp(2.2rem, 4vw, 3rem); color: #fff; line-height: 1.15; margin: 0 0 1.5rem;">
+                    Александр Попыкин: Искусство монументальной материи
+                </h2>
+                <div class="artist-quote">
+                    «Стена в несколько тысяч квадратных метров — это такое же художественное полотно, где свет, плотность зерна и тактильный рельеф определяют статус всего архитектурного объема».
+                </div>
+                <p style="font-size: 1.05rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 1.5rem;">
+                    Начав творческий путь в 1998 году с уличного граффити-райтинга, Александр выработал безупречное чувство масштаба и пластики. Станковая живопись, эксперименты со скульптурной керамикой и монументальными декоративными покрытиями (с 2011 г.) легли в основу авторского почерка студии.
+                </p>
+                <div class="timeline-roots">
+                    <div class="root-item">
+                        <div class="year">1998</div>
+                        <div class="text">Уличные корни, граффити и масштаб</div>
+                    </div>
+                    <div class="root-item">
+                        <div class="year">2005</div>
+                        <div class="text">Станковая живопись и графика</div>
+                    </div>
+                    <div class="root-item">
+                        <div class="year">2011</div>
+                        <div class="text">Интерьерный декор и fit-out объектов</div>
+                    </div>
+                    <div class="root-item">
+                        <div class="year">2026</div>
+                        <div class="text">Собственный инженерно-арт кластер</div>
+                    </div>
+                </div>
+                <div style="margin-top: 2.5rem;">
+                    <a href="/gallery/" class="btn btn-outline-gold">Посетить Арт-Галерею автора</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 7. ART GALLERY TEASER -->
+<section class="gallery-teaser-section">
+    <div class="container">
+        <div class="section-header" style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1.5rem;">
+            <div>
+                <h2 class="section-title">Оригинальная живопись и керамика</h2>
+                <p class="section-desc">Работы Александра Попыкина для частных коллекций и статусных представительских интерьеров.</p>
+            </div>
+            <a href="/gallery/" class="btn btn-secondary">Вся коллекция в галерее</a>
+        </div>
+
+        <div class="artworks-grid">
+            {% for artwork in artworks %}
+            <div class="artwork-card">
+                <div class="artwork-img-wrap">
+                    <img src="{{ artwork.image_url }}" alt="{{ artwork.title }}">
+                </div>
+                <div class="artwork-info">
+                    <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--accent-bronze); font-weight: 600;">{{ artwork.category.name }}</span>
+                    <h3 class="artwork-title">{{ artwork.title }}</h3>
+                    <p class="artwork-medium">{{ artwork.medium }}</p>
+                    <p style="font-size: 0.8rem; color: var(--text-subtle); margin-bottom: 1rem;">Размер: {{ artwork.dimensions }}</p>
+                    <div class="artwork-price-row">
+                        <span class="artwork-price">{{ artwork.price }}</span>
+                        <button class="btn btn-outline-gold btn-view-artwork" 
+                                style="padding: 0.4rem 0.9rem; font-size: 0.75rem;"
+                                data-title="{{ artwork.title }}"
+                                data-medium="{{ artwork.medium }}"
+                                data-dimensions="{{ artwork.dimensions }}"
+                                data-price="{{ artwork.price }}"
+                                data-desc="{{ artwork.curator_note }}"
+                                data-img="{{ artwork.image_url }}">
+                            Подробнее
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- 8. EXHIBITIONS & ARTICLES -->
+<section style="padding: 6rem 0; background-color: var(--bg-secondary);">
+    <div class="container">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;">
+            <!-- Exhibitions -->
+            <div>
+                <h3 style="font-size: 2.2rem; color: #fff; margin-bottom: 2rem;">Выставочная деятельность</h3>
+                <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                    {% for exh in exhibitions %}
+                    <div style="padding: 1.25rem; background: var(--bg-card); border-left: 2px solid var(--accent-gold); border-radius: 0 var(--radius-sm) var(--radius-sm) 0;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+                            <span style="font-family: var(--font-display); font-weight: 700; color: var(--accent-gold);">{{ exh.year }}</span>
+                            <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">{{ exh.get_status_display }}</span>
+                        </div>
+                        <h4 style="font-size: 1.25rem; color: #fff; margin-bottom: 0.25rem;">«{{ exh.title }}»</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-muted);">{{ exh.venue }} ({{ exh.city }})</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Articles -->
+            <div>
+                <h3 style="font-size: 2.2rem; color: #fff; margin-bottom: 2rem;">Статьи и исследования</h3>
+                <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                    {% for art in articles %}
+                    <article style="padding: 1.5rem; background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md);">
+                        <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--accent-bronze); font-weight: 600;">{{ art.tag }} • {{ art.read_time }}</span>
+                        <h4 style="font-size: 1.35rem; color: #fff; margin: 0.5rem 0;">{{ art.title }}</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1rem;">{{ art.summary }}</p>
+                        <a href="/articles/{{ art.slug }}/" style="font-size: 0.85rem; color: var(--accent-gold); font-weight: 600;">Читать статью <i class="fas fa-arrow-right"></i></a>
+                    </article>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+

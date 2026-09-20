@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    <title>{% block title %}GB STUDIO — Премиальный Fit-Out коммерческих объектов и арт-ателье под ключ{% endblock %}</title>
+    <meta name="description" content="{% block meta_desc %}Генеральный подряд и авторская отделка масштабных коммерческих объектов, отелей, производств и офисов. Собственная арт-лаборатория фактур под руководством Александра Попыкина.{% endblock %}">
+    
+    <!-- Design System CSS -->
+    <link rel="stylesheet" href="/static/css/style.css?v=20260919-2120">
+    
+    <!-- Favicon / FontAwesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-inner">
+            <a href="/" class="brand-logo">
+                <span class="brand-title">GB STUDIO</span>
+                <span class="brand-subtitle">Atelier & Fit-Out</span>
+            </a>
+
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="/#cases" class="nav-link">Объекты & Fit-Out</a></li>
+                    <li><a href="/#sectors" class="nav-link">Для предприятий</a></li>
+                    <li><a href="/#sample-box" class="nav-link">Sample Box</a></li>
+                    <li><a href="/gallery/" class="nav-link {% if request.path == '/gallery/' %}active{% endif %}">Арт-Галерея</a></li>
+                    <li><a href="/#atelier" class="nav-link">О мастере</a></li>
+                    <li><a href="/#contacts" class="nav-link">Контакты</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a href="tel:+74958904422" class="header-phone">
+                    <i class="fas fa-phone-alt"></i> +7 (495) 890-44-22
+                </a>
+                <a href="/#quiz" class="btn btn-primary btn-header-cta">
+                    Обсудить проект
+                </a>
+                <button class="burger-btn" aria-label="Открыть меню"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer" style="display: none;">
+        <!-- mobile menu toggled via js -->
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" id="contacts">
+        <div class="container">
+            <div class="footer-top">
+                <div>
+                    <div class="brand-logo" style="margin-bottom: 1.25rem;">
+                        <span class="brand-title">GB STUDIO</span>
+                        <span class="brand-subtitle">Architectural Fit-Out & Popykin Atelier</span>
+                    </div>
+                    <p style="font-size: 0.95rem; color: var(--text-muted); max-width: 380px; line-height: 1.7; margin-bottom: 1.5rem;">
+                        Генеральный подряд, комплексная отделка коммерческих предприятий и создание авторских архитектурных поверхностей с 2011 года.
+                    </p>
+                    <div style="display: flex; gap: 1rem; font-size: 1.25rem;">
+                        <a href="https://t.me/" target="_blank" style="color: var(--accent-gold);"><i class="fab fa-telegram"></i></a>
+                        <a href="https://wa.me/" target="_blank" style="color: #25D366;"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://instagram.com/" target="_blank" style="color: #E1306C;"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="footer-col-title">Направления</h4>
+                    <ul class="footer-links">
+                        <li><a href="/#sectors">Для предприятий и заводов</a></li>
+                        <li><a href="/#sectors">Корпоративные офисы</a></li>
+                        <li><a href="/#sectors">Отели и рестораны (HoReCa)</a></li>
+                        <li><a href="/#sectors">Входные группы и девелопмент</a></li>
+                        <li><a href="/#sample-box">Заказ кейса образцов</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="footer-col-title">Искусство</h4>
+                    <ul class="footer-links">
+                        <li><a href="/gallery/">Станковая живопись</a></li>
+                        <li><a href="/gallery/">Скульптурная керамика</a></li>
+                        <li><a href="/gallery/">Авторская графика</a></li>
+                        <li><a href="/#atelier">Манифест Саши Попыкина</a></li>
+                        <li><a href="/admin/" style="color: var(--accent-gold);"><i class="fas fa-lock" style="font-size: 0.75rem;"></i> Личный кабинет</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="footer-col-title">Контакты B2B-отдела</h4>
+                    <p style="font-size: 0.95rem; margin-bottom: 0.5rem; color: #fff;"><strong>Наталья Попыкина</strong></p>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">Директор по развитию коммерческих проектов</p>
+                    <p style="font-size: 0.95rem; margin-bottom: 0.4rem;"><i class="fas fa-phone" style="color: var(--accent-gold);"></i> <a href="tel:+74958904422">+7 (495) 890-44-22</a></p>
+                    <p style="font-size: 0.95rem; margin-bottom: 0.4rem;"><i class="fas fa-envelope" style="color: var(--accent-gold);"></i> <a href="mailto:tender@gbstudio.ru">tender@gbstudio.ru</a></p>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem;">Мастерская и офис: Москва, арт-кластер «Кристалл»</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2026 GB STUDIO. Все права защищены. Член ассоциации строителей, допуски СРО.</p>
+                <p><a href="/admin/">Панель управления CMS / CRM</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Sample Box Modal -->
+    <div class="modal-backdrop" id="sampleBoxModal">
+        <div class="modal-box">
+            <button class="modal-close">&times;</button>
+            <div class="eyebrow">Для архитекторов и дизайнеров</div>
+            <h3 style="font-size: 1.8rem; color: #fff; margin-bottom: 0.75rem;">Заказ «Architect Sample Box»</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+                Мы бесплатно доставим фирменный деревянный кейс с живыми выкрасами авторских штукатурок, микроцемента и минеральных текстур в ваше бюро.
+            </p>
+            <form id="sampleBoxForm">
+                <div class="form-group">
+                    <label class="form-label">Ваше имя и фамилия</label>
+                    <input type="text" name="name" class="form-input" placeholder="Константин Архипов" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Архитектурное бюро / Компания</label>
+                    <input type="text" name="company" class="form-input" placeholder="Бюро «Меганом»" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Телефон для связи</label>
+                    <input type="tel" name="phone" class="form-input" placeholder="+7 (999) 000-00-00" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Адрес доставки образцов</label>
+                    <input type="text" name="address" class="form-input" placeholder="г. Москва, ул. Арбат 10, офис 4" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Заказать кейс образцов</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Artwork Lightbox Modal -->
+    <div class="modal-backdrop" id="artworkModal">
+        <div class="modal-box" style="max-width: 820px; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center;">
+            <button class="modal-close">&times;</button>
+            <div>
+                <img src="" alt="" class="art-modal-img" style="border-radius: var(--radius-sm); width: 100%; max-height: 480px; object-fit: cover;">
+            </div>
+            <div>
+                <div class="eyebrow">Коллекционная работа</div>
+                <h3 class="art-modal-title" style="font-size: 1.6rem; color: #fff; margin-bottom: 0.35rem;"></h3>
+                <p class="art-modal-medium" style="font-size: 0.85rem; color: var(--accent-bronze); margin-bottom: 0.35rem;"></p>
+                <p class="art-modal-dim" style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.75rem;"></p>
+                <div style="font-size: 1.4rem; font-weight: 700; color: var(--accent-gold); margin-bottom: 0.75rem;" class="art-modal-price"></div>
+                <p class="art-modal-desc" style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1rem; max-height: 120px; overflow-y: auto;"></p>
+                
+                <form id="artInquiryForm" style="border-top: 1px solid var(--border-subtle); padding-top: 0.85rem;">
+                    <input type="hidden" name="artwork_title" id="artModalInputTitle" value="">
+                    <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--accent-gold); display: block; margin-bottom: 0.5rem; font-weight: 600;">Запрос условий приобретения</span>
+                    <div style="display: flex; gap: 0.5rem; margin-bottom: 0.65rem;">
+                        <input type="text" name="name" class="form-input" placeholder="Ваше имя" style="padding: 0.6rem 0.8rem; font-size: 0.85rem;" required>
+                        <input type="tel" name="phone" class="form-input" placeholder="+7 (___) ___-__-__" style="padding: 0.6rem 0.8rem; font-size: 0.85rem;" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 0.85rem; padding: 0.7rem;">Забронировать работу</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main JavaScript -->
+    <script src="/static/js/main.js"></script>
+</body>
+</html>

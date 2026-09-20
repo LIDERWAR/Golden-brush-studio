@@ -1,0 +1,70 @@
+# Audio & Voice recordings (Confidential)
+*.mp3
+*.ogg
+*.wav
+*.m4a
+*.aac
+audio*
+
+# Commercial Offers & Negotiations (Confidential)
+COMMERCIAL_OFFER*
+*.docx
+*.doc
+~$*
+create_docx_offer.py
+demo_screenshots/
+
+# Internal Guidelines & Agent configurations
+AGENTS.md
+.agents/
+scratch/
+
+# Database (protect client leads & personal data)
+*.sqlite3
+db.sqlite3
+
+# Environment & Secret Keys
+.env
+*.env
+local_settings.py
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environments
+venv/
+env/
+ENV/
+.venv/
+
+# Logs & Temp
+*.log
+*.tmp
+*.bak
+
+# IDE & OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+Desktop.ini

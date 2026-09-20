@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ project.title }} — Кейс Fit-Out GB STUDIO{% endblock %}
+{% block meta_desc %}{{ project.short_description }}{% endblock %}
+
+{% block content %}
+<section style="padding-top: 8rem; padding-bottom: 6rem; background-color: var(--bg-primary);">
+    <div class="container" style="max-width: 1000px;">
+        <a href="/#cases" style="display: inline-flex; align-items: center; gap: 0.5rem; color: var(--accent-gold); font-size: 0.85rem; font-weight: 600; margin-bottom: 2rem;">
+            <i class="fas fa-arrow-left"></i> Назад к кейсам
+        </a>
+
+        <div class="eyebrow">{{ project.category.name }} • {{ project.year }} год</div>
+        <h1 style="font-size: clamp(2.2rem, 4.5vw, 3.2rem); color: #fff; line-height: 1.2; margin-bottom: 1.5rem;">{{ project.title }}</h1>
+        
+        <div style="display: flex; gap: 2rem; flex-wrap: wrap; margin-bottom: 2.5rem; padding: 1.25rem 0; border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
+            <div><span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Площадь:</span> <strong style="color: #fff; font-size: 1.1rem; display: block;">{{ project.area_sqm }} м²</strong></div>
+            <div><span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Срок реализации:</span> <strong style="color: #fff; font-size: 1.1rem; display: block;">{{ project.duration }}</strong></div>
+            <div><span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Локация:</span> <strong style="color: #fff; font-size: 1.1rem; display: block;">{{ project.location }}</strong></div>
+            <div><span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Заказчик:</span> <strong style="color: var(--accent-gold); font-size: 1.1rem; display: block;">{{ project.client_name }}</strong></div>
+        </div>
+
+        <div style="margin-bottom: 3rem; border-radius: var(--radius-lg); overflow: hidden;">
+            <img src="{{ project.image_url }}" alt="{{ project.title }}" style="width: 100%;">
+        </div>
+
+        <h3 style="font-size: 1.8rem; color: #fff; margin-bottom: 1rem;">Задачи и архитектурная концепция</h3>
+        <p style="font-size: 1.1rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 2.5rem;">{{ project.short_description }}</p>
+
+        <h3 style="font-size: 1.8rem; color: #fff; margin-bottom: 1rem;">Состав выполненных работ под ключ</h3>
+        <ul style="list-style: none; margin-bottom: 3.5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+            {% for scope in project.get_scope_list %}
+            <li style="padding: 1.2rem; background: var(--bg-card); border-left: 2px solid var(--accent-bronze); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; color: #fff;">
+                <i class="fas fa-check" style="color: var(--accent-gold); margin-right: 0.5rem;"></i> {{ scope }}
+            </li>
+            {% endfor %}
+        </ul>
+
+        <div style="padding: 3rem; background: var(--bg-secondary); border: 1px solid var(--border-active); border-radius: var(--radius-lg); text-align: center;">
+            <h3 style="font-size: 2rem; color: #fff; margin-bottom: 1rem;">Требуется реализовать подобный проект?</h3>
+            <p style="font-size: 1.05rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 2rem;">
+                Рассчитайте предварительную смету или свяжитесь с Натальей Попыкиной для выезда главного инженера на ваш объект.
+            </p>
+            <a href="/#quiz" class="btn btn-primary">Рассчитать смету для моего объекта</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
