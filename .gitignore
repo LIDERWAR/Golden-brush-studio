@@ -1,18 +1,44 @@
-# Audio & Voice recordings (Confidential)
+# Audio & Voice recordings (Strictly Confidential)
 *.mp3
 *.ogg
 *.wav
 *.m4a
 *.aac
+*.oga
+*.opus
+*.flac
 audio*
+voice*
+tg_voice*
+voice_message*
+check_voice*
+temp_voice*
 
-# Commercial Offers & Negotiations (Confidential)
+# Personal correspondence, chat logs, transcripts & screenshots (Strictly Confidential)
+*transcription*
+*transcript*
+*chat*
+*correspondence*
+*perepiska*
+*telegram*
+*dialog*
+*client_notes*
+*meeting_notes*
+tg_*
+screenshot*
+screen_*
+demo_screenshots/
+
+# Commercial Offers, Estimates & Negotiations (Strictly Confidential)
 COMMERCIAL_OFFER*
+*estimate*
+*smeta*
+*offer*
+*kp*
 *.docx
 *.doc
 ~$*
 create_docx_offer.py
-demo_screenshots/
 
 # Internal Guidelines & Agent configurations
 AGENTS.md
