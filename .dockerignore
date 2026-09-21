@@ -1,0 +1,44 @@
+__pycache__
+*.py[cod]
+*$py.class
+*.so
+.git
+.gitignore
+.env
+*.env
+db.sqlite3
+*.sqlite3
+
+# Audio & Personal files
+*.mp3
+*.ogg
+*.wav
+*.m4a
+*.aac
+*.oga
+*.opus
+*.flac
+audio*
+voice*
+tg_voice*
+tg_*
+*transcription*
+*transcript*
+*chat*
+*perepiska*
+COMMERCIAL_OFFER*
+*.docx
+*.doc
+~$*
+
+# Virtualenv
+venv/
+env/
+.venv/
+
+# Guidelines & local artifacts
+.agents/
+AGENTS.md
+scratch/
+demo_screenshots/
+*.log

@@ -73,6 +73,31 @@ python manage.py runserver
 
 ---
 
+## 🐳 Развертывание в Production (Docker Compose + Nginx + PostgreSQL + SSL)
+
+Для боевого сервера предусмотрена изолированная мультиконтейнерная конфигурация:
+
+```bash
+# 1. Скопируйте и настройте боевые переменные окружения
+cp .env.example .env
+# Задайте SECRET_KEY, ALLOWED_HOSTS, DOMAIN_NAME и надежный пароль POSTGRES_PASSWORD
+
+# 2. Сборка и запуск всех сервисов в фоновом режиме
+docker compose up --build -d
+
+# 3. Наполнение базы данных и создание суперпользователя в контейнере
+docker compose exec web python seed_db.py
+```
+
+Сервисы автоматически поднимают:
+- **web**: Gunicorn + Django 6 на Python 3.12 (с автомиграцией и сбором статики через `entrypoint.sh`).
+- **db**: PostgreSQL 16 Alpine с изолированным хранилищем `postgres_data`.
+- **nginx**: Alpine Nginx с автоматической отдачей статики (`/static/`), медиа (`/media/`) и проксированием.
+- **certbot**: Автоматическое продление SSL Let's Encrypt сертификатов каждые 12 часов.
+
+
+---
+
 ## 📁 Структура проекта
 
 ```
