@@ -21,8 +21,8 @@ RUN pip install --no-cache-dir --upgrade pip && \
 # Copy project code
 COPY . /app/
 
-# Ensure entrypoint is executable
-RUN chmod +x /app/entrypoint.sh
+# Ensure entrypoint is executable and has UNIX line endings (prevents CRLF errors on Linux VPS)
+RUN sed -i 's/\r$//' /app/entrypoint.sh && chmod +x /app/entrypoint.sh
 
 EXPOSE 8000
 

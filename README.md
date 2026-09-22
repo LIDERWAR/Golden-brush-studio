@@ -75,25 +75,27 @@ python manage.py runserver
 
 ## 🐳 Развертывание в Production (Docker Compose + Nginx + PostgreSQL + SSL)
 
-Для боевого сервера предусмотрена изолированная мультиконтейнерная конфигурация:
+Подробное пошаговое руководство по настройке VPS-сервера, безопасности, файрвола и домена находится в файле **[DEPLOY.md](DEPLOY.md)**.
 
+### Быстрый запуск на сервере:
 ```bash
-# 1. Скопируйте и настройте боевые переменные окружения
+# 1. Скопируйте и настройте переменные окружения
 cp .env.example .env
-# Задайте SECRET_KEY, ALLOWED_HOSTS, DOMAIN_NAME и надежный пароль POSTGRES_PASSWORD
+nano .env
 
-# 2. Сборка и запуск всех сервисов в фоновом режиме
-docker compose up --build -d
+# 2. Однострочный запуск (сборка, запуск, миграции, статика, демо-данные)
+chmod +x deploy.sh init-ssl.sh entrypoint.sh
+./deploy.sh
 
-# 3. Наполнение базы данных и создание суперпользователя в контейнере
-docker compose exec web python seed_db.py
+# 3. Выпуск официального SSL-сертификата Let's Encrypt для вашего домена
+./init-ssl.sh
 ```
 
 Сервисы автоматически поднимают:
 - **web**: Gunicorn + Django 6 на Python 3.12 (с автомиграцией и сбором статики через `entrypoint.sh`).
 - **db**: PostgreSQL 16 Alpine с изолированным хранилищем `postgres_data`.
-- **nginx**: Alpine Nginx с автоматической отдачей статики (`/static/`), медиа (`/media/`) и проксированием.
-- **certbot**: Автоматическое продление SSL Let's Encrypt сертификатов каждые 12 часов.
+- **nginx**: Alpine Nginx с шаблонизацией переменных окружения (`templates/*.template`), сжатием Gzip, отдачей `/static/` и `/media/`, и защитными заголовками.
+- **certbot**: Автоматическое продление SSL-сертификатов Let's Encrypt каждые 12 часов.
 
 
 ---
