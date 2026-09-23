@@ -169,12 +169,12 @@ docker compose exec web python manage.py collectstatic --noinput
 ### Резервное копирование базы данных PostgreSQL
 Создать бэкап:
 ```bash
-docker compose exec -T db pg_dump -U popikin_user popikin_db > backup_$(date +%Y%m%d_%H%M%S).sql
+docker compose exec -T db pg_dump -U gb_studio_user gb_studio_db > backup_$(date +%Y%m%d_%H%M%S).sql
 ```
 
 Восстановить базу из бэкапа:
 ```bash
-cat backup_YYYYMMDD_HHMMSS.sql | docker compose exec -T db psql -U popikin_user popikin_db
+cat backup_YYYYMMDD_HHMMSS.sql | docker compose exec -T db psql -U gb_studio_user gb_studio_db
 ```
 
 ### Автоматическое продление SSL

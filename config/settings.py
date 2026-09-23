@@ -12,7 +12,7 @@ except ImportError:
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-popikin-studio-production-key-2026-b2b-art')
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-gb-studio-production-key-2026-b2b-art')
 
 DEBUG = os.environ.get('DEBUG', 'True').lower() in ('true', '1', 'yes')
 
