@@ -53,9 +53,16 @@ scratch/
 *.sqlite3
 db.sqlite3
 
-# Environment & Secret Keys
+# Environment & Secret Keys (Strictly Confidential)
 .env
 *.env
+.secrets/
+*.enc
+*credential*
+*credentials*
+*vps_access*
+*.key
+*.pem
 local_settings.py
 
 # Python
