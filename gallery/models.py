@@ -30,6 +30,7 @@ class Artwork(models.Model):
     price = models.CharField('Стоимость', max_length=100, default='По запросу', help_text='Например: 350 000 ₽ или По запросу')
     
     curator_note = models.TextField('Кураторская экспликация / Описание концепции')
+    image = models.ImageField('Фото произведения (загрузка с диска)', upload_to='artworks/', blank=True, null=True)
     image_url = models.CharField('Изображение (URL или статический путь)', max_length=255, default='/static/images/art_canvas.jpg')
     is_featured = models.BooleanField('Показывать в избранном', default=True)
     order = models.PositiveIntegerField('Порядок отображения', default=0)
@@ -43,3 +44,10 @@ class Artwork(models.Model):
 
     def __str__(self):
         return f"«{self.title}» ({self.year}) — {self.get_status_display()}"
+
+    @property
+    def get_image(self):
+        if self.image:
+            return self.image.url
+        return self.image_url
+

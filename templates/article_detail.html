@@ -1,36 +1,118 @@
 {% extends 'base.html' %}
 
-{% block title %}{{ article.title }} — GB STUDIO Экспертиза{% endblock %}
+{% block title %}{{ article.title }} — Журнал Мастерской | GB STUDIO{% endblock %}
 {% block meta_desc %}{{ article.summary }}{% endblock %}
 
 {% block content %}
 <article style="padding-top: 8rem; padding-bottom: 6rem; background-color: var(--bg-primary);">
-    <div class="container" style="max-width: 860px;">
-        <a href="/#articles" style="display: inline-flex; align-items: center; gap: 0.5rem; color: var(--accent-gold); font-size: 0.85rem; font-weight: 600; margin-bottom: 2rem;">
-            <i class="fas fa-arrow-left"></i> Назад к статьям
+    <div class="container" style="max-width: 880px;">
+        <!-- Breadcrumb / Back Link -->
+        <a href="{% url 'main:journal_list' %}" style="display: inline-flex; align-items: center; gap: 0.5rem; color: var(--accent-gold); font-size: 0.85rem; font-weight: 600; margin-bottom: 2rem; text-decoration: none;">
+            ← Назад в Журнал Мастерской
         </a>
 
-        <div class="eyebrow">{{ article.tag }} • {{ article.read_time }}</div>
-        <h1 style="font-size: clamp(2.2rem, 4.5vw, 3.4rem); color: #fff; line-height: 1.2; margin-bottom: 1.5rem;">{{ article.title }}</h1>
-        <p style="font-size: 1.2rem; color: var(--accent-gold); line-height: 1.6; font-style: italic; margin-bottom: 2.5rem; border-left: 2px solid var(--accent-bronze); padding-left: 1.5rem;">
+        <!-- Eyebrow & Meta -->
+        <div class="eyebrow" style="margin-bottom: 0.5rem;">
+            {{ article.get_category_display }} • {{ article.published_date|date:"d E Y" }} • {{ article.read_time }}
+        </div>
+        
+        <!-- Main Title -->
+        <h1 style="font-size: clamp(2.2rem, 4.5vw, 3.4rem); color: #fff; line-height: 1.2; margin-bottom: 1.5rem; font-family: var(--font-display);">
+            {{ article.title }}
+        </h1>
+
+        <!-- Summary / Intro -->
+        <p style="font-size: 1.2rem; color: var(--text-main); line-height: 1.7; font-weight: 400; margin-bottom: 2rem;">
             {{ article.summary }}
         </p>
 
-        <div style="margin-bottom: 2.5rem; border-radius: var(--radius-md); overflow: hidden;">
-            <img src="{{ article.image_url }}" alt="{{ article.title }}" style="width: 100%;">
+        <!-- Author Quote / Callout if present -->
+        {% if article.author_quote %}
+        <blockquote style="margin: 2.5rem 0; padding: 1.75rem 2rem; background: var(--bg-card); border-left: 3px solid var(--accent-gold); border-radius: 0 var(--radius-sm) var(--radius-sm) 0;">
+            <p style="font-family: var(--font-display); font-size: 1.25rem; font-style: italic; color: #fff; line-height: 1.6; margin: 0 0 0.5rem;">
+                «{{ article.author_quote }}»
+            </p>
+            <cite style="font-size: 0.85rem; color: var(--accent-gold); font-style: normal; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600;">
+                — Александр Попыкин, основатель ателье
+            </cite>
+        </blockquote>
+        {% endif %}
+
+        <!-- Hero Image -->
+        <div style="margin-bottom: 3rem; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border-subtle);">
+            <img src="{{ article.get_image }}" alt="{{ article.title }}" style="width: 100%; height: auto; display: block;">
         </div>
 
-        <div style="font-size: 1.1rem; color: var(--text-main); line-height: 1.8;" class="article-body">
+        <!-- Article Body -->
+        <div style="font-size: 1.1rem; color: var(--text-main); line-height: 1.85;" class="article-body">
             {{ article.content|safe }}
         </div>
 
-        <div style="margin-top: 4rem; padding: 2.5rem; background: var(--bg-card); border: 1px solid var(--border-active); border-radius: var(--radius-md); text-align: center;">
-            <h3 style="font-size: 1.6rem; color: #fff; margin-bottom: 0.75rem;">Планируете отделку коммерческого объекта?</h3>
-            <p style="font-size: 1rem; color: var(--text-muted); margin-bottom: 1.5rem;">
-                Получите техническую консультацию главного инженера и предварительный расчет сметы.
+        <!-- Work in Progress / Process Gallery if images exist -->
+        {% if process_images %}
+        <section style="margin-top: 4rem; padding-top: 3rem; border-top: 1px solid var(--border-subtle);">
+            <div class="eyebrow" style="margin-bottom: 0.5rem;">Бэкстейдж создания</div>
+            <h3 style="font-size: 1.8rem; color: #fff; margin-bottom: 1.5rem;">
+                Хроника работы над произведением
+            </h3>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem;">
+                {% for proc_img in process_images %}
+                <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); overflow: hidden;">
+                    <img src="{{ proc_img.get_image }}" alt="{{ proc_img.caption|default:article.title }}" 
+                         style="width: 100%; height: 200px; object-fit: cover;">
+                    {% if proc_img.caption %}
+                    <div style="padding: 0.85rem 1rem; font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+                        {{ proc_img.caption }}
+                    </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- Conversion / Contact Box -->
+        <div style="margin-top: 5rem; padding: 2.5rem; background: var(--bg-card); border: 1px solid var(--border-active); border-radius: var(--radius-md); text-align: center;">
+            <div class="eyebrow" style="margin-bottom: 0.5rem;">Сотрудничество</div>
+            <h3 style="font-size: 1.6rem; color: #fff; margin-bottom: 0.75rem;">
+                Интересует подобное решение для вашего объекта?
+            </h3>
+            <p style="font-size: 1rem; color: var(--text-muted); margin-bottom: 1.75rem; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.6;">
+                Разрабатываем эксклюзивные архитектурные поверхности и выполняем генподрядный fit-out коммерческих пространств под ключ.
             </p>
-            <a href="/#quiz" class="btn btn-primary">Рассчитать смету проекта</a>
+            <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                <a href="/#quiz" class="btn btn-primary">Рассчитать смету проекта</a>
+                <a href="tel:+74958904422" class="btn btn-secondary">Связаться с ателье</a>
+            </div>
         </div>
+
+        <!-- Related Articles -->
+        {% if related_articles %}
+        <div style="margin-top: 5rem; padding-top: 3rem; border-top: 1px solid var(--border-subtle);">
+            <div class="eyebrow" style="margin-bottom: 0.5rem;">Другие публикации</div>
+            <h3 style="font-size: 1.8rem; color: #fff; margin-bottom: 2rem;">
+                Из Журнала Мастерской
+            </h3>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem;">
+                {% for rel in related_articles %}
+                <a href="{% url 'main:journal_detail' rel.slug %}" 
+                   style="display: block; background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); overflow: hidden; text-decoration: none; color: inherit; transition: transform 0.2s ease;">
+                    <img src="{{ rel.get_image }}" alt="{{ rel.title }}" style="width: 100%; height: 160px; object-fit: cover;">
+                    <div style="padding: 1.25rem;">
+                        <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--accent-gold); font-weight: 600;">
+                            {{ rel.get_category_display|truncatechars:24 }}
+                        </span>
+                        <h4 style="font-size: 1.05rem; color: #fff; margin: 0.5rem 0 0.25rem; line-height: 1.4;">
+                            {{ rel.title }}
+                        </h4>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
     </div>
 </article>
 {% endblock %}

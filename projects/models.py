@@ -26,6 +26,7 @@ class Project(models.Model):
     short_description = models.TextField('Краткое описание проекта')
     scope_of_work = models.TextField('Выполненные работы (через точку с запятой)', help_text='Например: Комплексный fit-out под ключ; Монтаж вентиляции и СКС; Авторские рельефные покрытия стен; Изготовление стола из массива дуба и латуни')
     
+    image = models.ImageField('Фото объекта (загрузка с диска)', upload_to='projects/', blank=True, null=True)
     image_url = models.CharField('URL или путь к изображению', max_length=255, default='/static/images/case_hotel.jpg')
     is_featured = models.BooleanField('Отображать на главной', default=True)
     order = models.PositiveIntegerField('Порядок отображения', default=0)
@@ -42,3 +43,10 @@ class Project(models.Model):
 
     def get_scope_list(self):
         return [item.strip() for item in self.scope_of_work.split(';') if item.strip()]
+
+    @property
+    def get_image(self):
+        if self.image:
+            return self.image.url
+        return self.image_url
+

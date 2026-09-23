@@ -125,6 +125,10 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Telegram Notifications for Natalia & Sasha
+TELEGRAM_BOT_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN', '')
+TELEGRAM_CHAT_ID = os.environ.get('TELEGRAM_CHAT_ID', '')
+
 # JAZZMIN Settings for Luxury Architectural & Art Atelier
 JAZZMIN_SETTINGS = {
     "site_title": "GB STUDIO",

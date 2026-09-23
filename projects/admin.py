@@ -13,3 +13,14 @@ class ProjectAdmin(admin.ModelAdmin):
     search_fields = ('title', 'client_name', 'location', 'short_description', 'scope_of_work')
     list_editable = ('is_featured', 'order')
     prepopulated_fields = {'slug': ('title',)}
+    fieldsets = (
+        ('Параметры объекта', {
+            'fields': ('title', 'slug', 'category', 'client_name', 'location', 'area_sqm', 'year', 'duration', 'is_featured', 'order')
+        }),
+        ('Фотография и визуализация', {
+            'fields': ('image', 'image_url')
+        }),
+        ('Описание и перечень работ', {
+            'fields': ('short_description', 'scope_of_work')
+        }),
+    )

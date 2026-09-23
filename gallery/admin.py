@@ -13,3 +13,11 @@ class ArtworkAdmin(admin.ModelAdmin):
     search_fields = ('title', 'medium', 'curator_note')
     list_editable = ('status', 'price', 'is_featured', 'order')
     prepopulated_fields = {'slug': ('title',)}
+    fieldsets = (
+        ('Параметры произведения', {
+            'fields': ('title', 'slug', 'category', 'year', 'dimensions', 'medium', 'status', 'price', 'is_featured', 'order')
+        }),
+        ('Фотография и экспликация', {
+            'fields': ('image', 'image_url', 'curator_note')
+        }),
+    )
