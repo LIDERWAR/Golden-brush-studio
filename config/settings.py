@@ -136,7 +136,7 @@ JAZZMIN_SETTINGS = {
     "site_brand": "GB STUDIO",
     "welcome_sign": "Панель управления проектами и заявками GB STUDIO",
     "copyright": "GB STUDIO © 2026",
-    "search_model": ["leads.Lead", "projects.Project", "gallery.Artwork"],
+    "search_model": ["leads.Lead"],
     "topmenu_links": [
         {"name": "Перейти на сайт", "url": "/", "new_window": True},
         {"name": "Входящие Лиды (CRM)", "model": "leads.Lead"},
