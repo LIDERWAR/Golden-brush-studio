@@ -1904,78 +1904,102 @@ img {
   width: 100%;
 }
 
-/* Hero Split Header (Architectural Editorial Layout) */
-.hero-header-split {
-  display: grid;
-  grid-template-columns: 1.12fr 0.88fr;
-  gap: clamp(2rem, 4vw, 4.5rem);
-  align-items: flex-end;
-  margin-bottom: 2rem;
+/* Hero Header Composition (Architectural Editorial Layout) */
+.hero-composition {
   width: 100%;
+  margin-bottom: 2.25rem;
 }
 
-.hero-title-col {
+.hero-header-top {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: clamp(2rem, 3.5vw, 4.5rem);
+  margin-bottom: 1.75rem;
 }
 
-.hero-title-col .eyebrow {
-  margin-bottom: 0.5rem;
+.hero-title-area {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.hero-title-area .eyebrow {
+  margin-bottom: 0.65rem;
 }
 
 .hero-atelier-title {
   font-family: var(--font-serif);
-  font-size: clamp(2rem, 3.2vw, 3.2rem);
-  line-height: 1.12;
+  font-size: clamp(2.15rem, 3.2vw, 3.25rem);
+  line-height: 1.15;
   font-weight: 400;
   color: var(--text-main);
   margin: 0;
 }
 
-.hero-atelier-title .accent {
-  color: var(--accent-bronze);
+.hero-atelier-title .title-line-main {
+  display: block;
+  white-space: nowrap;
+}
+
+.hero-atelier-title .title-line-sub {
+  display: block;
   font-style: italic;
+  color: var(--accent-bronze);
   background: none;
   -webkit-text-fill-color: initial;
 }
 
-.hero-actions-col {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+.hero-desc-area {
+  flex: 0 0 clamp(320px, 30vw, 440px);
+  margin-bottom: 0.35rem;
 }
 
 .hero-atelier-desc {
-  font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+  font-size: clamp(0.95rem, 1.05vw, 1.05rem);
   color: var(--text-muted);
   line-height: 1.65;
-  margin-bottom: 1.25rem;
+  margin: 0;
 }
 
-.hero-cta-row {
+/* Horizontal Button Bar Across the Bottom of the Header Block */
+.hero-cta-bar {
   display: flex;
-  gap: 0.75rem;
+  align-items: center;
+  gap: 1rem;
   flex-wrap: wrap;
+  padding-top: 0.25rem;
 }
 
-.hero-cta-row .btn {
-  padding: 0.75rem 1.35rem;
-  font-size: 0.82rem;
+.hero-cta-bar .btn {
+  padding: 0.85rem 1.65rem;
+  font-size: 0.84rem;
   white-space: nowrap;
 }
 
-@media (max-width: 1024px) {
-  .hero-header-split {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-    margin-bottom: 1.75rem;
+@media (max-width: 1120px) {
+  .hero-atelier-title .title-line-main {
+    white-space: normal;
+  }
+  .hero-header-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+  .hero-desc-area {
+    flex: 1 1 auto;
+    max-width: 100%;
+    margin-bottom: 0;
   }
 }
 
-.hero-headline-block {
-  text-align: center;
-  max-width: 1100px;
-  margin: 0 auto 1.5rem;
+@media (max-width: 768px) {
+  .hero-cta-bar {
+    gap: 0.75rem;
+  }
+  .hero-cta-bar .btn {
+    width: 100%;
+    text-align: center;
+  }
 }
 
 /* Portals Grid (The 3 Windows) */
