@@ -86,7 +86,54 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 6. Architectural Hero Showcase Slider
     initHeroSlider();
+
+    // 7. Live Wall Area Calculator (Goldshell Style)
+    initLiveWallCalculator();
+
+    // 8. Free Art Fitting in Interior Modal
+    initArtFittingModal();
+
+    // 9. Floating Quick Contact Assistant
+    initFloatingQuickContact();
+
+    // 10. Atelier Video Reel Modal
+    initVideoReelModal();
+
+    // 11. Universal Modal Closer (Button, Backdrop, Escape)
+    initUniversalModalCloser();
 });
+
+// Universal Modal Closer
+function initUniversalModalCloser() {
+    document.querySelectorAll('.modal-close').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const modal = btn.closest('.modal-backdrop');
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.classList.remove('drawer-open');
+            }
+        });
+    });
+
+    document.querySelectorAll('.modal-backdrop').forEach(backdrop => {
+        backdrop.addEventListener('click', (e) => {
+            if (e.target === backdrop) {
+                backdrop.classList.remove('active');
+                document.body.classList.remove('drawer-open');
+            }
+        });
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            document.querySelectorAll('.modal-backdrop.active').forEach(m => {
+                m.classList.remove('active');
+            });
+            document.body.classList.remove('drawer-open');
+        }
+    });
+}
 
 // Toast notification helper
 function showToast(message, isSuccess = true) {
@@ -552,4 +599,290 @@ function initHeroSlider() {
     // Start auto slider
     animationFrame = requestAnimationFrame(tick);
 }
+
+// 7. Live Wall Area Calculator (Goldshell Style)
+function initLiveWallCalculator() {
+    const materialsGrid = document.getElementById('materialsGrid');
+    const wallAreaInput = document.getElementById('wallAreaInput');
+    const wallAreaSlider = document.getElementById('wallAreaSlider');
+    const calcSelectedName = document.getElementById('calcSelectedName');
+    const calcSelectedDesc = document.getElementById('calcSelectedDesc');
+    const ledgerMaterialCost = document.getElementById('ledgerMaterialCost');
+    const ledgerWorkCost = document.getElementById('ledgerWorkCost');
+    const ledgerDuration = document.getElementById('ledgerDuration');
+    const ledgerTotalPrice = document.getElementById('ledgerTotalPrice');
+    const btnFixCalcLead = document.getElementById('btnFixCalcLead');
+
+    if (!materialsGrid || !wallAreaInput) return;
+
+    let selectedName = 'Минеральная фактурная штукатурка';
+    let selectedPriceSqm = 4200;
+    let selectedDesc = 'Травертин, Марморино, скальные сколы и песчаные фактуры. Природные минеральные компоненты.';
+    let area = parseInt(wallAreaInput.value, 10) || 45;
+
+    function formatNumber(num) {
+        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' ₽';
+    }
+
+    function recalculate() {
+        area = Math.max(5, Math.min(2500, parseInt(wallAreaInput.value, 10) || 10));
+        
+        const total = area * selectedPriceSqm;
+        const matCost = Math.round(total * 0.35);
+        const workCost = total - matCost;
+
+        let duration = '3–5 рабочих дней';
+        if (area < 25) duration = '2–3 рабочих дня';
+        else if (area <= 60) duration = '3–5 рабочих дней';
+        else if (area <= 150) duration = '5–8 рабочих дней';
+        else duration = '8–14 рабочих дней';
+
+        if (ledgerMaterialCost) ledgerMaterialCost.textContent = formatNumber(matCost);
+        if (ledgerWorkCost) ledgerWorkCost.textContent = formatNumber(workCost);
+        if (ledgerDuration) ledgerDuration.textContent = duration;
+        if (ledgerTotalPrice) ledgerTotalPrice.textContent = formatNumber(total);
+    }
+
+    // Material card selection
+    const cards = materialsGrid.querySelectorAll('.material-card');
+    cards.forEach(card => {
+        card.addEventListener('click', () => {
+            cards.forEach(c => c.classList.remove('active'));
+            card.classList.add('active');
+
+            selectedName = card.getAttribute('data-name');
+            selectedPriceSqm = parseInt(card.getAttribute('data-price-sqm'), 10) || 4200;
+            selectedDesc = card.getAttribute('data-desc');
+
+            if (calcSelectedName) calcSelectedName.textContent = selectedName;
+            if (calcSelectedDesc) calcSelectedDesc.textContent = selectedDesc;
+
+            recalculate();
+        });
+    });
+
+    // Area slider & number input synchronization
+    if (wallAreaSlider && wallAreaInput) {
+        wallAreaSlider.addEventListener('input', (e) => {
+            wallAreaInput.value = e.target.value;
+            recalculate();
+        });
+
+        wallAreaInput.addEventListener('input', (e) => {
+            const val = parseInt(e.target.value, 10);
+            if (!isNaN(val) && val >= 5) {
+                if (wallAreaSlider.max < val) {
+                    wallAreaSlider.max = Math.max(val, 500);
+                }
+                wallAreaSlider.value = Math.min(val, 500);
+            }
+            recalculate();
+        });
+    }
+
+    // Fix calculation & book technologist button
+    if (btnFixCalcLead) {
+        btnFixCalcLead.addEventListener('click', (e) => {
+            e.preventDefault();
+            const modal = document.getElementById('calcLeadModal');
+            if (!modal) return;
+
+            const total = area * selectedPriceSqm;
+            const priceStr = formatNumber(total);
+
+            const modalMat = document.getElementById('calcModalMaterial');
+            const modalArea = document.getElementById('calcModalArea');
+            const modalPrice = document.getElementById('calcModalPrice');
+            const inputMat = document.getElementById('calcLeadInputMaterial');
+            const inputArea = document.getElementById('calcLeadInputArea');
+            const inputCost = document.getElementById('calcLeadInputCost');
+
+            if (modalMat) modalMat.textContent = selectedName;
+            if (modalArea) modalArea.textContent = `${area} м²`;
+            if (modalPrice) modalPrice.textContent = priceStr;
+
+            if (inputMat) inputMat.value = selectedName;
+            if (inputArea) inputArea.value = area;
+            if (inputCost) inputCost.value = priceStr;
+
+            modal.classList.add('active');
+            document.body.classList.add('drawer-open');
+        });
+    }
+
+    // Modal submit handler
+    const calcLeadForm = document.getElementById('calcLeadForm');
+    if (calcLeadForm) {
+        calcLeadForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const submitBtn = calcLeadForm.querySelector('button[type="submit"]');
+            const origText = submitBtn.textContent;
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Отправка...';
+
+            const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+            const formData = new FormData(calcLeadForm);
+            const payload = Object.fromEntries(formData.entries());
+
+            try {
+                const res = await fetch('/api/calculator-lead/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrfToken || ''
+                    },
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showToast(data.message || 'Расчет успешно зафиксирован! Технолог свяжется с вами.');
+                    calcLeadForm.reset();
+                    const modal = document.getElementById('calcLeadModal');
+                    if (modal) modal.classList.remove('active');
+                    document.body.classList.remove('drawer-open');
+                } else {
+                    showToast(data.error || 'Ошибка отправки', false);
+                }
+            } catch (err) {
+                showToast('Ошибка соединения с сервером', false);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = origText;
+            }
+        });
+    }
+
+    // Initial calculation
+    recalculate();
+}
+
+// 8. Free Art Fitting in Interior Modal
+function initArtFittingModal() {
+    const modal = document.getElementById('artFittingModal');
+    const form = document.getElementById('artFittingForm');
+    if (!modal) return;
+
+    // Attach to all trigger buttons
+    document.querySelectorAll('.btn-open-fitting').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const artTitle = btn.getAttribute('data-title');
+            if (artTitle && form) {
+                const artInput = form.querySelector('input[name="artworks_selected"]');
+                if (artInput) {
+                    artInput.value = `«${artTitle}»`;
+                }
+            }
+            modal.classList.add('active');
+            document.body.classList.add('drawer-open');
+        });
+    });
+
+    // Close button
+    const closeBtn = modal.querySelector('.modal-close');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            modal.classList.remove('active');
+            document.body.classList.remove('drawer-open');
+        });
+    }
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.remove('active');
+            document.body.classList.remove('drawer-open');
+        }
+    });
+
+    // Form submit
+    if (form) {
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const origText = submitBtn.textContent;
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Отправка заявки...';
+
+            const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+            const formData = new FormData(form);
+            const payload = Object.fromEntries(formData.entries());
+
+            try {
+                const res = await fetch('/api/art-fitting/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrfToken || ''
+                    },
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showToast(data.message || 'Заявка на примерку принята!');
+                    form.reset();
+                    modal.classList.remove('active');
+                    document.body.classList.remove('drawer-open');
+                } else {
+                    showToast(data.error || 'Ошибка отправки', false);
+                }
+            } catch (err) {
+                showToast('Ошибка соединения с сервером', false);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = origText;
+            }
+        });
+    }
+}
+
+// 9. Floating Quick Contact Assistant
+function initFloatingQuickContact() {
+    const toggleBtn = document.getElementById('floatingToggleBtn');
+    const menu = document.getElementById('floatingContactMenu');
+
+    if (!toggleBtn || !menu) return;
+
+    toggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        menu.classList.toggle('open');
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!menu.contains(e.target) && e.target !== toggleBtn) {
+            menu.classList.remove('open');
+        }
+    });
+}
+
+// 10. Atelier Video Reel Modal
+function initVideoReelModal() {
+    const playBtn = document.getElementById('btnPlayProcessVideo');
+    const modal = document.getElementById('videoModal');
+    if (!playBtn || !modal) return;
+
+    const closeBtn = modal.querySelector('.modal-close');
+    const iframe = document.getElementById('videoIframe');
+
+    playBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        modal.classList.add('active');
+        document.body.classList.add('drawer-open');
+        if (iframe) {
+            // Elegant background loop video of artistic craftsmanship
+            iframe.src = 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&loop=1';
+        }
+    });
+
+    function closeVideo() {
+        modal.classList.remove('active');
+        document.body.classList.remove('drawer-open');
+        if (iframe) iframe.src = '';
+    }
+
+    if (closeBtn) closeBtn.addEventListener('click', closeVideo);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeVideo();
+    });
+}
+
 

@@ -203,3 +203,90 @@ def submit_art_inquiry(request):
     except Exception as e:
         return JsonResponse({'success': False, 'error': str(e)}, status=500)
 
+@require_POST
+def submit_art_fitting(request):
+    """Заявка на бесплатную примерку картин в интерьере заказчика"""
+    try:
+        if request.content_type == 'application/json':
+            data = json.loads(request.body)
+        else:
+            data = request.POST
+
+        name = data.get('name', '').strip()
+        phone = data.get('phone', '').strip()
+        address = data.get('address', '').strip()
+        artworks_selected = data.get('artworks_selected', '').strip()
+        message = data.get('message', '').strip()
+
+        if not name or not phone:
+            return JsonResponse({'success': False, 'error': 'Укажите ваше имя и телефон'}, status=400)
+
+        lead_msg = f"Заявка на БЕСПЛАТНУЮ ПРИМЕРКУ КАРТИН В ИНТЕРЬЕРЕ.\nАдрес доставки: {address or 'Не указан'}\nПолотна для примерки: {artworks_selected or 'Подборка куратора'}"
+        if message:
+            lead_msg += f"\nПожелания / интерьер: {message}"
+
+        lead = Lead.objects.create(
+            name=name,
+            phone=phone,
+            message=lead_msg,
+            source='art_fitting',
+            status='new',
+            manager_notes='Бесплатная примерка картин на объекте. Согласовать удобное время визита и отобрать полотна в мастерской.'
+        )
+
+        send_telegram_notification(lead)
+
+        return JsonResponse({
+            'success': True,
+            'lead_id': lead.id,
+            'message': 'Заявка на примерку полотен принята! Мы свяжемся с вами в течение 15 минут для согласования времени доставки.'
+        })
+    except Exception as e:
+        return JsonResponse({'success': False, 'error': str(e)}, status=500)
+
+@require_POST
+def submit_calculator_lead(request):
+    """Заявка из калькулятора расчета стоимости покрытий по площади стен"""
+    try:
+        if request.content_type == 'application/json':
+            data = json.loads(request.body)
+        else:
+            data = request.POST
+
+        name = data.get('name', '').strip()
+        phone = data.get('phone', '').strip()
+        material = data.get('material', '').strip()
+        area_sqm = data.get('area_sqm', '').strip()
+        estimated_cost = data.get('estimated_cost', '').strip()
+        message = data.get('message', '').strip()
+
+        if not name or not phone:
+            return JsonResponse({'success': False, 'error': 'Укажите ваше имя и телефон'}, status=400)
+
+        lead_msg = f"Расчет из калькулятора материалов:\nПокрытие: {material}\nПлощадь стен: {area_sqm} м²\nОриентировочная сумма: {estimated_cost}"
+        if message:
+            lead_msg += f"\nКомментарий: {message}"
+
+        lead = Lead.objects.create(
+            name=name,
+            phone=phone,
+            service_needed=material,
+            area_range=f"{area_sqm} м²",
+            estimated_cost=estimated_cost,
+            message=lead_msg,
+            source='calculator',
+            status='new',
+            manager_notes='Расчет по калькулятору поверхностей. Согласовать выезд технолога с планшетами выкрасов.'
+        )
+
+        send_telegram_notification(lead)
+
+        return JsonResponse({
+            'success': True,
+            'lead_id': lead.id,
+            'message': 'Расчет зафиксирован! Мы свяжемся с вами для подтверждения параметров и бесплатного предоставления образцов.'
+        })
+    except Exception as e:
+        return JsonResponse({'success': False, 'error': str(e)}, status=500)
+
+
