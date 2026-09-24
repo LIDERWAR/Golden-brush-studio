@@ -26,7 +26,7 @@
 - **Backend:** Python 3.12+ / Django 6.0
 - **Admin & CRM:** Django Jazzmin (кастомизированная темная архитектурная тема)
 - **API:** Django REST Framework (асинхронная обработка заявок без перезагрузки)
-- **Frontend:** Vanilla HTML5, Vanilla CSS3 (модульная дизайн-система с токенами, адаптив от 320px до Ultrawide 3440px / 4K), Vanilla JS ES6+
+- **Frontend:** Vanilla HTML5, Vanilla CSS3 (модульная дизайн-система с токенами, адаптив от 360px до Ultrawide 3440px / 4K), Vanilla JS ES6+
 - **Typography:** Cormorant Garamond, Plus Jakarta Sans
 - **Database:** SQLite (разработка) / PostgreSQL (production)
 - **Deployment:** Gunicorn + Nginx + Let's Encrypt SSL on Linux VPS

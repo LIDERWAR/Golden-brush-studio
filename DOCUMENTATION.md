@@ -79,7 +79,7 @@
 * **Серверный бэкенд:** Python 3.12+ / Django 5.x–6.0.
 * **Интерфейс администрирования (CRM):** `django-jazzmin` с премиальной архитектурной темой графит/золото.
 * **База данных:** SQLite (локальная разработка) / PostgreSQL 16 Alpine (production).
-* **Фронтенд:** Vanilla HTML5, Vanilla CSS3 (собственная модульная дизайн-система токенов, адаптивная верстка от 320px до Ultrawide 4K), Vanilla JS (ES6+ асинхронные Fetch API).
+* **Фронтенд:** Vanilla HTML5, Vanilla CSS3 (собственная модульная дизайн-система токенов, адаптивная верстка от 360px до Ultrawide 4K), Vanilla JS (ES6+ асинхронные Fetch API).
 * **Сетевой стек и контейнеризация:** Docker, Docker Compose, Nginx, Certbot (Let's Encrypt SSL).
 
 ---

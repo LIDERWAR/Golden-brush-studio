@@ -15,19 +15,65 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 2. Mobile Menu Toggle
-    const burgerBtn = document.querySelector('.burger-btn');
-    const mobileMenu = document.querySelector('.mobile-drawer');
-    if (burgerBtn && mobileMenu) {
-        burgerBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('active');
-        });
-        const closeBtn = mobileMenu.querySelector('.drawer-close');
-        if (closeBtn) {
-            closeBtn.addEventListener('click', () => {
-                mobileMenu.classList.remove('active');
-            });
+    const burgerBtn = document.getElementById('burgerBtn') || document.querySelector('.burger-btn');
+    const mobileDrawer = document.getElementById('mobileDrawer') || document.querySelector('.mobile-drawer');
+    const drawerBackdrop = document.getElementById('drawerBackdrop');
+    const drawerClose = document.getElementById('drawerClose');
+
+    function openMobileDrawer() {
+        if (mobileDrawer) {
+            mobileDrawer.classList.add('active');
+            document.body.classList.add('drawer-open');
         }
     }
+
+    function closeMobileDrawer() {
+        if (mobileDrawer) {
+            mobileDrawer.classList.remove('active');
+            document.body.classList.remove('drawer-open');
+        }
+    }
+
+    if (burgerBtn) {
+        burgerBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (mobileDrawer && mobileDrawer.classList.contains('active')) {
+                closeMobileDrawer();
+            } else {
+                openMobileDrawer();
+            }
+        });
+    }
+
+    if (drawerClose) {
+        drawerClose.addEventListener('click', (e) => {
+            e.preventDefault();
+            closeMobileDrawer();
+        });
+    }
+
+    if (drawerBackdrop) {
+        drawerBackdrop.addEventListener('click', () => {
+            closeMobileDrawer();
+        });
+    }
+
+    // Auto-close on link click
+    if (mobileDrawer) {
+        const drawerLinks = mobileDrawer.querySelectorAll('.drawer-link, .drawer-cta');
+        drawerLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                closeMobileDrawer();
+            });
+        });
+    }
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobileDrawer && mobileDrawer.classList.contains('active')) {
+            closeMobileDrawer();
+        }
+    });
 
     // 3. B2B Multi-Step Quiz (Natalia's Lead Machine)
     initQuiz();
