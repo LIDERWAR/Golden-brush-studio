@@ -158,8 +158,8 @@ JAZZMIN_SETTINGS = {
     },
     "default_icon_parents": "fas fa-chevron-circle-right",
     "default_icon_children": "fas fa-circle",
-    "custom_css": "css/admin-dark.css",
-    "custom_js": "js/admin-dark.js",
+    "custom_css": "css/admin-dark.css?v=20260924-v3",
+    "custom_js": "js/admin-dark.js?v=20260924-v3",
 }
 
 JAZZMIN_UI_TWEAKS = {

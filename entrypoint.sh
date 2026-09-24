@@ -13,7 +13,7 @@ echo "Applying database migrations..."
 python manage.py migrate --noinput
 
 echo "Collecting static files..."
-python manage.py collectstatic --noinput
+python manage.py collectstatic --noinput --clear
 
 if [ "$AUTO_SEED_DB" = "true" ] || [ "$AUTO_SEED_DB" = "1" ]; then
   echo "Auto-seeding database (superuser, demo projects & artworks)..."
