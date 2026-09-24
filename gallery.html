@@ -34,20 +34,55 @@
             </nav>
 
             <div class="header-actions">
-                <a href="tel:+74958904422" class="header-phone">
-                    <i class="fas fa-phone-alt"></i> +7 (495) 890-44-22
+                <a href="tel:+74958904422" class="header-phone" aria-label="Позвонить в студию">
+                    <i class="fas fa-phone-alt"></i> <span class="phone-text">+7 (495) 890-44-22</span>
                 </a>
                 <a href="index.html#quiz" class="btn btn-primary btn-header-cta">
                     Обсудить проект
                 </a>
-                <button class="burger-btn" aria-label="Открыть меню"><i class="fas fa-bars"></i></button>
+                <button class="burger-btn" id="burgerBtn" aria-label="Открыть мобильное меню">
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
         </div>
     </header>
 
     <!-- Mobile Drawer -->
-    <div class="mobile-drawer" style="display: none;">
-        <!-- mobile menu toggled via js -->
+    <div class="mobile-drawer" id="mobileDrawer">
+        <div class="drawer-backdrop" id="drawerBackdrop"></div>
+        <div class="drawer-panel">
+            <div class="drawer-header">
+                <a href="index.html" class="brand-logo">
+                    <span class="brand-title">GB STUDIO</span>
+                    <span class="brand-subtitle">Atelier & Fit-Out</span>
+                </a>
+                <button class="drawer-close" id="drawerClose" aria-label="Закрыть меню">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <nav class="drawer-nav">
+                <ul class="drawer-menu">
+                    <li><a href="index.html#cases" class="drawer-link">Объекты & Fit-Out</a></li>
+                    <li><a href="index.html#sectors" class="drawer-link">Для предприятий</a></li>
+                    <li><a href="index.html#sample-box" class="drawer-link">Sample Box для архитекторов</a></li>
+                    <li><a href="gallery.html" class="drawer-link active">Арт-Галерея Саши Попыкина</a></li>
+                    <li><a href="index.html#atelier" class="drawer-link">О мастере</a></li>
+                    <li><a href="index.html#contacts" class="drawer-link">Контакты</a></li>
+                </ul>
+            </nav>
+
+            <div class="drawer-footer">
+                <a href="index.html#quiz" class="btn btn-primary drawer-cta">Рассчитать смету объекта</a>
+                <a href="tel:+74958904422" class="drawer-phone">
+                    <i class="fas fa-phone-alt"></i> +7 (495) 890-44-22
+                </a>
+                <div class="drawer-messengers">
+                    <a href="https://t.me/" target="_blank" class="drawer-soc-btn" aria-label="Telegram"><i class="fab fa-telegram"></i> Telegram</a>
+                    <a href="https://wa.me/" target="_blank" class="drawer-soc-btn" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Main Content -->
@@ -58,8 +93,8 @@
         <!-- Gallery Header -->
         <div style="text-align: center; max-width: 1200px; margin: 0 auto 4rem;">
             <div class="eyebrow">Atelier & Private Collection</div>
-            <h1 style="font-size: clamp(2.5rem, 4.5vw, 4rem); color: #fff; margin: 0 0 1rem; white-space: nowrap;">Арт-Галерея Александра Попыкина</h1>
-            <p style="font-size: 1.15rem; color: var(--text-muted); line-height: 1.8;">
+            <h1 style="font-size: clamp(1.85rem, 5vw, 4rem); color: #fff; margin: 0 0 1rem; word-break: break-word;">Арт-Галерея Александра Попыкина</h1>
+            <p style="font-size: clamp(0.95rem, 2.5vw, 1.15rem); color: var(--text-muted); line-height: 1.8;">
                 Оригинальные станковые полотна, скульптурная керамика и авторская графика Александра Попыкина. Каждое произведение создано вручную в мастерской и сопровождается сертификатом подлинности автора.
             </p>
         </div>

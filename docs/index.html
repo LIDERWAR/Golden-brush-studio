@@ -34,20 +34,55 @@
             </nav>
 
             <div class="header-actions">
-                <a href="tel:+74958904422" class="header-phone">
-                    <i class="fas fa-phone-alt"></i> +7 (495) 890-44-22
+                <a href="tel:+74958904422" class="header-phone" aria-label="Позвонить в студию">
+                    <i class="fas fa-phone-alt"></i> <span class="phone-text">+7 (495) 890-44-22</span>
                 </a>
                 <a href="#quiz" class="btn btn-primary btn-header-cta">
                     Обсудить проект
                 </a>
-                <button class="burger-btn" aria-label="Открыть меню"><i class="fas fa-bars"></i></button>
+                <button class="burger-btn" id="burgerBtn" aria-label="Открыть мобильное меню">
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
         </div>
     </header>
 
     <!-- Mobile Drawer -->
-    <div class="mobile-drawer" style="display: none;">
-        <!-- mobile menu toggled via js -->
+    <div class="mobile-drawer" id="mobileDrawer">
+        <div class="drawer-backdrop" id="drawerBackdrop"></div>
+        <div class="drawer-panel">
+            <div class="drawer-header">
+                <a href="index.html" class="brand-logo">
+                    <span class="brand-title">GB STUDIO</span>
+                    <span class="brand-subtitle">Atelier & Fit-Out</span>
+                </a>
+                <button class="drawer-close" id="drawerClose" aria-label="Закрыть меню">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <nav class="drawer-nav">
+                <ul class="drawer-menu">
+                    <li><a href="#cases" class="drawer-link">Объекты & Fit-Out</a></li>
+                    <li><a href="#sectors" class="drawer-link">Для предприятий</a></li>
+                    <li><a href="#sample-box" class="drawer-link">Sample Box для архитекторов</a></li>
+                    <li><a href="gallery.html" class="drawer-link">Арт-Галерея Саши Попыкина</a></li>
+                    <li><a href="#atelier" class="drawer-link">О мастере</a></li>
+                    <li><a href="#contacts" class="drawer-link">Контакты</a></li>
+                </ul>
+            </nav>
+
+            <div class="drawer-footer">
+                <a href="#quiz" class="btn btn-primary drawer-cta">Рассчитать смету объекта</a>
+                <a href="tel:+74958904422" class="drawer-phone">
+                    <i class="fas fa-phone-alt"></i> +7 (495) 890-44-22
+                </a>
+                <div class="drawer-messengers">
+                    <a href="https://t.me/" target="_blank" class="drawer-soc-btn" aria-label="Telegram"><i class="fab fa-telegram"></i> Telegram</a>
+                    <a href="https://wa.me/" target="_blank" class="drawer-soc-btn" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Main Content -->
