@@ -14,6 +14,26 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // 1b. Desktop Dropdown Touch & Click Support
+    const dropdownItems = document.querySelectorAll('.nav-item.has-dropdown');
+    dropdownItems.forEach(item => {
+        const toggle = item.querySelector('.dropdown-toggle');
+        if (toggle) {
+            toggle.addEventListener('click', (e) => {
+                if (window.innerWidth > 1080 && 'ontouchstart' in window) {
+                    e.preventDefault();
+                    item.classList.toggle('open');
+                }
+            });
+        }
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.nav-item.has-dropdown')) {
+            dropdownItems.forEach(item => item.classList.remove('open'));
+        }
+    });
+
     // 2. Mobile Menu Toggle
     const burgerBtn = document.getElementById('burgerBtn') || document.querySelector('.burger-btn');
     const mobileDrawer = document.getElementById('mobileDrawer') || document.querySelector('.mobile-drawer');

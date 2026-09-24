@@ -8,7 +8,7 @@
     <meta name="description" content="{% block meta_desc %}Генеральный подряд и авторская отделка масштабных коммерческих объектов, отелей, производств и офисов. Собственная арт-лаборатория фактур под руководством Александра Попыкина.{% endblock %}">
     
     <!-- Design System CSS -->
-    <link rel="stylesheet" href="/static/css/style.css?v=20260924-light-v6">
+    <link rel="stylesheet" href="/static/css/style.css?v=20260924-light-v7">
     
     <!-- Favicon / FontAwesome icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -22,16 +22,58 @@
                 <span class="brand-subtitle">Atelier & Fit-Out</span>
             </a>
 
-            <nav>
+            <nav class="nav-container">
                 <ul class="nav-menu">
-                    <li><a href="/#decor" class="nav-link">Декоративные работы</a></li>
-                    <li><a href="/#restoration" class="nav-link">Реставрация</a></li>
-                    <li><a href="/#calculator" class="nav-link">Калькулятор стен</a></li>
-                    <li><a href="/#gallery-showcase" class="nav-link">Галерея & Примерка</a></li>
-                    <li><a href="/#art-objects" class="nav-link">Арт-мебель</a></li>
-                    <li><a href="/#cases" class="nav-link">Проекты</a></li>
-                    <li><a href="/#partners" class="nav-link">Партнеры</a></li>
-                    <li><a href="/#contacts" class="nav-link">Контакты</a></li>
+                    <!-- Dropdown 1: Направления -->
+                    <li class="nav-item has-dropdown">
+                        <a href="/#decor" class="nav-link dropdown-toggle" aria-expanded="false">
+                            Направления <i class="fas fa-chevron-down nav-chevron"></i>
+                        </a>
+                        <div class="nav-dropdown-menu">
+                            <a href="/#decor" class="dropdown-item">
+                                <span class="dropdown-item-title">Декоративные покрытия</span>
+                                <span class="dropdown-item-desc">Микроцемент, фактуры, барельефы</span>
+                            </a>
+                            <a href="/#restoration" class="dropdown-item">
+                                <span class="dropdown-item-title">Реставрация и оформление</span>
+                                <span class="dropdown-item-desc">Лепнина, золочение, мозаичные панно</span>
+                            </a>
+                            <a href="/#art-objects" class="dropdown-item">
+                                <span class="dropdown-item-title">Арт-мебель и объекты</span>
+                                <span class="dropdown-item-desc">Авторские столы, консоли, скульптура</span>
+                            </a>
+                            <a href="/#calculator" class="dropdown-item dropdown-item-calc">
+                                <span class="dropdown-item-title">Калькулятор стен</span>
+                                <span class="dropdown-item-desc">Экспресс-расчёт по площади</span>
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- Dropdown 2: Галерея -->
+                    <li class="nav-item has-dropdown">
+                        <a href="/gallery/" class="nav-link dropdown-toggle" aria-expanded="false">
+                            Галерея <i class="fas fa-chevron-down nav-chevron"></i>
+                        </a>
+                        <div class="nav-dropdown-menu">
+                            <a href="/gallery/" class="dropdown-item">
+                                <span class="dropdown-item-title">Картины в интерьер</span>
+                                <span class="dropdown-item-desc">Оригинальные полотна Александра Попыкина</span>
+                            </a>
+                            <a href="/#gallery-showcase" class="dropdown-item">
+                                <span class="dropdown-item-title">Избранная коллекция</span>
+                                <span class="dropdown-item-desc">Главные работы и скульптурная керамика</span>
+                            </a>
+                            <a href="javascript:void(0)" class="dropdown-item btn-open-fitting">
+                                <span class="dropdown-item-title">Бесплатная примерка</span>
+                                <span class="dropdown-item-desc">Фотопривязка картин в вашем пространстве</span>
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- Direct Links -->
+                    <li class="nav-item"><a href="/#cases" class="nav-link">Проекты</a></li>
+                    <li class="nav-item"><a href="/#partners" class="nav-link">Партнеры</a></li>
+                    <li class="nav-item"><a href="/#contacts" class="nav-link">Контакты</a></li>
                 </ul>
             </nav>
 
@@ -39,9 +81,6 @@
                 <a href="tel:+74958904422" class="header-phone" aria-label="Позвонить в студию">
                     <i class="fas fa-phone-alt"></i> <span class="phone-text">+7 (495) 890-44-22</span>
                 </a>
-                <button type="button" class="btn btn-secondary btn-header-fitting btn-open-fitting">
-                    Примерка картин
-                </button>
                 <a href="/#calculator" class="btn btn-primary btn-header-cta">
                     Рассчитать проект
                 </a>
@@ -67,25 +106,29 @@
             </div>
             
             <nav class="drawer-nav">
+                <div class="drawer-section-title">Направления мастерской</div>
                 <ul class="drawer-menu">
-                    <li><a href="/#decor" class="drawer-link">Декоративные работы</a></li>
-                    <li><a href="/#restoration" class="drawer-link">Реставрация</a></li>
-                    <li><a href="/#calculator" class="drawer-link">Калькулятор материалов</a></li>
-                    <li><a href="/#gallery-showcase" class="drawer-link">Арт-Галерея Саши Попыкина</a></li>
-                    <li><a href="/#art-fitting" class="drawer-link">Бесплатная примерка картин</a></li>
+                    <li><a href="/#decor" class="drawer-link">Декоративные покрытия</a></li>
+                    <li><a href="/#restoration" class="drawer-link">Реставрация и оформление</a></li>
                     <li><a href="/#art-objects" class="drawer-link">Арт-мебель и объекты</a></li>
+                    <li><a href="/#calculator" class="drawer-link">Калькулятор стен</a></li>
+                </ul>
+
+                <div class="drawer-section-title">Искусство & Проекты</div>
+                <ul class="drawer-menu">
+                    <li><a href="/gallery/" class="drawer-link">Картины в интерьер</a></li>
+                    <li><a href="javascript:void(0)" class="drawer-link btn-open-fitting">Примерка картин</a></li>
                     <li><a href="/#cases" class="drawer-link">Реализованные проекты</a></li>
-                    <li><a href="/#partners" class="drawer-link">Партнеры</a></li>
+                    <li><a href="/#partners" class="drawer-link">Партнеры и сертификаты</a></li>
                     <li><a href="/#contacts" class="drawer-link">Контакты</a></li>
                 </ul>
             </nav>
 
             <div class="drawer-footer">
-                <button class="btn btn-secondary drawer-cta btn-open-fitting" style="width: 100%; margin-bottom: 0.75rem;">Заказать примерку картин</button>
-                <a href="/#calculator" class="btn btn-primary drawer-cta" style="width: 100%;">Рассчитать метраж стены</a>
                 <a href="tel:+74958904422" class="drawer-phone">
                     <i class="fas fa-phone-alt"></i> +7 (495) 890-44-22
                 </a>
+                <a href="/#calculator" class="btn btn-primary drawer-cta" style="width: 100%;">Рассчитать проект</a>
                 <div class="drawer-messengers">
                     <a href="https://t.me/" target="_blank" class="drawer-soc-btn" aria-label="Telegram"><i class="fab fa-telegram"></i> Telegram</a>
                     <a href="https://wa.me/" target="_blank" class="drawer-soc-btn" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
@@ -324,6 +367,6 @@
     </div>
 
     <!-- Main JavaScript -->
-    <script src="/static/js/main.js?v=20260924-v3"></script>
+    <script src="/static/js/main.js?v=20260924-v4"></script>
 </body>
 </html>
