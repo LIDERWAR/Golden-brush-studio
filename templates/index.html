@@ -7,20 +7,24 @@
     <div class="hero-atelier-overlay"></div>
 
     <div class="container hero-atelier-container">
-        <!-- Top Slogan & Headline -->
-        <div class="hero-headline-block">
-            <div class="eyebrow">Искусство как преображение пространства</div>
-            <h1 class="hero-atelier-title">
-                Художественно-декоративные работы <br class="d-none d-md-block">
-                <span class="accent">и проекты под ключ</span>
-            </h1>
-            <p class="hero-atelier-desc">
-                Ателье авторских минеральных поверхностей, монументальной росписи, реставрации и станковой живописи под руководством художника Александра Попыкина с 2011 года.
-            </p>
-            <div class="hero-cta-row">
-                <a href="#calculator" class="btn btn-primary">Рассчитать стоимость по площади стен</a>
-                <button type="button" class="btn btn-secondary btn-open-fitting">Бесплатная примерка картин</button>
-                <button type="button" class="btn btn-outline-gold btn-open-samplebox">Заказать Sample Box выкрасов</button>
+        <!-- Top Slogan & Headline Split Row -->
+        <div class="hero-header-split">
+            <div class="hero-title-col">
+                <div class="eyebrow">Искусство как преображение пространства</div>
+                <h1 class="hero-atelier-title">
+                    Художественно-декоративные работы <br>
+                    <span class="accent">и проекты под ключ</span>
+                </h1>
+            </div>
+            <div class="hero-actions-col">
+                <p class="hero-atelier-desc">
+                    Ателье авторских минеральных поверхностей, монументальной росписи, реставрации и станковой живописи под руководством художника Александра Попыкина с 2011 года.
+                </p>
+                <div class="hero-cta-row">
+                    <a href="#calculator" class="btn btn-primary">Рассчитать стоимость по площади стен</a>
+                    <button type="button" class="btn btn-secondary btn-open-fitting">Бесплатная примерка картин</button>
+                    <button type="button" class="btn btn-outline-gold btn-open-samplebox">Заказать Sample Box выкрасов</button>
+                </div>
             </div>
         </div>
 
@@ -374,13 +378,15 @@
 <!-- 6. ART GALLERY SHOWCASE: ЖИВОПИСЬ АЛЕКСАНДРА ПОПЫКИНА (Audio 4) -->
 <section class="gallery-showcase-section" id="gallery-showcase">
     <div class="container">
-        <div class="section-header" style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1.5rem;">
-            <div>
+        <div class="gallery-section-header">
+            <div class="gallery-header-info">
                 <div class="eyebrow">Atelier & Private Collection</div>
                 <h2 class="section-title">Картины Александра Попыкина в интерьер</h2>
-                <p class="section-desc">Оригинальная живопись и графика для оформления частных домов, офисов и пентхаусов. Автор — Александр Попыкин.</p>
+                <p class="section-desc">Оригинальная живопись и авторская графика для оформления частных домов, офисов и пентхаусов. Автор — Александр Попыкин.</p>
             </div>
-            <a href="/gallery/" class="btn btn-secondary">Вся коллекция галереи</a>
+            <div class="gallery-header-cta">
+                <a href="/gallery/" class="btn btn-secondary">Вся коллекция галереи</a>
+            </div>
         </div>
 
         <!-- Artwork Cards Grid with Prices and Dimensions -->
@@ -565,24 +571,24 @@
         <div class="sample-box-card">
             <div>
                 <div class="eyebrow">Для архитекторов и дизайнеров</div>
-                <h2 style="font-size: clamp(2rem, 3.5vw, 2.8rem); color: #fff; line-height: 1.2; margin-bottom: 1.25rem;">
+                <h2 class="sample-box-title">
                     Фирменный «Architect Sample Box» с живыми выкрасами фактур
                 </h2>
-                <p style="font-size: 1.05rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 2rem;">
+                <p class="sample-box-desc">
                     Бесплатно доставляем в архитектурные бюро и проектные отделы деревянный кейс с планшетами авторских покрытий: архитектурный микроцемент, скульптурная штукатурка, минеральные оксиды и латунная расшивка.
                 </p>
-                <div style="display: flex; gap: 1.5rem; margin-bottom: 2.5rem; flex-wrap: wrap;">
-                    <div style="display: flex; align-items: center; gap: 0.75rem;">
-                        <i class="fas fa-check" style="color: var(--accent-gold); font-size: 1rem;"></i>
-                        <span style="font-size: 0.9rem; color: #fff;">12 тактильных выкрасов</span>
+                <div class="sample-box-features">
+                    <div class="sample-feature-item">
+                        <i class="fas fa-check"></i>
+                        <span>12 тактильных выкрасов</span>
                     </div>
-                    <div style="display: flex; align-items: center; gap: 0.75rem;">
-                        <i class="fas fa-check" style="color: var(--accent-gold); font-size: 1rem;"></i>
-                        <span style="font-size: 0.9rem; color: #fff;">Пожарные сертификаты КМ-0</span>
+                    <div class="sample-feature-item">
+                        <i class="fas fa-check"></i>
+                        <span>Пожарные сертификаты КМ-0</span>
                     </div>
-                    <div style="display: flex; align-items: center; gap: 0.75rem;">
-                        <i class="fas fa-check" style="color: var(--accent-gold); font-size: 1rem;"></i>
-                        <span style="font-size: 0.9rem; color: #fff;">Бесплатная курьерская доставка</span>
+                    <div class="sample-feature-item">
+                        <i class="fas fa-check"></i>
+                        <span>Бесплатная курьерская доставка</span>
                     </div>
                 </div>
                 <button type="button" class="btn btn-primary btn-open-samplebox">Заказать кейс образцов в бюро</button>
@@ -599,17 +605,17 @@
     <div class="container">
         <div class="atelier-grid">
             <div>
-                <img src="/static/images/art_canvas.jpg" alt="Александр Попыкин в мастерской" style="border-radius: var(--radius-lg); box-shadow: 0 20px 50px rgba(0,0,0,0.6);">
+                <img src="/static/images/art_canvas.jpg" alt="Александр Попыкин в мастерской" style="border-radius: var(--radius-lg); box-shadow: 0 15px 40px rgba(0,0,0,0.08);">
             </div>
             <div>
                 <div class="eyebrow">Мастер и создатель студии</div>
-                <h2 style="font-size: clamp(2.2rem, 4vw, 3rem); color: #fff; line-height: 1.15; margin: 0 0 1.5rem;">
+                <h2 class="atelier-artist-title">
                     Александр Попыкин: Искусство монументальной материи
                 </h2>
                 <div class="artist-quote">
                     «Стена в несколько сотен или тысяч метров — это такое же художественное полотно, где плотность зерна, температура света и тактильный рельеф определяют статус всего пространства».
                 </div>
-                <p style="font-size: 1.05rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 1.5rem;">
+                <p class="atelier-artist-desc">
                     Начав творческий путь в 1998 году с граффити-райтинга, Александр выработал безупречное чувство масштаба, ритма и пластики. Станковая живопись, эксперименты со скульптурной керамикой и монументальными декоративными покрытиями (с 2011 г.) сформировали неповторимый авторский почерк студии.
                 </p>
                 <div class="timeline-roots">

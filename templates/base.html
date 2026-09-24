@@ -8,7 +8,7 @@
     <meta name="description" content="{% block meta_desc %}Генеральный подряд и авторская отделка масштабных коммерческих объектов, отелей, производств и офисов. Собственная арт-лаборатория фактур под руководством Александра Попыкина.{% endblock %}">
     
     <!-- Design System CSS -->
-    <link rel="stylesheet" href="/static/css/style.css?v=20260924-light-v4">
+    <link rel="stylesheet" href="/static/css/style.css?v=20260924-light-v5">
     
     <!-- Favicon / FontAwesome icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -159,11 +159,12 @@
     </footer>
 
     <!-- Sample Box Modal -->
+    <!-- Sample Box Modal -->
     <div class="modal-backdrop" id="sampleBoxModal">
         <div class="modal-box">
             <button class="modal-close">&times;</button>
             <div class="eyebrow">Для архитекторов и дизайнеров</div>
-            <h3 style="font-size: 1.8rem; color: #fff; margin-bottom: 0.75rem;">Заказ «Architect Sample Box»</h3>
+            <h3 style="font-size: 1.8rem; color: var(--text-main); margin-bottom: 0.75rem;">Заказ «Architect Sample Box»</h3>
             <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem;">
                 Мы бесплатно доставим фирменный деревянный кейс с живыми выкрасами авторских штукатурок, микроцемента и минеральных текстур в ваше бюро.
             </p>
@@ -198,15 +199,15 @@
             </div>
             <div>
                 <div class="eyebrow">Коллекционная работа</div>
-                <h3 class="art-modal-title" style="font-size: 1.6rem; color: #fff; margin-bottom: 0.35rem;"></h3>
+                <h3 class="art-modal-title" style="font-size: 1.6rem; color: var(--text-main); margin-bottom: 0.35rem;"></h3>
                 <p class="art-modal-medium" style="font-size: 0.85rem; color: var(--accent-bronze); margin-bottom: 0.35rem;"></p>
                 <p class="art-modal-dim" style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.75rem;"></p>
-                <div style="font-size: 1.4rem; font-weight: 700; color: var(--accent-gold); margin-bottom: 0.75rem;" class="art-modal-price"></div>
+                <div style="font-size: 1.4rem; font-weight: 700; color: var(--accent-bronze); margin-bottom: 0.75rem;" class="art-modal-price"></div>
                 <p class="art-modal-desc" style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1rem; max-height: 120px; overflow-y: auto;"></p>
                 
                 <form id="artInquiryForm" style="border-top: 1px solid var(--border-subtle); padding-top: 0.85rem;">
                     <input type="hidden" name="artwork_title" id="artModalInputTitle" value="">
-                    <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--accent-gold); display: block; margin-bottom: 0.5rem; font-weight: 600;">Запрос условий приобретения</span>
+                    <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--accent-bronze); display: block; margin-bottom: 0.5rem; font-weight: 600;">Запрос условий приобретения</span>
                     <div style="display: flex; gap: 0.5rem; margin-bottom: 0.65rem;">
                         <input type="text" name="name" class="form-input" placeholder="Ваше имя" style="padding: 0.6rem 0.8rem; font-size: 0.85rem;" required>
                         <input type="tel" name="phone" class="form-input" placeholder="+7 (___) ___-__-__" style="padding: 0.6rem 0.8rem; font-size: 0.85rem;" required>
@@ -222,7 +223,7 @@
         <div class="modal-box" style="max-width: 580px;">
             <button class="modal-close">&times;</button>
             <div class="eyebrow">Бесплатная услуга студии</div>
-            <h3 style="font-size: 1.8rem; color: #fff; margin-bottom: 0.75rem;">Примерка полотен в вашем интерьере</h3>
+            <h3 style="font-size: 1.8rem; color: var(--text-main); margin-bottom: 0.75rem;">Примерка полотен в вашем интерьере</h3>
             <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.6;">
                 Мы бесплатно привезем выбранные оригиналы картин Александра Попыкина к вам домой или на объект. Вы сможете примерить их на стене при реальном освещении вашего пространства перед принятием решения.
             </p>
@@ -257,11 +258,11 @@
         <div class="modal-box" style="max-width: 540px;">
             <button class="modal-close">&times;</button>
             <div class="eyebrow">Фиксация сметного расчета</div>
-            <h3 style="font-size: 1.8rem; color: #fff; margin-bottom: 0.5rem;">Зафиксировать расчет и вызвать технолога</h3>
-            <div id="calcModalSummary" style="background: rgba(197, 155, 109, 0.1); border: 1px solid var(--accent-bronze); border-radius: var(--radius-sm); padding: 1rem; margin-bottom: 1.25rem;">
-                <div style="font-size: 0.85rem; color: var(--text-muted);">Выбранное покрытие: <strong id="calcModalMaterial" style="color: #fff;">—</strong></div>
-                <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">Площадь стен: <strong id="calcModalArea" style="color: #fff;">—</strong></div>
-                <div style="font-size: 1.1rem; color: var(--accent-gold); font-weight: 700; margin-top: 0.5rem;">Ориентировочная сумма: <span id="calcModalPrice">—</span></div>
+            <h3 style="font-size: 1.8rem; color: var(--text-main); margin-bottom: 0.5rem;">Зафиксировать расчет и вызвать технолога</h3>
+            <div id="calcModalSummary" style="background: var(--bg-secondary); border: 1px solid var(--accent-bronze); border-radius: var(--radius-sm); padding: 1rem; margin-bottom: 1.25rem;">
+                <div style="font-size: 0.85rem; color: var(--text-muted);">Выбранное покрытие: <strong id="calcModalMaterial" style="color: var(--text-main);">—</strong></div>
+                <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">Площадь стен: <strong id="calcModalArea" style="color: var(--text-main);">—</strong></div>
+                <div style="font-size: 1.1rem; color: var(--accent-bronze); font-weight: 700; margin-top: 0.5rem;">Ориентировочная сумма: <span id="calcModalPrice">—</span></div>
             </div>
             <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.25rem;">
                 Технолог студии приедет на объект с крупными планшетами выкрасов данного материала для точного замера и демонстрации при вашем освещении.
