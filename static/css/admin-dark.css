@@ -1,0 +1,309 @@
+/* ==============================================================================
+   GB STUDIO — Luxury Architectural Atelier Admin Theme
+   Ensures consistent Dark Graphite & Gold palette across all browsers and devices
+   ============================================================================== */
+
+:root,
+[data-bs-theme="dark"],
+[data-bs-theme="light"],
+html {
+    --bs-body-bg: #141619 !important;
+    --bs-body-color: #e4e7eb !important;
+    --bs-tertiary-bg: #181a1e !important;
+    --bs-secondary-bg: #1e2126 !important;
+    --bs-card-bg: #1a1d22 !important;
+    --bs-border-color: #2a2e36 !important;
+    --bs-border-color-translucent: rgba(255, 255, 255, 0.08) !important;
+    color-scheme: dark !important;
+}
+
+body,
+.app-wrapper,
+.app-main,
+.content-wrapper,
+.bg-body-tertiary,
+.bg-body-secondary {
+    background-color: #141619 !important;
+    color: #e4e7eb !important;
+}
+
+/* Top Navbar */
+#jazzy-navbar,
+nav.app-header.navbar {
+    background-color: #101215 !important;
+    border-bottom: 1px solid #22252b !important;
+}
+
+#jazzy-navbar .nav-link {
+    color: #c0c4cc !important;
+    transition: color 0.2s ease;
+}
+
+#jazzy-navbar .nav-link:hover {
+    color: #d4af37 !important;
+}
+
+/* Search bar in navbar */
+#jazzy-navbar .form-control-navbar {
+    background-color: #1a1d22 !important;
+    border: 1px solid #2e333d !important;
+    color: #e4e7eb !important;
+}
+
+#jazzy-navbar .form-control-navbar:focus {
+    border-color: #d4af37 !important;
+    outline: none !important;
+}
+
+#jazzy-navbar .btn-navbar {
+    background-color: #1a1d22 !important;
+    border: 1px solid #2e333d !important;
+    color: #c0c4cc !important;
+}
+
+/* Sidebar */
+#jazzy-sidebar,
+aside.app-sidebar {
+    background-color: #101215 !important;
+    border-right: 1px solid #22252b !important;
+}
+
+#jazzy-logo {
+    border-bottom: 1px solid #22252b !important;
+}
+
+#jazzy-logo .brand-text {
+    font-weight: 600 !important;
+    letter-spacing: 0.06em !important;
+    color: #ffffff !important;
+}
+
+.sidebar-wrapper .user-panel {
+    border-bottom: 1px solid #22252b !important;
+}
+
+.sidebar-wrapper .nav-header {
+    color: #7d8590 !important;
+    font-size: 0.72rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.08em !important;
+    font-weight: 600 !important;
+    padding-top: 1rem !important;
+}
+
+.sidebar-wrapper .nav-link {
+    color: #b1b8c0 !important;
+    border-radius: 4px !important;
+    transition: all 0.15s ease !important;
+}
+
+.sidebar-wrapper .nav-link:hover {
+    background-color: #1a1d22 !important;
+    color: #ffffff !important;
+}
+
+.sidebar-wrapper .nav-link.active {
+    background-color: rgba(212, 175, 55, 0.15) !important;
+    color: #d4af37 !important;
+    font-weight: 500 !important;
+}
+
+/* Cards on Dashboard */
+.card {
+    background-color: #1a1d22 !important;
+    border: 1px solid #2a2e36 !important;
+    border-radius: 6px !important;
+    margin-bottom: 1.25rem !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
+}
+
+.card-header {
+    background-color: #20242b !important;
+    border-bottom: 1px solid #2a2e36 !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    padding: 0.75rem 1.25rem !important;
+}
+
+.card-header h5 {
+    font-size: 0.95rem !important;
+    font-weight: 600 !important;
+    color: #f0f2f5 !important;
+}
+
+.card-body {
+    background-color: #1a1d22 !important;
+    color: #e4e7eb !important;
+}
+
+/* Tables */
+.table {
+    color: #e4e7eb !important;
+    margin-bottom: 0 !important;
+}
+
+.table th,
+.table td {
+    border-top: 1px solid #252830 !important;
+    border-bottom: 1px solid #252830 !important;
+    vertical-align: middle !important;
+}
+
+.table tbody tr {
+    background-color: transparent !important;
+    transition: background-color 0.15s ease;
+}
+
+.table tbody tr:hover {
+    background-color: #22262e !important;
+}
+
+.table tbody tr td a {
+    color: #e4e7eb !important;
+    font-weight: 500 !important;
+    text-decoration: none !important;
+    transition: color 0.15s ease;
+}
+
+.table tbody tr td a:hover {
+    color: #d4af37 !important;
+}
+
+/* Action Buttons */
+.btn-xs {
+    padding: 0.2rem 0.55rem !important;
+    font-size: 0.75rem !important;
+    border-radius: 3px !important;
+    font-weight: 500 !important;
+}
+
+.btn-success,
+.addlink {
+    background-color: #183324 !important;
+    border-color: #245239 !important;
+    color: #4ade80 !important;
+}
+
+.btn-success:hover,
+.addlink:hover {
+    background-color: #245239 !important;
+    color: #86efac !important;
+}
+
+.btn-info,
+.changelink,
+.viewlink {
+    background-color: #1e293b !important;
+    border-color: #334155 !important;
+    color: #93c5fd !important;
+}
+
+.btn-info:hover,
+.changelink:hover,
+.viewlink:hover {
+    background-color: #334155 !important;
+    color: #bfdbfe !important;
+}
+
+.btn-primary {
+    background-color: #c5a059 !important;
+    border-color: #b38f48 !important;
+    color: #0f1012 !important;
+    font-weight: 600 !important;
+}
+
+.btn-primary:hover {
+    background-color: #d4af37 !important;
+    border-color: #c5a059 !important;
+    color: #000000 !important;
+}
+
+/* Recent Actions Module (Правая колонка на главной странице) */
+#content-related {
+    margin-top: 0 !important;
+}
+
+#recent-actions-module {
+    background-color: #1a1d22 !important;
+    border: 1px solid #2a2e36 !important;
+    border-radius: 6px !important;
+    padding: 1.25rem !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
+}
+
+#recent-actions-module h4 {
+    font-size: 0.95rem !important;
+    font-weight: 600 !important;
+    color: #d4af37 !important;
+    letter-spacing: 0.04em !important;
+    border-bottom: 1px solid #2a2e36 !important;
+    padding-bottom: 0.75rem !important;
+    margin-bottom: 1rem !important;
+}
+
+#recent-actions-module p {
+    color: #8c939d !important;
+    font-size: 0.85rem !important;
+    margin-bottom: 0 !important;
+}
+
+.timeline > div > .timeline-item {
+    background-color: #21252c !important;
+    color: #e4e7eb !important;
+    border: 1px solid #2e333d !important;
+    border-radius: 4px !important;
+}
+
+.timeline > div > .timeline-item > .time {
+    color: #8c939d !important;
+}
+
+/* Page Headers & Breadcrumbs */
+.app-content-header h3,
+.content-header h1 {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    font-size: 1.25rem !important;
+}
+
+.breadcrumb-item a {
+    color: #d4af37 !important;
+    text-decoration: none !important;
+}
+
+.breadcrumb-item.active {
+    color: #8c939d !important;
+}
+
+/* Form controls (Inputs, Selects, Textareas) */
+input.form-control,
+select.form-control,
+textarea.form-control,
+.select2-container--default .select2-selection--single,
+.select2-container--default .select2-selection--multiple {
+    background-color: #181a1f !important;
+    border: 1px solid #2e333d !important;
+    color: #ffffff !important;
+    border-radius: 4px !important;
+}
+
+input.form-control:focus,
+select.form-control:focus,
+textarea.form-control:focus {
+    border-color: #d4af37 !important;
+    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2) !important;
+    outline: none !important;
+}
+
+/* Footer */
+footer.app-footer,
+footer.main-footer {
+    background-color: #101215 !important;
+    border-top: 1px solid #22252b !important;
+    color: #7d8590 !important;
+}
+
+footer.app-footer a,
+footer.main-footer a {
+    color: #d4af37 !important;
+}
