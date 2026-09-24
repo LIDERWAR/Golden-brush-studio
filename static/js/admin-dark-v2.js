@@ -1,5 +1,5 @@
 /* ==============================================================================
-   GB STUDIO — Force Dark Architecture Theme & Admin Helpers
+   GB STUDIO — Force Dark Architecture Theme & Admin Helpers (v2)
    ============================================================================== */
 (function() {
     try {
@@ -53,7 +53,8 @@ document.addEventListener('DOMContentLoaded', function() {
     hintSpan.style.cssText = 'font-size: 0.78rem; color: #8c939d; margin-left: 6px;';
     hintSpan.innerHTML = 'Подсказка: на клавиатуре Windows знак рубля вводится через <strong>Правый Alt + 8</strong>';
 
-    rubleBtn.addEventListener('click', function() {
+    rubleBtn.addEventListener('click', function(e) {
+        e.preventDefault();
         if (priceInput.value) {
             priceInput.value = formatPriceVal(priceInput.value);
             if (!priceInput.value.includes('₽') && !/запрос/i.test(priceInput.value)) {
@@ -65,7 +66,8 @@ document.addEventListener('DOMContentLoaded', function() {
         priceInput.focus();
     });
 
-    requestBtn.addEventListener('click', function() {
+    requestBtn.addEventListener('click', function(e) {
+        e.preventDefault();
         priceInput.value = 'По запросу';
         priceInput.focus();
     });

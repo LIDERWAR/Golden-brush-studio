@@ -31,7 +31,7 @@
                      data-title="{{ artwork.title }}"
                      data-medium="{{ artwork.medium }}"
                      data-dimensions="{{ artwork.dimensions }}"
-                     data-price="{{ artwork.price }}"
+                     data-price="{{ artwork.formatted_price }}"
                      data-desc="{{ artwork.curator_note }}"
                      data-img="{{ artwork.image_url }}">
                     <img src="{{ artwork.image_url }}" alt="{{ artwork.title }}">
@@ -54,13 +54,13 @@
                     </div>
 
                     <div class="artwork-price-row">
-                        <span class="artwork-price">{{ artwork.price }}</span>
+                        <span class="artwork-price">{{ artwork.formatted_price }}</span>
                         <button class="btn btn-outline-gold btn-view-artwork" 
                                 style="padding: 0.5rem 1.1rem; font-size: 0.8rem;"
                                 data-title="{{ artwork.title }}"
                                 data-medium="{{ artwork.medium }}"
                                 data-dimensions="{{ artwork.dimensions }}"
-                                data-price="{{ artwork.price }}"
+                                data-price="{{ artwork.formatted_price }}"
                                 data-desc="{{ artwork.curator_note }}"
                                 data-img="{{ artwork.image_url }}">
                             Экспликация

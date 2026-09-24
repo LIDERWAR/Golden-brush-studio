@@ -440,13 +440,13 @@
                     <p class="artwork-medium">{{ artwork.medium }}</p>
                     <p style="font-size: 0.8rem; color: var(--text-subtle); margin-bottom: 1rem;">Размер: {{ artwork.dimensions }}</p>
                     <div class="artwork-price-row">
-                        <span class="artwork-price">{{ artwork.price }}</span>
+                        <span class="artwork-price">{{ artwork.formatted_price }}</span>
                         <button class="btn btn-outline-gold btn-view-artwork" 
                                 style="padding: 0.4rem 0.9rem; font-size: 0.75rem;"
                                 data-title="{{ artwork.title }}"
                                 data-medium="{{ artwork.medium }}"
                                 data-dimensions="{{ artwork.dimensions }}"
-                                data-price="{{ artwork.price }}"
+                                data-price="{{ artwork.formatted_price }}"
                                 data-desc="{{ artwork.curator_note }}"
                                 data-img="{{ artwork.image_url }}">
                             Подробнее
