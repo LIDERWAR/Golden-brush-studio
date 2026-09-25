@@ -1867,6 +1867,18 @@ img {
   margin-bottom: 0.6rem;
 }
 
+.footer-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color var(--tr-fast);
+}
+
+.footer-links a i {
+  font-size: 0.8rem;
+  margin-right: 0.25rem;
+}
+
 .footer-links a:hover {
   color: var(--accent-gold);
 }
