@@ -82,6 +82,11 @@ h1, h2, h3, h4, .font-serif {
   font-weight: 400;
   letter-spacing: -0.02em;
   color: var(--text-main);
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
 }
 
 .font-display {
@@ -2076,7 +2081,8 @@ img {
 }
 
 .hero-desc-area {
-  flex: 0 0 clamp(320px, 30vw, 440px);
+  flex: 0 0 clamp(340px, 32vw, 490px);
+  max-width: 490px;
   margin-bottom: 0.35rem;
 }
 
@@ -2085,6 +2091,7 @@ img {
   color: var(--text-muted);
   line-height: 1.65;
   margin: 0;
+  text-wrap: pretty;
 }
 
 /* Horizontal Button Bar Across the Bottom of the Header Block */
