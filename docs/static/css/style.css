@@ -1486,19 +1486,20 @@ img {
   overflow: hidden;
   transition: border-color 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
   position: relative;
+  box-shadow: 0 4px 24px rgba(20, 22, 26, 0.05);
 }
 
 .artwork-card:hover {
   border-color: var(--accent-bronze);
   transform: translateY(-6px);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 20px 48px rgba(20, 22, 26, 0.09);
 }
 
 .artwork-img-wrap {
   position: relative;
   width: 100%;
   aspect-ratio: 4 / 3;
-  background: #0d0f14;
+  background: var(--bg-secondary);
   overflow: hidden;
   cursor: pointer;
 }
@@ -1512,13 +1513,13 @@ img {
 }
 
 .artwork-card:hover .artwork-img-wrap img {
-  transform: scale(1.06);
+  transform: scale(1.05);
 }
 
 .artwork-overlay-reveal {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(10, 11, 14, 0.85) 0%, rgba(10, 11, 14, 0.2) 50%, transparent 100%);
+  background: linear-gradient(to top, rgba(20, 22, 26, 0.72) 0%, rgba(20, 22, 26, 0.15) 50%, transparent 100%);
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
@@ -1539,9 +1540,9 @@ img {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: #fff;
-  background: rgba(22, 25, 33, 0.85);
+  background: rgba(20, 22, 26, 0.85);
   backdrop-filter: blur(8px);
-  border: 1px solid var(--border-subtle);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   padding: 0.45rem 0.9rem;
   border-radius: var(--radius-sm);
 }
@@ -1558,7 +1559,7 @@ img {
   flex-direction: column;
   flex: 1 1 auto;
   padding: clamp(1.5rem, 2vw, 2.25rem);
-  background: linear-gradient(180deg, rgba(22, 25, 33, 0.6) 0%, rgba(15, 17, 23, 0.95) 100%);
+  background: var(--bg-card);
 }
 
 .artwork-info-top {
@@ -1571,14 +1572,15 @@ img {
 .artwork-title {
   font-size: clamp(1.4rem, 1.8vw, 1.85rem);
   line-height: 1.25;
-  color: #fff;
+  color: var(--text-main);
   margin: 0.35rem 0 0.6rem;
   font-family: var(--font-serif);
+  font-weight: 600;
 }
 
 .artwork-medium {
   font-size: 0.875rem;
-  color: var(--accent-gold);
+  color: var(--accent-bronze);
   margin-bottom: 0.35rem;
   font-weight: 500;
 }
@@ -1614,7 +1616,7 @@ img {
 .artwork-price {
   font-size: clamp(1.15rem, 1.4vw, 1.45rem);
   font-weight: 700;
-  color: var(--accent-gold);
+  color: var(--text-main);
   white-space: nowrap;
   font-family: var(--font-display);
 }

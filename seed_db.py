@@ -82,90 +82,109 @@ cat_canvas, _ = ArtworkCategory.objects.get_or_create(name='Живопись н�
 cat_ceramics, _ = ArtworkCategory.objects.get_or_create(name='Скульптурная керамика', slug='ceramics', order=2)
 cat_graphics, _ = ArtworkCategory.objects.get_or_create(name='Авторская графика', slug='graphics', order=3)
 
-# 5. Artworks
-if not Artwork.objects.exists():
-    Artwork.objects.create(
-        title='Палимпсест Улицы: Слой №7',
-        slug='palimpsest-street-layer-7',
-        category=cat_canvas,
-        year=2024,
-        dimensions='165 × 140 см',
-        medium='Холст, минеральная паста, графит, битум, акрил, мастихин',
-        status='available',
-        price='380 000 ₽',
-        curator_note='Полотно исследует археологию городских стен. Через наслоения рельефной пасты и экспрессивные каллиграфические росчерки проступает 25-летний бэкграунд художника в уличном граффити, переплавленный в музейную глубину.',
-        image_url='/static/images/art_canvas.jpg',
-        is_featured=True,
-        order=1
-    )
+# 5. Artworks (Architectural Luxury & Modern Art Authority, Anti-Neuroslop)
+artworks_data = [
+    {
+        'title': 'Композиция №14: Терра',
+        'slug': 'composition-14-terra',
+        'category': cat_canvas,
+        'year': 2024,
+        'dimensions': '165 × 140 см',
+        'medium': 'Холст, масло, фактурная паста, мастихин',
+        'status': 'available',
+        'price': '380 000 ₽',
+        'curator_note': 'Крупноформатная станковая работа с плотной рельефной поверхностью. Многослойное нанесение охристых, песочных и графитовых оттенков создает глубокую осязаемую фактуру.',
+        'image_url': '/static/images/art_canvas.jpg',
+        'is_featured': True,
+        'order': 1
+    },
+    {
+        'title': 'Ваза «Фактура земли»',
+        'slug': 'vase-texture-of-earth',
+        'category': cat_ceramics,
+        'year': 2025,
+        'dimensions': 'h: 46 см, d: 34 см',
+        'medium': 'Шамотная глина, ручная лепка, кракле-глазурь, обжиг 1250°C',
+        'status': 'available',
+        'price': '195 000 ₽',
+        'curator_note': 'Авторский скульптурный объект из крупнозернистого шамота. Естественные микротрещины и минеральный цвет глины подчеркивают первозданную красоту материала.',
+        'image_url': '/static/images/art_ceramic.jpg',
+        'is_featured': True,
+        'order': 2
+    },
+    {
+        'title': 'Графический лист №08',
+        'slug': 'graphic-sheet-08',
+        'category': cat_graphics,
+        'year': 2024,
+        'dimensions': '70 × 50 см (дубовый багет, музейное стекло)',
+        'medium': 'Хлопковая бумага ручного отлива, тушь, графит',
+        'status': 'available',
+        'price': '85 000 ₽',
+        'curator_note': 'Камерная графическая серия на фактурной бумаге с необрезным краем. Четкие линейные ритмы и тональные заливки тушью.',
+        'image_url': '/static/images/art_graphics.jpg',
+        'is_featured': True,
+        'order': 3
+    }
+]
 
-    Artwork.objects.create(
-        title='Вулканический Разлом / Tectonic Rupture',
-        slug='tectonic-rupture-ceramic',
-        category=cat_ceramics,
-        year=2025,
-        dimensions='h: 48 см, w: 36 см',
-        medium='Шамотная глина, вулканический базальтовый шликер, восстановительный высокотемпературный обжиг 1280°C',
-        status='available',
-        price='195 000 ₽',
-        curator_note='Монолитная керамическая форма, рожденная на стыке стихий. Шероховатая кавернозная текстура лавы создает осязаемый диалог между грубой природной материей и точно выверенной скульптурной пластикой.',
-        image_url='/static/images/art_ceramic.jpg',
-        is_featured=True,
-        order=2
-    )
+# Clean up legacy neuroslop records
+Artwork.objects.filter(slug__in=['palimpsest-street-layer-7', 'tectonic-rupture-ceramic', 'architectural-matrix-4']).delete()
 
-    Artwork.objects.create(
-        title='Архитектурная матрица №4',
-        slug='architectural-matrix-4',
-        category=cat_graphics,
-        year=2024,
-        dimensions='70 × 50 см (в музейном паспарту и дубовом багете)',
-        medium='Ручная хлопковая бумага 300 г/м², сепия, графит, сухая игла',
-        status='available',
-        price='85 000 ₽',
-        curator_note='Ритмическая графическая серия, созданная в процессе разработки эскизов для монументальных интерьерных панно. Лаконичная геометрия и глубокая фактура хлопкового листа.',
-        image_url='/static/images/art_canvas.jpg',
-        is_featured=True,
-        order=3
+for art in artworks_data:
+    Artwork.objects.update_or_create(
+        slug=art['slug'],
+        defaults=art
     )
-    print("Artworks seeded")
+print("Artworks seeded cleanly")
 
 # 6. Exhibitions
-if not Exhibition.objects.exists():
-    Exhibition.objects.create(
-        title='Теория Стен: От теггинга к архитектурному рельефу',
-        venue='Центр современного искусства «Винзавод»',
-        city='Москва',
-        year=2025,
-        dates='12 апреля — 28 мая 2025',
-        exhibition_type='Персональная ретроспектива',
-        status='upcoming',
-        description='Масштабный проект, объединяющий станковую живопись, монументальные фрагменты интерьерных фактур и скульптурную керамику мастера.',
-        order=1
+exhibitions_data = [
+    {
+        'title': 'Материал и форма',
+        'venue': 'Центр современного искусства «Винзавод»',
+        'city': 'Москва',
+        'year': 2025,
+        'dates': 'Май — июнь 2025',
+        'exhibition_type': 'Персональная выставка',
+        'status': 'upcoming',
+        'description': 'Масштабный проект, объединяющий станковую живопись, монументальные фрагменты интерьерных фактур и скульптурную керамику мастера.',
+        'order': 1
+    },
+    {
+        'title': 'Современные фактуры',
+        'venue': 'Галерея «Триумф»',
+        'city': 'Москва',
+        'year': 2024,
+        'dates': 'Октябрь 2024',
+        'exhibition_type': 'Групповая выставка',
+        'status': 'past',
+        'description': 'Экспозиция работ, исследующих тактильность и трансформацию урбанистических материалов в выставочном контексте.',
+        'order': 2
+    },
+    {
+        'title': 'Уличная волна: От эскиза к монументу',
+        'venue': 'Севкабель Порт',
+        'city': 'Санкт-Петербург',
+        'year': 2023,
+        'dates': 'Июль 2023',
+        'exhibition_type': 'Кураторский проект',
+        'status': 'past',
+        'description': 'Исторический срез пионеров российского уличного искусства и их эволюции в станковое и монументальное искусство.',
+        'order': 3
+    }
+]
+
+# Clean up legacy neuroslop exhibitions
+Exhibition.objects.filter(title__icontains='Археология').delete()
+Exhibition.objects.filter(title__icontains='Теория Стен').delete()
+
+for exh in exhibitions_data:
+    Exhibition.objects.update_or_create(
+        title=exh['title'],
+        defaults=exh
     )
-    Exhibition.objects.create(
-        title='Археология Поверхностей / Surfaces Archaeology',
-        venue='Галерея «Триумф»',
-        city='Москва',
-        year=2024,
-        dates='Октябрь 2024',
-        exhibition_type='Групповая выставка современных художников',
-        status='past',
-        description='Экспозиция работ, исследующих тактильность и трансформацию урбанистических материалов в выставочном контексте.',
-        order=2
-    )
-    Exhibition.objects.create(
-        title='Street Art Evolution 1998–2023',
-        venue='Музей стрит-арта',
-        city='Санкт-Петербург',
-        year=2023,
-        dates='Июнь — август 2023',
-        exhibition_type='Музейная выставка',
-        status='past',
-        description='Исторический срез пионеров российского уличного искусства и их эволюции в станковое и монументальное искусство.',
-        order=3
-    )
-    print("Exhibitions seeded")
+print("Exhibitions seeded cleanly")
 
 # 7. Articles
 if not Article.objects.exists():

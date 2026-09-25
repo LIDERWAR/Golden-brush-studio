@@ -134,6 +134,7 @@ JAZZMIN_SETTINGS = {
     "site_title": "GB STUDIO",
     "site_header": "GB STUDIO | FIT-OUT & ART",
     "site_brand": "GB STUDIO",
+    "site_icon": "images/favicon-32x32.png",
     "welcome_sign": "Панель управления проектами и заявками GB STUDIO",
     "copyright": "GB STUDIO © 2026",
     "search_model": ["leads.Lead"],

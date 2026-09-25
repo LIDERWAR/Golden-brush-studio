@@ -55,6 +55,14 @@ server {
 
     client_max_body_size 50M;
 
+    # Favicon direct serving
+    location = /favicon.ico {
+        alias /app/staticfiles/images/favicon.ico;
+        access_log off;
+        log_not_found off;
+        expires 30d;
+    }
+
     # Static files with caching
     location /static/ {
         alias /app/staticfiles/;
