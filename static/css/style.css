@@ -2469,6 +2469,31 @@ img {
   color: var(--text-subtle);
 }
 
+.mat-card-footer {
+  margin-top: 0.75rem;
+  padding-top: 0.65rem;
+  border-top: 1px dashed rgba(156, 111, 62, 0.25);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mat-detail-link {
+  font-size: 0.78rem;
+  color: var(--accent-bronze);
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--tr-smooth);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.mat-detail-link:hover {
+  color: var(--accent-gold);
+  text-decoration: underline;
+}
+
 /* Calculator Panel (Right Col) */
 .calc-panel-col {
   height: 100%;

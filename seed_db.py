@@ -245,4 +245,164 @@ if not Lead.objects.exists():
     )
     print("Leads seeded")
 
+# 9. Materials & Calculator Seed
+from materials.models import MaterialCategory, DecorativeMaterial
+
+cat_plaster, _ = MaterialCategory.objects.get_or_create(name='Минеральные штукатурки', slug='plasters', order=1)
+cat_micro, _ = MaterialCategory.objects.get_or_create(name='Бесшовный микроцемент', slug='microcement', order=2)
+cat_mural, _ = MaterialCategory.objects.get_or_create(name='Монументальная роспись', slug='murals', order=3)
+cat_gold, _ = MaterialCategory.objects.get_or_create(name='Золочение и металлы', slug='gilding', order=4)
+cat_relief, _ = MaterialCategory.objects.get_or_create(name='Скульптурные барельефы', slug='reliefs', order=5)
+cat_venice, _ = MaterialCategory.objects.get_or_create(name='Венецианские штукатурки', slug='venetian', order=6)
+
+materials_data = [
+    {
+        'slug': 'plaster',
+        'name': 'Минеральная фактурная штукатурка',
+        'category': cat_plaster,
+        'badge': 'Популярный выбор',
+        'price_per_sqm': 4200,
+        'material_cost_ratio': 0.35,
+        'speed_sqm_per_day': 25,
+        'short_desc': 'Травертин, марморино, скальный срез, архитектурный бетон. Моющаяся, дышащая основа.',
+        'full_desc': 'Экологичное известковое покрытие на основе выдержанной гашеной извести и мраморной муки тонкого помола. Создает благородную тактильную поверхность с эффектом натурального камня травертина или марморино. Материал абсолютно паропроницаем, не накапливает статическое электричество и со временем набирает прочность за счет естественной карбонизации извести.',
+        'composition': 'Выдержанная гидравлическая известь, мраморная мука, минеральные пигменты',
+        'application_areas': 'Гостиные, холлы, спальни, рестораны, представительские офисы',
+        'image_url': '/static/images/hero.jpg',
+        'order': 1,
+    },
+    {
+        'slug': 'microcement',
+        'name': 'Архитектурный микроцемент',
+        'category': cat_micro,
+        'badge': 'Влагостойкий',
+        'price_per_sqm': 4800,
+        'material_cost_ratio': 0.38,
+        'speed_sqm_per_day': 20,
+        'short_desc': 'Бесшовный монолит для санузлов, ванных комнат, полов и монолитных плоскостей без стыков.',
+        'full_desc': 'Высокотехнологичный полимерно-минеральный состав толщиной 2-3 мм, образующий сверхпрочную бесшовную мембрану. Идеален для мокрых зон, душевых поддонов без поддона, кухонных фартуков, полов с подогревом и лестничных маршей. Покрывается 2-компонентным матовым полиуретановым лаком с нулевым водопоглощением.',
+        'composition': 'Микроцемент тонкого помола, полимерные модификаторы, защитный PU-лак',
+        'application_areas': 'Ванные комнаты, санузлы, полы, лестницы, столешницы, фасады',
+        'image_url': '/static/images/art_furniture.jpg',
+        'order': 2,
+    },
+    {
+        'slug': 'mural',
+        'name': 'Художественная роспись & Фрески',
+        'category': cat_mural,
+        'badge': 'Авторский арт',
+        'price_per_sqm': 7500,
+        'material_cost_ratio': 0.25,
+        'speed_sqm_per_day': 10,
+        'short_desc': 'Ручная авторская роспись, панорамные фрески, графика и барельефы по эскизам Александра Попыкина.',
+        'full_desc': 'Индивидуальное монументальное оформление стен и потолков. От масштабных абстрактных полотен и графических композиций до классической фресковой живописи по сырой штукатурке. Каждый проект разрабатывается персонально под архитектуру помещения художником Александром Попыкиным.',
+        'composition': 'Акрилово-силикатные пигменты, минеральная основа, закрепляющие воски',
+        'application_areas': 'Акцентные стены гостиных, атриумы, холлы отелей, рестораны, пентхаусы',
+        'image_url': '/static/images/fresco_texture.jpg',
+        'order': 3,
+    },
+    {
+        'slug': 'gold',
+        'name': 'Золочение, металл & Патина',
+        'category': cat_gold,
+        'badge': 'Премиум-металл',
+        'price_per_sqm': 6200,
+        'material_cost_ratio': 0.40,
+        'speed_sqm_per_day': 15,
+        'short_desc': 'Сусальное золото, поталь, окисленная медь, латунь и благородная патина на рельефах и деталях.',
+        'full_desc': 'Сложные декоративные техники нанесения металлов: классическое золочение сусальным золотом и свободной поталью, жидкие металлы (латунь, бронза, цинк), химическое оксидирование с образованием аутентичной бирюзовой патины и ржавчины.',
+        'composition': 'Сусальное золото, поталь, микронизированные металлические порошки, активаторы патины',
+        'application_areas': 'Каминные порталы, карнизы, колонны, лепные розетки, акцентные арт-стены',
+        'image_url': '/static/images/restoration_craft.jpg',
+        'order': 4,
+    },
+    {
+        'slug': 'basrelief',
+        'name': 'Барельефы & 3D-панно',
+        'category': cat_relief,
+        'badge': 'Скульптурный рельеф',
+        'price_per_sqm': 8500,
+        'material_cost_ratio': 0.30,
+        'speed_sqm_per_day': 8,
+        'short_desc': 'Ручная объемная лепка, скальные рельефы, гроты и архитектурная пластика стен по эскизам автора.',
+        'full_desc': 'Создание уникальной скульптурной пластики прямо на стене объекта. Высокий и низкий рельеф, ботанические мотивы, природные скальные срезы, геометрическая деконструкция. Прочный армированный состав устойчив к механическим повреждениям.',
+        'composition': 'Скульптурный гипс повышенной прочности, фиброволокно, мраморный наполнитель',
+        'application_areas': 'Входные группы, гостиные, лестничные пролеты, рестораны, зоны ресепшн',
+        'image_url': '/static/images/hero.jpg',
+        'order': 5,
+    },
+    {
+        'slug': 'venetian',
+        'name': 'Венецианская штукатурка & Оникс',
+        'category': cat_venice,
+        'badge': 'Полированный мрамор',
+        'price_per_sqm': 5200,
+        'material_cost_ratio': 0.35,
+        'speed_sqm_per_day': 18,
+        'short_desc': 'Классическое зеркальное покрытие с эффектом глубины натурального камня и восковой полировкой.',
+        'full_desc': 'Традиционная многослойная итальянская техника нанесения тончайших слоев известково-мраморной смеси. За счет полировки кельмой и нанесения пчелиного воска создается эффект оптической глубины, полупрозрачности и рисунка полированного каррарского мрамора или оникса.',
+        'composition': 'Микронизированный мрамор, гашеная известь, натуральный пчелиный воск',
+        'application_areas': 'Колонны, своды, коридоры, ванные комнаты, парадные залы',
+        'image_url': '/static/images/case_hotel.jpg',
+        'order': 6,
+    },
+]
+
+for m in materials_data:
+    DecorativeMaterial.objects.get_or_create(
+        slug=m['slug'],
+        defaults=m
+    )
+print("Materials seeded successfully")
+
+# 10. Partners Seed
+from main.models import Partner, HomePageConfig
+
+partners_data = [
+    {
+        'name': 'Бюро «Меганом»',
+        'partner_type': 'Архитектурное бюро',
+        'description': 'Совместные проекты отделки лобби и частных пентхаусов премиум-класса.',
+        'order': 1,
+    },
+    {
+        'name': 'WOWHAUS',
+        'partner_type': 'Архитектура & Город',
+        'description': 'Создание авторских фактур общественных и культурных пространств.',
+        'order': 2,
+    },
+    {
+        'name': 'Sminex',
+        'partner_type': 'Девелопер клубных домов',
+        'description': 'Отделка представительских входных групп и монументальные рельефы МОП.',
+        'order': 3,
+    },
+    {
+        'name': 'MR Group',
+        'partner_type': 'Премиальный девелопмент',
+        'description': 'Комплексный fit-out бизнес-залов, шоу-румов и акцентных арт-стен.',
+        'order': 4,
+    },
+    {
+        'name': 'Goldshell Paints',
+        'partner_type': 'Производитель материалов',
+        'description': 'Официальное технологическое партнерство по краскам и микроцементу.',
+        'order': 5,
+    },
+    {
+        'name': 'Artplay Studio',
+        'partner_type': 'Интерьерный дизайн',
+        'description': 'Интеграция станковой живописи Александра Попыкина в интерьерные проекты.',
+        'order': 6,
+    },
+]
+
+for p in partners_data:
+    Partner.objects.get_or_create(name=p['name'], defaults=p)
+print("Partners seeded successfully")
+
+# 11. Home Page Config Seed
+HomePageConfig.get_solo()
+print("HomePageConfig initialized successfully")
+
 print("All seed data created successfully!")

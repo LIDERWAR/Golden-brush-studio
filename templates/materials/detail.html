@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ material.name }} — Декоративные минеральные покрытия GB STUDIO{% endblock %}
+{% block meta_desc %}{{ material.short_desc }} Авторское нанесение мастерами студии под надзором Александра Попыкина. Расчет сметы от {{ material.formatted_price }}/м².{% endblock %}
+
+{% block content %}
+<div class="material-detail-page" style="padding-top: 8rem; padding-bottom: 6rem; background-color: var(--bg-primary);">
+    <div class="container">
+        <!-- Breadcrumbs -->
+        <nav aria-label="breadcrumb" style="margin-bottom: 2rem;">
+            <ol style="display: flex; list-style: none; padding: 0; margin: 0; font-size: 0.85rem; color: var(--text-muted); gap: 0.5rem; align-items: center; flex-wrap: wrap;">
+                <li><a href="/" style="color: var(--text-muted); text-decoration: none;">Главная</a></li>
+                <li style="color: var(--border-subtle);">/</li>
+                <li><a href="{% url 'materials:list' %}" style="color: var(--text-muted); text-decoration: none;">Каталог материалов</a></li>
+                <li style="color: var(--border-subtle);">/</li>
+                <li style="color: var(--text-main); font-weight: 500;">{{ material.name }}</li>
+            </ol>
+        </nav>
+
+        <!-- Main Product Split Layout -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; margin-bottom: 4.5rem; align-items: start;" class="material-hero-grid">
+            <!-- Media Column -->
+            <div>
+                <div style="background: #16181d; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border-subtle); position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.06);">
+                    <img src="{{ material.display_image }}" alt="{{ material.name }}" style="width: 100%; height: auto; min-height: 400px; max-height: 540px; object-fit: cover; display: block;">
+                    {% if material.badge %}
+                    <div style="position: absolute; top: 1.25rem; left: 1.25rem; background: rgba(20, 22, 26, 0.85); backdrop-filter: blur(8px); color: var(--accent-bronze); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; padding: 0.4rem 1rem; border-radius: 4px; border: 1px solid rgba(197, 160, 89, 0.3);">
+                        {{ material.badge }}
+                    </div>
+                    {% endif %}
+                </div>
+
+                {% if material.gallery_images.all %}
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 1rem;">
+                    {% for img in material.gallery_images.all %}
+                    <div style="border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border-subtle); height: 90px;">
+                        <img src="{{ img.image.url }}" alt="{{ img.title }}" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Info Column -->
+            <div>
+                <div class="eyebrow">
+                    {% if material.category %}{{ material.category.name }}{% else %}Минеральное покрытие{% endif %}
+                </div>
+                <h1 style="font-family: var(--font-heading); font-size: clamp(2rem, 4vw, 3rem); color: var(--text-main); margin: 0 0 1.25rem; font-weight: 500; line-height: 1.2;">
+                    {{ material.name }}
+                </h1>
+                
+                <!-- Price Box -->
+                <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.5rem; margin-bottom: 2rem;">
+                    <div style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.35rem;">
+                        Базовая сметная стоимость под ключ
+                    </div>
+                    <div style="font-family: var(--font-heading); font-size: 2.2rem; color: var(--accent-bronze); font-weight: 600; line-height: 1.1; margin-bottom: 0.5rem;">
+                        от {{ material.formatted_price }} <span style="font-size: 1rem; font-family: var(--font-main); color: var(--text-muted); font-weight: 400;">/ м² стены</span>
+                    </div>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0; line-height: 1.5;">
+                        Включает сертифицированный минеральный состав, точную колеровку по каталогам NCS/RAL и ручное нанесение мастерами студии. Фиксируется договором.
+                    </p>
+                </div>
+
+                <p style="font-size: 1.05rem; color: var(--text-main); line-height: 1.8; margin-bottom: 2rem;">
+                    {{ material.short_desc }}
+                </p>
+
+                <!-- Actions -->
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem;">
+                    <a href="/#calculator" class="btn btn-primary" style="padding: 0.85rem 1.75rem;">
+                        Рассчитать в калькуляторе
+                    </a>
+                    <button type="button" class="btn btn-secondary btn-open-samplebox" style="padding: 0.85rem 1.75rem;">
+                        Заказать выкрас этого покрытия
+                    </button>
+                </div>
+
+                <!-- Technical Specs Grid -->
+                <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); overflow: hidden;">
+                    <div style="padding: 1rem 1.5rem; border-bottom: 1px solid var(--border-subtle); font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-main);">
+                        Технический паспорт покрытия
+                    </div>
+                    <div style="padding: 1.25rem 1.5rem; display: grid; gap: 0.85rem; font-size: 0.92rem;">
+                        <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed var(--border-subtle); padding-bottom: 0.65rem;">
+                            <span style="color: var(--text-muted);">Состав / основа:</span>
+                            <span style="font-weight: 500; text-align: right; max-width: 60%;">{{ material.composition }}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed var(--border-subtle); padding-bottom: 0.65rem;">
+                            <span style="color: var(--text-muted);">Зоны применения:</span>
+                            <span style="font-weight: 500; text-align: right; max-width: 60%;">{{ material.application_areas }}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed var(--border-subtle); padding-bottom: 0.65rem;">
+                            <span style="color: var(--text-muted);">Пожаробезопасность:</span>
+                            <span style="font-weight: 500; color: #388e3c; text-align: right;">{{ material.fire_rating }}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed var(--border-subtle); padding-bottom: 0.65rem;">
+                            <span style="color: var(--text-muted);">Влагостойкость:</span>
+                            <span style="font-weight: 500; text-align: right;">{{ material.moisture_resistance }}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding-bottom: 0.2rem;">
+                            <span style="color: var(--text-muted);">Скорость выполнения:</span>
+                            <span style="font-weight: 500; text-align: right;">до {{ material.speed_sqm_per_day }} м² в рабочий день</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Full Description & Technology -->
+        {% if material.full_desc %}
+        <section style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 3.5rem; margin-bottom: 4.5rem;">
+            <div style="max-width: 860px; margin: 0 auto;">
+                <div class="eyebrow">Технология & Художественный метод</div>
+                <h2 style="font-family: var(--font-heading); font-size: 2rem; color: var(--text-main); margin: 0 0 1.5rem;">
+                    Особенности нанесения и свойства покрытия
+                </h2>
+                <div style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.9;">
+                    {{ material.full_desc|linebreaks }}
+                </div>
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- Related Materials -->
+        {% if related_materials %}
+        <div>
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+                <div>
+                    <div class="eyebrow">Сочетания фактур</div>
+                    <h3 style="font-family: var(--font-heading); font-size: 1.85rem; color: var(--text-main); margin: 0;">
+                        Другие авторские покрытия
+                    </h3>
+                </div>
+                <a href="{% url 'materials:list' %}" class="btn btn-secondary">
+                    Весь каталог материалов
+                </a>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.75rem;">
+                {% for rel in related_materials %}
+                <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); overflow: hidden;">
+                    <a href="{{ rel.get_absolute_url }}" style="display: block; height: 180px; overflow: hidden;">
+                        <img src="{{ rel.display_image }}" alt="{{ rel.name }}" style="width: 100%; height: 100%; object-fit: cover;">
+                    </a>
+                    <div style="padding: 1.25rem;">
+                        <h4 style="font-family: var(--font-heading); font-size: 1.15rem; margin: 0 0 0.5rem;">
+                            <a href="{{ rel.get_absolute_url }}" style="color: var(--text-main); text-decoration: none;">{{ rel.name }}</a>
+                        </h4>
+                        <div style="font-size: 1.1rem; color: var(--accent-bronze); font-weight: 600; margin-bottom: 0.75rem;">
+                            от {{ rel.formatted_price }} / м²
+                        </div>
+                        <a href="{{ rel.get_absolute_url }}" class="btn btn-secondary" style="font-size: 0.8rem; width: 100%; text-align: center; display: block; box-sizing: border-box;">
+                            Смотреть технологию
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

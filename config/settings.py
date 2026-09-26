@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'projects',
     'gallery',
     'articles',
+    'materials',
 ]
 
 MIDDLEWARE = [
@@ -73,6 +74,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
                 'django.template.context_processors.static',
+                'main.context_processors.site_settings',
             ],
         },
     },
@@ -137,10 +139,12 @@ JAZZMIN_SETTINGS = {
     "site_icon": "images/favicon-32x32.png",
     "welcome_sign": "Панель управления проектами и заявками GB STUDIO",
     "copyright": "GB STUDIO © 2026",
-    "search_model": ["leads.Lead"],
+    "search_model": ["leads.Lead", "materials.DecorativeMaterial"],
     "topmenu_links": [
         {"name": "Перейти на сайт", "url": "/", "new_window": True},
         {"name": "Входящие Лиды (CRM)", "model": "leads.Lead"},
+        {"name": "Калькулятор & Материалы", "model": "materials.DecorativeMaterial"},
+        {"name": "Главная страница", "model": "main.HomePageConfig"},
         {"name": "Объекты Fit-Out", "model": "projects.Project"},
         {"name": "Арт-Галерея", "model": "gallery.Artwork"},
     ],
@@ -156,6 +160,10 @@ JAZZMIN_SETTINGS = {
         "gallery.ArtworkCategory": "fas fa-shapes",
         "articles.Article": "fas fa-newspaper",
         "articles.Exhibition": "fas fa-landmark",
+        "materials.DecorativeMaterial": "fas fa-paint-roller",
+        "materials.MaterialCategory": "fas fa-layer-group",
+        "main.HomePageConfig": "fas fa-sliders-h",
+        "main.Partner": "fas fa-handshake",
     },
     "default_icon_parents": "fas fa-chevron-circle-right",
     "default_icon_children": "fas fa-circle",

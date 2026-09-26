@@ -635,9 +635,11 @@ function initLiveWallCalculator() {
 
     if (!materialsGrid || !wallAreaInput) return;
 
-    let selectedName = 'Минеральная фактурная штукатурка';
-    let selectedPriceSqm = 4200;
-    let selectedDesc = 'Травертин, Марморино, скальные сколы и песчаные фактуры. Природные минеральные компоненты.';
+    const firstCard = materialsGrid.querySelector('.material-card.active') || materialsGrid.querySelector('.material-card');
+    let selectedName = firstCard ? firstCard.getAttribute('data-name') : 'Минеральная фактурная штукатурка';
+    let selectedPriceSqm = firstCard ? (parseInt(firstCard.getAttribute('data-price-sqm'), 10) || 4200) : 4200;
+    let selectedDesc = firstCard ? firstCard.getAttribute('data-desc') : 'Природные минеральные компоненты.';
+    let selectedRatio = firstCard ? (parseFloat(firstCard.getAttribute('data-ratio')) || 0.35) : 0.35;
     let area = parseInt(wallAreaInput.value, 10) || 45;
 
     function formatNumber(num) {
@@ -648,7 +650,7 @@ function initLiveWallCalculator() {
         area = Math.max(5, Math.min(2500, parseInt(wallAreaInput.value, 10) || 10));
         
         const total = area * selectedPriceSqm;
-        const matCost = Math.round(total * 0.35);
+        const matCost = Math.round(total * selectedRatio);
         const workCost = total - matCost;
 
         let duration = '3–5 рабочих дней';
@@ -663,6 +665,9 @@ function initLiveWallCalculator() {
         if (ledgerTotalPrice) ledgerTotalPrice.textContent = formatNumber(total);
     }
 
+    // Initial calculation on load
+    recalculate();
+
     // Material card selection
     const cards = materialsGrid.querySelectorAll('.material-card');
     cards.forEach(card => {
@@ -673,6 +678,7 @@ function initLiveWallCalculator() {
             selectedName = card.getAttribute('data-name');
             selectedPriceSqm = parseInt(card.getAttribute('data-price-sqm'), 10) || 4200;
             selectedDesc = card.getAttribute('data-desc');
+            selectedRatio = parseFloat(card.getAttribute('data-ratio')) || 0.35;
 
             if (calcSelectedName) calcSelectedName.textContent = selectedName;
             if (calcSelectedDesc) calcSelectedDesc.textContent = selectedDesc;

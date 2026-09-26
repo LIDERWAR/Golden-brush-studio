@@ -34,10 +34,14 @@
                 <ul class="nav-menu">
                     <!-- Dropdown 1: Направления -->
                     <li class="nav-item has-dropdown">
-                        <a href="/#decor" class="nav-link dropdown-toggle" aria-expanded="false">
-                            Направления <i class="fas fa-chevron-down nav-chevron"></i>
+                        <a href="/materials/" class="nav-link dropdown-toggle" aria-expanded="false">
+                            Материалы & Декор <i class="fas fa-chevron-down nav-chevron"></i>
                         </a>
                         <div class="nav-dropdown-menu">
+                            <a href="{% url 'materials:list' %}" class="dropdown-item">
+                                <span class="dropdown-item-title">Каталог материалов</span>
+                                <span class="dropdown-item-desc">Минеральные фактуры, составы, цены за м²</span>
+                            </a>
                             <a href="/#decor" class="dropdown-item">
                                 <span class="dropdown-item-title">Декоративные покрытия</span>
                                 <span class="dropdown-item-desc">Микроцемент, фактуры, барельефы</span>
@@ -79,6 +83,7 @@
                     </li>
 
                     <!-- Direct Links -->
+                    <li class="nav-item"><a href="{% url 'materials:list' %}" class="nav-link">Материалы</a></li>
                     <li class="nav-item"><a href="/#cases" class="nav-link">Проекты</a></li>
                     <li class="nav-item"><a href="/#partners" class="nav-link">Партнеры</a></li>
                     <li class="nav-item"><a href="/#contacts" class="nav-link">Контакты</a></li>
@@ -86,8 +91,8 @@
             </nav>
 
             <div class="header-actions">
-                <a href="tel:+74958904422" class="header-phone" aria-label="Позвонить в студию">
-                    <i class="fas fa-phone-alt"></i> <span class="phone-text">+7 (495) 890-44-22</span>
+                <a href="tel:{{ home_config.contact_phone|default:'+74958904422' }}" class="header-phone" aria-label="Позвонить в студию">
+                    <i class="fas fa-phone-alt"></i> <span class="phone-text">{{ home_config.contact_phone|default:'+7 (495) 890-44-22' }}</span>
                 </a>
                 <button class="burger-btn" id="burgerBtn" aria-label="Открыть мобильное меню">
                     <i class="fas fa-bars"></i>
@@ -188,9 +193,9 @@
                     <h4 class="footer-col-title">Контакты B2B-отдела</h4>
                     <p style="font-size: 0.95rem; margin-bottom: 0.5rem; color: #fff;"><strong>Наталья Попыкина</strong></p>
                     <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">Директор по развитию коммерческих проектов</p>
-                    <p style="font-size: 0.95rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.65rem;"><i class="fas fa-phone" style="color: var(--accent-gold); width: 16px; text-align: center; flex-shrink: 0;"></i> <a href="tel:+74958904422">+7 (495) 890-44-22</a></p>
-                    <p style="font-size: 0.95rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.65rem;"><i class="fas fa-envelope" style="color: var(--accent-gold); width: 16px; text-align: center; flex-shrink: 0;"></i> <a href="mailto:tender@gbstudio.ru">tender@gbstudio.ru</a></p>
-                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem;">Мастерская и офис: Москва, арт-кластер «Кристалл»</p>
+                    <p style="font-size: 0.95rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.65rem;"><i class="fas fa-phone" style="color: var(--accent-gold); width: 16px; text-align: center; flex-shrink: 0;"></i> <a href="tel:{{ home_config.contact_phone|default:'+74958904422' }}">{{ home_config.contact_phone|default:'+7 (495) 890-44-22' }}</a></p>
+                    <p style="font-size: 0.95rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.65rem;"><i class="fas fa-envelope" style="color: var(--accent-gold); width: 16px; text-align: center; flex-shrink: 0;"></i> <a href="mailto:{{ home_config.contact_email|default:'welcome@gbstudio.ru' }}">{{ home_config.contact_email|default:'welcome@gbstudio.ru' }}</a></p>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem;">Мастерская и офис: {{ home_config.contact_address|default:'Москва, арт-кластер «Кристалл»' }}</p>
                 </div>
             </div>
 
@@ -347,14 +352,14 @@
     <!-- Floating Quick Communication Widget -->
     <div class="floating-quick-contact" id="floatingQuickContact">
         <div class="floating-contact-menu" id="floatingContactMenu">
-            <a href="https://t.me/" target="_blank" class="contact-bubble-item tg">
+            <a href="{{ home_config.telegram_url }}" target="_blank" class="contact-bubble-item tg">
                 <i class="fab fa-telegram"></i> <span>Telegram мастера</span>
             </a>
-            <a href="https://wa.me/" target="_blank" class="contact-bubble-item wa">
+            <a href="{{ home_config.whatsapp_url }}" target="_blank" class="contact-bubble-item wa">
                 <i class="fab fa-whatsapp"></i> <span>WhatsApp студии</span>
             </a>
-            <a href="tel:+74958904422" class="contact-bubble-item tel">
-                <i class="fas fa-phone-alt"></i> <span>+7 (495) 890-44-22</span>
+            <a href="tel:{{ home_config.contact_phone|default:'+74958904422' }}" class="contact-bubble-item tel">
+                <i class="fas fa-phone-alt"></i> <span>{{ home_config.contact_phone|default:'+7 (495) 890-44-22' }}</span>
             </a>
             <button type="button" class="contact-bubble-item fitting btn-open-fitting">
                 <i class="fas fa-palette"></i> <span>Примерка картин</span>

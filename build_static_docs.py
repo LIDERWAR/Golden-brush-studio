@@ -19,6 +19,12 @@ def build_docs():
     with urllib.request.urlopen(req_gal) as response:
         gallery_html = response.read().decode('utf-8')
 
+    # 2.1 Fetch Materials Page
+    print("Fetching materials page from http://127.0.0.1:8000/materials/ ...")
+    req_mat = urllib.request.Request('http://127.0.0.1:8000/materials/', headers={'User-Agent': 'Mozilla/5.0'})
+    with urllib.request.urlopen(req_mat) as response:
+        materials_html = response.read().decode('utf-8')
+
     # 3. Copy static folder to docs/static
     docs_static = os.path.join(docs_dir, 'static')
     if os.path.exists(docs_static):
@@ -61,7 +67,7 @@ def build_docs():
         print("Patched docs/static/js/main.js for demo mode")
 
     # 5. Transform URLs in HTML for GitHub Pages relative paths
-    def transform_html(html, is_gallery=False):
+    def transform_html(html, page_type='main'):
         # Replace /static/ with static/
         html = html.replace('href="/static/', 'href="static/')
         html = html.replace('src="/static/', 'src="static/')
@@ -69,26 +75,30 @@ def build_docs():
         html = html.replace('url("/static/', 'url("static/')
 
         # Replace internal links
-        if not is_gallery:
-            html = html.replace('href="/gallery/"', 'href="gallery.html"')
+        html = html.replace('href="/materials/"', 'href="materials.html"')
+        html = html.replace('href="/gallery/"', 'href="gallery.html"')
+        if page_type == 'main':
             html = html.replace('href="/#', 'href="#')
             html = html.replace('href="/"', 'href="index.html"')
         else:
-            html = html.replace('href="/gallery/"', 'href="gallery.html"')
             html = html.replace('href="/#', 'href="index.html#')
             html = html.replace('href="/"', 'href="index.html"')
 
         return html
 
-    main_html_clean = transform_html(main_html, is_gallery=False)
-    gallery_html_clean = transform_html(gallery_html, is_gallery=True)
+    main_html_clean = transform_html(main_html, page_type='main')
+    gallery_html_clean = transform_html(gallery_html, page_type='gallery')
+    materials_html_clean = transform_html(materials_html, page_type='materials')
 
-    # 6. Write docs/index.html and docs/gallery.html
+    # 6. Write docs/index.html, docs/gallery.html and docs/materials.html
     with open(os.path.join(docs_dir, 'index.html'), 'w', encoding='utf-8') as f:
         f.write(main_html_clean)
 
     with open(os.path.join(docs_dir, 'gallery.html'), 'w', encoding='utf-8') as f:
         f.write(gallery_html_clean)
+
+    with open(os.path.join(docs_dir, 'materials.html'), 'w', encoding='utf-8') as f:
+        f.write(materials_html_clean)
 
     # Add .nojekyll so GitHub Pages doesn't ignore anything
     with open(os.path.join(docs_dir, '.nojekyll'), 'w', encoding='utf-8') as f:

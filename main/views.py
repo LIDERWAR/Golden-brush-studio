@@ -6,6 +6,8 @@ import json
 from projects.models import Project, ProjectCategory
 from gallery.models import Artwork, ArtworkCategory
 from articles.models import Article, Exhibition
+from materials.models import DecorativeMaterial
+from main.models import Partner, HomePageConfig
 from leads.models import Lead
 from leads.services import send_telegram_notification
 
@@ -16,6 +18,9 @@ def index(request):
     artworks = Artwork.objects.filter(is_featured=True).select_related('category')[:4]
     articles = Article.objects.filter(is_published=True, is_featured=True)[:3]
     exhibitions = Exhibition.objects.all()[:4]
+    materials = DecorativeMaterial.objects.filter(is_active=True, show_in_calculator=True).order_by('order', 'id')
+    partners = Partner.objects.filter(is_active=True).order_by('order', 'id')
+    home_config = HomePageConfig.get_solo()
     
     context = {
         'projects': projects,
@@ -23,6 +28,9 @@ def index(request):
         'artworks': artworks,
         'articles': articles,
         'exhibitions': exhibitions,
+        'materials': materials,
+        'partners': partners,
+        'home_config': home_config,
     }
     return render(request, 'index.html', context)
 

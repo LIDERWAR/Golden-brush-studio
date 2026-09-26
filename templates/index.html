@@ -3,7 +3,7 @@
 {% block content %}
 <!-- 1. HERO SECTION: THREE GRAND PORTALS (DAWALLS MINIMALIST AESTHETIC) -->
 <section class="hero-atelier" id="home">
-    <div class="hero-atelier-bg" style="background-image: url('/static/images/fresco_texture.jpg');"></div>
+    <div class="hero-atelier-bg" style="background-image: url('{{ home_config.hero_bg_image_url }}');"></div>
     <div class="hero-atelier-overlay"></div>
 
     <div class="container hero-atelier-container">
@@ -11,15 +11,15 @@
         <div class="hero-composition">
             <div class="hero-header-top">
                 <div class="hero-title-area">
-                    <div class="eyebrow">Искусство как преображение пространства</div>
+                    <div class="eyebrow">{{ home_config.hero_eyebrow }}</div>
                     <h1 class="hero-atelier-title">
-                        <span class="title-line-main">Художественно-декоративные работы</span>
-                        <span class="accent title-line-sub">и проекты под ключ</span>
+                        <span class="title-line-main">{{ home_config.hero_title_main }}</span>
+                        <span class="accent title-line-sub">{{ home_config.hero_title_sub }}</span>
                     </h1>
                 </div>
                 <div class="hero-desc-area">
                     <p class="hero-atelier-desc">
-                        Ателье авторских минеральных поверхностей, монументальной росписи, реставрации и&nbsp;станковой живописи под&nbsp;руководством художника Александра Попыкина с&nbsp;2011&nbsp;года.
+                        {{ home_config.hero_desc }}
                     </p>
                 </div>
             </div>
@@ -35,55 +35,49 @@
         <!-- The 3 Grand Windows (Portals) -->
         <div class="portals-grid">
             <!-- Window 1: Decorative Works -->
-            <a href="#decor" class="portal-card">
+            <a href="{{ home_config.portal1_link }}" class="portal-card">
                 <div class="portal-img-wrap">
-                    <img src="/static/images/hero.jpg" alt="Художественно-декоративные работы">
+                    <img src="{{ home_config.portal1_img_url }}" alt="{{ home_config.portal1_title }}">
                     <div class="portal-glass-overlay"></div>
                 </div>
                 <div class="portal-content">
-                    <span class="portal-num">01 / Фактуры & Материя</span>
-                    <h3 class="portal-title">Художественно-декоративные работы</h3>
-                    <p class="portal-desc">
-                        Авторские рельефные штукатурки, бесшовный микроцемент, монументальные фрески, барельефы, золочение и окислы металлов.
-                    </p>
+                    <span class="portal-num">{{ home_config.portal1_num }}</span>
+                    <h3 class="portal-title">{{ home_config.portal1_title }}</h3>
+                    <p class="portal-desc">{{ home_config.portal1_desc }}</p>
                     <div class="portal-action">
-                        <span class="portal-link-text">Каталог фактур и калькулятор</span>
+                        <span class="portal-link-text">{{ home_config.portal1_link_text }}</span>
                     </div>
                 </div>
             </a>
 
             <!-- Window 2: Restoration -->
-            <a href="#restoration" class="portal-card">
+            <a href="{{ home_config.portal2_link }}" class="portal-card">
                 <div class="portal-img-wrap">
-                    <img src="/static/images/restoration_craft.jpg" alt="Реставрация и оформление">
+                    <img src="{{ home_config.portal2_img_url }}" alt="{{ home_config.portal2_title }}">
                     <div class="portal-glass-overlay"></div>
                 </div>
                 <div class="portal-content">
-                    <span class="portal-num">02 / Наследие & Мастерство</span>
-                    <h3 class="portal-title">Реставрация и оформление</h3>
-                    <p class="portal-desc">
-                        Бережная реставрация архитектурной лепнины, мозаичных панно, антикварных деталей, фасадов, каминных порталов и сусального золота.
-                    </p>
+                    <span class="portal-num">{{ home_config.portal2_num }}</span>
+                    <h3 class="portal-title">{{ home_config.portal2_title }}</h3>
+                    <p class="portal-desc">{{ home_config.portal2_desc }}</p>
                     <div class="portal-action">
-                        <span class="portal-link-text">Реставрационные кейсы</span>
+                        <span class="portal-link-text">{{ home_config.portal2_link_text }}</span>
                     </div>
                 </div>
             </a>
 
             <!-- Window 3: Art Gallery & Fitting -->
-            <a href="#gallery-showcase" class="portal-card">
+            <a href="{{ home_config.portal3_link }}" class="portal-card">
                 <div class="portal-img-wrap">
-                    <img src="/static/images/art_canvas.jpg" alt="Картинная галерея Александра Попыкина">
+                    <img src="{{ home_config.portal3_img_url }}" alt="{{ home_config.portal3_title }}">
                     <div class="portal-glass-overlay"></div>
                 </div>
                 <div class="portal-content">
-                    <span class="portal-num">03 / Живопись & Витрина</span>
-                    <h3 class="portal-title">Картинная галерея с примеркой</h3>
-                    <p class="portal-desc">
-                        Оригинальные интерьерные полотна Александра Попыкина с указанием размеров и цен. Бесплатная примерка полотен в вашем интерьере.
-                    </p>
+                    <span class="portal-num">{{ home_config.portal3_num }}</span>
+                    <h3 class="portal-title">{{ home_config.portal3_title }}</h3>
+                    <p class="portal-desc">{{ home_config.portal3_desc }}</p>
                     <div class="portal-action">
-                        <span class="portal-link-text">Витрина полотен и заказ</span>
+                        <span class="portal-link-text">{{ home_config.portal3_link_text }}</span>
                     </div>
                 </div>
             </a>
@@ -101,27 +95,27 @@
                     <i class="fas fa-play"></i>
                 </button>
                 <div class="video-caption-chip">
-                    <span>Мастерская Александра Попыкина • Москва</span>
+                    <span>{{ home_config.process_badge }}</span>
                 </div>
             </div>
             <div class="process-text-col">
-                <div class="eyebrow">Живой процесс мастерской</div>
-                <h2 class="section-title" style="margin-bottom: 1.25rem;">Как рождается материя в руках художника</h2>
+                <div class="eyebrow">{{ home_config.process_eyebrow }}</div>
+                <h2 class="section-title" style="margin-bottom: 1.25rem;">{{ home_config.process_title }}</h2>
                 <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 2rem;">
-                    Каждая фактура стены, рельефное панно и картина — результат тонкого диалога мастера с материалом. Мы сами смешиваем минеральные пигменты, наносим многослойные воски, полируем микроцемент и вручную создаем сложнейшие переходы светотени, которые невозможно воспроизвести заводским способом.
+                    {{ home_config.process_desc }}
                 </p>
                 <div class="process-metrics-grid">
                     <div class="metric-item">
-                        <div class="metric-val">15+</div>
-                        <div class="metric-label">лет практики в декоре и росписи</div>
+                        <div class="metric-val">{{ home_config.metric1_val }}</div>
+                        <div class="metric-label">{{ home_config.metric1_lbl }}</div>
                     </div>
                     <div class="metric-item">
-                        <div class="metric-val">200+</div>
-                        <div class="metric-label">авторских рецептур штукатурки</div>
+                        <div class="metric-val">{{ home_config.metric2_val }}</div>
+                        <div class="metric-label">{{ home_config.metric2_lbl }}</div>
                     </div>
                     <div class="metric-item">
-                        <div class="metric-val">100%</div>
-                        <div class="metric-label">ручное нанесение мастерами</div>
+                        <div class="metric-val">{{ home_config.metric3_val }}</div>
+                        <div class="metric-label">{{ home_config.metric3_lbl }}</div>
                     </div>
                 </div>
             </div>
@@ -133,94 +127,57 @@
 <section class="calculator-catalog-section" id="calculator">
     <div class="container">
         <div class="section-header" style="text-align: center; max-width: 820px; margin: 0 auto 3rem;">
-            <div class="eyebrow">Каталог материалов & Расчет сметы</div>
-            <h2 class="section-title">Каталог декоративных покрытий и расчет по площади</h2>
+            <div class="eyebrow">{{ home_config.calc_eyebrow }}</div>
+            <h2 class="section-title">{{ home_config.calc_title }}</h2>
             <p class="section-desc" style="margin: 0.75rem auto 0;">
-                Выберите тип покрытия и укажите метраж стен для моментального расчета стоимости материалов и работы мастеров с выездом технолога.
+                {{ home_config.calc_desc }}
             </p>
+            <div style="margin-top: 1.25rem;">
+                <a href="{% url 'materials:list' %}" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.6rem 1.5rem;">
+                    Смотреть полный каталог покрытий с технологией нанесения →
+                </a>
+            </div>
         </div>
 
         <div class="calc-catalog-wrapper" id="decor">
             <!-- Left: Material Selector Cards -->
             <div class="calc-materials-col">
                 <div class="materials-grid" id="materialsGrid">
-                    <!-- Material 1 -->
+                    {% for mat in materials %}
+                    <div class="material-card {% if forloop.first %}active{% endif %}" 
+                         data-id="{{ mat.slug }}" 
+                         data-name="{{ mat.name }}" 
+                         data-price-sqm="{{ mat.price_per_sqm }}" 
+                         data-speed="{{ mat.speed_sqm_per_day }}"
+                         data-ratio="{{ mat.material_cost_ratio }}"
+                         data-desc="{{ mat.short_desc }}">
+                        {% if mat.badge %}
+                        <div class="mat-badge">{{ mat.badge }}</div>
+                        {% endif %}
+                        <h4 class="mat-title">{{ mat.name }}</h4>
+                        <p class="mat-desc">{{ mat.short_desc }}</p>
+                        <div class="mat-price-tag">от {{ mat.formatted_price }} / м² <span class="mat-sub">(работа + материал)</span></div>
+                        <div class="mat-card-footer" style="margin-top: 0.75rem; padding-top: 0.65rem; border-top: 1px dashed rgba(197, 160, 89, 0.25); display: flex; justify-content: space-between; align-items: center;">
+                            <a href="{{ mat.get_absolute_url }}" class="mat-detail-link" onclick="event.stopPropagation();" style="font-size: 0.78rem; color: var(--accent-bronze); text-decoration: none; font-weight: 500;">
+                                Подробнее о материале →
+                            </a>
+                            <span style="font-size: 0.75rem; color: var(--text-muted);">{{ mat.speed_sqm_per_day }} м²/день</span>
+                        </div>
+                    </div>
+                    {% empty %}
                     <div class="material-card active" 
                          data-id="plaster" 
                          data-name="Фактурная минеральная штукатурка" 
                          data-price-sqm="4200" 
                          data-speed="25"
+                         data-ratio="0.35"
                          data-desc="Травертин, Марморино, скальные сколы и песчаные фактуры. Природные минеральные компоненты.">
                         <div class="mat-badge">Популярный выбор</div>
                         <h4 class="mat-title">Минеральная фактурная штукатурка</h4>
                         <p class="mat-desc">Травертин, марморино, скальный срез, архитектурный бетон. Моющаяся, дышащая основа.</p>
                         <div class="mat-price-tag">от 4 200 ₽ / м² <span class="mat-sub">(работа + материал)</span></div>
                     </div>
-
-                    <!-- Material 2 -->
-                    <div class="material-card" 
-                         data-id="microcement" 
-                         data-name="Архитектурный микроцемент" 
-                         data-price-sqm="4800" 
-                         data-speed="20"
-                         data-desc="Бесшовное монолитное покрытие для санузлов, душевых, полов, лестниц и фартуков. 100% влагостойкость.">
-                        <div class="mat-badge">Влагостойкий</div>
-                        <h4 class="mat-title">Архитектурный микроцемент</h4>
-                        <p class="mat-desc">Бесшовный монолит для санузлов, ванных комнат, полов и монолитных плоскостей без стыков.</p>
-                        <div class="mat-price-tag">от 4 800 ₽ / м² <span class="mat-sub">(работа + материал)</span></div>
-                    </div>
-
-                    <!-- Material 3 -->
-                    <div class="material-card" 
-                         data-id="mural" 
-                         data-name="Монументальная роспись & Фрески" 
-                         data-price-sqm="7500" 
-                         data-speed="10"
-                         data-desc="Авторская художественная роспись стен и потолков, графика, пейзажные и абстрактные монументальные фрески.">
-                        <div class="mat-badge">Авторский арт</div>
-                        <h4 class="mat-title">Художественная роспись & Фрески</h4>
-                        <p class="mat-desc">Ручная авторская роспись, панорамные фрески, графика и барельефы по эскизам Александра Попыкина.</p>
-                        <div class="mat-price-tag">от 7 500 ₽ / м² <span class="mat-sub">(ручная роспись)</span></div>
-                    </div>
-
-                    <!-- Material 4 -->
-                    <div class="material-card" 
-                         data-id="gold" 
-                         data-name="Золочение, окислы металлов & Патина" 
-                         data-price-sqm="6200" 
-                         data-speed="15"
-                         data-desc="Сусальное золото, поталь, жидкая латунь, окисленная бронза, состаренное дерево и декоративное патинирование.">
-                        <div class="mat-badge">Премиум-металл</div>
-                        <h4 class="mat-title">Золочение, металл & Патина</h4>
-                        <p class="mat-desc">Сусальное золото, поталь, окисленная медь, латунь и благородная патина на рельефах и деталях.</p>
-                        <div class="mat-price-tag">от 6 200 ₽ / м² <span class="mat-sub">(работа + материал)</span></div>
-                    </div>
-
-                    <!-- Material 5 -->
-                    <div class="material-card" 
-                         data-id="basrelief" 
-                         data-name="Скульптурные барельефы & 3D-панно" 
-                         data-price-sqm="8500" 
-                         data-speed="8"
-                         data-desc="Ручная объемная лепка, скальные гроты, ботанические и архитектурные рельефы из прочного минерального состава.">
-                        <div class="mat-badge">Скульптурный рельеф</div>
-                        <h4 class="mat-title">Барельефы & 3D-панно</h4>
-                        <p class="mat-desc">Ручная объемная лепка, скальные рельефы, гроты и архитектурная пластика стен по эскизам автора.</p>
-                        <div class="mat-price-tag">от 8 500 ₽ / м² <span class="mat-sub">(ручная лепка)</span></div>
-                    </div>
-
-                    <!-- Material 6 -->
-                    <div class="material-card" 
-                         data-id="venetian" 
-                         data-name="Венецианская штукатурка & Оникс" 
-                         data-price-sqm="5200" 
-                         data-speed="18"
-                         data-desc="Многослойное зеркальное покрытие с эффектом природного мрамора и оникса, полировка натуральным воском.">
-                        <div class="mat-badge">Полированный мрамор</div>
-                        <h4 class="mat-title">Венецианская штукатурка & Оникс</h4>
-                        <p class="mat-desc">Классическое зеркальное покрытие с эффектом глубины натурального камня и восковой полировкой.</p>
-                        <div class="mat-price-tag">от 5 200 ₽ / м² <span class="mat-sub">(работа + материал)</span></div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
 
@@ -229,8 +186,12 @@
                 <div class="calc-panel-card">
                     <div class="calc-panel-header">
                         <span class="calc-panel-eyebrow">Интерактивный расчет</span>
-                        <h3 class="calc-selected-title" id="calcSelectedName">Фактурная минеральная штукатурка</h3>
-                        <p class="calc-selected-desc" id="calcSelectedDesc">Травертин, Марморино, скальные сколы и песчаные фактуры. Природные минеральные компоненты.</p>
+                        <h3 class="calc-selected-title" id="calcSelectedName">
+                            {% if materials.first %}{{ materials.first.name }}{% else %}Минеральная фактурная штукатурка{% endif %}
+                        </h3>
+                        <p class="calc-selected-desc" id="calcSelectedDesc">
+                            {% if materials.first %}{{ materials.first.short_desc }}{% else %}Травертин, Марморино, скальные сколы и песчаные фактуры. Природные минеральные компоненты.{% endif %}
+                        </p>
                     </div>
 
                     <!-- Wall Area Control -->
@@ -280,7 +241,7 @@
                             Зафиксировать расчет и вызвать технолога
                         </button>
                         <p class="calc-sub-guarantee">
-                            Бесплатный выезд технолога с образцами по Москве и МО • Замер и точная смета
+                            {{ home_config.calc_guarantee_text }}
                         </p>
                     </div>
                 </div>
@@ -366,38 +327,38 @@
     <div class="container">
         <div class="restoration-wrap">
             <div class="restoration-img-col">
-                <img src="/static/images/restoration_craft.jpg" alt="Реставрация лепнины и золочение">
+                <img src="{{ home_config.restoration_img_url }}" alt="{{ home_config.restoration_title }}">
                 <div class="restoration-badge-card">
-                    <span class="badge-num">100%</span>
-                    <span class="badge-lbl">сохранение исторической аутентичности</span>
+                    <span class="badge-num">{{ home_config.restoration_badge_num }}</span>
+                    <span class="badge-lbl">{{ home_config.restoration_badge_lbl }}</span>
                 </div>
             </div>
             <div class="restoration-info-col">
-                <div class="eyebrow">Реконструкция & Наследие</div>
-                <h2 class="section-title" style="margin-bottom: 1.25rem;">Реставрация лепнины, мозаики и оформление</h2>
+                <div class="eyebrow">{{ home_config.restoration_eyebrow }}</div>
+                <h2 class="section-title" style="margin-bottom: 1.25rem;">{{ home_config.restoration_title }}</h2>
                 <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 1.75rem;">
-                    Мы бережно восстанавливаем утраченные фрагменты сложной архитектурной лепнины, мозаичные панно из смальты и натурального камня, сусальное золочение, историческую роспись и антикварные поверхности. Работаем как с памятниками архитектуры, так и с частными коллекционными пространствами.
+                    {{ home_config.restoration_desc }}
                 </p>
                 <div class="restoration-services-list">
                     <div class="rest-service-item">
-                        <div class="rest-service-title">Воссоздание гипсовой и каменной лепнины</div>
-                        <div class="rest-service-desc">Снятие форм, долепка утрат, укрепление основы и финишная тонировка.</div>
+                        <div class="rest-service-title">{{ home_config.restoration_item1_title }}</div>
+                        <div class="rest-service-desc">{{ home_config.restoration_item1_desc }}</div>
                     </div>
                     <div class="rest-service-item">
-                        <div class="rest-service-title">Золочение сусальным золотом и поталью</div>
-                        <div class="rest-service-desc">Классическое клеевое и масляное золочение карнизов, пилястр, сводов и арт-объектов.</div>
+                        <div class="rest-service-title">{{ home_config.restoration_item2_title }}</div>
+                        <div class="rest-service-desc">{{ home_config.restoration_item2_desc }}</div>
                     </div>
                     <div class="rest-service-item">
-                        <div class="rest-service-title">Мозаичные панно и римская мозаика</div>
-                        <div class="rest-service-desc">Реставрация и создание мозаичных ковров, фартуков, бассейнов и каминных зон.</div>
+                        <div class="rest-service-title">{{ home_config.restoration_item3_title }}</div>
+                        <div class="rest-service-desc">{{ home_config.restoration_item3_desc }}</div>
                     </div>
                     <div class="rest-service-item">
-                        <div class="rest-service-title">Патинирование и художественное состаривание</div>
-                        <div class="rest-service-desc">Благородная патина времени для каминов, порталов, дверей и деревянных панелей.</div>
+                        <div class="rest-service-title">{{ home_config.restoration_item4_title }}</div>
+                        <div class="rest-service-desc">{{ home_config.restoration_item4_desc }}</div>
                     </div>
                 </div>
                 <div style="margin-top: 2rem;">
-                    <a href="https://t.me/" target="_blank" class="btn btn-primary">Запросить экспертизу объекта у мастера</a>
+                    <a href="{{ home_config.telegram_url }}" target="_blank" class="btn btn-primary">Запросить экспертизу объекта у мастера</a>
                 </div>
             </div>
         </div>
@@ -471,38 +432,38 @@
 
     <div class="container art-fitting-container">
         <div class="art-fitting-card">
-            <div class="eyebrow">Флагманский сервис студии</div>
-            <h2 class="fitting-card-title">Бесплатная примерка картин в вашем интерьере</h2>
+            <div class="eyebrow">{{ home_config.fitting_eyebrow }}</div>
+            <h2 class="fitting-card-title">{{ home_config.fitting_title }}</h2>
             <p class="fitting-card-desc">
-                Картина должна звучать в реальном свете вашего дома. Мы бесплатно привезем оригиналы выбранных полотен Александра Попыкина к вам на объект в Москве и Подмосковье, навесим и примерим на ваших стенах. Вы покупаете только то, что идеально подошло вашему пространству.
+                {{ home_config.fitting_desc }}
             </p>
 
             <div class="fitting-steps-grid">
                 <div class="fitting-step-item">
                     <span class="step-num">01</span>
-                    <h4 class="step-title">Выбор работ</h4>
-                    <p class="step-desc">Выберите до 5 полотен на сайте или отправьте фото интерьера нашему куратору.</p>
+                    <h4 class="step-title">{{ home_config.fitting_step1_title }}</h4>
+                    <p class="step-desc">{{ home_config.fitting_step1_desc }}</p>
                 </div>
                 <div class="fitting-step-item">
                     <span class="step-num">02</span>
-                    <h4 class="step-title">Доставка на объект</h4>
-                    <p class="step-desc">Бесплатно привозим картины на специально оборудованном транспорте студии.</p>
+                    <h4 class="step-title">{{ home_config.fitting_step2_title }}</h4>
+                    <p class="step-desc">{{ home_config.fitting_step2_desc }}</p>
                 </div>
                 <div class="fitting-step-item">
                     <span class="step-num">03</span>
-                    <h4 class="step-title">Примерка на стене</h4>
-                    <p class="step-desc">Оцениваем масштаб, колорит и освещение в дневных и вечерних сценариях.</p>
+                    <h4 class="step-title">{{ home_config.fitting_step3_title }}</h4>
+                    <p class="step-desc">{{ home_config.fitting_step3_desc }}</p>
                 </div>
                 <div class="fitting-step-item">
                     <span class="step-num">04</span>
-                    <h4 class="step-title">Решение без спешки</h4>
-                    <p class="step-desc">Подошедшие картины остаются у вас. Остальные мы увозим без каких-либо оплат.</p>
+                    <h4 class="step-title">{{ home_config.fitting_step4_title }}</h4>
+                    <p class="step-desc">{{ home_config.fitting_step4_desc }}</p>
                 </div>
             </div>
 
             <div class="fitting-action-row">
                 <button type="button" class="btn btn-primary btn-open-fitting">Записаться на бесплатную примерку</button>
-                <a href="https://t.me/" target="_blank" class="btn btn-secondary">Отправить фото интерьера в Telegram</a>
+                <a href="{{ home_config.telegram_url }}" target="_blank" class="btn btn-secondary">Отправить фото интерьера в Telegram</a>
             </div>
         </div>
     </div>
@@ -513,35 +474,35 @@
     <div class="container">
         <div class="furniture-split-wrap">
             <div class="furniture-content-col">
-                <div class="eyebrow">Сложные интерьерные формы</div>
-                <h2 class="section-title">Кастомные арт-объекты и дизайнерская мебель</h2>
+                <div class="eyebrow">{{ home_config.furniture_eyebrow }}</div>
+                <h2 class="section-title">{{ home_config.furniture_title }}</h2>
                 <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 2rem;">
-                    Помимо стен, мы создаем уникальные штучные предметы интерьера: массивные обеденные столы из монолитного микроцемента, стулья и кресла скульптурных форм, каминные порталы с патиной и латунью, декоративные колонны и арт-перегородки под ключ.
+                    {{ home_config.furniture_desc }}
                 </p>
                 
                 <div class="furniture-features-list">
                     <div class="furn-feat-item">
-                        <div class="furn-feat-title">Монолитные столы из микроцемента и слэбов</div>
-                        <div class="furn-feat-desc">Устойчивые к царапинам, влаге и горячей посуде. Любая геометрия под заказ.</div>
+                        <div class="furn-feat-title">{{ home_config.furniture_item1_title }}</div>
+                        <div class="furn-feat-desc">{{ home_config.furniture_item1_desc }}</div>
                     </div>
                     <div class="furn-feat-item">
-                        <div class="furn-feat-title">Скульптурные стулья и арт-кресла</div>
-                        <div class="furn-feat-desc">Интерьерная пластика с минеральными и бронзовыми эффектами поверхности.</div>
+                        <div class="furn-feat-title">{{ home_config.furniture_item2_title }}</div>
+                        <div class="furn-feat-desc">{{ home_config.furniture_item2_desc }}</div>
                     </div>
                     <div class="furn-feat-item">
-                        <div class="furn-feat-title">Каминные порталы и архитектурные объемы</div>
-                        <div class="furn-feat-desc">Индивидуальное проектирование, патинирование, интеграция подсветки и металла.</div>
+                        <div class="furn-feat-title">{{ home_config.furniture_item3_title }}</div>
+                        <div class="furn-feat-desc">{{ home_config.furniture_item3_desc }}</div>
                     </div>
                 </div>
 
                 <div style="margin-top: 2rem;">
-                    <a href="https://t.me/" target="_blank" class="btn btn-primary">Обсудить изготовление арт-объекта</a>
+                    <a href="{{ home_config.telegram_url }}" target="_blank" class="btn btn-primary">Обсудить изготовление арт-объекта</a>
                 </div>
             </div>
 
             <div class="furniture-image-col">
                 <div class="furniture-img-frame">
-                    <img src="/static/images/art_furniture.jpg" alt="Кастомная арт-мебель из микроцемента и латуни">
+                    <img src="{{ home_config.furniture_img_url }}" alt="{{ home_config.furniture_title }}">
                 </div>
             </div>
         </div>
@@ -560,36 +521,26 @@
         </div>
 
         <div class="partners-grid-cards">
+            {% for partner in partners %}
+            <div class="partner-card">
+                <span class="partner-type">{{ partner.partner_type }}</span>
+                <h4 class="partner-title">{{ partner.name }}</h4>
+                <p class="partner-desc">{{ partner.description }}</p>
+                {% if partner.website_url %}
+                <div style="margin-top: 0.5rem;">
+                    <a href="{{ partner.website_url }}" target="_blank" rel="noopener" style="font-size: 0.78rem; color: var(--accent-bronze); text-decoration: none;">
+                        Перейти к проекту →
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+            {% empty %}
             <div class="partner-card">
                 <span class="partner-type">Архитектурное бюро</span>
                 <h4 class="partner-title">Бюро «Меганом»</h4>
                 <p class="partner-desc">Совместные проекты отделки лобби и частных пентхаусов премиум-класса.</p>
             </div>
-            <div class="partner-card">
-                <span class="partner-type">Архитектура & Город</span>
-                <h4 class="partner-title">WOWHAUS</h4>
-                <p class="partner-desc">Создание авторских фактур общественных и культурных пространств.</p>
-            </div>
-            <div class="partner-card">
-                <span class="partner-type">Девелопер клубных домов</span>
-                <h4 class="partner-title">Sminex</h4>
-                <p class="partner-desc">Отделка представительских входных групп и монументальные рельефы МОП.</p>
-            </div>
-            <div class="partner-card">
-                <span class="partner-type">Премиальный девелопмент</span>
-                <h4 class="partner-title">MR Group</h4>
-                <p class="partner-desc">Комплексный fit-out бизнес-залов, шоу-румов и акцентных арт-стен.</p>
-            </div>
-            <div class="partner-card">
-                <span class="partner-type">Производитель материалов</span>
-                <h4 class="partner-title">Goldshell Paints</h4>
-                <p class="partner-desc">Официальное технологическое партнерство по краскам и микроцементу.</p>
-            </div>
-            <div class="partner-card">
-                <span class="partner-type">Интерьерный дизайн</span>
-                <h4 class="partner-title">Artplay Studio</h4>
-                <p class="partner-desc">Интеграция станковой живописи Александра Попыкина в интерьерные проекты.</p>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </section>
@@ -634,40 +585,40 @@
     <div class="container">
         <div class="atelier-grid">
             <div>
-                <img src="/static/images/art_canvas.jpg" alt="Александр Попыкин в мастерской" style="border-radius: var(--radius-lg); box-shadow: 0 15px 40px rgba(0,0,0,0.08);">
+                <img src="{{ home_config.master_img_url }}" alt="Александр Попыкин в мастерской" style="border-radius: var(--radius-lg); box-shadow: 0 15px 40px rgba(0,0,0,0.08);">
             </div>
             <div>
-                <div class="eyebrow">Мастер и создатель студии</div>
+                <div class="eyebrow">{{ home_config.master_eyebrow }}</div>
                 <h2 class="atelier-artist-title">
-                    Александр Попыкин: Искусство монументальной материи
+                    {{ home_config.master_title }}
                 </h2>
                 <div class="artist-quote">
-                    «Стена в несколько сотен или тысяч метров — это такое же художественное полотно, где плотность зерна, температура света и тактильный рельеф определяют статус всего пространства».
+                    {{ home_config.master_quote }}
                 </div>
                 <p class="atelier-artist-desc">
-                    Начав творческий путь в 1998 году с граффити-райтинга, Александр выработал безупречное чувство масштаба, ритма и пластики. Станковая живопись, эксперименты со скульптурной керамикой и монументальными декоративными покрытиями (с 2011 г.) сформировали неповторимый авторский почерк студии.
+                    {{ home_config.master_desc }}
                 </p>
                 <div class="timeline-roots">
                     <div class="root-item">
-                        <div class="year">1998</div>
-                        <div class="text">Уличные корни, масштаб и пластика</div>
+                        <div class="year">{{ home_config.timeline1_year }}</div>
+                        <div class="text">{{ home_config.timeline1_text }}</div>
                     </div>
                     <div class="root-item">
-                        <div class="year">2005</div>
-                        <div class="text">Станковая живопись и выставки</div>
+                        <div class="year">{{ home_config.timeline2_year }}</div>
+                        <div class="text">{{ home_config.timeline2_text }}</div>
                     </div>
                     <div class="root-item">
-                        <div class="year">2011</div>
-                        <div class="text">Интерьерный декор и архитектурные поверхности</div>
+                        <div class="year">{{ home_config.timeline3_year }}</div>
+                        <div class="text">{{ home_config.timeline3_text }}</div>
                     </div>
                     <div class="root-item">
-                        <div class="year">2026</div>
-                        <div class="text">Собственная лаборатория фактур и ателье</div>
+                        <div class="year">{{ home_config.timeline4_year }}</div>
+                        <div class="text">{{ home_config.timeline4_text }}</div>
                     </div>
                 </div>
                 <div style="margin-top: 2.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
                     <a href="/gallery/" class="btn btn-outline-gold">Смотреть картины в галерее</a>
-                    <a href="https://t.me/" target="_blank" class="btn btn-secondary">Написать Александру в Telegram</a>
+                    <a href="{{ home_config.telegram_url }}" target="_blank" class="btn btn-secondary">Написать Александру в Telegram</a>
                 </div>
             </div>
         </div>
