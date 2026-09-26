@@ -37,7 +37,14 @@ class DecorativeMaterialAdmin(admin.ModelAdmin):
     )
     list_display_links = ('image_preview', 'name')
     list_filter = ('category', 'show_in_calculator', 'is_active')
-    list_editable = ('price_per_sqm', 'badge', 'show_in_calculator', 'is_active', 'order')
+    list_editable = (
+        'price_per_sqm',
+        'speed_sqm_per_day',
+        'badge',
+        'show_in_calculator',
+        'is_active',
+        'order'
+    )
     search_fields = ('name', 'short_desc', 'full_desc', 'composition')
     prepopulated_fields = {'slug': ('name',)}
     readonly_fields = ('display_preview',)
