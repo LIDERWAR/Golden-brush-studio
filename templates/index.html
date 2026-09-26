@@ -151,31 +151,248 @@
                          data-speed="{{ mat.speed_sqm_per_day }}"
                          data-ratio="{{ mat.material_cost_ratio }}"
                          data-desc="{{ mat.short_desc }}">
-                        {% if mat.badge %}
-                        <div class="mat-badge">{{ mat.badge }}</div>
-                        {% endif %}
-                        <h4 class="mat-title">{{ mat.name }}</h4>
-                        <p class="mat-desc">{{ mat.short_desc }}</p>
-                        <div class="mat-price-tag">от {{ mat.formatted_price }} / м² <span class="mat-sub">(работа + материал)</span></div>
-                        <div class="mat-card-footer" style="margin-top: 0.75rem; padding-top: 0.65rem; border-top: 1px dashed rgba(197, 160, 89, 0.25); display: flex; justify-content: space-between; align-items: center;">
-                            <a href="{{ mat.get_absolute_url }}" class="mat-detail-link" onclick="event.stopPropagation();" style="font-size: 0.78rem; color: var(--accent-bronze); text-decoration: none; font-weight: 500;">
-                                Подробнее о материале →
-                            </a>
-                            <span style="font-size: 0.75rem; color: var(--text-muted);">{{ mat.speed_sqm_per_day }} м²/день</span>
+                        
+                        <!-- Genuine Real Material Texture Swatch -->
+                        <div class="mat-texture-bg" style="background-image: url('{{ mat.display_image }}');"></div>
+                        
+                        <!-- Active Indicator -->
+                        <div class="mat-active-indicator">Выбрано</div>
+
+                        <!-- Permanent Base View (Visible over texture with dark gradient scrim) -->
+                        <div class="mat-card-base">
+                            {% if mat.badge %}
+                            <div class="mat-badge">{{ mat.badge }}</div>
+                            {% endif %}
+                            <h4 class="mat-title">{{ mat.name }}</h4>
+                            <div class="mat-price-tag">от {{ mat.formatted_price }} / м² <span class="mat-sub">(работа + материал)</span></div>
+                        </div>
+
+                        <!-- Architectural Hover Overlay ("Что это такое / Описание материала") -->
+                        <div class="mat-hover-overlay">
+                            <div class="mat-hover-top">
+                                <div class="mat-hover-kicker">О материале</div>
+                                <h5 class="mat-hover-title">{{ mat.name }}</h5>
+                                <p class="mat-hover-desc">{{ mat.short_desc }}</p>
+                                
+                                <div class="mat-hover-specs">
+                                    {% if mat.composition %}
+                                    <div class="mat-spec-row">
+                                        <span class="mat-spec-label">Основа:</span>
+                                        <span class="mat-spec-val">{{ mat.composition }}</span>
+                                    </div>
+                                    {% endif %}
+                                    {% if mat.application_areas %}
+                                    <div class="mat-spec-row">
+                                        <span class="mat-spec-label">Применение:</span>
+                                        <span class="mat-spec-val">{{ mat.application_areas }}</span>
+                                    </div>
+                                    {% endif %}
+                                    <div class="mat-spec-row">
+                                        <span class="mat-spec-label">Скорость:</span>
+                                        <span class="mat-spec-val">{{ mat.speed_sqm_per_day }} м²/день</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mat-hover-footer">
+                                <span class="mat-hover-price">от {{ mat.formatted_price }}/м²</span>
+                                <a href="{{ mat.get_absolute_url }}" class="mat-hover-link" onclick="event.stopPropagation();">
+                                    Подробнее о материале →
+                                </a>
+                            </div>
                         </div>
                     </div>
                     {% empty %}
+                    <!-- 1. Mineral Plaster -->
                     <div class="material-card active" 
                          data-id="plaster" 
-                         data-name="Фактурная минеральная штукатурка" 
+                         data-name="Минеральная фактурная штукатурка" 
                          data-price-sqm="4200" 
                          data-speed="25"
                          data-ratio="0.35"
-                         data-desc="Травертин, Марморино, скальные сколы и песчаные фактуры. Природные минеральные компоненты.">
-                        <div class="mat-badge">Популярный выбор</div>
-                        <h4 class="mat-title">Минеральная фактурная штукатурка</h4>
-                        <p class="mat-desc">Травертин, марморино, скальный срез, архитектурный бетон. Моющаяся, дышащая основа.</p>
-                        <div class="mat-price-tag">от 4 200 ₽ / м² <span class="mat-sub">(работа + материал)</span></div>
+                         data-desc="Травертин, марморино, скальный срез, архитектурный бетон. Моющаяся, дышащая основа.">
+                        <div class="mat-texture-bg" style="background-image: url('/static/images/mat_mineral_plaster.jpg');"></div>
+                        <div class="mat-active-indicator">Выбрано</div>
+                        <div class="mat-card-base">
+                            <div class="mat-badge">Популярный выбор</div>
+                            <h4 class="mat-title">Минеральная фактурная штукатурка</h4>
+                            <div class="mat-price-tag">от 4 200 ₽ / м² <span class="mat-sub">(работа + материал)</span></div>
+                        </div>
+                        <div class="mat-hover-overlay">
+                            <div class="mat-hover-top">
+                                <div class="mat-hover-kicker">О материале</div>
+                                <h5 class="mat-hover-title">Минеральная фактурная штукатурка</h5>
+                                <p class="mat-hover-desc">Травертин, марморино, скальный срез, архитектурный бетон. Экологичная моющаяся известковая основа.</p>
+                                <div class="mat-hover-specs">
+                                    <div class="mat-spec-row"><span class="mat-spec-label">Основа:</span><span class="mat-spec-val">Гидравлическая известь, мраморная мука</span></div>
+                                    <div class="mat-spec-row"><span class="mat-spec-label">Применение:</span><span class="mat-spec-val">Гостиные, холлы, спальни, офисы</span></div>
+                                </div>
+                            </div>
+                            <div class="mat-hover-footer">
+                                <span class="mat-hover-price">от 4 200 ₽/м²</span>
+                                <a href="/materials/plaster/" class="mat-hover-link" onclick="event.stopPropagation();">Подробнее о материале →</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. Microcement -->
+                    <div class="material-card" 
+                         data-id="microcement" 
+                         data-name="Архитектурный микроцемент" 
+                         data-price-sqm="4800" 
+                         data-speed="20"
+                         data-ratio="0.38"
+                         data-desc="Бесшовный монолит для санузлов, ванных комнат, полов и монолитных плоскостей без стыков.">
+                        <div class="mat-texture-bg" style="background-image: url('/static/images/mat_microcement.jpg');"></div>
+                        <div class="mat-active-indicator">Выбрано</div>
+                        <div class="mat-card-base">
+                            <div class="mat-badge">Влагостойкий</div>
+                            <h4 class="mat-title">Архитектурный микроцемент</h4>
+                            <div class="mat-price-tag">от 4 800 ₽ / м² <span class="mat-sub">(работа + материал)</span></div>
+                        </div>
+                        <div class="mat-hover-overlay">
+                            <div class="mat-hover-top">
+                                <div class="mat-hover-kicker">О материале</div>
+                                <h5 class="mat-hover-title">Архитектурный микроцемент</h5>
+                                <p class="mat-hover-desc">Бесшовный сверхпрочный монолит толщиной 2-3 мм для санузлов, ванных, полов и лестниц. Нулевое водопоглощение.</p>
+                                <div class="mat-hover-specs">
+                                    <div class="mat-spec-row"><span class="mat-spec-label">Основа:</span><span class="mat-spec-val">Полимер-микроцемент, защитный PU-лак</span></div>
+                                    <div class="mat-spec-row"><span class="mat-spec-label">Применение:</span><span class="mat-spec-val">Ванные комнаты, полы, столешницы</span></div>
+                                </div>
+                            </div>
+                            <div class="mat-hover-footer">
+                                <span class="mat-hover-price">от 4 800 ₽/м²</span>
+                                <a href="/materials/microcement/" class="mat-hover-link" onclick="event.stopPropagation();">Подробнее о материале →</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Mural -->
+                    <div class="material-card" 
+                         data-id="mural" 
+                         data-name="Художественная роспись & Фрески" 
+                         data-price-sqm="7500" 
+                         data-speed="10"
+                         data-ratio="0.25"
+                         data-desc="Ручная авторская роспись, панорамные фрески, графика и барельефы по эскизам Александра Попыкина.">
+                        <div class="mat-texture-bg" style="background-image: url('/static/images/mat_mural.jpg');"></div>
+                        <div class="mat-active-indicator">Выбрано</div>
+                        <div class="mat-card-base">
+                            <div class="mat-badge">Авторский арт</div>
+                            <h4 class="mat-title">Художественная роспись & Фрески</h4>
+                            <div class="mat-price-tag">от 7 500 ₽ / м² <span class="mat-sub">(ручная роспись)</span></div>
+                        </div>
+                        <div class="mat-hover-overlay">
+                            <div class="mat-hover-top">
+                                <div class="mat-hover-kicker">О материале</div>
+                                <h5 class="mat-hover-title">Художественная роспись & Фрески</h5>
+                                <p class="mat-hover-desc">Монументальная живопись и фрески по сырой штукатурке. Персональная разработка эскизов Александром Попыкиным.</p>
+                                <div class="mat-hover-specs">
+                                    <div class="mat-spec-row"><span class="mat-spec-label">Основа:</span><span class="mat-spec-val">Минеральные пигменты, силикаты, воск</span></div>
+                                    <div class="mat-spec-row"><span class="mat-spec-label">Применение:</span><span class="mat-spec-val">Акцентные стены, атриумы, холлы отелей</span></div>
+                                </div>
+                            </div>
+                            <div class="mat-hover-footer">
+                                <span class="mat-hover-price">от 7 500 ₽/м²</span>
+                                <a href="/materials/mural/" class="mat-hover-link" onclick="event.stopPropagation();">Подробнее о материале →</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. Gold Leaf -->
+                    <div class="material-card" 
+                         data-id="gold" 
+                         data-name="Золочение, металл & Патина" 
+                         data-price-sqm="6200" 
+                         data-speed="15"
+                         data-ratio="0.40"
+                         data-desc="Сусальное золото, поталь, окисленная медь, латунь и благородная патина на рельефах и деталях.">
+                        <div class="mat-texture-bg" style="background-image: url('/static/images/mat_gold.jpg');"></div>
+                        <div class="mat-active-indicator">Выбрано</div>
+                        <div class="mat-card-base">
+                            <div class="mat-badge">Премиум-металл</div>
+                            <h4 class="mat-title">Золочение, металл & Патина</h4>
+                            <div class="mat-price-tag">от 6 200 ₽ / м² <span class="mat-sub">(работа + материал)</span></div>
+                        </div>
+                        <div class="mat-hover-overlay">
+                            <div class="mat-hover-top">
+                                <div class="mat-hover-kicker">О материале</div>
+                                <h5 class="mat-hover-title">Золочение, металл & Патина</h5>
+                                <p class="mat-hover-desc">Нанесение сусального золота, потали, жидких металлов (латунь, бронза) и химическое оксидирование с благородной патиной.</p>
+                                <div class="mat-hover-specs">
+                                    <div class="mat-spec-row"><span class="mat-spec-label">Основа:</span><span class="mat-spec-val">Сусальное золото, поталь, микрометаллы</span></div>
+                                    <div class="mat-spec-row"><span class="mat-spec-label">Применение:</span><span class="mat-spec-val">Камины, карнизы, колонны, лепнина</span></div>
+                                </div>
+                            </div>
+                            <div class="mat-hover-footer">
+                                <span class="mat-hover-price">от 6 200 ₽/м²</span>
+                                <a href="/materials/gold/" class="mat-hover-link" onclick="event.stopPropagation();">Подробнее о материале →</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5. Bas-relief -->
+                    <div class="material-card" 
+                         data-id="basrelief" 
+                         data-name="Барельефы & 3D-панно" 
+                         data-price-sqm="8500" 
+                         data-speed="8"
+                         data-ratio="0.30"
+                         data-desc="Ручная объемная лепка, скальные рельефы, гроты и архитектурная пластика стен по эскизам автора.">
+                        <div class="mat-texture-bg" style="background-image: url('/static/images/mat_basrelief.jpg');"></div>
+                        <div class="mat-active-indicator">Выбрано</div>
+                        <div class="mat-card-base">
+                            <div class="mat-badge">Скульптурный рельеф</div>
+                            <h4 class="mat-title">Барельефы & 3D-панно</h4>
+                            <div class="mat-price-tag">от 8 500 ₽ / м² <span class="mat-sub">(ручная лепка)</span></div>
+                        </div>
+                        <div class="mat-hover-overlay">
+                            <div class="mat-hover-top">
+                                <div class="mat-hover-kicker">О материале</div>
+                                <h5 class="mat-hover-title">Барельефы & 3D-панно</h5>
+                                <p class="mat-hover-desc">Уникальная ручная объемная пластика стен: струящиеся волны, скальные срезы, гроты из высокопрочного скульптурного гипса.</p>
+                                <div class="mat-hover-specs">
+                                    <div class="mat-spec-row"><span class="mat-spec-label">Основа:</span><span class="mat-spec-val">Высокопрочный гипс, фиброволокно</span></div>
+                                    <div class="mat-spec-row"><span class="mat-spec-label">Применение:</span><span class="mat-spec-val">Входные группы, гостиные, зоны ресепшн</span></div>
+                                </div>
+                            </div>
+                            <div class="mat-hover-footer">
+                                <span class="mat-hover-price">от 8 500 ₽/м²</span>
+                                <a href="/materials/basrelief/" class="mat-hover-link" onclick="event.stopPropagation();">Подробнее о материале →</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 6. Venetian & Onyx -->
+                    <div class="material-card" 
+                         data-id="venetian" 
+                         data-name="Венецианская штукатурка & Оникс" 
+                         data-price-sqm="5200" 
+                         data-speed="18"
+                         data-ratio="0.35"
+                         data-desc="Классическое зеркальное покрытие с эффектом глубины натурального камня и восковой полировкой.">
+                        <div class="mat-texture-bg" style="background-image: url('/static/images/mat_venetian.jpg');"></div>
+                        <div class="mat-active-indicator">Выбрано</div>
+                        <div class="mat-card-base">
+                            <div class="mat-badge">Полированный мрамор</div>
+                            <h4 class="mat-title">Венецианская штукатурка & Оникс</h4>
+                            <div class="mat-price-tag">от 5 200 ₽ / м² <span class="mat-sub">(работа + материал)</span></div>
+                        </div>
+                        <div class="mat-hover-overlay">
+                            <div class="mat-hover-top">
+                                <div class="mat-hover-kicker">О материале</div>
+                                <h5 class="mat-hover-title">Венецианская штукатурка & Оникс</h5>
+                                <p class="mat-hover-desc">Классическая итальянская техника тончайших слоев мраморной пыли с полировкой кельмой и пчелиным воском. Оптическая глубина.</p>
+                                <div class="mat-hover-specs">
+                                    <div class="mat-spec-row"><span class="mat-spec-label">Основа:</span><span class="mat-spec-val">Микронизированный мрамор, натуральный воск</span></div>
+                                    <div class="mat-spec-row"><span class="mat-spec-label">Применение:</span><span class="mat-spec-val">Колонны, залы, спальни, ванные комнаты</span></div>
+                                </div>
+                            </div>
+                            <div class="mat-hover-footer">
+                                <span class="mat-hover-price">от 5 200 ₽/м²</span>
+                                <a href="/materials/venetian/" class="mat-hover-link" onclick="event.stopPropagation();">Подробнее о материале →</a>
+                            </div>
+                        </div>
                     </div>
                     {% endfor %}
                 </div>
