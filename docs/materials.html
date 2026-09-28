@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="1QJCAlhKFnQQlUgFSSoxKczVdUPYqBovlPOwM2kesHbcCVt38IOikP6Yo3f8s0wT">
+    <meta name="csrf-token" content="GM8BWMVvsf1ulVf3PwuIE3NGtnawuBuPZNOhaPpjBqAup8pmxg2wl7NxxyU47rgx">
     <title>Каталог декоративных покрытий и расчет сметы — Golden Brush Studio</title>
     <meta name="description" content="Полный каталог авторских минеральных покрытий Golden Brush Studio: рельефные штукатурки, бесшовный микроцемент, фрески, барельефы. Онлайн-калькулятор стоимости по площади стен.">
     
     <!-- Design System CSS -->
-    <link rel="stylesheet" href="static/css/style.css?v=20260928-v10">
+    <link rel="stylesheet" href="static/css/style.css?v=20260928-v11">
     
     <!-- Favicon Suite: Architectural Luxury GB Monogram -->
     <link rel="icon" type="image/svg+xml" href="static/images/favicon.svg">
@@ -196,7 +196,6 @@
             </nav>
 
             <div class="header-actions">
-                <button type="button" class="btn btn-gold-header btn-open-contact" id="headerContactBtn">Связаться с нами</button>
                 <button class="burger-btn" id="burgerBtn" aria-label="Открыть навигационное меню" onclick="window.toggleMobileDrawer(event)">
                     <span class="burger-lines">
                         <span class="line line-1"></span>
@@ -1124,7 +1123,32 @@
         </div>
     </div>
 
+    <!-- Floating Quick Communication Widget ("Связаться с нами") -->
+    <div class="floating-quick-contact" id="floatingQuickContact">
+        <div class="floating-contact-menu" id="floatingContactMenu">
+            <button type="button" class="contact-bubble-item btn-open-contact">
+                <i class="fas fa-envelope"></i> <span>Оставить заявку</span>
+            </button>
+            <a href="https://t.me/gbstudio" target="_blank" rel="noopener" class="contact-bubble-item tg">
+                <i class="fab fa-telegram"></i> <span>Telegram мастера</span>
+            </a>
+            <a href="https://wa.me/74958904422" target="_blank" rel="noopener" class="contact-bubble-item wa">
+                <i class="fab fa-whatsapp"></i> <span>WhatsApp студии</span>
+            </a>
+            <a href="tel:+7 (495) 890-44-22" class="contact-bubble-item tel">
+                <i class="fas fa-phone-alt"></i> <span>+7 (495) 890-44-22</span>
+            </a>
+            <button type="button" class="contact-bubble-item fitting btn-open-fitting">
+                <i class="fas fa-palette"></i> <span>Примерка картин</span>
+            </button>
+        </div>
+        <button class="floating-toggle-btn" id="floatingToggleBtn" aria-label="Связаться с нами">
+            <i class="fas fa-comment-dots"></i>
+            <span class="floating-badge-text">Связаться с нами</span>
+        </button>
+    </div>
+
     <!-- Main JavaScript -->
-    <script src="static/js/main.js?v=20260928-v8"></script>
+    <script src="static/js/main.js?v=20260928-v9"></script>
 </body>
 </html>

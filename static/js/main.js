@@ -889,6 +889,12 @@ function initFloatingQuickContact() {
             menu.classList.remove('open');
         }
     });
+
+    menu.querySelectorAll('.contact-bubble-item').forEach(item => {
+        item.addEventListener('click', () => {
+            menu.classList.remove('open');
+        });
+    });
 }
 
 // 10. Atelier Video Reel Modal
