@@ -403,7 +403,7 @@ print("Partners seeded successfully")
 
 # 11. Home Page Config Seed
 cfg = HomePageConfig.get_solo()
-cfg.hero_eyebrow = 'Golden brush Studio'
+cfg.hero_eyebrow = 'Golden Brush Studio'
 cfg.hero_title = 'Художественно-декоративные работы под ключ'
 cfg.hero_bg_image_url = '/static/images/fresco_texture.jpg'
 cfg.portal1_title = 'Наши проекты'
@@ -415,7 +415,7 @@ cfg.portal2_img_url = '/static/images/restoration_craft.jpg'
 cfg.portal3_title = 'Галерея'
 cfg.portal3_link = '/gallery/'
 cfg.portal3_img_url = '/static/images/art_canvas.jpg'
-cfg.process_badge = 'Мастерская Golden brush Studio'
+cfg.process_badge = 'Мастерская Golden Brush Studio'
 cfg.process_eyebrow = 'Процесс создания'
 cfg.process_title = 'Магия ручной работы и минеральных текстур'
 cfg.metric1_val = '15+'
@@ -435,6 +435,6 @@ cfg.contact_address = 'Москва, Центр дизайна ARTPLAY / Мас�
 cfg.telegram_url = 'https://t.me/gbstudio'
 cfg.whatsapp_url = 'https://wa.me/74958904422'
 cfg.save()
-print("HomePageConfig initialized with Golden brush Studio defaults successfully")
+print("HomePageConfig initialized with Golden Brush Studio defaults successfully")
 
 print("All seed data created successfully!")

@@ -972,7 +972,7 @@ function initGeneralContactModal() {
             name: name,
             phone: phone,
             object_type: interest,
-            message: `Запрос с сайта (Golden brush Studio): ${interest}. ${message}`.trim(),
+            message: `Запрос с сайта (Golden Brush Studio): ${interest}. ${message}`.trim(),
             source: 'contact_modal'
         };
 

@@ -20,14 +20,14 @@ class Partner(models.Model):
 class HomePageConfig(models.Model):
     """
     Единая панель управления текстовым и визуальным контентом главной страницы
-    и общими настройками студии Golden brush Studio.
+    и общими настройками студии Golden Brush Studio.
     Singleton-модель: в базе хранится 1 запись.
     """
     # 1. Hero-блок и 3 Портала
     hero_eyebrow = models.CharField(
         'Hero: Надстрочник',
         max_length=200,
-        default='Golden brush Studio'
+        default='Golden Brush Studio'
     )
     hero_title = models.CharField(
         'Hero: Главный заголовок',
@@ -53,7 +53,7 @@ class HomePageConfig(models.Model):
     portal3_img_url = models.CharField('Портал 3: Фото', max_length=255, default='/static/images/art_canvas.jpg')
 
     # 2. Процесс мастерской (Reel & Метрики)
-    process_badge = models.CharField('Процесс: Подпись на бейдже', max_length=150, default='Мастерская Golden brush Studio')
+    process_badge = models.CharField('Процесс: Подпись на бейдже', max_length=150, default='Мастерская Golden Brush Studio')
     process_eyebrow = models.CharField('Процесс: Надстрочник', max_length=200, default='Процесс создания')
     process_title = models.CharField('Процесс: Заголовок', max_length=200, default='Магия ручной работы и минеральных текстур')
     process_video_url = models.CharField('Процесс: Видео (URL ролика или mp4)', max_length=255, blank=True, default='')
@@ -88,7 +88,7 @@ class HomePageConfig(models.Model):
         verbose_name_plural = 'Главная страница & Настройки'
 
     def __str__(self):
-        return f"Golden brush Studio — Тексты и настройки (обновлено {self.updated_at.strftime('%d.%m.%Y')})"
+        return f"Golden Brush Studio — Тексты и настройки (обновлено {self.updated_at.strftime('%d.%m.%Y')})"
 
     @classmethod
     def get_solo(cls):
