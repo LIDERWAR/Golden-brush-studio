@@ -1,91 +1,63 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<!-- 1. HERO SECTION: THREE GRAND PORTALS (DAWALLS MINIMALIST AESTHETIC) -->
+<!-- 1. HERO SECTION: THREE GRAND PORTALS (ARCHITECTURAL MINIMALISM) -->
 <section class="hero-atelier" id="home">
-    <div class="hero-atelier-bg" style="background-image: url('{{ home_config.hero_bg_image_url }}');"></div>
+    <div class="hero-atelier-bg" style="background-image: url('{{ home_config.hero_bg_image_url|default:'/static/images/fresco_texture.jpg' }}');"></div>
     <div class="hero-atelier-overlay"></div>
 
     <div class="container hero-atelier-container">
-        <!-- Top Slogan & Headline Split Row -->
+        <!-- Headline -->
         <div class="hero-composition">
             <div class="hero-header-top">
                 <div class="hero-title-area">
-                    <div class="eyebrow">{{ home_config.hero_eyebrow }}</div>
+                    <div class="eyebrow">{{ home_config.hero_eyebrow|default:'Golden brush Studio' }}</div>
                     <h1 class="hero-atelier-title">
-                        <span class="title-line-main">{{ home_config.hero_title_main }}</span>
-                        <span class="accent title-line-sub">{{ home_config.hero_title_sub }}</span>
+                        {{ home_config.hero_title|default:'Художественно-декоративные работы под ключ' }}
                     </h1>
                 </div>
-                <div class="hero-desc-area">
-                    <p class="hero-atelier-desc">
-                        {{ home_config.hero_desc }}
-                    </p>
-                </div>
-            </div>
-
-            <!-- CTA Buttons in a Clean Horizontal Row Across the Bottom of the Header Composition -->
-            <div class="hero-cta-bar">
-                <a href="#calculator" class="btn btn-primary">Рассчитать стоимость по площади стен</a>
-                <button type="button" class="btn btn-secondary btn-open-fitting">Бесплатная примерка картин</button>
-                <button type="button" class="btn btn-outline-gold btn-open-samplebox">Заказать Sample Box выкрасов</button>
             </div>
         </div>
 
         <!-- The 3 Grand Windows (Portals) -->
         <div class="portals-grid">
-            <!-- Window 1: Decorative Works -->
-            <a href="{{ home_config.portal1_link }}" class="portal-card">
+            <!-- Window 1: Наши проекты -->
+            <a href="{{ home_config.portal1_link|default:'/projects/' }}" class="portal-card">
                 <div class="portal-img-wrap">
-                    <img src="{{ home_config.portal1_img_url }}" alt="{{ home_config.portal1_title }}">
+                    <img src="{{ home_config.portal1_img_url|default:'/static/images/hero.jpg' }}" alt="{{ home_config.portal1_title|default:'Наши проекты' }}">
                     <div class="portal-glass-overlay"></div>
                 </div>
                 <div class="portal-content">
-                    <span class="portal-num">{{ home_config.portal1_num }}</span>
-                    <h3 class="portal-title">{{ home_config.portal1_title }}</h3>
-                    <p class="portal-desc">{{ home_config.portal1_desc }}</p>
-                    <div class="portal-action">
-                        <span class="portal-link-text">{{ home_config.portal1_link_text }}</span>
-                    </div>
+                    <h3 class="portal-title">{{ home_config.portal1_title|default:'Наши проекты' }}</h3>
                 </div>
             </a>
 
-            <!-- Window 2: Restoration -->
-            <a href="{{ home_config.portal2_link }}" class="portal-card">
+            <!-- Window 2: Реставрация -->
+            <a href="{{ home_config.portal2_link|default:'#restoration' }}" class="portal-card">
                 <div class="portal-img-wrap">
-                    <img src="{{ home_config.portal2_img_url }}" alt="{{ home_config.portal2_title }}">
+                    <img src="{{ home_config.portal2_img_url|default:'/static/images/restoration_craft.jpg' }}" alt="{{ home_config.portal2_title|default:'Реставрация' }}">
                     <div class="portal-glass-overlay"></div>
                 </div>
                 <div class="portal-content">
-                    <span class="portal-num">{{ home_config.portal2_num }}</span>
-                    <h3 class="portal-title">{{ home_config.portal2_title }}</h3>
-                    <p class="portal-desc">{{ home_config.portal2_desc }}</p>
-                    <div class="portal-action">
-                        <span class="portal-link-text">{{ home_config.portal2_link_text }}</span>
-                    </div>
+                    <h3 class="portal-title">{{ home_config.portal2_title|default:'Реставрация' }}</h3>
                 </div>
             </a>
 
-            <!-- Window 3: Art Gallery & Fitting -->
-            <a href="{{ home_config.portal3_link }}" class="portal-card">
+            <!-- Window 3: Галерея -->
+            <a href="{{ home_config.portal3_link|default:'/gallery/' }}" class="portal-card">
                 <div class="portal-img-wrap">
-                    <img src="{{ home_config.portal3_img_url }}" alt="{{ home_config.portal3_title }}">
+                    <img src="{{ home_config.portal3_img_url|default:'/static/images/art_canvas.jpg' }}" alt="{{ home_config.portal3_title|default:'Галерея' }}">
                     <div class="portal-glass-overlay"></div>
                 </div>
                 <div class="portal-content">
-                    <span class="portal-num">{{ home_config.portal3_num }}</span>
-                    <h3 class="portal-title">{{ home_config.portal3_title }}</h3>
-                    <p class="portal-desc">{{ home_config.portal3_desc }}</p>
-                    <div class="portal-action">
-                        <span class="portal-link-text">{{ home_config.portal3_link_text }}</span>
-                    </div>
+                    <h3 class="portal-title">{{ home_config.portal3_title|default:'Галерея' }}</h3>
                 </div>
             </a>
         </div>
     </div>
 </section>
 
-<!-- 2. VIDEO REEL: ATELIER WORKSHOP PROCESS -->
+<!-- 2. VIDEO REEL: WORKSHOP PROCESS -->
 <section class="atelier-process-section" id="process">
     <div class="container">
         <div class="process-card-wrap">
@@ -95,27 +67,25 @@
                     <i class="fas fa-play"></i>
                 </button>
                 <div class="video-caption-chip">
-                    <span>{{ home_config.process_badge }}</span>
+                    <span>{{ home_config.process_badge|default:'Мастерская Golden brush Studio' }}</span>
                 </div>
             </div>
             <div class="process-text-col">
-                <div class="eyebrow">{{ home_config.process_eyebrow }}</div>
-                <h2 class="section-title" style="margin-bottom: 1.25rem;">{{ home_config.process_title }}</h2>
-                <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 2rem;">
-                    {{ home_config.process_desc }}
-                </p>
+                <div class="eyebrow">{{ home_config.process_eyebrow|default:'Процесс создания' }}</div>
+                <h2 class="section-title" style="margin-bottom: 1.5rem;">{{ home_config.process_title|default:'Магия ручной работы и минеральных текстур' }}</h2>
+                
                 <div class="process-metrics-grid">
                     <div class="metric-item">
-                        <div class="metric-val">{{ home_config.metric1_val }}</div>
-                        <div class="metric-label">{{ home_config.metric1_lbl }}</div>
+                        <div class="metric-val">{{ home_config.metric1_val|default:'15+' }}</div>
+                        <div class="metric-label">{{ home_config.metric1_lbl|default:'лет практики в декоре и росписи' }}</div>
                     </div>
                     <div class="metric-item">
-                        <div class="metric-val">{{ home_config.metric2_val }}</div>
-                        <div class="metric-label">{{ home_config.metric2_lbl }}</div>
+                        <div class="metric-val">{{ home_config.metric2_val|default:'200+' }}</div>
+                        <div class="metric-label">{{ home_config.metric2_lbl|default:'авторских рецептур штукатурки' }}</div>
                     </div>
                     <div class="metric-item">
-                        <div class="metric-val">{{ home_config.metric3_val }}</div>
-                        <div class="metric-label">{{ home_config.metric3_lbl }}</div>
+                        <div class="metric-val">{{ home_config.metric3_val|default:'100%' }}</div>
+                        <div class="metric-label">{{ home_config.metric3_lbl|default:'ручное нанесение мастерами' }}</div>
                     </div>
                 </div>
             </div>
@@ -123,617 +93,36 @@
     </div>
 </section>
 
-<!-- 3. SURFACES CATALOG & LIVE WALL CALCULATOR (GOLDSHELL PAINTS STYLE) -->
-<section class="calculator-catalog-section" id="calculator">
+<!-- 3. RESTORATION PREVIEW (Anchor #restoration) -->
+<section class="restoration-preview-section" id="restoration">
     <div class="container">
-        <div class="section-header" style="text-align: center; max-width: 820px; margin: 0 auto 3rem;">
-            <div class="eyebrow">{{ home_config.calc_eyebrow }}</div>
-            <h2 class="section-title">{{ home_config.calc_title }}</h2>
-            <p class="section-desc" style="margin: 0.75rem auto 0;">
-                {{ home_config.calc_desc }}
-            </p>
-            <div style="margin-top: 1.25rem;">
-                <a href="{% url 'materials:list' %}" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.6rem 1.5rem;">
-                    Смотреть полный каталог покрытий с технологией нанесения →
-                </a>
-            </div>
-        </div>
-
-        <div class="calc-catalog-wrapper" id="decor">
-            <!-- Left: Material Selector Cards -->
-            <div class="calc-materials-col">
-                <div class="materials-grid" id="materialsGrid">
-                    {% for mat in materials %}
-                    <div class="material-card {% if forloop.first %}active{% endif %}" 
-                         data-id="{{ mat.slug }}" 
-                         data-name="{{ mat.name }}" 
-                         data-price-sqm="{{ mat.price_per_sqm }}" 
-                         data-speed="{{ mat.speed_sqm_per_day }}"
-                         data-ratio="{{ mat.material_cost_ratio }}"
-                         data-desc="{{ mat.short_desc }}">
-                        
-                        <!-- Genuine Real Material Texture Swatch -->
-                        <div class="mat-texture-bg" style="background-image: url('{{ mat.display_image }}');"></div>
-                        
-                        <!-- Active Indicator -->
-                        <div class="mat-active-indicator">Выбрано</div>
-
-                        <!-- Permanent Base View (Visible over texture with dark gradient scrim) -->
-                        <div class="mat-card-base">
-                            {% if mat.badge %}
-                            <div class="mat-badge">{{ mat.badge }}</div>
-                            {% endif %}
-                            <h4 class="mat-title">{{ mat.name }}</h4>
-                            <div class="mat-price-tag">от {{ mat.formatted_price }} / м² <span class="mat-sub">(работа + материал)</span></div>
-                        </div>
-
-                        <!-- Architectural Hover Overlay ("Что это такое / Описание материала") -->
-                        <div class="mat-hover-overlay">
-                            <div class="mat-hover-top">
-                                <div class="mat-hover-kicker">О материале</div>
-                                <h5 class="mat-hover-title">{{ mat.name }}</h5>
-                                <p class="mat-hover-desc">{{ mat.short_desc }}</p>
-                                
-                                <div class="mat-hover-specs">
-                                    {% if mat.composition %}
-                                    <div class="mat-spec-row">
-                                        <span class="mat-spec-label">Основа:</span>
-                                        <span class="mat-spec-val">{{ mat.composition }}</span>
-                                    </div>
-                                    {% endif %}
-                                    {% if mat.application_areas %}
-                                    <div class="mat-spec-row">
-                                        <span class="mat-spec-label">Применение:</span>
-                                        <span class="mat-spec-val">{{ mat.application_areas }}</span>
-                                    </div>
-                                    {% endif %}
-                                    <div class="mat-spec-row">
-                                        <span class="mat-spec-label">Скорость:</span>
-                                        <span class="mat-spec-val">{{ mat.speed_sqm_per_day }} м²/день</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="mat-hover-footer">
-                                <span class="mat-hover-price">от {{ mat.formatted_price }}/м²</span>
-                                <a href="{{ mat.get_absolute_url }}" class="mat-hover-link" onclick="event.stopPropagation();">
-                                    Подробнее о материале →
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    {% empty %}
-                    <!-- 1. Mineral Plaster -->
-                    <div class="material-card active" 
-                         data-id="plaster" 
-                         data-name="Минеральная фактурная штукатурка" 
-                         data-price-sqm="4200" 
-                         data-speed="25"
-                         data-ratio="0.35"
-                         data-desc="Травертин, марморино, скальный срез, архитектурный бетон. Моющаяся, дышащая основа.">
-                        <div class="mat-texture-bg" style="background-image: url('/static/images/mat_mineral_plaster.jpg');"></div>
-                        <div class="mat-active-indicator">Выбрано</div>
-                        <div class="mat-card-base">
-                            <div class="mat-badge">Популярный выбор</div>
-                            <h4 class="mat-title">Минеральная фактурная штукатурка</h4>
-                            <div class="mat-price-tag">от 4 200 ₽ / м² <span class="mat-sub">(работа + материал)</span></div>
-                        </div>
-                        <div class="mat-hover-overlay">
-                            <div class="mat-hover-top">
-                                <div class="mat-hover-kicker">О материале</div>
-                                <h5 class="mat-hover-title">Минеральная фактурная штукатурка</h5>
-                                <p class="mat-hover-desc">Травертин, марморино, скальный срез, архитектурный бетон. Экологичная моющаяся известковая основа.</p>
-                                <div class="mat-hover-specs">
-                                    <div class="mat-spec-row"><span class="mat-spec-label">Основа:</span><span class="mat-spec-val">Гидравлическая известь, мраморная мука</span></div>
-                                    <div class="mat-spec-row"><span class="mat-spec-label">Применение:</span><span class="mat-spec-val">Гостиные, холлы, спальни, офисы</span></div>
-                                </div>
-                            </div>
-                            <div class="mat-hover-footer">
-                                <span class="mat-hover-price">от 4 200 ₽/м²</span>
-                                <a href="/materials/plaster/" class="mat-hover-link" onclick="event.stopPropagation();">Подробнее о материале →</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 2. Microcement -->
-                    <div class="material-card" 
-                         data-id="microcement" 
-                         data-name="Архитектурный микроцемент" 
-                         data-price-sqm="4800" 
-                         data-speed="20"
-                         data-ratio="0.38"
-                         data-desc="Бесшовный монолит для санузлов, ванных комнат, полов и монолитных плоскостей без стыков.">
-                        <div class="mat-texture-bg" style="background-image: url('/static/images/mat_microcement.jpg');"></div>
-                        <div class="mat-active-indicator">Выбрано</div>
-                        <div class="mat-card-base">
-                            <div class="mat-badge">Влагостойкий</div>
-                            <h4 class="mat-title">Архитектурный микроцемент</h4>
-                            <div class="mat-price-tag">от 4 800 ₽ / м² <span class="mat-sub">(работа + материал)</span></div>
-                        </div>
-                        <div class="mat-hover-overlay">
-                            <div class="mat-hover-top">
-                                <div class="mat-hover-kicker">О материале</div>
-                                <h5 class="mat-hover-title">Архитектурный микроцемент</h5>
-                                <p class="mat-hover-desc">Бесшовный сверхпрочный монолит толщиной 2-3 мм для санузлов, ванных, полов и лестниц. Нулевое водопоглощение.</p>
-                                <div class="mat-hover-specs">
-                                    <div class="mat-spec-row"><span class="mat-spec-label">Основа:</span><span class="mat-spec-val">Полимер-микроцемент, защитный PU-лак</span></div>
-                                    <div class="mat-spec-row"><span class="mat-spec-label">Применение:</span><span class="mat-spec-val">Ванные комнаты, полы, столешницы</span></div>
-                                </div>
-                            </div>
-                            <div class="mat-hover-footer">
-                                <span class="mat-hover-price">от 4 800 ₽/м²</span>
-                                <a href="/materials/microcement/" class="mat-hover-link" onclick="event.stopPropagation();">Подробнее о материале →</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 3. Mural -->
-                    <div class="material-card" 
-                         data-id="mural" 
-                         data-name="Художественная роспись & Фрески" 
-                         data-price-sqm="7500" 
-                         data-speed="10"
-                         data-ratio="0.25"
-                         data-desc="Ручная авторская роспись, панорамные фрески, графика и барельефы по эскизам Александра Попыкина.">
-                        <div class="mat-texture-bg" style="background-image: url('/static/images/mat_mural.jpg');"></div>
-                        <div class="mat-active-indicator">Выбрано</div>
-                        <div class="mat-card-base">
-                            <div class="mat-badge">Авторский арт</div>
-                            <h4 class="mat-title">Художественная роспись & Фрески</h4>
-                            <div class="mat-price-tag">от 7 500 ₽ / м² <span class="mat-sub">(ручная роспись)</span></div>
-                        </div>
-                        <div class="mat-hover-overlay">
-                            <div class="mat-hover-top">
-                                <div class="mat-hover-kicker">О материале</div>
-                                <h5 class="mat-hover-title">Художественная роспись & Фрески</h5>
-                                <p class="mat-hover-desc">Монументальная живопись и фрески по сырой штукатурке. Персональная разработка эскизов Александром Попыкиным.</p>
-                                <div class="mat-hover-specs">
-                                    <div class="mat-spec-row"><span class="mat-spec-label">Основа:</span><span class="mat-spec-val">Минеральные пигменты, силикаты, воск</span></div>
-                                    <div class="mat-spec-row"><span class="mat-spec-label">Применение:</span><span class="mat-spec-val">Акцентные стены, атриумы, холлы отелей</span></div>
-                                </div>
-                            </div>
-                            <div class="mat-hover-footer">
-                                <span class="mat-hover-price">от 7 500 ₽/м²</span>
-                                <a href="/materials/mural/" class="mat-hover-link" onclick="event.stopPropagation();">Подробнее о материале →</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 4. Gold Leaf -->
-                    <div class="material-card" 
-                         data-id="gold" 
-                         data-name="Золочение, металл & Патина" 
-                         data-price-sqm="6200" 
-                         data-speed="15"
-                         data-ratio="0.40"
-                         data-desc="Сусальное золото, поталь, окисленная медь, латунь и благородная патина на рельефах и деталях.">
-                        <div class="mat-texture-bg" style="background-image: url('/static/images/mat_gold.jpg');"></div>
-                        <div class="mat-active-indicator">Выбрано</div>
-                        <div class="mat-card-base">
-                            <div class="mat-badge">Премиум-металл</div>
-                            <h4 class="mat-title">Золочение, металл & Патина</h4>
-                            <div class="mat-price-tag">от 6 200 ₽ / м² <span class="mat-sub">(работа + материал)</span></div>
-                        </div>
-                        <div class="mat-hover-overlay">
-                            <div class="mat-hover-top">
-                                <div class="mat-hover-kicker">О материале</div>
-                                <h5 class="mat-hover-title">Золочение, металл & Патина</h5>
-                                <p class="mat-hover-desc">Нанесение сусального золота, потали, жидких металлов (латунь, бронза) и химическое оксидирование с благородной патиной.</p>
-                                <div class="mat-hover-specs">
-                                    <div class="mat-spec-row"><span class="mat-spec-label">Основа:</span><span class="mat-spec-val">Сусальное золото, поталь, микрометаллы</span></div>
-                                    <div class="mat-spec-row"><span class="mat-spec-label">Применение:</span><span class="mat-spec-val">Камины, карнизы, колонны, лепнина</span></div>
-                                </div>
-                            </div>
-                            <div class="mat-hover-footer">
-                                <span class="mat-hover-price">от 6 200 ₽/м²</span>
-                                <a href="/materials/gold/" class="mat-hover-link" onclick="event.stopPropagation();">Подробнее о материале →</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 5. Bas-relief -->
-                    <div class="material-card" 
-                         data-id="basrelief" 
-                         data-name="Барельефы & 3D-панно" 
-                         data-price-sqm="8500" 
-                         data-speed="8"
-                         data-ratio="0.30"
-                         data-desc="Ручная объемная лепка, скальные рельефы, гроты и архитектурная пластика стен по эскизам автора.">
-                        <div class="mat-texture-bg" style="background-image: url('/static/images/mat_basrelief.jpg');"></div>
-                        <div class="mat-active-indicator">Выбрано</div>
-                        <div class="mat-card-base">
-                            <div class="mat-badge">Скульптурный рельеф</div>
-                            <h4 class="mat-title">Барельефы & 3D-панно</h4>
-                            <div class="mat-price-tag">от 8 500 ₽ / м² <span class="mat-sub">(ручная лепка)</span></div>
-                        </div>
-                        <div class="mat-hover-overlay">
-                            <div class="mat-hover-top">
-                                <div class="mat-hover-kicker">О материале</div>
-                                <h5 class="mat-hover-title">Барельефы & 3D-панно</h5>
-                                <p class="mat-hover-desc">Уникальная ручная объемная пластика стен: струящиеся волны, скальные срезы, гроты из высокопрочного скульптурного гипса.</p>
-                                <div class="mat-hover-specs">
-                                    <div class="mat-spec-row"><span class="mat-spec-label">Основа:</span><span class="mat-spec-val">Высокопрочный гипс, фиброволокно</span></div>
-                                    <div class="mat-spec-row"><span class="mat-spec-label">Применение:</span><span class="mat-spec-val">Входные группы, гостиные, зоны ресепшн</span></div>
-                                </div>
-                            </div>
-                            <div class="mat-hover-footer">
-                                <span class="mat-hover-price">от 8 500 ₽/м²</span>
-                                <a href="/materials/basrelief/" class="mat-hover-link" onclick="event.stopPropagation();">Подробнее о материале →</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 6. Venetian & Onyx -->
-                    <div class="material-card" 
-                         data-id="venetian" 
-                         data-name="Венецианская штукатурка & Оникс" 
-                         data-price-sqm="5200" 
-                         data-speed="18"
-                         data-ratio="0.35"
-                         data-desc="Классическое зеркальное покрытие с эффектом глубины натурального камня и восковой полировкой.">
-                        <div class="mat-texture-bg" style="background-image: url('/static/images/mat_venetian.jpg');"></div>
-                        <div class="mat-active-indicator">Выбрано</div>
-                        <div class="mat-card-base">
-                            <div class="mat-badge">Полированный мрамор</div>
-                            <h4 class="mat-title">Венецианская штукатурка & Оникс</h4>
-                            <div class="mat-price-tag">от 5 200 ₽ / м² <span class="mat-sub">(работа + материал)</span></div>
-                        </div>
-                        <div class="mat-hover-overlay">
-                            <div class="mat-hover-top">
-                                <div class="mat-hover-kicker">О материале</div>
-                                <h5 class="mat-hover-title">Венецианская штукатурка & Оникс</h5>
-                                <p class="mat-hover-desc">Классическая итальянская техника тончайших слоев мраморной пыли с полировкой кельмой и пчелиным воском. Оптическая глубина.</p>
-                                <div class="mat-hover-specs">
-                                    <div class="mat-spec-row"><span class="mat-spec-label">Основа:</span><span class="mat-spec-val">Микронизированный мрамор, натуральный воск</span></div>
-                                    <div class="mat-spec-row"><span class="mat-spec-label">Применение:</span><span class="mat-spec-val">Колонны, залы, спальни, ванные комнаты</span></div>
-                                </div>
-                            </div>
-                            <div class="mat-hover-footer">
-                                <span class="mat-hover-price">от 5 200 ₽/м²</span>
-                                <a href="/materials/venetian/" class="mat-hover-link" onclick="event.stopPropagation();">Подробнее о материале →</a>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-
-            <!-- Right: Interactive Wall Size & Price Calculator Box -->
-            <div class="calc-panel-col">
-                <div class="calc-panel-card">
-                    <div class="calc-panel-header">
-                        <span class="calc-panel-eyebrow">Интерактивный расчет</span>
-                        <h3 class="calc-selected-title" id="calcSelectedName">
-                            {% if materials.first %}{{ materials.first.name }}{% else %}Минеральная фактурная штукатурка{% endif %}
-                        </h3>
-                        <p class="calc-selected-desc" id="calcSelectedDesc">
-                            {% if materials.first %}{{ materials.first.short_desc }}{% else %}Травертин, Марморино, скальные сколы и песчаные фактуры. Природные минеральные компоненты.{% endif %}
-                        </p>
-                    </div>
-
-                    <!-- Wall Area Control -->
-                    <div class="calc-control-group">
-                        <div class="calc-label-row">
-                            <label class="calc-label" for="wallAreaInput">Укажите площадь стен помещения:</label>
-                            <div class="calc-area-display">
-                                <input type="number" id="wallAreaInput" value="45" min="5" max="2000" class="calc-number-input">
-                                <span class="calc-unit">м²</span>
-                            </div>
-                        </div>
-                        <input type="range" id="wallAreaSlider" value="45" min="5" max="500" step="1" class="calc-range-slider">
-                        <div class="calc-range-ticks">
-                            <span>10 м² (комната)</span>
-                            <span>50 м²</span>
-                            <span>150 м² (квартира)</span>
-                            <span>300+ м²</span>
-                        </div>
-                    </div>
-
-                    <!-- Live Calculation Breakdown Ledger -->
-                    <div class="calc-ledger-box">
-                        <div class="ledger-row">
-                            <span class="ledger-name">Материалы, грунты и защита:</span>
-                            <span class="ledger-val" id="ledgerMaterialCost">67 500 ₽</span>
-                        </div>
-                        <div class="ledger-row">
-                            <span class="ledger-name">Работа мастеров-декораторов:</span>
-                            <span class="ledger-val" id="ledgerWorkCost">121 500 ₽</span>
-                        </div>
-                        <div class="ledger-row">
-                            <span class="ledger-name">Ориентировочный срок:</span>
-                            <span class="ledger-val" id="ledgerDuration">3–5 рабочих дней</span>
-                        </div>
-                        <div class="ledger-total-row">
-                            <div>
-                                <span class="ledger-total-label">Итоговая смета:</span>
-                                <div class="ledger-total-price" id="ledgerTotalPrice">189 000 ₽</div>
-                            </div>
-                            <span class="ledger-note">* Фиксируется договором</span>
-                        </div>
-                    </div>
-
-                    <!-- Actions -->
-                    <div class="calc-action-block">
-                        <button type="button" class="btn btn-primary btn-block" id="btnFixCalcLead">
-                            Зафиксировать расчет и вызвать технолога
-                        </button>
-                        <p class="calc-sub-guarantee">
-                            {{ home_config.calc_guarantee_text }}
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- 4. FLAGSHIP PROJECTS SHOWCASE (По 3 работы каждого направления) -->
-<section class="cases-showcase-section" id="cases">
-    <div class="container">
-        <div class="section-header" style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1.5rem;">
-            <div>
-                <div class="eyebrow">Реализованные объекты</div>
-                <h2 class="section-title">Проекты в реальных интерьерах</h2>
-                <p class="section-desc">Крупные коммерческие пространства, бутик-отели, рестораны и частные резиденции.</p>
-            </div>
-            <a href="/projects/grand-residence-barvikha/" class="btn btn-secondary">Все реализованные проекты</a>
-        </div>
-
-        <div class="cases-gallery-grid">
-            {% for project in projects %}
-            <article class="case-item-card">
-                <div class="case-thumb-wrap">
-                    <img src="{{ project.image_url }}" alt="{{ project.title }}">
-                    <div class="case-tag-overlay">{{ project.category.name }}</div>
-                </div>
-                <div class="case-item-body">
-                    <div class="case-item-meta">
-                        <span>{{ project.location }}</span> • <span>{{ project.area_sqm }} м²</span> • <span>{{ project.duration }}</span>
-                    </div>
-                    <h3 class="case-item-title">{{ project.title }}</h3>
-                    <p class="case-item-desc">{{ project.short_description }}</p>
-                    <div class="case-item-scope">
-                        {% for scope in project.get_scope_list|slice:":3" %}
-                        <span class="scope-pill">{{ scope }}</span>
-                        {% endfor %}
-                    </div>
-                </div>
-            </article>
-            {% empty %}
-            <!-- Fallback 3 Projects if DB is empty -->
-            <article class="case-item-card">
-                <div class="case-thumb-wrap">
-                    <img src="/static/images/case_hotel.jpg" alt="Бутик-отель «Метрополь Арт»">
-                    <div class="case-tag-overlay">Отели & Рестораны</div>
-                </div>
-                <div class="case-item-body">
-                    <div class="case-item-meta">Москва • 1 850 м² • 3 месяца</div>
-                    <h3 class="case-item-title">Бутик-отель «Метрополь Арт»</h3>
-                    <p class="case-item-desc">Монументальные рельефные штукатурки в лобби, позолота карнизов, роспись сьютов.</p>
-                </div>
-            </article>
-            <article class="case-item-card">
-                <div class="case-thumb-wrap">
-                    <img src="/static/images/case_office.jpg" alt="Представительский офис девелопера">
-                    <div class="case-tag-overlay">Корпоративные офисы</div>
-                </div>
-                <div class="case-item-body">
-                    <div class="case-item-meta">Москва-Сити • 920 м² • 2 месяца</div>
-                    <h3 class="case-item-title">Штаб-квартира девелоперской группы</h3>
-                    <p class="case-item-desc">Бесшовный графитовый микроцемент, акцентные стены с латунной расшивкой, конференц-столы.</p>
-                </div>
-            </article>
-            <article class="case-item-card">
-                <div class="case-thumb-wrap">
-                    <img src="/static/images/art_furniture.jpg" alt="Частная вилла в Серебряном Бору">
-                    <div class="case-tag-overlay">Частные резиденции</div>
-                </div>
-                <div class="case-item-body">
-                    <div class="case-item-meta">Серебряный Бор • 650 м² • 2.5 месяца</div>
-                    <h3 class="case-item-title">Вилла в Серебряном Бору</h3>
-                    <p class="case-item-desc">Комплексная отделка стен травертином, кастомные обеденные столы из микроцемента, коллекционная живопись.</p>
-                </div>
-            </article>
-            {% endfor %}
-        </div>
-    </div>
-</section>
-
-<!-- 5. RESTORATION & ARTISANAL RECONSTRUCTION SECTION (Audio 2 & 3) -->
-<section class="restoration-section" id="restoration">
-    <div class="container">
-        <div class="restoration-wrap">
-            <div class="restoration-img-col">
-                <img src="{{ home_config.restoration_img_url }}" alt="{{ home_config.restoration_title }}">
-                <div class="restoration-badge-card">
-                    <span class="badge-num">{{ home_config.restoration_badge_num }}</span>
-                    <span class="badge-lbl">{{ home_config.restoration_badge_lbl }}</span>
-                </div>
-            </div>
-            <div class="restoration-info-col">
-                <div class="eyebrow">{{ home_config.restoration_eyebrow }}</div>
-                <h2 class="section-title" style="margin-bottom: 1.25rem;">{{ home_config.restoration_title }}</h2>
-                <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 1.75rem;">
-                    {{ home_config.restoration_desc }}
+        <div class="restoration-preview-wrap">
+            <div class="rest-preview-text">
+                <div class="eyebrow">{{ home_config.restoration_eyebrow|default:'Мастерство & Наследие' }}</div>
+                <h2 class="section-title" style="margin-bottom: 1rem;">{{ home_config.restoration_title|default:'Реставрация и оформление' }}</h2>
+                <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 1.75rem;">
+                    {{ home_config.restoration_desc|default:'Бережное восстановление исторической архитектурной лепнины, мозаичных панно, сусального золота и антикварных интерьерных поверхностей.' }}
                 </p>
-                <div class="restoration-services-list">
-                    <div class="rest-service-item">
-                        <div class="rest-service-title">{{ home_config.restoration_item1_title }}</div>
-                        <div class="rest-service-desc">{{ home_config.restoration_item1_desc }}</div>
-                    </div>
-                    <div class="rest-service-item">
-                        <div class="rest-service-title">{{ home_config.restoration_item2_title }}</div>
-                        <div class="rest-service-desc">{{ home_config.restoration_item2_desc }}</div>
-                    </div>
-                    <div class="rest-service-item">
-                        <div class="rest-service-title">{{ home_config.restoration_item3_title }}</div>
-                        <div class="rest-service-desc">{{ home_config.restoration_item3_desc }}</div>
-                    </div>
-                    <div class="rest-service-item">
-                        <div class="rest-service-title">{{ home_config.restoration_item4_title }}</div>
-                        <div class="rest-service-desc">{{ home_config.restoration_item4_desc }}</div>
-                    </div>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <button type="button" class="btn btn-primary btn-open-contact">Прислать фото на оценку</button>
+                    <a href="tel:{{ home_config.contact_phone|default:'+74958904422' }}" class="btn btn-secondary">Консультация реставратора</a>
                 </div>
-                <div style="margin-top: 2rem;">
-                    <a href="{{ home_config.telegram_url }}" target="_blank" class="btn btn-primary">Запросить экспертизу объекта у мастера</a>
-                </div>
+            </div>
+            <div class="rest-preview-img">
+                <img src="{{ home_config.restoration_img_url|default:'/static/images/restoration_craft.jpg' }}" alt="{{ home_config.restoration_title|default:'Реставрация и оформление' }}" style="border-radius: var(--radius-md); width: 100%; height: 280px; object-fit: cover;">
             </div>
         </div>
     </div>
 </section>
 
-<!-- 6. ART GALLERY SHOWCASE: ЖИВОПИСЬ АЛЕКСАНДРА ПОПЫКИНА (Audio 4) -->
-<section class="gallery-showcase-section" id="gallery-showcase">
-    <div class="container">
-        <div class="gallery-section-header">
-            <div class="gallery-header-info">
-                <div class="eyebrow">Atelier & Private Collection</div>
-                <h2 class="section-title">Картины Александра Попыкина в интерьер</h2>
-                <p class="section-desc">Оригинальная живопись и авторская графика для оформления частных домов, офисов и пентхаусов. Автор — Александр Попыкин.</p>
-            </div>
-            <div class="gallery-header-cta">
-                <a href="/gallery/" class="btn btn-secondary">Вся коллекция галереи</a>
-            </div>
-        </div>
-
-        <!-- Artwork Cards Grid with Prices and Dimensions -->
-        <div class="artworks-showcase-grid">
-            {% for artwork in artworks %}
-            <div class="art-card-modern">
-                <div class="art-card-img-wrap">
-                    <img src="{{ artwork.image_url }}" alt="{{ artwork.title }}">
-                    <div class="art-status-chip {% if artwork.status == 'available' %}avail{% else %}res{% endif %}">
-                        {{ artwork.get_status_display }}
-                    </div>
-                </div>
-                <div class="art-card-body">
-                    <div class="art-cat-label">{{ artwork.category.name }}</div>
-                    <h3 class="art-title-text">{{ artwork.title }}</h3>
-                    <p class="art-meta-text">{{ artwork.medium }}</p>
-                    <div class="art-dimensions-text">Размер: <strong>{{ artwork.dimensions }}</strong> ({{ artwork.year }} г.)</div>
-                    
-                    <div class="art-footer-row">
-                        <div class="art-price-val">{{ artwork.formatted_price }}</div>
-                        <div class="art-card-buttons">
-                            <button type="button" 
-                                    class="btn-art-fit btn-open-fitting"
-                                    data-title="{{ artwork.title }}"
-                                    data-dimensions="{{ artwork.dimensions }}"
-                                    data-price="{{ artwork.formatted_price }}"
-                                    title="Заказать бесплатную примерку картины у себя дома">
-                                Примерить в комнате
-                            </button>
-                            <button type="button" 
-                                    class="btn-art-buy btn-view-artwork"
-                                    data-title="{{ artwork.title }}"
-                                    data-medium="{{ artwork.medium }}"
-                                    data-dimensions="{{ artwork.dimensions }}"
-                                    data-price="{{ artwork.formatted_price }}"
-                                    data-desc="{{ artwork.curator_note }}"
-                                    data-img="{{ artwork.image_url }}">
-                                Купить
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-</section>
-
-<!-- 7. FLAGSHIP CONVERSION: FREE ART FITTING IN INTERIOR (Audio 6) -->
-<section class="art-fitting-banner-section" id="art-fitting">
-    <div class="art-fitting-bg" style="background-image: url('/static/images/art_fitting_interior.jpg');"></div>
-    <div class="art-fitting-overlay"></div>
-
-    <div class="container art-fitting-container">
-        <div class="art-fitting-card">
-            <div class="eyebrow">{{ home_config.fitting_eyebrow }}</div>
-            <h2 class="fitting-card-title">{{ home_config.fitting_title }}</h2>
-            <p class="fitting-card-desc">
-                {{ home_config.fitting_desc }}
-            </p>
-
-            <div class="fitting-steps-grid">
-                <div class="fitting-step-item">
-                    <span class="step-num">01</span>
-                    <h4 class="step-title">{{ home_config.fitting_step1_title }}</h4>
-                    <p class="step-desc">{{ home_config.fitting_step1_desc }}</p>
-                </div>
-                <div class="fitting-step-item">
-                    <span class="step-num">02</span>
-                    <h4 class="step-title">{{ home_config.fitting_step2_title }}</h4>
-                    <p class="step-desc">{{ home_config.fitting_step2_desc }}</p>
-                </div>
-                <div class="fitting-step-item">
-                    <span class="step-num">03</span>
-                    <h4 class="step-title">{{ home_config.fitting_step3_title }}</h4>
-                    <p class="step-desc">{{ home_config.fitting_step3_desc }}</p>
-                </div>
-                <div class="fitting-step-item">
-                    <span class="step-num">04</span>
-                    <h4 class="step-title">{{ home_config.fitting_step4_title }}</h4>
-                    <p class="step-desc">{{ home_config.fitting_step4_desc }}</p>
-                </div>
-            </div>
-
-            <div class="fitting-action-row">
-                <button type="button" class="btn btn-primary btn-open-fitting">Записаться на бесплатную примерку</button>
-                <a href="{{ home_config.telegram_url }}" target="_blank" class="btn btn-secondary">Отправить фото интерьера в Telegram</a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- 8. CUSTOM ART FURNITURE & OBJECTS SECTION (Audio 8) -->
-<section class="art-furniture-section" id="art-objects">
-    <div class="container">
-        <div class="furniture-split-wrap">
-            <div class="furniture-content-col">
-                <div class="eyebrow">{{ home_config.furniture_eyebrow }}</div>
-                <h2 class="section-title">{{ home_config.furniture_title }}</h2>
-                <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 2rem;">
-                    {{ home_config.furniture_desc }}
-                </p>
-                
-                <div class="furniture-features-list">
-                    <div class="furn-feat-item">
-                        <div class="furn-feat-title">{{ home_config.furniture_item1_title }}</div>
-                        <div class="furn-feat-desc">{{ home_config.furniture_item1_desc }}</div>
-                    </div>
-                    <div class="furn-feat-item">
-                        <div class="furn-feat-title">{{ home_config.furniture_item2_title }}</div>
-                        <div class="furn-feat-desc">{{ home_config.furniture_item2_desc }}</div>
-                    </div>
-                    <div class="furn-feat-item">
-                        <div class="furn-feat-title">{{ home_config.furniture_item3_title }}</div>
-                        <div class="furn-feat-desc">{{ home_config.furniture_item3_desc }}</div>
-                    </div>
-                </div>
-
-                <div style="margin-top: 2rem;">
-                    <a href="{{ home_config.telegram_url }}" target="_blank" class="btn btn-primary">Обсудить изготовление арт-объекта</a>
-                </div>
-            </div>
-
-            <div class="furniture-image-col">
-                <div class="furniture-img-frame">
-                    <img src="{{ home_config.furniture_img_url }}" alt="{{ home_config.furniture_title }}">
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- 9. PARTNERS SECTION (Audio 7) -->
+<!-- 4. PARTNERS SECTION -->
 <section class="partners-section" id="partners">
     <div class="container">
         <div class="section-header" style="text-align: center; max-width: 780px; margin: 0 auto 3rem;">
             <div class="eyebrow">Сотрудничество и доверие</div>
             <h2 class="section-title">Наши партнёры</h2>
             <p class="section-desc" style="margin: 0.75rem auto 0;">
-                С 2011 года мы работаем в тесном партнерстве с ведущими архитектурными бюро, интерьерными дизайнерами, девелоперами и производителями элитных материалов.
+                Ведущие архитектурные бюро, интерьерные дизайнеры и производители премиальных минеральных покрытий.
             </p>
         </div>
 
@@ -762,82 +151,17 @@
     </div>
 </section>
 
-<!-- 10. ARCHITECT SAMPLE BOX SECTION -->
-<section class="sample-box-section" id="sample-box">
-    <div class="container">
-        <div class="sample-box-card">
-            <div>
-                <div class="eyebrow">Для архитекторов и дизайнеров</div>
-                <h2 class="sample-box-title">
-                    Фирменный «Architect Sample Box» с живыми выкрасами фактур
-                </h2>
-                <p class="sample-box-desc">
-                    Бесплатно доставляем в архитектурные бюро и проектные отделы деревянный кейс с планшетами авторских покрытий: архитектурный микроцемент, скульптурная штукатурка, минеральные оксиды и латунная расшивка.
-                </p>
-                <div class="sample-box-features">
-                    <div class="sample-feature-item">
-                        <i class="fas fa-check"></i>
-                        <span>12 тактильных выкрасов</span>
-                    </div>
-                    <div class="sample-feature-item">
-                        <i class="fas fa-check"></i>
-                        <span>Пожарные сертификаты КМ-0</span>
-                    </div>
-                    <div class="sample-feature-item">
-                        <i class="fas fa-check"></i>
-                        <span>Бесплатная курьерская доставка</span>
-                    </div>
-                </div>
-                <button type="button" class="btn btn-primary btn-open-samplebox">Заказать кейс образцов в бюро</button>
-            </div>
-            <div class="sample-box-img">
-                <img src="/static/images/sample_box.jpg" alt="Architect Sample Box Popykin Atelier">
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- 11. THE MASTER ARTIST (SASHA'S AUTHENTICITY) -->
-<section class="atelier-section" id="atelier">
-    <div class="container">
-        <div class="atelier-grid">
-            <div>
-                <img src="{{ home_config.master_img_url }}" alt="Александр Попыкин в мастерской" style="border-radius: var(--radius-lg); box-shadow: 0 15px 40px rgba(0,0,0,0.08);">
-            </div>
-            <div>
-                <div class="eyebrow">{{ home_config.master_eyebrow }}</div>
-                <h2 class="atelier-artist-title">
-                    {{ home_config.master_title }}
-                </h2>
-                <div class="artist-quote">
-                    {{ home_config.master_quote }}
-                </div>
-                <p class="atelier-artist-desc">
-                    {{ home_config.master_desc }}
-                </p>
-                <div class="timeline-roots">
-                    <div class="root-item">
-                        <div class="year">{{ home_config.timeline1_year }}</div>
-                        <div class="text">{{ home_config.timeline1_text }}</div>
-                    </div>
-                    <div class="root-item">
-                        <div class="year">{{ home_config.timeline2_year }}</div>
-                        <div class="text">{{ home_config.timeline2_text }}</div>
-                    </div>
-                    <div class="root-item">
-                        <div class="year">{{ home_config.timeline3_year }}</div>
-                        <div class="text">{{ home_config.timeline3_text }}</div>
-                    </div>
-                    <div class="root-item">
-                        <div class="year">{{ home_config.timeline4_year }}</div>
-                        <div class="text">{{ home_config.timeline4_text }}</div>
-                    </div>
-                </div>
-                <div style="margin-top: 2.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-                    <a href="/gallery/" class="btn btn-outline-gold">Смотреть картины в галерее</a>
-                    <a href="{{ home_config.telegram_url }}" target="_blank" class="btn btn-secondary">Написать Александру в Telegram</a>
-                </div>
-            </div>
+<!-- 5. FINAL CONSULTATION CALLOUT -->
+<section class="home-callout-section" style="padding: 5rem 0; background: var(--bg-secondary); border-top: 1px solid var(--border-subtle);">
+    <div class="container" style="text-align: center; max-width: 740px; margin: 0 auto;">
+        <div class="eyebrow">Индивидуальный диалог</div>
+        <h2 class="section-title" style="margin-bottom: 1rem;">Готовы обсудить ваш проект?</h2>
+        <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 2rem;">
+            Свяжитесь с нами для подбора фактурных покрытий, предварительного расчета стоимости или заказа выезда технолога на объект.
+        </p>
+        <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+            <button type="button" class="btn btn-primary btn-open-contact">Связаться с нами</button>
+            <a href="{{ home_config.telegram_url|default:'https://t.me/' }}" target="_blank" rel="noopener" class="btn btn-secondary">Написать в Telegram</a>
         </div>
     </div>
 </section>

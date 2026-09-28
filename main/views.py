@@ -63,8 +63,24 @@ def journal_list(request):
     }
     return render(request, 'journal.html', context)
 
+def projects_list(request):
+    """Раздел «Наши проекты»: реализованные интерьеры, декоративные покрытия, мебель, арт-объекты и свет"""
+    category_slug = request.GET.get('category', '').strip()
+    projects = Project.objects.all().select_related('category')
+    if category_slug:
+        projects = projects.filter(category__slug=category_slug)
+        
+    categories = ProjectCategory.objects.all()
+    
+    context = {
+        'projects': projects,
+        'categories': categories,
+        'current_category': category_slug,
+    }
+    return render(request, 'projects_list.html', context)
+
 def project_detail(request, slug):
-    """Детальная страница B2B кейса"""
+    """Детальная страница кейса / объекта"""
     project = get_object_or_404(Project, slug=slug)
     related_projects = Project.objects.exclude(id=project.id)[:3]
     return render(request, 'project_detail.html', {'project': project, 'related_projects': related_projects})

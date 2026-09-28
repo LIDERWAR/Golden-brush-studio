@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% block title %}Наши проекты — Golden brush Studio{% endblock %}
+{% block meta_desc %}Портфолио реализованных проектов Golden brush Studio: комплексная отделка интерьеров, авторские фактуры, дизайнерская мебель, арт-объекты и свет.{% endblock %}
+
+{% block content %}
+<div class="projects-page-wrap" style="padding-top: 8rem; padding-bottom: 6rem; background-color: var(--bg-primary);">
+    <div class="container">
+        <!-- Header -->
+        <div style="text-align: center; max-width: 960px; margin: 0 auto 3.5rem;">
+            <div class="eyebrow">Портфолио студии</div>
+            <h1 style="font-size: clamp(2rem, 4.5vw, 3.8rem); color: var(--text-main); margin: 0 0 1rem;">
+                Наши проекты
+            </h1>
+            <p style="font-size: clamp(0.95rem, 2.2vw, 1.15rem); color: var(--text-muted); line-height: 1.8;">
+                Крупные коммерческие объекты, бутик-отели, рестораны, частные резиденции, монолитные арт-объекты и эксклюзивная дизайнерская мебель.
+            </p>
+        </div>
+
+        <!-- Filter Bar -->
+        <div style="display: flex; justify-content: center; gap: 0.75rem; margin-bottom: 3.5rem; flex-wrap: wrap;">
+            <a href="{% url 'main:projects_list' %}" 
+               class="btn btn-secondary {% if not current_category %}active{% endif %}"
+               style="font-size: 0.85rem; padding: 0.65rem 1.5rem;">
+                Все проекты
+            </a>
+            {% for cat in categories %}
+            <a href="{% url 'main:projects_list' %}?category={{ cat.slug }}" 
+               class="btn btn-secondary {% if current_category == cat.slug %}active{% endif %}"
+               style="font-size: 0.85rem; padding: 0.65rem 1.5rem;">
+                {{ cat.name }}
+            </a>
+            {% endfor %}
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="cases-gallery-grid">
+            {% for project in projects %}
+            <article class="case-item-card">
+                <a href="{{ project.get_absolute_url|default:'#' }}" class="case-thumb-wrap" style="display: block;">
+                    <img src="{{ project.get_image }}" alt="{{ project.title }}">
+                    <div class="case-tag-overlay">{{ project.category.name }}</div>
+                </a>
+                <div class="case-item-body">
+                    <div class="case-item-meta">
+                        <span>{{ project.location }}</span> • <span>{{ project.area_sqm }} м²</span> • <span>{{ project.duration }}</span>
+                    </div>
+                    <h3 class="case-item-title">
+                        <a href="{{ project.get_absolute_url|default:'#' }}" style="color: inherit; text-decoration: none;">
+                            {{ project.title }}
+                        </a>
+                    </h3>
+                    <p class="case-item-desc">{{ project.short_description }}</p>
+                    <div class="case-item-scope">
+                        {% for scope in project.get_scope_list|slice:":3" %}
+                        <span class="scope-pill">{{ scope }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+            </article>
+            {% empty %}
+            <!-- Fallback projects -->
+            <article class="case-item-card">
+                <div class="case-thumb-wrap">
+                    <img src="/static/images/case_hotel.jpg" alt="Бутик-отель «Метрополь Арт»">
+                    <div class="case-tag-overlay">Отели & Рестораны</div>
+                </div>
+                <div class="case-item-body">
+                    <div class="case-item-meta">Москва • 1 850 м² • 3 месяца</div>
+                    <h3 class="case-item-title">Бутик-отель «Метрополь Арт»</h3>
+                    <p class="case-item-desc">Монументальные рельефные штукатурки в лобби, позолота карнизов, роспись сьютов.</p>
+                </div>
+            </article>
+            <article class="case-item-card">
+                <div class="case-thumb-wrap">
+                    <img src="/static/images/case_office.jpg" alt="Представительский офис девелопера">
+                    <div class="case-tag-overlay">Корпоративные офисы</div>
+                </div>
+                <div class="case-item-body">
+                    <div class="case-item-meta">Москва-Сити • 920 м² • 2 месяца</div>
+                    <h3 class="case-item-title">Штаб-квартира девелоперской группы</h3>
+                    <p class="case-item-desc">Бесшовный графитовый микроцемент, акцентные стены с латунной расшивкой, конференц-столы.</p>
+                </div>
+            </article>
+            <article class="case-item-card">
+                <div class="case-thumb-wrap">
+                    <img src="/static/images/art_furniture.jpg" alt="Частная вилла в Серебряном Бору">
+                    <div class="case-tag-overlay">Частные резиденции</div>
+                </div>
+                <div class="case-item-body">
+                    <div class="case-item-meta">Серебряный Бор • 650 м² • 2.5 месяца</div>
+                    <h3 class="case-item-title">Вилла в Серебряном Бору</h3>
+                    <p class="case-item-desc">Комплексная отделка стен травертином, кастомные обеденные столы из микроцемента, коллекционная живопись.</p>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+
+        <!-- Section Link to Wall Calculator & Materials -->
+        <div style="margin-top: 5rem; background: var(--bg-secondary); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: clamp(2rem, 4vw, 3.5rem); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem;">
+            <div style="max-width: 600px;">
+                <div class="eyebrow">Интерактивный расчет</div>
+                <h3 style="font-family: var(--font-serif); font-size: 1.8rem; color: var(--text-main); margin: 0 0 0.5rem;">
+                    Рассчитать стоимость фактур по площади стен
+                </h3>
+                <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin: 0;">
+                    Выберите нужное покрытие в нашем каталоге и укажите метраж стен для моментального расчета сметы материалов и работы мастеров.
+                </p>
+            </div>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <a href="{% url 'materials:list' %}" class="btn btn-primary">Перейти в калькулятор покрытий</a>
+                <button type="button" class="btn btn-secondary btn-open-contact">Связаться с нами</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

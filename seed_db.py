@@ -402,7 +402,39 @@ for p in partners_data:
 print("Partners seeded successfully")
 
 # 11. Home Page Config Seed
-HomePageConfig.get_solo()
-print("HomePageConfig initialized successfully")
+cfg = HomePageConfig.get_solo()
+cfg.hero_eyebrow = 'Golden brush Studio'
+cfg.hero_title = 'Художественно-декоративные работы под ключ'
+cfg.hero_bg_image_url = '/static/images/fresco_texture.jpg'
+cfg.portal1_title = 'Наши проекты'
+cfg.portal1_link = '/projects/'
+cfg.portal1_img_url = '/static/images/hero.jpg'
+cfg.portal2_title = 'Реставрация'
+cfg.portal2_link = '#restoration'
+cfg.portal2_img_url = '/static/images/restoration_craft.jpg'
+cfg.portal3_title = 'Галерея'
+cfg.portal3_link = '/gallery/'
+cfg.portal3_img_url = '/static/images/art_canvas.jpg'
+cfg.process_badge = 'Мастерская Golden brush Studio'
+cfg.process_eyebrow = 'Процесс создания'
+cfg.process_title = 'Магия ручной работы и минеральных текстур'
+cfg.metric1_val = '15+'
+cfg.metric1_lbl = 'лет практики в декоре и росписи'
+cfg.metric2_val = '200+'
+cfg.metric2_lbl = 'авторских рецептур штукатурки'
+cfg.metric3_val = '100%'
+cfg.metric3_lbl = 'ручное нанесение мастерами'
+cfg.restoration_eyebrow = 'Мастерство & Наследие'
+cfg.restoration_title = 'Реставрация и оформление'
+cfg.restoration_desc = 'Бережное восстановление исторической архитектурной лепнины, мозаичных панно, сусального золота и антикварных интерьерных поверхностей.'
+cfg.restoration_img_url = '/static/images/restoration_craft.jpg'
+cfg.calc_guarantee_text = 'Бесплатный выезд технолога с образцами по Москве и МО • Замер и точная смета'
+cfg.contact_phone = '+7 (495) 890-44-22'
+cfg.contact_email = 'welcome@gbstudio.ru'
+cfg.contact_address = 'Москва, Центр дизайна ARTPLAY / Мастерская на Яузе'
+cfg.telegram_url = 'https://t.me/gbstudio'
+cfg.whatsapp_url = 'https://wa.me/74958904422'
+cfg.save()
+print("HomePageConfig initialized with Golden brush Studio defaults successfully")
 
 print("All seed data created successfully!")

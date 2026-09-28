@@ -34,47 +34,54 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 2. Mobile Menu Toggle
+    // 2. Mobile Menu Toggle ("Три полосочки")
     const burgerBtn = document.getElementById('burgerBtn') || document.querySelector('.burger-btn');
     const mobileDrawer = document.getElementById('mobileDrawer') || document.querySelector('.mobile-drawer');
     const drawerBackdrop = document.getElementById('drawerBackdrop');
     const drawerClose = document.getElementById('drawerClose');
 
-    function openMobileDrawer() {
-        if (mobileDrawer) {
-            mobileDrawer.classList.add('active');
+    window.openMobileDrawer = function() {
+        const drawer = document.getElementById('mobileDrawer') || document.querySelector('.mobile-drawer');
+        if (drawer) {
+            drawer.classList.add('active');
             document.body.classList.add('drawer-open');
         }
-    }
+    };
 
-    function closeMobileDrawer() {
-        if (mobileDrawer) {
-            mobileDrawer.classList.remove('active');
+    window.closeMobileDrawer = function() {
+        const drawer = document.getElementById('mobileDrawer') || document.querySelector('.mobile-drawer');
+        if (drawer) {
+            drawer.classList.remove('active');
             document.body.classList.remove('drawer-open');
         }
-    }
+    };
+
+    window.toggleMobileDrawer = function(e) {
+        if (e && e.preventDefault) e.preventDefault();
+        const drawer = document.getElementById('mobileDrawer') || document.querySelector('.mobile-drawer');
+        if (drawer && drawer.classList.contains('active')) {
+            window.closeMobileDrawer();
+        } else {
+            window.openMobileDrawer();
+        }
+    };
 
     if (burgerBtn) {
         burgerBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            if (mobileDrawer && mobileDrawer.classList.contains('active')) {
-                closeMobileDrawer();
-            } else {
-                openMobileDrawer();
-            }
+            window.toggleMobileDrawer(e);
         });
     }
 
     if (drawerClose) {
         drawerClose.addEventListener('click', (e) => {
-            e.preventDefault();
-            closeMobileDrawer();
+            if (e && e.preventDefault) e.preventDefault();
+            window.closeMobileDrawer();
         });
     }
 
     if (drawerBackdrop) {
         drawerBackdrop.addEventListener('click', () => {
-            closeMobileDrawer();
+            window.closeMobileDrawer();
         });
     }
 
@@ -83,15 +90,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const drawerLinks = mobileDrawer.querySelectorAll('.drawer-link, .drawer-cta');
         drawerLinks.forEach(link => {
             link.addEventListener('click', () => {
-                closeMobileDrawer();
+                window.closeMobileDrawer();
             });
         });
     }
 
     // Close on Escape key
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && mobileDrawer && mobileDrawer.classList.contains('active')) {
-            closeMobileDrawer();
+        const drawer = document.getElementById('mobileDrawer') || document.querySelector('.mobile-drawer');
+        if (e.key === 'Escape' && drawer && drawer.classList.contains('active')) {
+            window.closeMobileDrawer();
         }
     });
 
@@ -119,7 +127,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // 10. Atelier Video Reel Modal
     initVideoReelModal();
 
-    // 11. Universal Modal Closer (Button, Backdrop, Escape)
+    // 11. General Contact Modal ("Связаться с нами")
+    initGeneralContactModal();
+
+    // 12. Universal Modal Closer (Button, Backdrop, Escape)
     initUniversalModalCloser();
 });
 
@@ -910,5 +921,73 @@ function initVideoReelModal() {
         if (e.target === modal) closeVideo();
     });
 }
+
+// 11. General Contact Modal ("Связаться с нами")
+function initGeneralContactModal() {
+    const contactModal = document.getElementById('contactModal');
+    if (!contactModal) return;
+
+    document.querySelectorAll('.btn-open-contact').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            contactModal.classList.add('active');
+            document.body.classList.add('drawer-open');
+        });
+    });
+
+    const form = document.getElementById('generalContactForm');
+    if (!form) return;
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const origText = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Отправка...';
+
+        const formData = new FormData(form);
+        const name = formData.get('name');
+        const phone = formData.get('phone');
+        const interest = formData.get('interest') || '';
+        const message = formData.get('message') || '';
+
+        const payload = {
+            name: name,
+            phone: phone,
+            object_type: interest,
+            message: `Запрос с сайта (Golden brush Studio): ${interest}. ${message}`.trim(),
+            source: 'contact_modal'
+        };
+
+        const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
+
+        try {
+            const resp = await fetch('/api/quiz-lead/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                },
+                body: JSON.stringify(payload)
+            });
+
+            const data = await resp.json();
+            if (data.success) {
+                showToast('Спасибо! Мы свяжемся с вами в течение 10 минут.', true);
+                form.reset();
+                contactModal.classList.remove('active');
+                document.body.classList.remove('drawer-open');
+            } else {
+                showToast(data.error || 'Ошибка при отправке. Пожалуйста, попробуйте еще раз.', false);
+            }
+        } catch (err) {
+            showToast('Ошибка сети. Проверьте подключение.', false);
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = origText;
+        }
+    });
+}
+
 
 

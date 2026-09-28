@@ -8,6 +8,7 @@ urlpatterns = [
     path('gallery/', views.gallery_view, name='gallery'),
     path('journal/', views.journal_list, name='journal_list'),
     path('journal/<slug:slug>/', views.article_detail, name='journal_detail'),
+    path('projects/', views.projects_list, name='projects_list'),
     path('projects/<slug:slug>/', views.project_detail, name='project_detail'),
     path('articles/<slug:slug>/', views.article_detail, name='article_detail'),  # legacy alias
     path('api/quiz-lead/', views.submit_quiz_lead, name='quiz_lead'),
