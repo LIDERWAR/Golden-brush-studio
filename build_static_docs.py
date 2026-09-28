@@ -86,18 +86,24 @@ def build_docs():
 
         return html
 
+    root_dir = os.path.dirname(__file__)
     for key, (path, page_type) in pages.items():
         clean_html = transform_html(raw_htmls[key], page_type=page_type)
         out_file = os.path.join(docs_dir, f"{key}.html")
         with open(out_file, 'w', encoding='utf-8') as f:
             f.write(clean_html)
-        print(f"Saved {out_file}")
+        root_file = os.path.join(root_dir, f"{key}.html")
+        with open(root_file, 'w', encoding='utf-8') as f:
+            f.write(clean_html)
+        print(f"Saved {out_file} and {root_file}")
 
     # Add .nojekyll so GitHub Pages doesn't ignore anything
     with open(os.path.join(docs_dir, '.nojekyll'), 'w', encoding='utf-8') as f:
         f.write('')
+    with open(os.path.join(root_dir, '.nojekyll'), 'w', encoding='utf-8') as f:
+        f.write('')
 
-    print("All pages (index, gallery, materials, projects, fonts) generated successfully!")
+    print("All pages (index, gallery, materials, projects, fonts) generated successfully in root and docs!")
 
 if __name__ == '__main__':
     build_docs()
