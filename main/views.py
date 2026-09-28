@@ -314,3 +314,9 @@ def submit_calculator_lead(request):
         return JsonResponse({'success': False, 'error': str(e)}, status=500)
 
 
+def fonts_presentation(request):
+    """Интерактивная презентация шрифтовой айдентики для согласования с заказчиком"""
+    return render(request, 'fonts_presentation.html')
+
+
+

@@ -11,6 +11,7 @@ urlpatterns = [
     path('projects/', views.projects_list, name='projects_list'),
     path('projects/<slug:slug>/', views.project_detail, name='project_detail'),
     path('articles/<slug:slug>/', views.article_detail, name='article_detail'),  # legacy alias
+    path('fonts/', views.fonts_presentation, name='fonts_presentation'),
     path('api/quiz-lead/', views.submit_quiz_lead, name='quiz_lead'),
     path('api/sample-box/', views.submit_sample_box, name='sample_box'),
     path('api/art-inquiry/', views.submit_art_inquiry, name='art_inquiry'),

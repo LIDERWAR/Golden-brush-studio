@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="6wwd3MqRn7JF7crVpDIkOPO17pHqxf2hFRdZXlLJc81GGsvNMTsH9uQIVF8ur8D7">
-    <title>Наши проекты — Golden Brush Studio</title>
-    <meta name="description" content="Портфолио реализованных проектов Golden Brush Studio: комплексная отделка интерьеров, авторские фактуры, дизайнерская мебель, арт-объекты и свет.">
+    <meta name="csrf-token" content="1qPPa1FtQ5l1nnBaK2KNXBxVF5GTCUh3ALwB4A0lF6D2WDF27iuaigzCtl7XwNST">
+    <title>Презентация шрифтовой айдентики — Golden Brush Studio</title>
+    <meta name="description" content="Интерактивная презентация шрифтовых концептов для Golden Brush Studio на базе референсов Balimo и ROAD: основательность, тактильность и европейский уровень.">
     
     <!-- Design System CSS -->
     <link rel="stylesheet" href="static/css/style.css?v=20260928-v11">
@@ -251,157 +251,601 @@
     <!-- Main Content -->
     <main>
         
-<div class="projects-page-wrap" style="padding-top: 8rem; padding-bottom: 6rem; background-color: var(--bg-primary);">
+<main class="showcase-page">
     <div class="container">
-        <!-- Header -->
-        <div style="text-align: center; max-width: 960px; margin: 0 auto 3.5rem;">
-            <div class="eyebrow">Портфолио студии</div>
-            <h1 style="font-size: clamp(2rem, 4.5vw, 3.8rem); color: var(--text-main); margin: 0 0 1rem;">
-                Наши проекты
-            </h1>
-            <p style="font-size: clamp(0.95rem, 2.2vw, 1.15rem); color: var(--text-muted); line-height: 1.8;">
-                Крупные коммерческие объекты, бутик-отели, рестораны, частные резиденции, монолитные арт-объекты и эксклюзивная дизайнерская мебель.
+        <!-- Showcase Header -->
+        <header class="showcase-header">
+            <div class="eyebrow">Golden Brush Studio — Бренд-айдентика и типографика</div>
+            <h1 id="showcaseMainTitle">Выбор фирменного шрифта: основательность и европейский уровень</h1>
+            <p>
+                Интерактивная примерка 4 основательных европейских гротесков, подобранных по вашим референсам 
+                <strong>Balimo</strong> и <strong>ROAD</strong>. Выберите любой концепт в блоке ниже — и вся страница, 
+                включая логотип, заголовки и симулятор сайта, мгновенно переключится в выбранный шрифт.
             </p>
-        </div>
+        </header>
 
-        <!-- Filter Bar -->
-        <div style="display: flex; justify-content: center; gap: 0.75rem; margin-bottom: 3.5rem; flex-wrap: wrap;">
-            <a href="projects.html" 
-               class="btn btn-secondary active"
-               style="font-size: 0.85rem; padding: 0.65rem 1.5rem;">
-                Все проекты
-            </a>
-            
-            <a href="/projects/?category=horeca" 
-               class="btn btn-secondary "
-               style="font-size: 0.85rem; padding: 0.65rem 1.5rem;">
-                Гостиничный сектор (HoReCa)
-            </a>
-            
-            <a href="/projects/?category=corporate" 
-               class="btn btn-secondary "
-               style="font-size: 0.85rem; padding: 0.65rem 1.5rem;">
-                Штаб-квартиры и корпоративные офисы
-            </a>
-            
-            <a href="/projects/?category=industrial" 
-               class="btn btn-secondary "
-               style="font-size: 0.85rem; padding: 0.65rem 1.5rem;">
-                Производственные предприятия и холдинги
-            </a>
-            
-            <a href="/projects/?category=residential" 
-               class="btn btn-secondary "
-               style="font-size: 0.85rem; padding: 0.65rem 1.5rem;">
-                Элитная недвижимость и пентхаусы
-            </a>
-            
-        </div>
-
-        <!-- Projects Grid -->
-        <div class="cases-gallery-grid">
-            
-            <article class="case-item-card">
-                <a href="#" class="case-thumb-wrap" style="display: block;">
-                    <img src="static/images/case_hotel.jpg" alt="Реновация лобби и представительских зон пятизвездочного отеля The Oro">
-                    <div class="case-tag-overlay">Гостиничный сектор (HoReCa)</div>
-                </a>
-                <div class="case-item-body">
-                    <div class="case-item-meta">
-                        <span>Москва, Центр</span> • <span>1850 м²</span> • <span>3.5 месяца</span>
-                    </div>
-                    <h3 class="case-item-title">
-                        <a href="#" style="color: inherit; text-decoration: none;">
-                            Реновация лобби и представительских зон пятизвездочного отеля The Oro
-                        </a>
-                    </h3>
-                    <p class="case-item-desc">Комплексный fit-out входной группы, лобби-бара и лаунж-зон. Создание монументальной скульптурной волны из авторской известковой штукатурки с криволинейной подсветкой.</p>
-                    <div class="case-item-scope">
-                        
-                        <span class="scope-pill">Инженерный демонтаж и усиление конструкций</span>
-                        
-                        <span class="scope-pill">Скульптурные рельефные стены ручной работы</span>
-                        
-                        <span class="scope-pill">Бесшовные полы терраццо с латунной расшивкой</span>
-                        
-                    </div>
+        <!-- 1. Concept Selector Cards -->
+        <section aria-label="Шрифтовые концепты" class="concept-cards-grid" id="conceptsGrid">
+            <!-- Concept 1 -->
+            <div class="concept-card active" data-concept="c1" data-font="'Manrope', sans-serif" data-name="Концепт 1: Soft Architectural" data-fontname="Manrope ExtraBold 800" data-note="Ближайший к референсу Balimo: мягкие скругленные стыки, открытые круги, плотный и тактильный вес минеральных штукатурок.">
+                <div class="concept-card-num">Концепт 01 • Референс Balimo</div>
+                <div class="concept-card-title" style="font-family: var(--font-c1-manrope); font-weight: 800;">Soft Architectural</div>
+                <div class="concept-card-font">Шрифт: Manrope (ExtraBold 800)</div>
+                <div class="concept-card-desc">
+                    Мягкая дружелюбная геометрия, круглые формы и устойчивый вес. Ощущение ручного труда и тепла архитектурных поверхностей.
                 </div>
-            </article>
-            
-            <article class="case-item-card">
-                <a href="#" class="case-thumb-wrap" style="display: block;">
-                    <img src="static/images/case_office.jpg" alt="Штаб-квартира и совет директоров инвестиционной корпорации Apex Global">
-                    <div class="case-tag-overlay">Штаб-квартиры и корпоративные офисы</div>
-                </a>
-                <div class="case-item-body">
-                    <div class="case-item-meta">
-                        <span>Москва-Сити</span> • <span>920 м²</span> • <span>2.5 месяца</span>
-                    </div>
-                    <h3 class="case-item-title">
-                        <a href="#" style="color: inherit; text-decoration: none;">
-                            Штаб-квартира и совет директоров инвестиционной корпорации Apex Global
-                        </a>
-                    </h3>
-                    <p class="case-item-desc">Премиальная отделка VIP-этажа: переговорная зала на 16 персон с акцентной фактурной стеной &quot;Антрацитовый срез&quot;, стеклянными акустическими перегородками и авторским столом из массива дуба.</p>
-                    <div class="case-item-scope">
-                        
-                        <span class="scope-pill">Комплексный fit-out под ключ</span>
-                        
-                        <span class="scope-pill">Акустическая подготовка и звукоизоляция 52 дБ</span>
-                        
-                        <span class="scope-pill">Авторская декоративная стена с графитовым пигментом</span>
-                        
-                    </div>
+                <div class="concept-card-sample" style="font-family: var(--font-c1-manrope); font-weight: 800;">
+                    Golden Brush Studio
                 </div>
-            </article>
-            
-            <article class="case-item-card">
-                <a href="#" class="case-thumb-wrap" style="display: block;">
-                    <img src="static/images/hero.jpg" alt="Атриум и представительский блок машиностроительного кластера">
-                    <div class="case-tag-overlay">Производственные предприятия и холдинги</div>
-                </a>
-                <div class="case-item-body">
-                    <div class="case-item-meta">
-                        <span>Калужская область</span> • <span>3400 м²</span> • <span>5 месяцев</span>
-                    </div>
-                    <h3 class="case-item-title">
-                        <a href="#" style="color: inherit; text-decoration: none;">
-                            Атриум и представительский блок машиностроительного кластера
-                        </a>
-                    </h3>
-                    <p class="case-item-desc">Капитальная реновация административно-бытового корпуса промышленного предприятия. Индустриальная эстетика, высокопрочные износостойкие покрытия и монументальные акценты.</p>
-                    <div class="case-item-scope">
-                        
-                        <span class="scope-pill">Замена всех инженерных сетей (ОВ, ВК, ЭОМ)</span>
-                        
-                        <span class="scope-pill">Антивандальные авторские покрытия стен с устойчивостью к истиранию 50 000 циклов</span>
-                        
-                        <span class="scope-pill">Промышленные полимер-бетонные полы</span>
-                        
-                    </div>
-                </div>
-            </article>
-            
-        </div>
-
-        <!-- Section Link to Wall Calculator & Materials -->
-        <div style="margin-top: 5rem; background: var(--bg-secondary); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: clamp(2rem, 4vw, 3.5rem); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem;">
-            <div style="max-width: 600px;">
-                <div class="eyebrow">Интерактивный расчет</div>
-                <h3 style="font-family: var(--font-serif); font-size: 1.8rem; color: var(--text-main); margin: 0 0 0.5rem;">
-                    Рассчитать стоимость фактур по площади стен
-                </h3>
-                <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin: 0;">
-                    Выберите нужное покрытие в нашем каталоге и укажите метраж стен для моментального расчета сметы материалов и работы мастеров.
-                </p>
             </div>
-            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                <a href="materials.html" class="btn btn-primary">Перейти в калькулятор покрытий</a>
-                <button type="button" class="btn btn-secondary btn-open-contact">Связаться с нами</button>
+
+            <!-- Concept 2 -->
+            <div class="concept-card" data-concept="c2" data-font="'Unbounded', sans-serif" data-name="Концепт 2: Monolithic Wide" data-fontname="Unbounded Bold 700 / 800" data-note="Ближайший к референсу ROAD: сверхширокие пропорции, приземленный монументальный центр тяжести, несокрушимый архитектурный объем.">
+                <div class="concept-card-num">Концепт 02 • Референс ROAD</div>
+                <div class="concept-card-title" style="font-family: var(--font-c2-unbounded); font-weight: 700;">Monolithic Wide</div>
+                <div class="concept-card-font">Шрифт: Unbounded (Bold 700 / 800)</div>
+                <div class="concept-card-desc">
+                    Сверхширокий (Extended) монументальный гротеск. Приземленная горизонтальная посадка каменных плит и надежного генподряда.
+                </div>
+                <div class="concept-card-sample" style="font-family: var(--font-c2-unbounded); font-weight: 700;">
+                    Golden Brush Studio
+                </div>
             </div>
+
+            <!-- Concept 3 -->
+            <div class="concept-card" data-concept="c3" data-font="'Wix Madefor Display', sans-serif" data-name="Концепт 3: Contemporary Neo-Grotesque" data-fontname="Wix Madefor Display (ExtraBold 800)" data-note="Европейский уровень без лишнего шума: выверенный швейцарский модернизм, идеален для B2B fit-out флагманских объектов и отелей.">
+                <div class="concept-card-num">Концепт 03 • Европейский лаконизм</div>
+                <div class="concept-card-title" style="font-family: var(--font-c3-wix); font-weight: 800;">Contemporary Neo-Grotesque</div>
+                <div class="concept-card-font">Шрифт: Wix Madefor Display (800)</div>
+                <div class="concept-card-desc">
+                    Максимальная чистота, плотный ритм и архитектурная собранность. Высокий европейский стиль без визуального шума.
+                </div>
+                <div class="concept-card-sample" style="font-family: var(--font-c3-wix); font-weight: 800;">
+                    Golden Brush Studio
+                </div>
+            </div>
+
+            <!-- Concept 4 -->
+            <div class="concept-card" data-concept="c4" data-font="'Geologica', sans-serif" data-name="Концепт 4: Engineered Modernist" data-fontname="Geologica (ExtraBold 800)" data-note="Архитектурная инженерия: плотная посадка, геометрический характер и авторский баланс мастерской художника.">
+                <div class="concept-card-num">Концепт 04 • Тектоника</div>
+                <div class="concept-card-title" style="font-family: var(--font-c4-geologica); font-weight: 800;">Engineered Modernist</div>
+                <div class="concept-card-font">Шрифт: Geologica (ExtraBold 800)</div>
+                <div class="concept-card-desc">
+                    Плотная геометрия, авторский баланс между точным строительным производством и свободой художественного ателье.
+                </div>
+                <div class="concept-card-sample" style="font-family: var(--font-c4-geologica); font-weight: 800;">
+                    Golden Brush Studio
+                </div>
+            </div>
+        </section>
+
+        <!-- Current selection info banner -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem 1.75rem; margin-bottom: 2.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+            <div>
+                <span style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent-bronze); font-weight: 700; display: block; margin-bottom: 0.25rem;">Активный выбор</span>
+                <strong id="activeConceptLabel" style="font-size: 1.2rem; color: var(--text-main);">Концепт 1: Soft Architectural (Manrope ExtraBold 800)</strong>
+                <p id="activeConceptNote" style="font-size: 0.92rem; color: var(--text-muted); margin: 0.25rem 0 0;">Ближайший к референсу Balimo: мягкие скругленные стыки, открытые круги, плотный и тактильный вес минеральных штукатурок.</p>
+            </div>
+            <button id="compareClassicBtn" type="button" style="padding: 0.65rem 1.2rem; background: var(--bg-secondary); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); font-size: 0.88rem; font-weight: 600; color: var(--text-main); cursor: pointer; transition: var(--tr-fast);">
+                Сравнить с прежним шрифтом (Cormorant)
+            </button>
         </div>
+
+        <!-- 2. Section: Live Brand Display in Context -->
+        <section class="showcase-card" aria-label="Демонстрация логотипа">
+            <div class="showcase-card-header">
+                <div>
+                    <h2>1. Фирменное написание и монограмма (Live Logotype)</h2>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0.2rem 0 0;">
+                        Как логотип ведет себя на латинице, кириллице и в компактной монограмме мастерской
+                    </p>
+                </div>
+                <!-- Theme Picker -->
+                <div class="theme-picker" aria-label="Фон для примерки">
+                    <span style="font-size: 0.85rem; color: var(--text-muted); margin-right: 0.25rem;">Фон:</span>
+                    <button type="button" class="theme-picker-btn active" data-theme="theme-light" style="background: #faf8f5;" title="Светлый архитектурный" aria-label="Светлый фон"></button>
+                    <button type="button" class="theme-picker-btn" data-theme="theme-dark" style="background: #14161a;" title="Глубокий темный монолит" aria-label="Темный фон"></button>
+                    <button type="button" class="theme-picker-btn" data-theme="theme-bronze" style="background: #231b14;" title="Атмосферная бронза" aria-label="Бронзовый фон"></button>
+                </div>
+            </div>
+
+            <div class="stage-canvas theme-light" id="brandStage">
+                <div class="brand-display-main">
+                    <div class="brand-specimen-large active-target-font" style="font-family: var(--font-c1-manrope); font-weight: 800;">
+                        Golden Brush Studio
+                    </div>
+                    <div class="brand-specimen-sub">
+                        Atelier &amp; Fit-Out Production • с 2011 года
+                    </div>
+                    <div class="brand-specimen-cyrillic active-target-font" style="font-family: var(--font-c1-manrope); font-weight: 800;">
+                        Голден Браш Студио
+                    </div>
+
+                    <!-- Monograms -->
+                    <div class="monograms-row">
+                        <div class="monogram-item">
+                            <div class="monogram-box active-target-font" style="font-family: var(--font-c1-manrope); font-weight: 800;">
+                                GBS
+                            </div>
+                            <span class="monogram-label">Штамп студии</span>
+                        </div>
+                        <div class="monogram-item">
+                            <div class="monogram-box active-target-font" style="font-family: var(--font-c1-manrope); font-weight: 800;">
+                                ГБС
+                            </div>
+                            <span class="monogram-label">Кириллическая версия</span>
+                        </div>
+                        <div class="monogram-item">
+                            <div class="monogram-box active-target-font" style="font-family: var(--font-c1-manrope); font-weight: 800; border-radius: 50%;">
+                                GB
+                            </div>
+                            <span class="monogram-label">Круглый медальон</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Section: Interactive Type Tester Sandbox -->
+        <section class="showcase-card" aria-label="Интерактивный тестер текста">
+            <div class="showcase-card-header">
+                <div>
+                    <h2>2. Интерактивная песочница: проверьте любое ваше слово</h2>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0.2rem 0 0;">
+                        Напечатайте текст или нажмите на быстрые теги ниже, регулируйте размер и интервалы
+                    </p>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="tester-controls">
+                <div>
+                    <label for="testerInput" style="display: block; font-size: 0.85rem; font-weight: 600; color: var(--text-main); margin-bottom: 0.35rem;">
+                        Текст для проверки:
+                    </label>
+                    <input type="text" id="testerInput" class="tester-input" value="Golden Brush Studio" placeholder="Введите слово или фразу...">
+                </div>
+                <div>
+                    <label for="sizeSlider" style="display: block; font-size: 0.85rem; font-weight: 600; color: var(--text-main); margin-bottom: 0.35rem;">
+                        Размер: <span id="sizeVal">48</span>px
+                    </label>
+                    <input type="range" id="sizeSlider" min="20" max="84" value="48" style="width: 100%; accent-color: var(--accent-bronze);">
+                </div>
+                <div>
+                    <label for="spacingSlider" style="display: block; font-size: 0.85rem; font-weight: 600; color: var(--text-main); margin-bottom: 0.35rem;">
+                        Межбуквенный трекинг: <span id="spacingVal">0</span>px
+                    </label>
+                    <input type="range" id="spacingSlider" min="-3" max="8" value="0" style="width: 100%; accent-color: var(--accent-bronze);">
+                </div>
+            </div>
+
+            <!-- Quick Presets -->
+            <div class="tester-chips">
+                <button type="button" class="tester-chip" data-text="Golden Brush Studio">Golden Brush Studio</button>
+                <button type="button" class="tester-chip" data-text="Художественные стены и микроцемент">Художественные стены и микроцемент</button>
+                <button type="button" class="tester-chip" data-text="Popykin Architectural Atelier">Popykin Architectural Atelier</button>
+                <button type="button" class="tester-chip" data-text="Александр Попыкин">Александр Попыкин</button>
+                <button type="button" class="tester-chip" data-text="от 4 800 ₽ / м² стены">от 4 800 ₽ / м² стены</button>
+                <button type="button" class="tester-chip" data-text="ГЕНПОДРЯД И FIT-OUT">ГЕНПОДРЯД И FIT-OUT</button>
+                <button type="button" class="tester-chip" data-text="GBS PRODUCTION">GBS PRODUCTION</button>
+            </div>
+
+            <!-- Output Box -->
+            <div class="tester-output-box">
+                <div id="testerOutput" class="tester-output-text active-target-font" style="font-family: var(--font-c1-manrope); font-weight: 800; font-size: 48px; letter-spacing: 0px;">
+                    Golden Brush Studio
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Section: Live Site Mockup Simulator -->
+        <section class="showcase-card" aria-label="Симулятор сайта в реальном контексте">
+            <div class="showcase-card-header">
+                <div>
+                    <h2>3. Примерка на реальном экране сайта (Live Mockup)</h2>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0.2rem 0 0;">
+                        Как выбранный шрифт преображает шапку, главный экран, кнопки и цифры реального проекта
+                    </p>
+                </div>
+            </div>
+
+            <div class="mockup-container">
+                <!-- Mockup Header -->
+                <div class="mockup-header-bar">
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <span style="font-size: 1.15rem; font-weight: 700; color: var(--text-main);" class="active-target-font">Golden Brush Studio</span>
+                    </div>
+                    <nav class="mockup-nav" aria-label="Навигация симулятора">
+                        <span>Услуги &amp; Проекты</span>
+                        <span>Материалы</span>
+                        <span>Галерея</span>
+                        <span>Мастерская</span>
+                    </nav>
+                    <div style="font-size: 0.85rem; font-weight: 600; color: var(--accent-bronze);">+7 (926) 357-37-33</div>
+                </div>
+
+                <!-- Mockup Hero -->
+                <div class="mockup-hero-area">
+                    <div class="mockup-hero-eyebrow">
+                        Генподряд и fit-out коммерческих объектов с 2011 года
+                    </div>
+                    <h2 class="mockup-hero-title active-target-font" style="font-family: var(--font-c1-manrope); font-weight: 800;">
+                        Художественные покрытия и архитектурные поверхности
+                    </h2>
+                    <p class="mockup-hero-desc">
+                        Превращаем сложные архитектурные пространства в осязаемое искусство. Собственные рецептуры микроцементов, 
+                        рельефных минералов и монументальных росписей для премиальных объектов.
+                    </p>
+                    <div class="mockup-actions">
+                        <button type="button" class="btn btn-primary">Рассчитать стоимость проекта</button>
+                        <button type="button" class="btn btn-secondary">Смотреть реализованные объекты</button>
+                    </div>
+
+                    <!-- Metrics -->
+                    <div class="mockup-metrics-grid">
+                        <div>
+                            <div class="mockup-metric-val active-target-font" style="font-family: var(--font-c1-manrope); font-weight: 800;">14 лет</div>
+                            <div class="mockup-metric-lbl">Опыта на строительных объектах</div>
+                        </div>
+                        <div>
+                            <div class="mockup-metric-val active-target-font" style="font-family: var(--font-c1-manrope); font-weight: 800;">320+</div>
+                            <div class="mockup-metric-lbl">Сданных проектов под ключ</div>
+                        </div>
+                        <div>
+                            <div class="mockup-metric-val active-target-font" style="font-family: var(--font-c1-manrope); font-weight: 800;">от 4 800 ₽</div>
+                            <div class="mockup-metric-lbl">За м² с нанесением и гарантией</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Section: Side-by-Side Comparison Matrix -->
+        <section class="showcase-card" aria-label="Сравнительная таблица шрифтов">
+            <div class="showcase-card-header">
+                <div>
+                    <h2>4. Сравнение всех концептов бок о бок</h2>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0.2rem 0 0;">
+                        Наглядное сопоставление всех 4 вариантов шрифтов на одних и тех же фирменных строках
+                    </p>
+                </div>
+            </div>
+
+            <div style="overflow-x: auto;">
+                <table class="matrix-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 22%;">Концепт</th>
+                            <th style="width: 28%;">Логотип (Latin)</th>
+                            <th style="width: 26%;">Название (Cyrillic)</th>
+                            <th style="width: 12%;">Монограмма</th>
+                            <th style="width: 12%;">Цифры &amp; Цены</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- C1 -->
+                        <tr>
+                            <td>
+                                <div class="matrix-concept-cell">01. Soft Architectural</div>
+                                <small style="color: var(--text-subtle);">Manrope (ExtraBold 800) • Референс Balimo</small>
+                            </td>
+                            <td>
+                                <div class="matrix-specimen" style="font-family: var(--font-c1-manrope); font-weight: 800;">
+                                    Golden Brush Studio
+                                </div>
+                            </td>
+                            <td>
+                                <div class="matrix-specimen" style="font-family: var(--font-c1-manrope); font-weight: 800;">
+                                    Голден Браш Студио
+                                </div>
+                            </td>
+                            <td>
+                                <div style="font-family: var(--font-c1-manrope); font-weight: 800; font-size: 1.5rem; color: var(--accent-bronze);">
+                                    GBS
+                                </div>
+                            </td>
+                            <td>
+                                <div style="font-family: var(--font-c1-manrope); font-weight: 800; font-size: 1.15rem;">
+                                    4 800 ₽/м²
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- C2 -->
+                        <tr>
+                            <td>
+                                <div class="matrix-concept-cell">02. Monolithic Wide</div>
+                                <small style="color: var(--text-subtle);">Unbounded (Bold 700 / 800) • Референс ROAD</small>
+                            </td>
+                            <td>
+                                <div class="matrix-specimen" style="font-family: var(--font-c2-unbounded); font-weight: 700; font-size: 1.2rem;">
+                                    Golden Brush Studio
+                                </div>
+                            </td>
+                            <td>
+                                <div class="matrix-specimen" style="font-family: var(--font-c2-unbounded); font-weight: 700; font-size: 1.2rem;">
+                                    Голден Браш Студио
+                                </div>
+                            </td>
+                            <td>
+                                <div style="font-family: var(--font-c2-unbounded); font-weight: 800; font-size: 1.4rem; color: var(--accent-bronze);">
+                                    GBS
+                                </div>
+                            </td>
+                            <td>
+                                <div style="font-family: var(--font-c2-unbounded); font-weight: 700; font-size: 1.05rem;">
+                                    4 800 ₽/м²
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- C3 -->
+                        <tr>
+                            <td>
+                                <div class="matrix-concept-cell">03. Contemporary Neo-Grotesque</div>
+                                <small style="color: var(--text-subtle);">Wix Madefor Display (800) • Европейский лаконизм</small>
+                            </td>
+                            <td>
+                                <div class="matrix-specimen" style="font-family: var(--font-c3-wix); font-weight: 800;">
+                                    Golden Brush Studio
+                                </div>
+                            </td>
+                            <td>
+                                <div class="matrix-specimen" style="font-family: var(--font-c3-wix); font-weight: 800;">
+                                    Голден Браш Студио
+                                </div>
+                            </td>
+                            <td>
+                                <div style="font-family: var(--font-c3-wix); font-weight: 800; font-size: 1.5rem; color: var(--accent-bronze);">
+                                    GBS
+                                </div>
+                            </td>
+                            <td>
+                                <div style="font-family: var(--font-c3-wix); font-weight: 800; font-size: 1.15rem;">
+                                    4 800 ₽/м²
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- C4 -->
+                        <tr>
+                            <td>
+                                <div class="matrix-concept-cell">04. Engineered Modernist</div>
+                                <small style="color: var(--text-subtle);">Geologica (800) • Тектоническая инженерия</small>
+                            </td>
+                            <td>
+                                <div class="matrix-specimen" style="font-family: var(--font-c4-geologica); font-weight: 800;">
+                                    Golden Brush Studio
+                                </div>
+                            </td>
+                            <td>
+                                <div class="matrix-specimen" style="font-family: var(--font-c4-geologica); font-weight: 800;">
+                                    Голден Браш Студио
+                                </div>
+                            </td>
+                            <td>
+                                <div style="font-family: var(--font-c4-geologica); font-weight: 800; font-size: 1.5rem; color: var(--accent-bronze);">
+                                    GBS
+                                </div>
+                            </td>
+                            <td>
+                                <div style="font-family: var(--font-c4-geologica); font-weight: 800; font-size: 1.15rem;">
+                                    4 800 ₽/м²
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- Baseline: Cormorant Garamond -->
+                        <tr style="opacity: 0.65; background: rgba(0,0,0,0.015);">
+                            <td>
+                                <div class="matrix-concept-cell" style="color: var(--text-muted);">Прежний вариант (Антиква)</div>
+                                <small style="color: var(--text-subtle);">Cormorant Garamond (500) • Классические засечки</small>
+                            </td>
+                            <td>
+                                <div class="matrix-specimen" style="font-family: var(--font-serif); font-weight: 600;">
+                                    Golden Brush Studio
+                                </div>
+                            </td>
+                            <td>
+                                <div class="matrix-specimen" style="font-family: var(--font-serif); font-weight: 600;">
+                                    Голден Браш Студио
+                                </div>
+                            </td>
+                            <td>
+                                <div style="font-family: var(--font-serif); font-weight: 600; font-size: 1.5rem; color: var(--accent-bronze);">
+                                    GBS
+                                </div>
+                            </td>
+                            <td>
+                                <div style="font-family: var(--font-serif); font-weight: 600; font-size: 1.15rem;">
+                                    4 800 ₽/м²
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 6. Decision Card -->
+        <section class="decision-card" aria-label="Фиксация выбора">
+            <div class="eyebrow" style="color: var(--accent-gold); margin-bottom: 0.75rem;">Итоговое согласование</div>
+            <h3>Определились с направлением?</h3>
+            <p>
+                Нажмите кнопку ниже — решение с названием выбранного концепта автоматически скопируется в буфер обмена 
+                в виде готового ответа для отправки в Telegram.
+            </p>
+            <button type="button" class="copy-btn" id="copyDecisionBtn">
+                Скопировать выбор в буфер обмена для Telegram
+            </button>
+        </section>
     </div>
+</main>
+
+<!-- Toast Notification -->
+<div id="copyToast" class="copy-toast" role="alert">
+    Решение скопировано в буфер обмена! Можно вставить в Telegram.
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    let currentConcept = 'c1';
+    let currentFont = "'Manrope', sans-serif";
+    let currentConceptName = "Концепт 1: Soft Architectural (Manrope ExtraBold 800)";
+    let isClassicMode = false;
+
+    const cards = document.querySelectorAll('.concept-card');
+    const activeLabel = document.getElementById('activeConceptLabel');
+    const activeNote = document.getElementById('activeConceptNote');
+    const targets = document.querySelectorAll('.active-target-font');
+    const compareClassicBtn = document.getElementById('compareClassicBtn');
+    const copyDecisionBtn = document.getElementById('copyDecisionBtn');
+    const copyToast = document.getElementById('copyToast');
+
+    // Type Tester Elements
+    const testerInput = document.getElementById('testerInput');
+    const sizeSlider = document.getElementById('sizeSlider');
+    const sizeVal = document.getElementById('sizeVal');
+    const spacingSlider = document.getElementById('spacingSlider');
+    const spacingVal = document.getElementById('spacingVal');
+    const testerOutput = document.getElementById('testerOutput');
+    const chips = document.querySelectorAll('.tester-chip');
+
+    // Theme Picker Elements
+    const themeBtns = document.querySelectorAll('.theme-picker-btn');
+    const brandStage = document.getElementById('brandStage');
+
+    function applyConcept(card) {
+        cards.forEach(c => c.classList.remove('active'));
+        card.classList.add('active');
+
+        currentConcept = card.getAttribute('data-concept');
+        currentFont = card.getAttribute('data-font');
+        currentConceptName = card.getAttribute('data-name') + " (" + card.getAttribute('data-fontname') + ")";
+        const note = card.getAttribute('data-note');
+
+        if (activeLabel) activeLabel.textContent = currentConceptName;
+        if (activeNote) activeNote.textContent = note;
+
+        // Update active target fonts on the page
+        targets.forEach(el => {
+            el.style.fontFamily = currentFont;
+        });
+
+        // Also update real site header brand font!
+        document.documentElement.style.setProperty('--font-brand', currentFont);
+
+        if (testerOutput) {
+            testerOutput.style.fontFamily = currentFont;
+        }
+
+        isClassicMode = false;
+        if (compareClassicBtn) {
+            compareClassicBtn.textContent = 'Сравнить с прежним шрифтом (Cormorant)';
+            compareClassicBtn.style.background = 'var(--bg-secondary)';
+        }
+    }
+
+    cards.forEach(card => {
+        card.addEventListener('click', function() {
+            applyConcept(this);
+        });
+    });
+
+    // Compare with classic Cormorant
+    if (compareClassicBtn) {
+        compareClassicBtn.addEventListener('click', function() {
+            if (!isClassicMode) {
+                targets.forEach(el => {
+                    el.style.fontFamily = "var(--font-serif)";
+                });
+                document.documentElement.style.setProperty('--font-brand', 'var(--font-serif)');
+                if (testerOutput) testerOutput.style.fontFamily = "var(--font-serif)";
+                this.textContent = 'Вернуть выбранный концепт (' + currentConcept.toUpperCase() + ')';
+                this.style.background = 'var(--accent-bronze)';
+                this.style.color = '#ffffff';
+                isClassicMode = true;
+            } else {
+                targets.forEach(el => {
+                    el.style.fontFamily = currentFont;
+                });
+                document.documentElement.style.setProperty('--font-brand', currentFont);
+                if (testerOutput) testerOutput.style.fontFamily = currentFont;
+                this.textContent = 'Сравнить с прежним шрифтом (Cormorant)';
+                this.style.background = 'var(--bg-secondary)';
+                this.style.color = 'var(--text-main)';
+                isClassicMode = false;
+            }
+        });
+    }
+
+    // Tester Input sync
+    if (testerInput && testerOutput) {
+        testerInput.addEventListener('input', function() {
+            testerOutput.textContent = this.value || 'Golden Brush Studio';
+        });
+    }
+
+    // Sliders
+    if (sizeSlider && sizeVal && testerOutput) {
+        sizeSlider.addEventListener('input', function() {
+            sizeVal.textContent = this.value;
+            testerOutput.style.fontSize = this.value + 'px';
+        });
+    }
+
+    if (spacingSlider && spacingVal && testerOutput) {
+        spacingSlider.addEventListener('input', function() {
+            spacingVal.textContent = this.value;
+            testerOutput.style.letterSpacing = this.value + 'px';
+        });
+    }
+
+    // Preset Chips
+    chips.forEach(chip => {
+        chip.addEventListener('click', function() {
+            const text = this.getAttribute('data-text');
+            if (testerInput && testerOutput) {
+                testerInput.value = text;
+                testerOutput.textContent = text;
+            }
+        });
+    });
+
+    // Theme Picker
+    themeBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            themeBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            const theme = this.getAttribute('data-theme');
+            if (brandStage) {
+                brandStage.className = 'stage-canvas ' + theme;
+            }
+        });
+    });
+
+    // Copy Decision for Telegram
+    if (copyDecisionBtn) {
+        copyDecisionBtn.addEventListener('click', function() {
+            const msg = "Выбрали " + currentConceptName + " для Golden Brush Studio. Шрифт основательный, лаконичный и идеально отвечает европейскому уровню.";
+            navigator.clipboard.writeText(msg).then(() => {
+                showToast("Скопировано: «" + currentConceptName + "»");
+            }).catch(() => {
+                showToast("Скопировано решение для Telegram!");
+            });
+        });
+    }
+
+    function showToast(text) {
+        if (!copyToast) return;
+        copyToast.textContent = text;
+        copyToast.classList.add('show');
+        setTimeout(() => {
+            copyToast.classList.remove('show');
+        }, 3200);
+    }
+});
+</script>
 
     </main>
 
