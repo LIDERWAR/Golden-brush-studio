@@ -3,7 +3,7 @@
    Architectural Luxury & Contemporary Art Authority
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Geologica:wght@400;600;700;800;900&family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Syne:wght@400;600;700;800&family=Unbounded:wght@400;600;700;800;900&family=Wix+Madefor+Display:wght@500;600;700;800&subset=cyrillic&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Forum&family=Montserrat+Alternates:wght@600;700;800&family=Philosopher:wght@400;700&family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Syne:wght@400;600;700;800&family=Tenor+Sans&family=Unbounded:wght@400;600;700;800;900&subset=cyrillic&display=swap');
 
 :root {
   /* Color Palette: DaWalls Light Architectural Luxury */
@@ -33,11 +33,13 @@
   --font-brand: var(--font-serif);
   --font-heading: var(--font-serif);
   
-  /* Curated Typography Options for Brand Identity */
-  --font-c1-manrope: 'Manrope', sans-serif;
-  --font-c2-unbounded: 'Unbounded', sans-serif;
-  --font-c3-wix: 'Wix Madefor Display', sans-serif;
-  --font-c4-geologica: 'Geologica', sans-serif;
+  /* Curated Typography Archetypes for Brand Identity */
+  --font-c1-forum: 'Forum', serif;
+  --font-c2-philosopher: 'Philosopher', sans-serif;
+  --font-c3-montserrat-alt: 'Montserrat Alternates', sans-serif;
+  --font-c4-playfair: 'Playfair Display', Georgia, serif;
+  --font-c5-tenor: 'Tenor Sans', sans-serif;
+  --font-c6-unbounded: 'Unbounded', sans-serif;
   
   /* Transitions */
   --tr-smooth: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
@@ -3775,15 +3777,15 @@ img {
   line-height: 1.6;
 }
 
-/* Concept Cards Bar */
+/* Concept Cards Bar (6 archetypes) */
 .concept-cards-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.25rem;
   margin-bottom: 2.5rem;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1100px) {
   .concept-cards-grid {
     grid-template-columns: repeat(2, 1fr);
   }
