@@ -20,6 +20,8 @@ def build_docs():
         'materials': ('/materials/', 'materials'),
         'projects': ('/projects/', 'projects'),
         'fonts': ('/fonts/', 'fonts'),
+        'partners': ('/partners/', 'partners'),
+        'portal': ('/portal/', 'portal'),
     }
 
     raw_htmls = {}
@@ -76,6 +78,8 @@ def build_docs():
         html = html.replace('href="/gallery/"', 'href="gallery.html"')
         html = html.replace('href="/projects/"', 'href="projects.html"')
         html = html.replace('href="/fonts/"', 'href="fonts.html"')
+        html = html.replace('href="/partners/"', 'href="partners.html"')
+        html = html.replace('href="/portal/"', 'href="portal.html"')
 
         if page_type == 'main':
             html = html.replace('href="/#', 'href="#')

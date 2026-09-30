@@ -1,0 +1,188 @@
+{% extends 'base.html' %}
+
+{% block title %}Личный кабинет: {{ data.project.title }} — Golden Brush Studio{% endblock %}
+{% block meta_desc %}Цифровой трекер объекта {{ data.project.title }}: контроль стадий работ, бэкстейдж мастерской, сметы, договор и быстрая оплата этапа через СБП.{% endblock %}
+
+{% block content %}
+<section class="portal-dashboard-section">
+    <div class="container portal-dashboard-container">
+        <!-- Top Bar: Greeting & Object Switcher -->
+        <header class="portal-header-bar">
+            <div>
+                <div class="eyebrow">Личный кабинет заказчика • Golden Brush Studio</div>
+                <h1 class="portal-title">
+                    {% if data.client.full_name %}{{ data.client.full_name }}{% else %}{{ data.client.full_name }}{% endif %}
+                </h1>
+                <div class="portal-meta-badges">
+                    <span class="portal-badge"><i class="fas fa-phone-alt"></i> {{ data.client.phone }}</span>
+                    {% if data.client.company %}<span class="portal-badge"><i class="fas fa-building"></i> {{ data.client.company }}</span>{% endif %}
+                    {% if is_demo %}<span class="portal-badge portal-badge-demo">Режим демонстрации</span>{% endif %}
+                </div>
+            </div>
+
+            <div class="portal-header-actions">
+                <a href="tel:{{ data.project.artisan_phone|default:'+74958904422' }}" class="btn btn-primary">
+                    Связаться с куратором
+                </a>
+                <a href="{% url 'portal:logout' %}" class="btn btn-secondary btn-portal-logout">
+                    Выйти
+                </a>
+            </div>
+        </header>
+
+        <!-- Project Overview Card -->
+        <div class="portal-project-card">
+            <div class="project-card-header">
+                <div>
+                    <span class="project-status-label">Текущий объект в производстве:</span>
+                    <h2 class="project-object-title">{{ data.project.title }}</h2>
+                    <div class="project-details-row">
+                        <span><strong>Договор:</strong> {{ data.project.contract_number }}</span>
+                        <span><strong>Адрес:</strong> {{ data.project.address }}</span>
+                        <span><strong>Площадь:</strong> {{ data.project.total_area }}</span>
+                        <span><strong>Сдача:</strong> {{ data.project.estimated_completion }}</span>
+                    </div>
+                </div>
+
+                <div class="project-progress-circle-wrap">
+                    <div class="progress-percent-val">{{ data.project.progress_percent }}%</div>
+                    <span class="progress-percent-label">Готовность объекта</span>
+                </div>
+            </div>
+
+            <!-- Visual Progress Bar -->
+            <div class="portal-progress-bar-wrap" aria-label="Шкала готовности объекта">
+                <div class="portal-progress-bar-fill" style="width: {{ data.project.progress_percent }}%;"></div>
+            </div>
+
+            <!-- Financial Summary Ledger -->
+            <div class="project-financial-grid">
+                <div class="fin-box">
+                    <span class="fin-label">Сумма по смете под ключ</span>
+                    <span class="fin-value">{{ data.project.total_amount|floatformat:0 }} ₽</span>
+                </div>
+                <div class="fin-box">
+                    <span class="fin-label">Оплачено (аванс + материалы)</span>
+                    <span class="fin-value fin-paid">{{ data.project.paid_amount|floatformat:0 }} ₽</span>
+                </div>
+                <div class="fin-box">
+                    <span class="fin-label">Остаток к расчету по КС-2</span>
+                    <span class="fin-value fin-remain">{{ data.project.remaining_amount|floatformat:0 }} ₽</span>
+                </div>
+                <div class="fin-box fin-action-box">
+                    <span class="fin-label">Статус расчетов</span>
+                    <span class="fin-value" style="font-size: 1.1rem; color: #2e7d32;">Аванс внесен (50%)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2 Columns: Stages Tracker (Left) & Curator + Actions (Right) -->
+        <div class="portal-grid-two-cols">
+            <!-- Left: Stages Timeline -->
+            <div class="portal-stages-col">
+                <div class="portal-section-header">
+                    <h2>Инженерный трекер стадий реализации</h2>
+                    <p>Прозрачный контроль выполнения технологической карты декоративных работ</p>
+                </div>
+
+                <div class="stages-timeline">
+                    {% for stage in data.stages %}
+                    <div class="stage-timeline-item stage-{{ stage.status }}">
+                        <div class="stage-node-indicator">
+                            {% if stage.status == 'completed' %}
+                            <i class="fas fa-check"></i>
+                            {% elif stage.status == 'in_progress' %}
+                            <span class="pulse-dot"></span>
+                            {% else %}
+                            <span class="stage-number">{{ stage.step_number }}</span>
+                            {% endif %}
+                        </div>
+
+                        <div class="stage-content-card">
+                            <div class="stage-card-top">
+                                <span class="stage-status-pill stage-pill-{{ stage.status }}">
+                                    {% if stage.status == 'completed' %}Завершен
+                                    {% elif stage.status == 'in_progress' %}В работе сейчас
+                                    {% else %}Ожидает начала{% endif %}
+                                </span>
+                                <span class="stage-date">{{ stage.date_label }}</span>
+                            </div>
+
+                            <h3 class="stage-title">{{ stage.title }}</h3>
+                            <p class="stage-description">{{ stage.description }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Right Col: Curator Card & Project Documents -->
+            <div class="portal-sidebar-col">
+                <!-- Curator Card -->
+                <div class="curator-card">
+                    <div class="curator-badge">Ведущий технолог объекта</div>
+                    <h3 class="curator-name">{{ data.project.lead_artisan }}</h3>
+                    <p class="curator-desc">
+                        Личный контроль подготовки оснований, колеровки и финишного нанесения минеральных фактур.
+                    </p>
+                    <div class="curator-actions">
+                        <a href="tel:{{ data.project.artisan_phone|default:'+74958904422' }}" class="btn btn-secondary curator-phone-btn">
+                            {{ data.project.artisan_phone|default:'+7 (495) 890-44-22' }}
+                        </a>
+                        <a href="https://t.me/gbstudio" target="_blank" rel="noopener" class="btn btn-primary curator-tg-btn">
+                            Написать в Telegram
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Digital Documents Hub -->
+                <div class="documents-card">
+                    <div class="portal-section-header">
+                        <h2>Документы объекта</h2>
+                        <p>Официальные сметы, договор и акты</p>
+                    </div>
+
+                    <div class="documents-list">
+                        {% for doc in data.documents %}
+                        <a href="{{ doc.url|default:'#' }}" class="doc-item" onclick="if(this.getAttribute('href').startsWith('#')) { alert('Документ скачивается: {{ doc.title|escapejs }}'); return false; }">
+                            <div class="doc-icon-wrap">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div class="doc-info">
+                                <span class="doc-title">{{ doc.title }}</span>
+                                <span class="doc-meta">{{ doc.doc_type_display }} • {{ doc.size_label }}</span>
+                            </div>
+                            <div class="doc-action">
+                                <span class="doc-download-text">Скачать</span>
+                            </div>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section: Live Photo Feed (Work in Progress Backstage) -->
+        <section class="portal-photos-section">
+            <div class="portal-section-header">
+                <h2>Живой фотоотчет со стройки и из мастерской</h2>
+                <p>Фиксация этапов подготовки, нанесения фактур и контроля геометрии мастерами</p>
+            </div>
+
+            <div class="portal-photos-grid">
+                {% for photo in data.photos %}
+                <div class="photo-card">
+                    <div class="photo-img-wrap">
+                        <img src="{{ photo.display_url }}" alt="{{ photo.caption }}">
+                        <div class="photo-date-chip">{{ photo.date|default:'Сентябрь 2026' }}</div>
+                    </div>
+                    <div class="photo-card-caption">
+                        {{ photo.caption }}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+</section>
+{% endblock %}

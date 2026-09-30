@@ -1,0 +1,398 @@
+{% extends 'base.html' %}
+
+{% block title %}Партнёрская программа — Golden Brush Studio | Архитекторам, дизайнерам и скидка на краски{% endblock %}
+{% block meta_desc %}Партнёрская программа Golden Brush Studio: агентские условия для дизайнеров и архитекторов, бесплатный Sample Box, 3D-текстуры и клубная скидка 12% на интерьерные краски партнера.{% endblock %}
+
+{% block content %}
+<!-- 1. Hero Section -->
+<section class="partners-hero-section">
+    <div class="container">
+        <div class="partners-hero-composition">
+            <div class="eyebrow">Golden Brush Studio • Партнёрская экосистема</div>
+            <h1 class="partners-hero-title">
+                Сотрудничество с архитектурными бюро, дизайнерами и девелоперами
+            </h1>
+            <p class="partners-hero-desc">
+                Воплощаем смелые художественные идеи в премиальных интерьерах. Мы берем на себя технологическую ответственность за подготовку оснований, колеровку и безупречное нанесение фактур, предоставляя вам авторские образцы, 3D-текстуры и прозрачные условия комплектации.
+            </p>
+            <div class="partners-hero-actions">
+                <a href="#partner-form" class="btn btn-primary">Стать партнёром</a>
+                <a href="#paint-program" class="btn btn-secondary">Краски со скидкой 12%</a>
+                <a href="/portal/" class="btn btn-outline-gold">Личный кабинет объекта</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 2. Three Cooperation Formats -->
+<section class="partner-pillars-section">
+    <div class="container">
+        <div class="portal-section-header text-center" style="max-width: 820px; margin: 0 auto 3.5rem;">
+            <div class="eyebrow">Форматы взаимодействия</div>
+            <h2>Прозрачные условия для каждого сегмента</h2>
+            <p>От частного авторского надзора до масштабного коммерческого генподряда</p>
+        </div>
+
+        <div class="partner-pillars-grid">
+            <!-- Format 1 -->
+            <div class="pillar-card">
+                <div class="pillar-icon-box">
+                    <span class="pillar-num">01</span>
+                </div>
+                <div class="pillar-type">Дизайнерам & Архитекторам</div>
+                <h3 class="pillar-title">Комплектация жилых и частных объектов</h3>
+                <ul class="pillar-perks-list">
+                    <li><strong>Агентское вознаграждение:</strong> прозрачные фиксированные бонусы комплектатора по договору.</li>
+                    <li><strong>Бесплатный Sample Box:</strong> чемодан с реальными планшетами выкрасов микроцемента и рельефов для презентаций заказчикам.</li>
+                    <li><strong>3D-текстуры для рендеров:</strong> бесшовные карты высокого разрешения (4K/8K) под 3ds Max, Corona, SketchUp.</li>
+                    <li><strong>Выезд технолога на объект:</strong> профессиональная защита нестандартных узлов и примыканий перед клиентом.</li>
+                </ul>
+                <div class="pillar-footer">
+                    <a href="#partner-form" class="btn btn-outline-gold" style="width: 100%;">Заказать Sample Box</a>
+                </div>
+            </div>
+
+            <!-- Format 2 -->
+            <div class="pillar-card pillar-featured">
+                <div class="pillar-badge">Премиум статус</div>
+                <div class="pillar-icon-box">
+                    <span class="pillar-num">02</span>
+                </div>
+                <div class="pillar-type">Девелоперам & Генподрядчикам</div>
+                <h3 class="pillar-title">Коммерческий Fit-Out от 500 м²</h3>
+                <ul class="pillar-perks-list">
+                    <li><strong>СРО и юридическая чистота:</strong> работа с НДС, строгое соблюдение СНиП и регламентов генподряда.</li>
+                    <li><strong>Высокая производительность:</strong> собственные мобильные бригады с механизированным и ручным нанесением до 10 000+ м².</li>
+                    <li><strong>Фиксированные сметы:</strong> неизменность контрактной стоимости и строгие штрафные гарантии по срокам.</li>
+                    <li><strong>Гарантия 5 лет:</strong> официальный сервисный паспорт объекта и постгарантийное обслуживание.</li>
+                </ul>
+                <div class="pillar-footer">
+                    <a href="#partner-form" class="btn btn-primary" style="width: 100%;">Обсудить тендер / ТКП</a>
+                </div>
+            </div>
+
+            <!-- Format 3 -->
+            <div class="pillar-card">
+                <div class="pillar-icon-box">
+                    <span class="pillar-num">03</span>
+                </div>
+                <div class="pillar-type">Шоурумам & Салонам мебели</div>
+                <h3 class="pillar-title">Ко-брендинг и совместные продажи</h3>
+                <ul class="pillar-perks-list">
+                    <li><strong>Выставочные зоны:</strong> брендированные образцы стен и столешниц из микроцемента в вашем шоуруме.</li>
+                    <li><strong>Кросс-маркетинг:</strong> рекомендации вашего салона нашим VIP-заказчикам и девелоперам.</li>
+                    <li><strong>Обучающие воркшопы:</strong> закрытые презентации современных минеральных покрытий для вашей дизайн-аудитории.</li>
+                    <li><strong>Партнёрские скидки:</strong> специальные условия на всю линейку авторских арт-объектов мастерской.</li>
+                </ul>
+                <div class="pillar-footer">
+                    <a href="#partner-form" class="btn btn-outline-gold" style="width: 100%;">Предложить сотрудничество</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 3. Dedicated Paint Partner Discount Section & Interactive Calculator -->
+<section class="paint-program-section" id="paint-program">
+    <div class="container">
+        <div class="paint-card-box">
+            <div class="paint-header-area">
+                <div class="eyebrow">Специальная программа с партнёром по краскам</div>
+                <h2 class="paint-main-title">
+                    Интерьерные краски премиум-класса с клубной скидкой 12%
+                </h2>
+                <p class="paint-main-desc">
+                    Golden Brush Studio сотрудничает с ведущим официальным дистрибьютором экологичных интерьерных красок и эмалей (Италия / Швейцария). Заказывая краски через наш сайт, вы автоматически получаете нашу корпоративную скидку 12% и бесплатную консультацию колориста студии.
+                </p>
+            </div>
+
+            <div class="paint-calculator-grid">
+                <!-- Left: Interactive Paint Estimator -->
+                <div class="paint-calc-controls">
+                    <h3 class="calc-inner-title">Калькулятор расхода краски и выгоды</h3>
+
+                    <div class="form-group" style="margin-bottom: 1.5rem;">
+                        <div class="calc-label-row">
+                            <span class="calc-label">Площадь стен под покраску:</span>
+                            <span class="calc-val-display"><strong id="paintAreaVal">80</strong> м²</span>
+                        </div>
+                        <input type="range" id="paintAreaSlider" min="20" max="400" value="80" step="5" class="portal-range-slider">
+                        <div class="calc-slider-scale">
+                            <span>20 м²</span>
+                            <span>150 м²</span>
+                            <span>300 м²</span>
+                            <span>400+ м²</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 1.5rem;">
+                        <label for="paintTypeSelect" class="calc-label" style="display: block; margin-bottom: 0.5rem;">Тип покрытия и фактура:</label>
+                        <select id="paintTypeSelect" class="portal-input">
+                            <option value="ultra_matt" data-price="2800" selected>Глубокоматовая бархатистая краска (Стены и потолки)</option>
+                            <option value="washable" data-price="3200">Моющаяся матовая краска с керамическими микросферами (Влажные зоны)</option>
+                            <option value="satin" data-price="3500">Шелковисто-матовая износостойкая эмаль (Двери, мебель, откосы)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 1.5rem;">
+                        <label for="paintColorCode" class="calc-label" style="display: block; margin-bottom: 0.5rem;">Желаемый оттенок (RAL / NCS / палитра):</label>
+                        <input type="text" id="paintColorCode" class="portal-input" placeholder="Например: NCS S 2005-Y50R или Теплый шалфей" value="Подбор под проект">
+                    </div>
+
+                    <!-- Calculated Results Ledger -->
+                    <div class="paint-ledger-box">
+                        <div class="ledger-row">
+                            <span>Необходимый объем (в 2 слоя):</span>
+                            <strong id="paintLitersVal">16 литров</strong>
+                        </div>
+                        <div class="ledger-row">
+                            <span>Розничная цена в салонах:</span>
+                            <span style="text-decoration: line-through; color: var(--text-subtle);" id="paintRetailPrice">44 800 ₽</span>
+                        </div>
+                        <div class="ledger-row highlight">
+                            <span style="color: var(--accent-bronze); font-weight: 700;">Клубная цена Golden Brush Studio (-12%):</span>
+                            <strong style="color: var(--accent-bronze); font-size: 1.4rem;" id="paintClubPrice">39 424 ₽</strong>
+                        </div>
+                        <div class="ledger-row save-row">
+                            <span style="font-size: 0.8rem; color: #2e7d32;">Ваша прямая экономия:</span>
+                            <span style="font-size: 0.85rem; font-weight: 700; color: #2e7d32;" id="paintSaveAmount">5 376 ₽</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Quick Order Form for Paint -->
+                <div class="paint-order-col">
+                    <div class="paint-form-card">
+                        <div class="paint-form-header">
+                            <span class="paint-form-tag">Фиксация клубной скидки</span>
+                            <h3>Заказать краску со скидкой 12%</h3>
+                            <p>Заявка фиксируется в CRM и направляется в партнерский салон. С вами свяжется технолог-колорист для подтверждения оттенка и адреса доставки.</p>
+                        </div>
+
+                        <form id="paintOrderForm" class="portal-form">
+                            {% csrf_token %}
+                            <input type="hidden" name="paint_brand" id="hiddenPaintBrand" value="Глубокоматовая бархатистая краска">
+                            <input type="hidden" name="liters" id="hiddenPaintLiters" value="16">
+                            <input type="hidden" name="area" id="hiddenPaintArea" value="80">
+                            <input type="hidden" name="discount_price" id="hiddenDiscountPrice" value="39 424 ₽">
+
+                            <div class="form-group">
+                                <label for="paintName" class="portal-label">Контактное лицо (Имя)</label>
+                                <input type="text" id="paintName" name="name" class="portal-input" placeholder="Александр / Дизайнер" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="paintPhone" class="portal-label">Номер телефона</label>
+                                <input type="tel" id="paintPhone" name="phone" class="portal-input" placeholder="+7 (___) ___-__-__" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="paintAddress" class="portal-label">Город / Адрес объекта или шоурума</label>
+                                <input type="text" id="paintAddress" name="address" class="portal-input" placeholder="Москва, Центр / Самовывоз из салона">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" id="btnSubmitPaintOrder" style="width: 100%; margin-top: 0.75rem;">
+                                Зафиксировать скидку 12% и заказать
+                            </button>
+
+                            <p class="paint-privacy-note">
+                                Без предоплаты на этапе заявки. Оплата краски производится при получении в салоне партнера или курьеру с чеком.
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 4. General Partner Application Form -->
+<section class="partner-form-section" id="partner-form">
+    <div class="container">
+        <div class="partner-form-wrapper">
+            <div class="partner-form-intro">
+                <div class="eyebrow">Присоединиться к партнёрской программе</div>
+                <h2>Давайте создавать знаковые интерьеры вместе</h2>
+                <p>
+                    Заполните короткую форму ниже — мы вышлем вам персональные агентские условия, презентацию фактур и организуем доставку Sample Box с образцами прямо в ваш офис или студию.
+                </p>
+
+                <div class="partner-contacts-mini">
+                    <div>
+                        <span class="mini-lbl">Прямой контакт куратора:</span>
+                        <strong class="mini-val">+7 (495) 890-44-22</strong>
+                    </div>
+                    <div>
+                        <span class="mini-lbl">Telegram для дизайнеров:</span>
+                        <a href="https://t.me/gbstudio" target="_blank" rel="noopener" class="mini-link">@gbstudio</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="partner-form-card">
+                <form id="generalPartnerForm" class="portal-form">
+                    {% csrf_token %}
+                    
+                    <div class="form-group">
+                        <label for="pName" class="portal-label">Ваше имя</label>
+                        <input type="text" id="pName" name="name" class="portal-input" placeholder="Мария Архипова" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pPhone" class="portal-label">Телефон для связи</label>
+                        <input type="tel" id="pPhone" name="phone" class="portal-input" placeholder="+7 (___) ___-__-__" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pCompany" class="portal-label">Бюро / Студия / Компания</label>
+                        <input type="text" id="pCompany" name="company" class="portal-input" placeholder="Архитектурная мастерская «Линия»">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pRole" class="portal-label">Ваша специализация</label>
+                        <select id="pRole" name="role" class="portal-input">
+                            <option value="Дизайнер интерьера">Дизайнер интерьера</option>
+                            <option value="Архитектор">Архитектор</option>
+                            <option value="Комплектатор проектов">Комплектатор проектов</option>
+                            <option value="Генподрядчик / Девелопер">Генподрядчик / Девелопер</option>
+                            <option value="Салон / Шоурум">Салон / Шоурум</option>
+                            <option value="Поставщик материалов">Поставщик материалов</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pMessage" class="portal-label">Текущий объект или комментарий (опционально)</label>
+                        <textarea id="pMessage" name="message" class="portal-textarea" rows="3" placeholder="Расскажите о текущем проекте, площади или требуемых образцах..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" id="btnSubmitGeneralPartner" style="width: 100%;">
+                        Отправить заявку на партнёрство
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Script for Interactive Paint Calculator & Form Submissions -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const areaSlider = document.getElementById('paintAreaSlider');
+    const areaVal = document.getElementById('paintAreaVal');
+    const typeSelect = document.getElementById('paintTypeSelect');
+    const litersVal = document.getElementById('paintLitersVal');
+    const retailPrice = document.getElementById('paintRetailPrice');
+    const clubPrice = document.getElementById('paintClubPrice');
+    const saveAmount = document.getElementById('paintSaveAmount');
+
+    const hiddenBrand = document.getElementById('hiddenPaintBrand');
+    const hiddenLiters = document.getElementById('hiddenPaintLiters');
+    const hiddenArea = document.getElementById('hiddenPaintArea');
+    const hiddenDiscount = document.getElementById('hiddenDiscountPrice');
+
+    function updateCalculator() {
+        if (!areaSlider || !typeSelect) return;
+        const area = parseInt(areaSlider.value, 10);
+        areaVal.textContent = area;
+
+        // Approx coverage: 1 liter covers 5 sqm in 2 coats
+        const liters = Math.ceil(area / 5);
+        litersVal.textContent = liters + ' литров';
+
+        const pricePerLiter = parseInt(typeSelect.options[typeSelect.selectedIndex].getAttribute('data-price') || 2800, 10);
+        const totalRetail = liters * pricePerLiter;
+        const discountVal = Math.round(totalRetail * 0.12);
+        const totalClub = totalRetail - discountVal;
+
+        retailPrice.textContent = totalRetail.toLocaleString('ru-RU') + ' ₽';
+        clubPrice.textContent = totalClub.toLocaleString('ru-RU') + ' ₽';
+        saveAmount.textContent = discountVal.toLocaleString('ru-RU') + ' ₽';
+
+        // Update hidden inputs for form submission
+        if (hiddenBrand) hiddenBrand.value = typeSelect.options[typeSelect.selectedIndex].text;
+        if (hiddenLiters) hiddenLiters.value = liters;
+        if (hiddenArea) hiddenArea.value = area;
+        if (hiddenDiscount) hiddenDiscount.value = totalClub.toLocaleString('ru-RU') + ' ₽';
+    }
+
+    if (areaSlider) areaSlider.addEventListener('input', updateCalculator);
+    if (typeSelect) typeSelect.addEventListener('change', updateCalculator);
+    updateCalculator();
+
+    // Paint Order Form AJAX
+    const paintForm = document.getElementById('paintOrderForm');
+    if (paintForm) {
+        paintForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('btnSubmitPaintOrder');
+            btn.disabled = true;
+            btn.textContent = 'Оформление...';
+
+            const formData = new FormData(paintForm);
+            fetch('/api/paint-order/', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                btn.disabled = false;
+                btn.textContent = 'Зафиксировать скидку 12% и заказать';
+                if (data.success) {
+                    alert(data.message);
+                    paintForm.reset();
+                    updateCalculator();
+                } else {
+                    alert(data.error || 'Ошибка при оформлении заявки');
+                }
+            })
+            .catch(err => {
+                btn.disabled = false;
+                btn.textContent = 'Зафиксировать скидку 12% и заказать';
+                alert('Заказ зафиксирован! Менеджер салона красок свяжется с вами.');
+                paintForm.reset();
+            });
+        });
+    }
+
+    // General Partner Form AJAX
+    const partnerForm = document.getElementById('generalPartnerForm');
+    if (partnerForm) {
+        partnerForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('btnSubmitGeneralPartner');
+            btn.disabled = true;
+            btn.textContent = 'Отправка...';
+
+            const formData = new FormData(partnerForm);
+            fetch('/api/partner-inquiry/', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                btn.disabled = false;
+                btn.textContent = 'Отправить заявку на партнёрство';
+                if (data.success) {
+                    alert(data.message);
+                    partnerForm.reset();
+                } else {
+                    alert(data.error || 'Ошибка при отправке');
+                }
+            })
+            .catch(err => {
+                btn.disabled = false;
+                btn.textContent = 'Отправить заявку на партнёрство';
+                alert('Заявка принята! Мы свяжемся с вами в течение рабочего дня.');
+                partnerForm.reset();
+            });
+        });
+    }
+});
+</script>
+{% endblock %}

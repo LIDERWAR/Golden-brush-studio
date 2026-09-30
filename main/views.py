@@ -319,4 +319,112 @@ def fonts_presentation(request):
     return render(request, 'fonts_presentation.html')
 
 
+def partners_view(request):
+    """Выделенная страница Партнёрской программы: архитекторам, дизайнерам, девелоперам и заказ красок со скидкой"""
+    partners = Partner.objects.filter(is_active=True).order_by('order', 'id')
+    home_config = HomePageConfig.get_solo()
+    context = {
+        'partners': partners,
+        'home_config': home_config,
+    }
+    return render(request, 'partners.html', context)
+
+
+@require_POST
+def submit_partner_inquiry(request):
+    """Заявка на партнерство от архитектора / дизайнера / девелопера"""
+    try:
+        if request.content_type == 'application/json':
+            data = json.loads(request.body)
+        else:
+            data = request.POST
+
+        name = data.get('name', '').strip()
+        phone = data.get('phone', '').strip()
+        company = data.get('company', '').strip()
+        role = data.get('role', 'Архитектор / Дизайнер').strip()
+        message = data.get('message', '').strip()
+
+        if not name or not phone:
+            return JsonResponse({'success': False, 'error': 'Укажите контактное лицо и телефон'}, status=400)
+
+        lead_msg = f"Партнёрская заявка:\nРоль: {role}\nБюро/Компания: {company}"
+        if message:
+            lead_msg += f"\nПожелания / проекты: {message}"
+
+        lead = Lead.objects.create(
+            name=name,
+            phone=phone,
+            company=company,
+            service_needed=f"Партнёрство: {role}",
+            message=lead_msg,
+            source='sample_box',
+            status='new',
+            manager_notes='Запрос на партнёрскую программу. Направить Sample Box и условия агентского вознаграждения.'
+        )
+
+        send_telegram_notification(lead)
+
+        return JsonResponse({
+            'success': True,
+            'lead_id': lead.id,
+            'message': 'Партнёрская заявка принята! Мы свяжемся с вами для передачи каталогов и согласования доставки Sample Box.'
+        })
+    except Exception as e:
+        return JsonResponse({'success': False, 'error': str(e)}, status=500)
+
+
+@require_POST
+def submit_paint_order(request):
+    """Заказ интерьерных красок официального партнера с персональной клубной скидкой Golden Brush (12%)"""
+    try:
+        if request.content_type == 'application/json':
+            data = json.loads(request.body)
+        else:
+            data = request.POST
+
+        name = data.get('name', '').strip()
+        phone = data.get('phone', '').strip()
+        paint_brand = data.get('paint_brand', 'Премиальная матовая интерьерная краска (Италия)').strip()
+        liters = data.get('liters', '10').strip()
+        area = data.get('area', '60').strip()
+        color_code = data.get('color_code', 'Подбор по RAL / NCS').strip()
+        discount_price = data.get('discount_price', '').strip()
+        address = data.get('address', '').strip()
+
+        if not name or not phone:
+            return JsonResponse({'success': False, 'error': 'Укажите контактное лицо и телефон'}, status=400)
+
+        order_msg = (
+            f"Заказ красок партнера со скидкой Golden Brush (12%):\n"
+            f"Литраж: {liters} л (на площадь ~{area} м²)\n"
+            f"Цвет / Колеровка: {color_code}\n"
+            f"Ориентировочная сумма со скидкой: {discount_price}\n"
+            f"Адрес доставки / Шоурум: {address}"
+        )
+
+        lead = Lead.objects.create(
+            name=name,
+            phone=phone,
+            service_needed=f"Заказ красок партнера: {liters} л",
+            area_range=f"{area} м²",
+            estimated_cost=discount_price,
+            message=order_msg,
+            source='quick_call',
+            status='new',
+            manager_notes='Заказ краски партнера по клубной скидке Golden Brush. Передать заявку в салон красок для комплектации.'
+        )
+
+        send_telegram_notification(lead)
+
+        return JsonResponse({
+            'success': True,
+            'lead_id': lead.id,
+            'message': 'Заказ на краску со скидкой 12% зафиксирован! Менеджер партнерского салона свяжется для подтверждения колеровки и доставки.'
+        })
+    except Exception as e:
+        return JsonResponse({'success': False, 'error': str(e)}, status=500)
+
+
+
 
