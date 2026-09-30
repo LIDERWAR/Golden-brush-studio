@@ -2369,19 +2369,20 @@ img {
   border-top: 1px solid var(--border-subtle);
 }
 
-.portal-title {
-  font-family: var(--font-serif);
-  font-size: clamp(1.4rem, 2.1vw, 1.8rem);
-  font-weight: 500;
+.portal-title,
+.portal-card .portal-title {
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-size: clamp(1.4rem, 2.2vw, 1.85rem) !important;
+  font-weight: 500 !important;
   color: var(--text-main);
   margin: 0;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.025em;
   white-space: nowrap;
-  transition: var(--tr-fast);
+  transition: color var(--tr-fast);
 }
 
 .portal-card:hover .portal-title {
-  color: var(--accent-bronze);
+  color: var(--accent-bronze) !important;
 }
 
 /* Restoration Preview Block */
@@ -4404,7 +4405,7 @@ img {
   gap: 1.5rem;
 }
 
-.portal-title {
+.portal-user-title {
   font-family: var(--font-heading);
   font-size: clamp(2rem, 3.5vw, 2.8rem);
   font-weight: 800;
