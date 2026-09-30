@@ -27,7 +27,7 @@
   --border-active: rgba(156, 111, 62, 0.45);
   
   /* Typography — Concept 3: Montserrat Alternates (Основательная авторская геометрия) */
-  --font-serif: 'Montserrat Alternates', 'Cormorant Garamond', Georgia, serif;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-display: 'Montserrat Alternates', sans-serif;
   --font-brand: 'Montserrat Alternates', sans-serif;
@@ -2360,7 +2360,7 @@ img {
 }
 
 .portal-content {
-  padding: 1.5rem;
+  padding: 1.4rem 1.25rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2370,12 +2370,13 @@ img {
 }
 
 .portal-title {
-  font-family: var(--font-heading);
-  font-size: clamp(1.25rem, 1.8vw, 1.55rem);
-  font-weight: 700;
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 2.1vw, 1.8rem);
+  font-weight: 500;
   color: var(--text-main);
   margin: 0;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
   transition: var(--tr-fast);
 }
 
