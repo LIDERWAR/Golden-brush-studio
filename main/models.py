@@ -27,7 +27,8 @@ class HomePageConfig(models.Model):
     hero_eyebrow = models.CharField(
         'Hero: Надстрочник',
         max_length=200,
-        default='Golden Brush Studio'
+        default='Ателье монументально-декоративного искусства',
+        blank=True
     )
     hero_title = models.CharField(
         'Hero: Главный заголовок',

@@ -11,7 +11,9 @@
         <div class="hero-composition">
             <div class="hero-header-top">
                 <div class="hero-title-area">
-                    <div class="eyebrow">{{ home_config.hero_eyebrow|default:'Golden Brush Studio' }}</div>
+                    {% if home_config.hero_eyebrow %}
+                    <div class="eyebrow">{{ home_config.hero_eyebrow }}</div>
+                    {% endif %}
                     <h1 class="hero-atelier-title">
                         {{ home_config.hero_title|default:'Художественно-декоративные работы под ключ' }}
                     </h1>

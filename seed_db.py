@@ -403,7 +403,7 @@ print("Partners seeded successfully")
 
 # 11. Home Page Config Seed
 cfg = HomePageConfig.get_solo()
-cfg.hero_eyebrow = 'Golden Brush Studio'
+cfg.hero_eyebrow = 'Ателье монументально-декоративного искусства'
 cfg.hero_title = 'Художественно-декоративные работы под ключ'
 cfg.hero_bg_image_url = '/static/images/fresco_texture.jpg'
 cfg.portal1_title = 'Наши проекты'

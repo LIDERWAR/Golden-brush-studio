@@ -74,12 +74,24 @@ def build_docs():
         html = html.replace('url("/static/', 'url("static/')
 
         # Replace internal links
+        html = html.replace('href="/materials/#', 'href="materials.html#')
         html = html.replace('href="/materials/"', 'href="materials.html"')
-        html = html.replace('href="/gallery/"', 'href="gallery.html"')
+        html = html.replace('href="/materials"', 'href="materials.html"')
+        html = html.replace('href="/projects/#', 'href="projects.html#')
         html = html.replace('href="/projects/"', 'href="projects.html"')
+        html = html.replace('href="/projects"', 'href="projects.html"')
+        html = html.replace('href="/gallery/#', 'href="gallery.html#')
+        html = html.replace('href="/gallery/"', 'href="gallery.html"')
+        html = html.replace('href="/gallery"', 'href="gallery.html"')
+        html = html.replace('href="/fonts/#', 'href="fonts.html#')
         html = html.replace('href="/fonts/"', 'href="fonts.html"')
+        html = html.replace('href="/fonts"', 'href="fonts.html"')
+        html = html.replace('href="/partners/#', 'href="partners.html#')
         html = html.replace('href="/partners/"', 'href="partners.html"')
+        html = html.replace('href="/partners"', 'href="partners.html"')
+        html = html.replace('href="/portal/#', 'href="portal.html#')
         html = html.replace('href="/portal/"', 'href="portal.html"')
+        html = html.replace('href="/portal"', 'href="portal.html"')
 
         if page_type == 'main':
             html = html.replace('href="/#', 'href="#')
