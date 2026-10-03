@@ -15,6 +15,12 @@
                 </p>
             </div>
 
+            {% if error %}
+            <div style="background: rgba(220, 53, 69, 0.12); border: 1px solid rgba(220, 53, 69, 0.35); color: #f87171; padding: 0.85rem 1.15rem; border-radius: var(--radius-sm); margin-bottom: 1.5rem; font-size: 0.9rem; line-height: 1.5;">
+                {{ error }}
+            </div>
+            {% endif %}
+
             <form method="POST" action="{% url 'portal:login' %}" class="portal-login-form">
                 {% csrf_token %}
                 

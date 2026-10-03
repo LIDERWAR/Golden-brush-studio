@@ -2,11 +2,16 @@ upstream django_app {
     server web:8000;
 }
 
+# Rate Limiting Zones (Anti-DDoS, Brute Force & Credential Stuffing Protection)
+limit_req_zone $binary_remote_addr zone=api_limit:10m rate=10r/s;
+limit_req_zone $binary_remote_addr zone=login_limit:10m rate=3r/s;
+
 # 1. HTTP Server: ACME challenge & HTTP to HTTPS redirect
 server {
     listen 80;
     listen [::]:80;
     server_name ${DOMAIN_NAME} www.${DOMAIN_NAME} localhost;
+    server_tokens off;
 
     # Let's Encrypt ACME challenge verification
     location /.well-known/acme-challenge/ {
@@ -27,11 +32,14 @@ server {
     http2 on;
     server_name ${DOMAIN_NAME} www.${DOMAIN_NAME};
 
+    # Hide Nginx Version from Reconnaissance / Scanners
+    server_tokens off;
+
     # SSL Certificates
     ssl_certificate /etc/letsencrypt/live/${DOMAIN_NAME}/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/${DOMAIN_NAME}/privkey.pem;
 
-    # Modern SSL Security settings
+    # Modern SSL Security settings (A+ Rating Standards)
     ssl_protocols TLSv1.2 TLSv1.3;
     ssl_prefer_server_ciphers on;
     ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305;
@@ -40,11 +48,9 @@ server {
     ssl_session_tickets off;
 
     # Security Headers
-    add_header X-Frame-Options "SAMEORIGIN" always;
-    add_header X-XSS-Protection "1; mode=block" always;
     add_header X-Content-Type-Options "nosniff" always;
-    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
-    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
+    add_header Permissions-Policy "camera=(), microphone=(), geolocation=()" always;
 
     # Performance: Gzip Compression
     gzip on;
@@ -54,6 +60,13 @@ server {
     gzip_types text/plain text/css text/xml application/json application/javascript application/xml+rss application/atom+xml image/svg+xml;
 
     client_max_body_size 50M;
+
+    # Deny access to hidden/dot files (.git, .env, .secrets, etc.)
+    location ~ /\. {
+        deny all;
+        access_log off;
+        log_not_found off;
+    }
 
     # Favicon direct serving
     location = /favicon.ico {
@@ -68,14 +81,40 @@ server {
         alias /app/staticfiles/;
         expires 1h;
         add_header Cache-Control "public, no-cache, must-revalidate";
+        add_header X-Content-Type-Options "nosniff" always;
         access_log off;
     }
 
-    # Media files (portfolio photos, artworks)
+    # Media files (portfolio photos, artworks, client documents)
     location /media/ {
         alias /app/media/;
         expires 7d;
         add_header Cache-Control "public, max-age=604800";
+        add_header X-Content-Type-Options "nosniff" always;
+    }
+
+    # Protected Rate-Limited API Endpoints
+    location /api/ {
+        limit_req zone=api_limit burst=15 nodelay;
+        proxy_pass http://django_app;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto https;
+        proxy_redirect off;
+    }
+
+    # Protected Rate-Limited Admin & Portal Auth Endpoints
+    location ~ ^/(admin|portal)/login/ {
+        limit_req zone=login_limit burst=5 nodelay;
+        proxy_pass http://django_app;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto https;
+        proxy_redirect off;
     }
 
     # Proxy all dynamic requests to Django Gunicorn

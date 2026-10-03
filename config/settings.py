@@ -31,6 +31,11 @@ if not DEBUG:
     CSRF_COOKIE_SECURE = True
     SECURE_BROWSER_XSS_FILTER = True
     SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    X_FRAME_OPTIONS = 'SAMEORIGIN'
+    SECURE_SSL_REDIRECT = False  # Handled at Nginx level to prevent redirect loops
 
 INSTALLED_APPS = [
     'jazzmin',  # Must be before django.contrib.admin

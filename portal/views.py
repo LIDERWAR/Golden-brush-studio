@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
-from django.views.decorators.csrf import csrf_exempt
+import re
 from .models import ClientAccount, ProjectContract, ProjectStage, StageUpdatePhoto, ProjectDocument
 
 def get_demo_context():
@@ -116,23 +116,36 @@ def get_demo_context():
     }
 
 def portal_login(request):
+    error = None
     if request.method == 'POST':
         phone = request.POST.get('phone', '').strip()
         pin = request.POST.get('pin', '').strip()
         demo = request.POST.get('demo', '')
 
-        if demo or phone == 'demo':
+        # 1. Явный демо-доступ для демонстрации интерфейса
+        if demo or phone.lower() == 'demo':
             request.session['client_phone'] = 'demo'
             return redirect('portal:dashboard')
 
-        client = ClientAccount.objects.filter(phone__icontains=phone.replace(' ', '').replace('-', '')[-10:]).first()
-        if client and (not client.access_pin or client.access_pin == pin or pin == '1234'):
+        # 2. Поиск реального договора по номеру телефона
+        digits = re.sub(r'\D', '', phone)
+        if len(digits) >= 10:
+            client = ClientAccount.objects.filter(phone__icontains=digits[-10:]).first()
+        else:
+            client = None
+
+        if client:
+            # Если у клиента установлен персональный PIN, требуем точного соответствия
+            if client.access_pin and client.access_pin != pin:
+                return render(request, 'portal/login.html', {
+                    'error': 'Неверный PIN-код быстрого доступа. Проверьте 4 цифры из SMS или договора.'
+                })
             request.session['client_phone'] = client.phone
             return redirect('portal:dashboard')
-        elif not client:
-            # Create on first login or allow demo
-            request.session['client_phone'] = 'demo'
-            return redirect('portal:dashboard')
+        else:
+            return render(request, 'portal/login.html', {
+                'error': 'Объект с данным номером телефона пока не зарегистрирован в базе договоров. Нажмите «Демо-доступ», чтобы посмотреть пример кабинета.'
+            })
 
     return render(request, 'portal/login.html')
 

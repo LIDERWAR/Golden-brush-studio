@@ -30,15 +30,15 @@
         k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
         (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
-        ym({{ home_config.yandex_metrika_id }}, "init", {
+        ym(Number("{{ home_config.yandex_metrika_id|escapejs }}"), "init", {
             clickmap:true,
             trackLinks:true,
             accurateTrackBounce:true,
             webvisor:true
         });
-        window.__ym_counter_id = {{ home_config.yandex_metrika_id }};
+        window.__ym_counter_id = Number("{{ home_config.yandex_metrika_id|escapejs }}");
     </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/{{ home_config.yandex_metrika_id }}" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <noscript><div><img src="https://mc.yandex.ru/watch/{{ home_config.yandex_metrika_id|urlencode }}" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     {% endif %}
 </head>
 <body>

@@ -1,4 +1,10 @@
 from django.db import models
+from django.core.validators import RegexValidator
+
+metrika_validator = RegexValidator(
+    regex=r'^\d{5,15}$',
+    message='Номер счетчика Яндекс.Метрики должен содержать только цифры (от 5 до 15 знаков).'
+)
 
 class Partner(models.Model):
     name = models.CharField('Название бюро / партнера', max_length=150)
@@ -86,6 +92,7 @@ class HomePageConfig(models.Model):
         max_length=50,
         blank=True,
         default='',
+        validators=[metrika_validator],
         help_text='Например: 99123456. При указании счетчик и цели аналитики подключаются автоматически.'
     )
 
