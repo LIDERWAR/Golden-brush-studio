@@ -20,6 +20,26 @@
 
     <!-- FontAwesome icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Yandex.Metrika Analytics Suite -->
+    {% if home_config.yandex_metrika_id %}
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+        ym({{ home_config.yandex_metrika_id }}, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
+        });
+        window.__ym_counter_id = {{ home_config.yandex_metrika_id }};
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/{{ home_config.yandex_metrika_id }}" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    {% endif %}
 </head>
 <body>
     <!-- Header -->
@@ -194,6 +214,7 @@
                 Мы бесплатно доставим фирменный деревянный кейс с живыми выкрасами авторских штукатурок, микроцемента и минеральных текстур в ваше бюро.
             </p>
             <form id="sampleBoxForm">
+                <input type="text" name="website_check" style="position:absolute; opacity:0; pointer-events:none; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true">
                 <div class="form-group">
                     <label class="form-label">Ваше имя и фамилия</label>
                     <input type="text" name="name" class="form-input" placeholder="Константин Архипов" required>
@@ -253,6 +274,7 @@
                 Мы бесплатно привезем выбранные оригиналы картин Александра Попыкина к вам домой или на объект. Вы сможете примерить их на стене при реальном освещении вашего пространства перед принятием решения.
             </p>
             <form id="artFittingForm">
+                <input type="text" name="website_check" style="position:absolute; opacity:0; pointer-events:none; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true">
                 <div class="form-group">
                     <label class="form-label">Ваше имя *</label>
                     <input type="text" name="name" class="form-input" placeholder="Елена / Архитектор Михаил" required>
@@ -293,6 +315,7 @@
                 Технолог студии приедет на объект с крупными планшетами выкрасов данного материала для точного замера и демонстрации при вашем освещении.
             </p>
             <form id="calcLeadForm">
+                <input type="text" name="website_check" style="position:absolute; opacity:0; pointer-events:none; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true">
                 <input type="hidden" name="material" id="calcLeadInputMaterial">
                 <input type="hidden" name="area_sqm" id="calcLeadInputArea">
                 <input type="hidden" name="estimated_cost" id="calcLeadInputCost">
@@ -344,6 +367,7 @@
                 </a>
             </div>
             <form id="generalContactForm">
+                <input type="text" name="website_check" style="position:absolute; opacity:0; pointer-events:none; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true">
                 <div class="form-group">
                     <label class="form-label">Ваше имя *</label>
                     <input type="text" name="name" class="form-input" placeholder="Константин" required>

@@ -171,6 +171,7 @@
 
                         <form id="paintOrderForm" class="portal-form">
                             {% csrf_token %}
+                            <input type="text" name="website_check" style="position:absolute; opacity:0; pointer-events:none; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true">
                             <input type="hidden" name="paint_brand" id="hiddenPaintBrand" value="Глубокоматовая бархатистая краска">
                             <input type="hidden" name="liters" id="hiddenPaintLiters" value="16">
                             <input type="hidden" name="area" id="hiddenPaintArea" value="80">
@@ -232,6 +233,7 @@
             <div class="partner-form-card">
                 <form id="generalPartnerForm" class="portal-form">
                     {% csrf_token %}
+                    <input type="text" name="website_check" style="position:absolute; opacity:0; pointer-events:none; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true">
                     
                     <div class="form-group">
                         <label for="pName" class="portal-label">Ваше имя</label>
@@ -341,6 +343,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 btn.disabled = false;
                 btn.textContent = 'Зафиксировать скидку 12% и заказать';
                 if (data.success) {
+                    if (window.triggerGoal) window.triggerGoal('lead_paint_order');
                     alert(data.message);
                     paintForm.reset();
                     updateCalculator();
@@ -379,6 +382,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 btn.disabled = false;
                 btn.textContent = 'Отправить заявку на партнёрство';
                 if (data.success) {
+                    if (window.triggerGoal) window.triggerGoal('lead_partner_inquiry');
                     alert(data.message);
                     partnerForm.reset();
                 } else {

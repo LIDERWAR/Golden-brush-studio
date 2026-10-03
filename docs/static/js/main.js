@@ -132,7 +132,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 12. Universal Modal Closer (Button, Backdrop, Escape)
     initUniversalModalCloser();
+
+    // 13. Universal Phone Mask (+7 (XXX) XXX-XX-XX)
+    initPhoneMask();
 });
+
+// Analytics Goal Dispatcher (Yandex.Metrika)
+window.triggerGoal = function(goalName, params) {
+    try {
+        if (typeof ym === 'function') {
+            const counterId = window.__ym_counter_id;
+            if (counterId) {
+                ym(counterId, 'reachGoal', goalName, params);
+            }
+        }
+    } catch (e) {
+        console.warn('Analytics goal dispatch warning:', e);
+    }
+};
 
 // Universal Modal Closer
 function initUniversalModalCloser() {
@@ -304,16 +321,16 @@ function initQuiz() {
             quizData.phone = quizForm.querySelector('input[name="phone"]').value;
             quizData.email = quizForm.querySelector('input[name="email"]').value;
             quizData.message = quizForm.querySelector('textarea[name="message"]').value;
+            quizData.website_check = quizForm.querySelector('input[name="website_check"]')?.value || '';
 
+            let res;
             try {
-                
-        // GitHub Pages Demo Mode: Return simulated success if on static host
-        if (window.location.hostname.includes('github.io') || window.location.protocol === 'file:') {
-            await new Promise(r => setTimeout(r, 600));
-            res = { success: true };
-        } else {
-        
-            
+                // GitHub Pages Demo Mode: Return simulated success if on static host
+                if (window.location.hostname.includes('github.io') || window.location.protocol === 'file:') {
+                    await new Promise(r => setTimeout(r, 600));
+                    res = { success: true };
+                } else {
+                    
         // GitHub Pages Demo Mode: Return simulated success if on static host
         if (window.location.hostname.includes('github.io') || window.location.protocol === 'file:') {
             await new Promise(r => setTimeout(r, 600));
@@ -321,18 +338,17 @@ function initQuiz() {
         } else {
         
             const response = await fetch('/api/quiz-lead/', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRFToken': getCsrfToken()
-                    },
-                    body: JSON.stringify(quizData)
-                });
-
-                const res = await response.json();
-        }
-        }
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRFToken': getCsrfToken()
+                        },
+                        body: JSON.stringify(quizData)
+                    });
+                    res = await response.json();
+                }
                 if (res.success) {
+                    window.triggerGoal('lead_fitout_quiz', { cost: quizData.estimated_cost });
                     quizEl.querySelector('.quiz-body-wrap').innerHTML = `
                         <div style="text-align: center; padding: 3rem 1rem;">
                             <div style="width: 70px; height: 70px; border-radius: 50%; background: rgba(197, 155, 109, 0.15); border: 2px solid var(--accent-gold); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 2rem; color: var(--accent-gold);">✓</div>
@@ -400,29 +416,28 @@ function initSampleBoxModal() {
                 company: form.querySelector('input[name="company"]').value,
                 phone: form.querySelector('input[name="phone"]').value,
                 address: form.querySelector('input[name="address"]').value,
+                website_check: form.querySelector('input[name="website_check"]')?.value || '',
             };
 
+            let res;
             try {
-                
-        // GitHub Pages Demo Mode: Return simulated success if on static host
-        if (window.location.hostname.includes('github.io') || window.location.protocol === 'file:') {
-            await new Promise(r => setTimeout(r, 600));
-            res = { success: true };
-        } else {
-        
-            const response = await fetch('/api/sample-box/', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRFToken': getCsrfToken()
-                    },
-                    body: JSON.stringify(payload)
-                });
-
-                const res = await response.json();
-        }
-        }
+                // GitHub Pages Demo Mode: Return simulated success if on static host
+                if (window.location.hostname.includes('github.io') || window.location.protocol === 'file:') {
+                    await new Promise(r => setTimeout(r, 600));
+                    res = { success: true };
+                } else {
+                    const response = await fetch('/api/sample-box/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRFToken': getCsrfToken()
+                        },
+                        body: JSON.stringify(payload)
+                    });
+                    res = await response.json();
+                }
                 if (res.success) {
+                    window.triggerGoal('lead_sample_box');
                     modal.classList.remove('active');
                     showToast('Кейс с образцами успешно заказан! Мы отправим трек-номер в WhatsApp.');
                     form.reset();
@@ -482,18 +497,18 @@ function initLightbox() {
                 phone: artForm.querySelector('input[name="phone"]').value,
                 service_needed: `Бронирование картины/керамики: ${modal.querySelector('#artModalInputTitle').value}`,
                 source: 'art_inquiry',
-                object_type: 'Частная коллекция'
+                object_type: 'Частная коллекция',
+                website_check: artForm.querySelector('input[name="website_check"]')?.value || '',
             };
 
+            let res;
             try {
-                
-        // GitHub Pages Demo Mode: Return simulated success if on static host
-        if (window.location.hostname.includes('github.io') || window.location.protocol === 'file:') {
-            await new Promise(r => setTimeout(r, 600));
-            res = { success: true };
-        } else {
-        
-            
+                // GitHub Pages Demo Mode: Return simulated success if on static host
+                if (window.location.hostname.includes('github.io') || window.location.protocol === 'file:') {
+                    await new Promise(r => setTimeout(r, 600));
+                    res = { success: true };
+                } else {
+                    
         // GitHub Pages Demo Mode: Return simulated success if on static host
         if (window.location.hostname.includes('github.io') || window.location.protocol === 'file:') {
             await new Promise(r => setTimeout(r, 600));
@@ -501,17 +516,17 @@ function initLightbox() {
         } else {
         
             const response = await fetch('/api/quiz-lead/', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRFToken': getCsrfToken()
-                    },
-                    body: JSON.stringify(payload)
-                });
-                const res = await response.json();
-        }
-        }
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRFToken': getCsrfToken()
+                        },
+                        body: JSON.stringify(payload)
+                    });
+                    res = await response.json();
+                }
                 if (res.success) {
+                    window.triggerGoal('lead_art_fitting');
                     modal.classList.remove('active');
                     showToast('Запрос на бронирование отправлен! Мы свяжемся с вами в течение 15 минут.');
                     artForm.reset();
@@ -789,6 +804,7 @@ function initLiveWallCalculator() {
                 });
                 const data = await res.json();
                 if (data.success) {
+                    window.triggerGoal('lead_calculator');
                     showToast(data.message || 'Расчет успешно зафиксирован! Технолог свяжется с вами.');
                     calcLeadForm.reset();
                     const modal = document.getElementById('calcLeadModal');
@@ -973,13 +989,15 @@ function initGeneralContactModal() {
         const phone = formData.get('phone');
         const interest = formData.get('interest') || '';
         const message = formData.get('message') || '';
+        const website_check = formData.get('website_check') || '';
 
         const payload = {
             name: name,
             phone: phone,
             object_type: interest,
             message: `Запрос с сайта (Golden Brush Studio): ${interest}. ${message}`.trim(),
-            source: 'contact_modal'
+            source: 'contact_modal',
+            website_check: website_check
         };
 
         const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
@@ -996,6 +1014,7 @@ function initGeneralContactModal() {
 
             const data = await resp.json();
             if (data.success) {
+                window.triggerGoal('lead_contact_modal');
                 showToast('Спасибо! Мы свяжемся с вами в течение 10 минут.', true);
                 form.reset();
                 contactModal.classList.remove('active');
@@ -1011,6 +1030,87 @@ function initGeneralContactModal() {
         }
     });
 }
+
+// 13. Universal Phone Mask (+7 (XXX) XXX-XX-XX)
+function initPhoneMask() {
+    const phoneInputs = document.querySelectorAll('input[type="tel"], input[name="phone"]');
+
+    function getInputNumbersValue(input) {
+        return input.value.replace(/\D/g, '');
+    }
+
+    function onPhoneInput(e) {
+        const input = e.target;
+        let inputNumbersValue = getInputNumbersValue(input);
+        const selectionStart = input.selectionStart;
+        let formattedInputValue = '';
+
+        if (!inputNumbersValue) {
+            return input.value = '';
+        }
+
+        if (input.value.length !== selectionStart) {
+            if (e.data && /\D/g.test(e.data)) {
+                input.value = inputNumbersValue;
+            }
+            return;
+        }
+
+        if (['7', '8', '9'].indexOf(inputNumbersValue[0]) > -1) {
+            if (inputNumbersValue[0] === '9') inputNumbersValue = '7' + inputNumbersValue;
+            const firstSymbols = '+7';
+            formattedInputValue = firstSymbols + ' ';
+
+            if (inputNumbersValue.length > 1) {
+                formattedInputValue += '(' + inputNumbersValue.substring(1, 4);
+            }
+            if (inputNumbersValue.length >= 5) {
+                formattedInputValue += ') ' + inputNumbersValue.substring(4, 7);
+            }
+            if (inputNumbersValue.length >= 8) {
+                formattedInputValue += '-' + inputNumbersValue.substring(7, 9);
+            }
+            if (inputNumbersValue.length >= 10) {
+                formattedInputValue += '-' + inputNumbersValue.substring(9, 11);
+            }
+        } else {
+            formattedInputValue = '+' + inputNumbersValue.substring(0, 16);
+        }
+
+        input.value = formattedInputValue;
+    }
+
+    function onPhoneKeyDown(e) {
+        const input = e.target;
+        if (e.keyCode === 8 && getInputNumbersValue(input).length === 1) {
+            input.value = '';
+        }
+    }
+
+    function onPhonePaste(e) {
+        const input = e.target;
+        const inputNumbersValue = getInputNumbersValue(input);
+        const pasted = e.clipboardData || window.clipboardData;
+        if (pasted) {
+            const pastedText = pasted.getData('Text');
+            if (/\D/g.test(pastedText)) {
+                input.value = inputNumbersValue;
+            }
+        }
+    }
+
+    phoneInputs.forEach(input => {
+        input.removeEventListener('input', onPhoneInput);
+        input.removeEventListener('keydown', onPhoneKeyDown);
+        input.removeEventListener('paste', onPhonePaste);
+
+        input.addEventListener('input', onPhoneInput);
+        input.addEventListener('keydown', onPhoneKeyDown);
+        input.addEventListener('paste', onPhonePaste);
+    });
+}
+window.initPhoneMask = initPhoneMask;
+
 
 
 

@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 import json
+import re
 
 from projects.models import Project, ProjectCategory
 from gallery.models import Artwork, ArtworkCategory
@@ -96,6 +97,44 @@ def article_detail(request, slug):
         'related_articles': related_articles
     })
 
+def validate_and_clean_lead_data(data):
+    """
+    Валидация телефона и фильтрация спам-ботов через honeypot-ловушку.
+    Возвращает: (is_valid, cleaned_phone, is_bot, error_msg)
+    """
+    # 1. Проверка поля-ловушки honeypot (скрыто для человека, но заполняется спам-ботами)
+    honeypot = data.get('website_check', '') or data.get('website_url_check', '')
+    if honeypot and str(honeypot).strip():
+        return False, None, True, 'Spam detected'
+
+    name = str(data.get('name', '')).strip()
+    phone_raw = str(data.get('phone', '')).strip()
+
+    if not name:
+        return False, None, False, 'Пожалуйста, укажите контактное имя'
+    if not phone_raw:
+        return False, None, False, 'Пожалуйста, укажите контактный телефон'
+
+    # 2. Очистка и валидация телефона
+    digits = re.sub(r'\D', '', phone_raw)
+    if len(digits) < 10 or len(digits) > 15:
+        return False, None, False, 'Пожалуйста, введите корректный номер телефона (не менее 10 цифр)'
+
+    # Исключение явных фиктивных номеров вида 0000000000, 1111111111
+    if len(set(digits)) <= 2:
+        return False, None, False, 'Пожалуйста, укажите действительный номер телефона'
+
+    # Нормализация формата: +7 (XXX) XXX-XX-XX
+    if len(digits) == 11 and digits[0] in ('7', '8'):
+        cleaned_phone = f"+7 ({digits[1:4]}) {digits[4:7]}-{digits[7:9]}-{digits[9:11]}"
+    elif len(digits) == 10:
+        cleaned_phone = f"+7 ({digits[0:3]}) {digits[3:6]}-{digits[6:8]}-{digits[8:10]}"
+    else:
+        cleaned_phone = f"+{digits}"
+
+    return True, cleaned_phone, False, None
+
+
 @require_POST
 def submit_quiz_lead(request):
     """Прием заявки из интерактивного конфигуратора предварительного расчета сметы объекта"""
@@ -105,8 +144,14 @@ def submit_quiz_lead(request):
         else:
             data = request.POST
 
+        is_valid, cleaned_phone, is_bot, error_msg = validate_and_clean_lead_data(data)
+        if is_bot:
+            return JsonResponse({'success': True, 'lead_id': 0, 'message': 'Заявка принята!'})
+        if not is_valid:
+            return JsonResponse({'success': False, 'error': error_msg}, status=400)
+
         name = data.get('name', '').strip()
-        phone = data.get('phone', '').strip()
+        phone = cleaned_phone
         company = data.get('company', '').strip()
         email = data.get('email', '').strip()
         object_type = data.get('object_type', '').strip()
@@ -116,9 +161,6 @@ def submit_quiz_lead(request):
         message = data.get('message', '').strip()
         estimated_cost = data.get('estimated_cost', '').strip()
         source = data.get('source', 'quiz')
-
-        if not name or not phone:
-            return JsonResponse({'success': False, 'error': 'Пожалуйста, укажите контактное лицо и номер телефона'}, status=400)
 
         lead = Lead.objects.create(
             name=name,
@@ -156,13 +198,16 @@ def submit_sample_box(request):
         else:
             data = request.POST
 
+        is_valid, cleaned_phone, is_bot, error_msg = validate_and_clean_lead_data(data)
+        if is_bot:
+            return JsonResponse({'success': True, 'lead_id': 0, 'message': 'Заказ принят!'})
+        if not is_valid:
+            return JsonResponse({'success': False, 'error': error_msg}, status=400)
+
         name = data.get('name', '').strip()
-        phone = data.get('phone', '').strip()
+        phone = cleaned_phone
         company = data.get('company', '').strip()
         address = data.get('address', '').strip()
-
-        if not name or not phone:
-            return JsonResponse({'success': False, 'error': 'Укажите ваше имя и телефон'}, status=400)
 
         lead = Lead.objects.create(
             name=name,
@@ -194,14 +239,17 @@ def submit_art_inquiry(request):
         else:
             data = request.POST
 
+        is_valid, cleaned_phone, is_bot, error_msg = validate_and_clean_lead_data(data)
+        if is_bot:
+            return JsonResponse({'success': True, 'lead_id': 0, 'message': 'Запрос принят!'})
+        if not is_valid:
+            return JsonResponse({'success': False, 'error': error_msg}, status=400)
+
         name = data.get('name', '').strip()
-        phone = data.get('phone', '').strip()
+        phone = cleaned_phone
         artwork_title = data.get('artwork_title', '').strip()
         artwork_id = data.get('artwork_id', '').strip()
         message = data.get('message', '').strip()
-
-        if not name or not phone:
-            return JsonResponse({'success': False, 'error': 'Пожалуйста, укажите имя и телефон для связи'}, status=400)
 
         lead_message = f"Резерв произведения: «{artwork_title}» (ID #{artwork_id})."
         if message:
@@ -236,14 +284,17 @@ def submit_art_fitting(request):
         else:
             data = request.POST
 
+        is_valid, cleaned_phone, is_bot, error_msg = validate_and_clean_lead_data(data)
+        if is_bot:
+            return JsonResponse({'success': True, 'lead_id': 0, 'message': 'Заявка принята!'})
+        if not is_valid:
+            return JsonResponse({'success': False, 'error': error_msg}, status=400)
+
         name = data.get('name', '').strip()
-        phone = data.get('phone', '').strip()
+        phone = cleaned_phone
         address = data.get('address', '').strip()
         artworks_selected = data.get('artworks_selected', '').strip()
         message = data.get('message', '').strip()
-
-        if not name or not phone:
-            return JsonResponse({'success': False, 'error': 'Укажите ваше имя и телефон'}, status=400)
 
         lead_msg = f"Заявка на БЕСПЛАТНУЮ ПРИМЕРКУ КАРТИН В ИНТЕРЬЕРЕ.\nАдрес доставки: {address or 'Не указан'}\nПолотна для примерки: {artworks_selected or 'Подборка куратора'}"
         if message:
@@ -277,15 +328,18 @@ def submit_calculator_lead(request):
         else:
             data = request.POST
 
+        is_valid, cleaned_phone, is_bot, error_msg = validate_and_clean_lead_data(data)
+        if is_bot:
+            return JsonResponse({'success': True, 'lead_id': 0, 'message': 'Расчет принят!'})
+        if not is_valid:
+            return JsonResponse({'success': False, 'error': error_msg}, status=400)
+
         name = data.get('name', '').strip()
-        phone = data.get('phone', '').strip()
+        phone = cleaned_phone
         material = data.get('material', '').strip()
         area_sqm = data.get('area_sqm', '').strip()
         estimated_cost = data.get('estimated_cost', '').strip()
         message = data.get('message', '').strip()
-
-        if not name or not phone:
-            return JsonResponse({'success': False, 'error': 'Укажите ваше имя и телефон'}, status=400)
 
         lead_msg = f"Расчет из калькулятора материалов:\nПокрытие: {material}\nПлощадь стен: {area_sqm} м²\nОриентировочная сумма: {estimated_cost}"
         if message:
@@ -339,14 +393,17 @@ def submit_partner_inquiry(request):
         else:
             data = request.POST
 
+        is_valid, cleaned_phone, is_bot, error_msg = validate_and_clean_lead_data(data)
+        if is_bot:
+            return JsonResponse({'success': True, 'lead_id': 0, 'message': 'Партнёрская заявка принята!'})
+        if not is_valid:
+            return JsonResponse({'success': False, 'error': error_msg}, status=400)
+
         name = data.get('name', '').strip()
-        phone = data.get('phone', '').strip()
+        phone = cleaned_phone
         company = data.get('company', '').strip()
         role = data.get('role', 'Архитектор / Дизайнер').strip()
         message = data.get('message', '').strip()
-
-        if not name or not phone:
-            return JsonResponse({'success': False, 'error': 'Укажите контактное лицо и телефон'}, status=400)
 
         lead_msg = f"Партнёрская заявка:\nРоль: {role}\nБюро/Компания: {company}"
         if message:
@@ -383,17 +440,20 @@ def submit_paint_order(request):
         else:
             data = request.POST
 
+        is_valid, cleaned_phone, is_bot, error_msg = validate_and_clean_lead_data(data)
+        if is_bot:
+            return JsonResponse({'success': True, 'lead_id': 0, 'message': 'Заказ на краску зафиксирован!'})
+        if not is_valid:
+            return JsonResponse({'success': False, 'error': error_msg}, status=400)
+
         name = data.get('name', '').strip()
-        phone = data.get('phone', '').strip()
+        phone = cleaned_phone
         paint_brand = data.get('paint_brand', 'Премиальная матовая интерьерная краска (Италия)').strip()
         liters = data.get('liters', '10').strip()
         area = data.get('area', '60').strip()
         color_code = data.get('color_code', 'Подбор по RAL / NCS').strip()
         discount_price = data.get('discount_price', '').strip()
         address = data.get('address', '').strip()
-
-        if not name or not phone:
-            return JsonResponse({'success': False, 'error': 'Укажите контактное лицо и телефон'}, status=400)
 
         order_msg = (
             f"Заказ красок партнера со скидкой Golden Brush (12%):\n"

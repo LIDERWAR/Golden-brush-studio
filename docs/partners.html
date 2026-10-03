@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="b8yHb4RIi9b9mf9kMi9X2IgZ8AJIRMwKH3PlU3Rqieyf3US4nYit6PmzjhHGJji8">
+    <meta name="csrf-token" content="HMWz7iWEZB9u0sWOGEzP8f73kDGHQOz0BZXUvcctC0k2moT3cjmO0B2K4M88nkrJ">
     <title>Партнёрская программа — Golden Brush Studio | Архитекторам, дизайнерам и скидка на краски</title>
     <meta name="description" content="Партнёрская программа Golden Brush Studio: агентские условия для дизайнеров и архитекторов, бесплатный Sample Box, 3D-текстуры и клубная скидка 12% на интерьерные краски партнера.">
     
@@ -20,6 +20,9 @@
 
     <!-- FontAwesome icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Yandex.Metrika Analytics Suite -->
+    
 </head>
 <body>
     <!-- Header -->
@@ -292,7 +295,8 @@
                         </div>
 
                         <form id="paintOrderForm" class="portal-form">
-                            <input type="hidden" name="csrfmiddlewaretoken" value="b8yHb4RIi9b9mf9kMi9X2IgZ8AJIRMwKH3PlU3Rqieyf3US4nYit6PmzjhHGJji8">
+                            <input type="hidden" name="csrfmiddlewaretoken" value="HMWz7iWEZB9u0sWOGEzP8f73kDGHQOz0BZXUvcctC0k2moT3cjmO0B2K4M88nkrJ">
+                            <input type="text" name="website_check" style="position:absolute; opacity:0; pointer-events:none; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true">
                             <input type="hidden" name="paint_brand" id="hiddenPaintBrand" value="Глубокоматовая бархатистая краска">
                             <input type="hidden" name="liters" id="hiddenPaintLiters" value="16">
                             <input type="hidden" name="area" id="hiddenPaintArea" value="80">
@@ -353,7 +357,8 @@
 
             <div class="partner-form-card">
                 <form id="generalPartnerForm" class="portal-form">
-                    <input type="hidden" name="csrfmiddlewaretoken" value="b8yHb4RIi9b9mf9kMi9X2IgZ8AJIRMwKH3PlU3Rqieyf3US4nYit6PmzjhHGJji8">
+                    <input type="hidden" name="csrfmiddlewaretoken" value="HMWz7iWEZB9u0sWOGEzP8f73kDGHQOz0BZXUvcctC0k2moT3cjmO0B2K4M88nkrJ">
+                    <input type="text" name="website_check" style="position:absolute; opacity:0; pointer-events:none; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true">
                     
                     <div class="form-group">
                         <label for="pName" class="portal-label">Ваше имя</label>
@@ -463,6 +468,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 btn.disabled = false;
                 btn.textContent = 'Зафиксировать скидку 12% и заказать';
                 if (data.success) {
+                    if (window.triggerGoal) window.triggerGoal('lead_paint_order');
                     alert(data.message);
                     paintForm.reset();
                     updateCalculator();
@@ -501,6 +507,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 btn.disabled = false;
                 btn.textContent = 'Отправить заявку на партнёрство';
                 if (data.success) {
+                    if (window.triggerGoal) window.triggerGoal('lead_partner_inquiry');
                     alert(data.message);
                     partnerForm.reset();
                 } else {
@@ -586,6 +593,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 Мы бесплатно доставим фирменный деревянный кейс с живыми выкрасами авторских штукатурок, микроцемента и минеральных текстур в ваше бюро.
             </p>
             <form id="sampleBoxForm">
+                <input type="text" name="website_check" style="position:absolute; opacity:0; pointer-events:none; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true">
                 <div class="form-group">
                     <label class="form-label">Ваше имя и фамилия</label>
                     <input type="text" name="name" class="form-input" placeholder="Константин Архипов" required>
@@ -645,6 +653,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 Мы бесплатно привезем выбранные оригиналы картин Александра Попыкина к вам домой или на объект. Вы сможете примерить их на стене при реальном освещении вашего пространства перед принятием решения.
             </p>
             <form id="artFittingForm">
+                <input type="text" name="website_check" style="position:absolute; opacity:0; pointer-events:none; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true">
                 <div class="form-group">
                     <label class="form-label">Ваше имя *</label>
                     <input type="text" name="name" class="form-input" placeholder="Елена / Архитектор Михаил" required>
@@ -685,6 +694,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 Технолог студии приедет на объект с крупными планшетами выкрасов данного материала для точного замера и демонстрации при вашем освещении.
             </p>
             <form id="calcLeadForm">
+                <input type="text" name="website_check" style="position:absolute; opacity:0; pointer-events:none; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true">
                 <input type="hidden" name="material" id="calcLeadInputMaterial">
                 <input type="hidden" name="area_sqm" id="calcLeadInputArea">
                 <input type="hidden" name="estimated_cost" id="calcLeadInputCost">
@@ -736,6 +746,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </a>
             </div>
             <form id="generalContactForm">
+                <input type="text" name="website_check" style="position:absolute; opacity:0; pointer-events:none; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true">
                 <div class="form-group">
                     <label class="form-label">Ваше имя *</label>
                     <input type="text" name="name" class="form-input" placeholder="Константин" required>

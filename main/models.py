@@ -81,6 +81,13 @@ class HomePageConfig(models.Model):
     contact_address = models.CharField('Адрес студии / мастерской', max_length=255, default='Москва, Центр дизайна ARTPLAY / Мастерская на Яузе')
     telegram_url = models.CharField('Ссылка Telegram', max_length=200, default='https://t.me/gbstudio')
     whatsapp_url = models.CharField('Ссылка / номер WhatsApp', max_length=200, default='https://wa.me/74958904422')
+    yandex_metrika_id = models.CharField(
+        'Номер счетчика Яндекс.Метрики',
+        max_length=50,
+        blank=True,
+        default='',
+        help_text='Например: 99123456. При указании счетчик и цели аналитики подключаются автоматически.'
+    )
 
     updated_at = models.DateTimeField(auto_now=True)
 

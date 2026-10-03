@@ -434,6 +434,8 @@ cfg.contact_email = 'welcome@gbstudio.ru'
 cfg.contact_address = 'Москва, Центр дизайна ARTPLAY / Мастерская на Яузе'
 cfg.telegram_url = 'https://t.me/gbstudio'
 cfg.whatsapp_url = 'https://wa.me/74958904422'
+if not hasattr(cfg, 'yandex_metrika_id') or cfg.yandex_metrika_id is None:
+    cfg.yandex_metrika_id = ''
 cfg.save()
 print("HomePageConfig initialized with Golden Brush Studio defaults successfully")
 
