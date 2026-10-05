@@ -1,149 +1,332 @@
 {% extends 'base.html' %}
 
-{% block title %}Галерея интерьерных картин — Golden Brush Studio{% endblock %}
-{% block meta_desc %}Официальная экспозиция интерьерных картин и скульптурной керамики Golden Brush Studio. Автор произведений — художник Александр Попыкин. Бесплатная примерка полотен в интерьере.{% endblock %}
+{% block title %}Арт-галерея — Golden Brush Studio | Александр Попыкин{% endblock %}
+{% block meta_desc %}Официальная арт-галерея Golden Brush Studio. Автор произведений — художник Александр Попыкин. Интерьерная живопись, графика, керамика и арт-объекты для оформления частных резиденций, представительских офисов и пентхаусов.{% endblock %}
 
 {% block content %}
-<div style="padding-top: 8rem; padding-bottom: 6rem; background-color: var(--bg-primary);">
-    <div class="gallery-fluid-container">
-        <!-- Gallery Header -->
-        <div style="text-align: center; max-width: 1100px; margin: 0 auto 3.5rem;">
-            <div class="eyebrow">Atelier &amp; Private Collection</div>
-            <h1 style="font-size: clamp(2rem, 4.5vw, 3.8rem); color: var(--text-main); margin: 0 0 1rem; word-break: break-word;">Галерея</h1>
-            <p style="font-size: clamp(0.95rem, 2.2vw, 1.15rem); color: var(--text-muted); line-height: 1.8; max-width: 820px; margin: 0 auto;">
-                Оригинальные интерьерные полотна, монументальная абстракция и скульптурная керамика для оформления частных резиденций, представительских офисов и пентхаусов.
+<div class="gallery-page-wrap" style="padding-top: clamp(4.5rem, 6.5vh, 5.5rem); padding-bottom: 5rem; background-color: var(--bg-primary);">
+    <div class="gallery-fluid-container" style="max-width: 1400px; margin: 0 auto; padding: 0 clamp(1rem, 3vw, 2.5rem);">
+        <!-- Compact Poster Header (Audio 6 & 7: no eyebrow, exact requested subtitle, screen-fit) -->
+        <div class="gallery-compact-header" style="text-align: center; max-width: 920px; margin: 0 auto clamp(1.2rem, 2.5vh, 2rem);">
+            <h1 style="font-size: clamp(1.85rem, 3.4vw, 2.65rem); font-family: var(--font-heading); font-weight: 800; color: var(--text-main); margin: 0 0 0.5rem; letter-spacing: -0.02em;">
+                Арт-галерея
+            </h1>
+            <p style="font-size: clamp(0.92rem, 1.4vw, 1.05rem); color: var(--text-muted); line-height: 1.6; margin: 0;">
+                Интерьерная живопись, графика, керамика и арт-объекты для оформления частных резиденций, представительских офисов и пентхаусов.
             </p>
         </div>
 
-        <!-- Filter Bar -->
-        <div style="display: flex; justify-content: center; gap: 0.75rem; margin-bottom: 3.5rem; flex-wrap: wrap;" id="galleryFilters">
-            <button class="btn btn-secondary active" data-filter="all" style="font-size: 0.85rem; padding: 0.65rem 1.5rem;">Все работы</button>
-            {% for cat in categories %}
-            <button class="btn btn-secondary" data-filter="{{ cat.slug }}" style="font-size: 0.85rem; padding: 0.65rem 1.5rem;">{{ cat.name }}</button>
+        <!-- 3 Primary Folders (Audio 8: 1. Живопись и графика, 2. Керамика, 3. Арт-объекты with arrows & 2/3 modal, no prices on front) -->
+        <div class="flagship-folders-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 2vw, 1.75rem); align-items: stretch; margin-bottom: clamp(2.5rem, 4vh, 4rem);">
+            {% for cat in flagship_categories %}
+            <article class="folder-showcase-card artwork-folder-card" id="artwork-card-{{ cat.slug }}" data-cat="{{ cat.slug }}" style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 4px 20px rgba(0,0,0,0.03); transition: transform 0.25s ease, box-shadow 0.25s ease;">
+                <!-- Folder Card Top Bar -->
+                <div style="padding: 0.9rem 1.25rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-subtle); background: var(--bg-card);">
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <span style="font-family: var(--font-display); font-size: 0.78rem; font-weight: 700; color: var(--accent-bronze); text-transform: uppercase; letter-spacing: 0.08em;">
+                            0{{ forloop.counter }}
+                        </span>
+                        <h2 style="font-size: 1.02rem; font-weight: 700; margin: 0; color: var(--text-main); font-family: var(--font-heading);">
+                            {{ cat.name }}
+                        </h2>
+                    </div>
+                    <span class="slide-counter-badge" style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600; background: var(--bg-primary); padding: 0.2rem 0.6rem; border-radius: 4px; border: 1px solid var(--border-subtle);">
+                        1 / {{ cat.count }}
+                    </span>
+                </div>
+
+                <!-- Slide Image Frame with On-Card Arrows -->
+                <div class="card-slide-frame" style="position: relative; width: 100%; height: clamp(220px, 28vh, 290px); background: #111; overflow: hidden; cursor: pointer;" title="Нажмите, чтобы рассмотреть на 2/3 экрана">
+                    <img class="folder-current-img" src="{{ cat.primary_artwork.get_image }}" alt="{{ cat.primary_artwork.title }}" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s ease;">
+                    
+                    <!-- Arrow Controls directly on card (Audio 8) -->
+                    <button type="button" class="slide-nav-btn prev-btn" aria-label="Предыдущая работа" style="position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); width: 36px; height: 36px; border-radius: 50%; background: rgba(18, 18, 18, 0.75); color: #fff; border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; cursor: pointer; backdrop-filter: blur(4px); transition: background 0.2s;">
+                        ‹
+                    </button>
+                    <button type="button" class="slide-nav-btn next-btn" aria-label="Следующая работа" style="position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); width: 36px; height: 36px; border-radius: 50%; background: rgba(18, 18, 18, 0.75); color: #fff; border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; cursor: pointer; backdrop-filter: blur(4px); transition: background 0.2s;">
+                        ›
+                    </button>
+
+                    <!-- Click to open 2/3 screen modal hint -->
+                    <div class="expand-hint-badge" style="position: absolute; bottom: 0.75rem; right: 0.75rem; background: rgba(0,0,0,0.7); color: #fff; font-size: 0.72rem; padding: 0.25rem 0.65rem; border-radius: 4px; letter-spacing: 0.04em; backdrop-filter: blur(4px); pointer-events: none;">
+                        Рассмотреть фактуру
+                    </div>
+                </div>
+
+                <!-- Card Body Information (No prices on front view per Audio 8 instruction) -->
+                <div class="card-info-wrap" style="padding: 1.25rem; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between;">
+                    <div>
+                        <div class="folder-meta-row" style="font-size: 0.78rem; color: var(--accent-bronze); margin-bottom: 0.35rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em;">
+                            <span>Александр Попыкин</span> • <span class="meta-year">{{ cat.primary_artwork.year }} г.</span>
+                        </div>
+                        <h3 class="folder-artwork-title" style="font-size: 1.08rem; line-height: 1.35; margin: 0 0 0.4rem; color: var(--text-main); font-weight: 700;">
+                            «{{ cat.primary_artwork.title }}»
+                        </h3>
+                        <p class="folder-artwork-medium" style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.45; margin: 0 0 0.25rem;">
+                            {{ cat.primary_artwork.medium }}
+                        </p>
+                        <p class="folder-artwork-dimensions" style="font-size: 0.8rem; color: var(--text-muted); margin: 0 0 0.85rem; font-weight: 500;">
+                            {{ cat.primary_artwork.dimensions }}
+                        </p>
+                    </div>
+
+                    <div style="display: flex; gap: 0.6rem; align-items: center; justify-content: space-between; border-top: 1px solid var(--border-subtle); padding-top: 0.85rem; margin-top: auto;">
+                        <button type="button" class="btn btn-secondary btn-trigger-artwork-modal" style="width: 100%; padding: 0.6rem 1rem; font-size: 0.82rem; text-align: center;">
+                            Открыть экспозицию
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Hidden JSON dataset for client-side slider & modal -->
+                <script type="application/json" class="folder-data-json">
+                    {{ cat.items_json|safe }}
+                </script>
+            </article>
             {% endfor %}
         </div>
 
-        <!-- Artworks Grid -->
-        <div class="artworks-grid">
-            {% for artwork in artworks %}
-            <div class="artwork-card gallery-item" data-category="{{ artwork.category.slug }}">
-                <div class="artwork-img-wrap btn-view-artwork"
-                     data-title="{{ artwork.title }}"
-                     data-medium="{{ artwork.medium }}"
-                     data-dimensions="{{ artwork.dimensions }}"
-                     data-price="{{ artwork.formatted_price }}"
-                     data-desc="{{ artwork.curator_note }}"
-                     data-img="{{ artwork.image_url }}">
-                    <img src="{{ artwork.image_url }}" alt="{{ artwork.title }}">
-                    <div class="artwork-overlay-reveal">
-                        <span class="artwork-reveal-badge">Рассмотреть фактуру</span>
-                        <span class="artwork-reveal-btn">Подробнее →</span>
+        <!-- 2/3 Screen Lightbox Modal for Artworks (Prices & Curator Explanations revealed inside!) -->
+        <div id="artworkModal23" class="project-modal-backdrop" style="display: none; position: fixed; inset: 0; z-index: 10000; background: rgba(10, 10, 12, 0.85); backdrop-filter: blur(8px); align-items: center; justify-content: center; padding: 1.5rem;">
+            <div class="project-modal-window" style="background: #ffffff; border-radius: var(--radius-md); width: min(1080px, 92vw); max-height: 88vh; overflow: hidden; display: grid; grid-template-columns: 1.25fr 1fr; box-shadow: 0 25px 60px rgba(0,0,0,0.3); position: relative;">
+                <!-- Close Button -->
+                <button type="button" id="artModalCloseBtn" aria-label="Закрыть" style="position: absolute; top: 1rem; right: 1rem; z-index: 20; width: 40px; height: 40px; border-radius: 50%; background: rgba(0,0,0,0.6); color: #fff; border: none; font-size: 1.3rem; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+                    ✕
+                </button>
+
+                <!-- Modal Media with arrows -->
+                <div class="modal-media-col" style="position: relative; background: #0c0c0c; display: flex; align-items: center; justify-content: center; overflow: hidden; min-height: 380px;">
+                    <img id="artModalImg" src="" alt="" style="width: 100%; height: 100%; object-fit: contain; max-height: 88vh; background: #0c0c0c;">
+                    
+                    <button type="button" id="artModalPrevBtn" aria-label="Назад" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; background: rgba(0,0,0,0.65); color: #fff; border: 1px solid rgba(255,255,255,0.2); font-size: 1.4rem; cursor: pointer; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(4px);">
+                        ‹
+                    </button>
+                    <button type="button" id="artModalNextBtn" aria-label="Вперед" style="position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; background: rgba(0,0,0,0.65); color: #fff; border: 1px solid rgba(255,255,255,0.2); font-size: 1.4rem; cursor: pointer; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(4px);">
+                        ›
+                    </button>
+
+                    <div id="artModalCounter" style="position: absolute; bottom: 1rem; left: 1rem; background: rgba(0,0,0,0.7); color: #fff; font-size: 0.8rem; padding: 0.3rem 0.75rem; border-radius: 4px;">
+                        1 / 2
                     </div>
                 </div>
-                <div class="artwork-info">
-                    <div class="artwork-info-top">
-                        <span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-bronze); font-weight: 600;">{{ artwork.category.name }}</span>
-                        <span style="font-size: 0.75rem; color: var(--text-muted);">{{ artwork.year }} г.</span>
-                    </div>
-                    <h3 class="artwork-title">{{ artwork.title }}</h3>
-                    <p style="font-size: 0.75rem; color: var(--text-muted); margin: 0.15rem 0 0.5rem;">Автор: Александр Попыкин</p>
-                    <p class="artwork-medium">{{ artwork.medium }}</p>
-                    <p class="artwork-dimensions">{{ artwork.dimensions }}</p>
 
-                    <div class="artwork-curator-note">
-                        {{ artwork.curator_note }}
-                    </div>
+                <!-- Modal Information & Curator note -->
+                <div class="modal-info-col" style="padding: clamp(1.5rem, 3vw, 2.5rem); display: flex; flex-direction: column; justify-content: space-between; overflow-y: auto;">
+                    <div>
+                        <div id="artModalCategory" style="font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-bronze); font-weight: 700; margin-bottom: 0.35rem;">
+                            Живопись и графика
+                        </div>
+                        <h2 id="artModalTitle" style="font-family: var(--font-heading); font-size: clamp(1.3rem, 2.2vw, 1.75rem); color: var(--text-main); margin: 0 0 0.35rem; line-height: 1.25;">
+                            Название произведения
+                        </h2>
+                        <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+                            Автор: Александр Попыкин • <span id="artModalYear">2024 г.</span>
+                        </div>
 
-                    <div class="artwork-price-row">
-                        <span class="artwork-price">{{ artwork.formatted_price }}</span>
-                        <div style="display: flex; gap: 0.5rem;">
-                            <button class="btn btn-outline-gold btn-open-fitting"
-                                    style="padding: 0.5rem 0.9rem; font-size: 0.78rem;"
-                                    title="Заказать примерку картины в интерьере">
-                                Примерить
-                            </button>
-                            <button class="btn btn-secondary btn-view-artwork" 
-                                    style="padding: 0.5rem 0.9rem; font-size: 0.78rem;"
-                                    data-title="{{ artwork.title }}"
-                                    data-medium="{{ artwork.medium }}"
-                                    data-dimensions="{{ artwork.dimensions }}"
-                                    data-price="{{ artwork.formatted_price }}"
-                                    data-desc="{{ artwork.curator_note }}"
-                                    data-img="{{ artwork.image_url }}">
-                                Купить
-                            </button>
+                        <div style="background: var(--bg-primary); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 0.85rem 1rem; margin-bottom: 1.25rem;">
+                            <div style="font-size: 0.82rem; color: var(--text-main); margin-bottom: 0.25rem;">
+                                <strong>Материалы:</strong> <span id="artModalMedium">Холст, масло</span>
+                            </div>
+                            <div style="font-size: 0.82rem; color: var(--text-main);">
+                                <strong>Размеры:</strong> <span id="artModalDimensions">165 × 140 см</span>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: 1.5rem;">
+                            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); font-weight: 600; margin-bottom: 0.4rem;">
+                                Кураторская экспликация:
+                            </div>
+                            <p id="artModalDesc" style="font-size: 0.88rem; color: var(--text-main); line-height: 1.6; margin: 0;">
+                                Описание работы...
+                            </p>
+                        </div>
+
+                        <!-- Price display inside modal -->
+                        <div style="padding-top: 1rem; border-top: 1px solid var(--border-subtle); margin-bottom: 1rem; display: flex; align-items: baseline; justify-content: space-between;">
+                            <span style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); font-weight: 600;">Стоимость:</span>
+                            <span id="artModalPrice" style="font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; color: var(--accent-gold);">
+                                380 000 ₽
+                            </span>
                         </div>
                     </div>
+
+                    <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; padding-top: 1rem; border-top: 1px solid var(--border-subtle);">
+                        <button type="button" class="btn btn-primary btn-open-fitting" style="flex: 1; text-align: center; padding: 0.75rem 1.1rem; font-size: 0.88rem;">
+                            Примерить в интерьере
+                        </button>
+                        <button type="button" class="btn btn-secondary btn-open-contact" style="flex: 1; text-align: center; padding: 0.75rem 1.1rem; font-size: 0.88rem;">
+                            Запросить оригинал
+                        </button>
+                    </div>
                 </div>
             </div>
-            {% endfor %}
         </div>
 
-        <!-- Free Art Fitting Feature Banner (Audio 10 requirement) -->
-        <div style="max-width: 1200px; margin: 6rem auto 0; background: var(--bg-secondary); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: clamp(2rem, 5vw, 4rem); display: grid; grid-template-columns: 1.2fr 1fr; gap: 3rem; align-items: center;">
+        <!-- Free Art Fitting Feature Banner (Retained as high-end concierge service) -->
+        <div style="margin-top: clamp(3rem, 5vh, 4.5rem); background: var(--bg-secondary); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: clamp(1.75rem, 4vw, 3.5rem); display: grid; grid-template-columns: 1.25fr 1fr; gap: 2.5rem; align-items: center;">
             <div>
-                <div class="eyebrow">Сервис галереи</div>
-                <h2 style="font-family: var(--font-serif); font-size: clamp(1.8rem, 3.5vw, 2.6rem); color: var(--text-main); margin: 0 0 1rem; line-height: 1.2;">
+                <h2 style="font-family: var(--font-heading); font-size: clamp(1.5rem, 2.8vw, 2.2rem); color: var(--text-main); margin: 0 0 0.85rem; line-height: 1.25;">
                     Бесплатная примерка полотен в вашем интерьере
                 </h2>
-                <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 2rem;">
-                    Картина должна звучать в реальном свете вашего дома. Мы бесплатно привезем выбранные оригиналы к вам на объект в Москве и Подмосковье, навесим и оценим масштаб при дневном и вечернем сценариях света.
+                <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 1.75rem; font-size: 0.92rem;">
+                    Произведение искусства должно идеально гармонировать со световыми сценариями и масштабом вашего пространства. Мы доставляем выбранные оригиналы на объект в Москве и области для примерки перед приобретением.
                 </p>
-                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                    <button type="button" class="btn btn-primary btn-open-fitting">Заказать примерку картин</button>
-                    <a href="{{ home_config.telegram_url|default:'https://t.me/' }}" target="_blank" rel="noopener" class="btn btn-secondary">Отправить фото комнаты в Telegram</a>
+                <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                    <button type="button" class="btn btn-primary btn-open-fitting" style="padding: 0.75rem 1.4rem; font-size: 0.88rem;">
+                        Заказать примерку картин
+                    </button>
+                    <a href="{{ home_config.telegram_url|default:'https://t.me/gbstudio' }}" target="_blank" rel="noopener" class="btn btn-secondary" style="padding: 0.75rem 1.4rem; font-size: 0.88rem;">
+                        Отправить фото стен в Telegram
+                    </a>
                 </div>
             </div>
             <div>
-                <img src="/static/images/art_fitting_interior.jpg" alt="Примерка полотен в интерьере" style="border-radius: var(--radius-md); width: 100%; height: 320px; object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,0.06);">
-            </div>
-        </div>
-
-        <!-- Exhibitions Timeline section -->
-        <div style="max-width: 1200px; margin: 6rem auto 0; padding-top: 4rem; border-top: 1px solid var(--border-subtle);">
-            <div class="section-header" style="text-align: center;">
-                <div class="eyebrow">Хроника признания</div>
-                <h2 class="section-title">Выставки и музейные экспозиции</h2>
-            </div>
-
-            <div style="max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.5rem;">
-                {% for exh in exhibitions %}
-                <div style="padding: 1.75rem; background: var(--bg-card); border-left: 3px solid var(--accent-gold); border-radius: 0 var(--radius-md) var(--radius-md) 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-                    <div>
-                        <span style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 800; color: var(--accent-gold); margin-right: 1rem;">{{ exh.year }}</span>
-                        <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--accent-bronze); font-weight: 600;">{{ exh.exhibition_type }}</span>
-                        <h3 style="font-size: 1.4rem; color: var(--text-main); margin: 0.35rem 0;">«{{ exh.title }}»</h3>
-                        <p style="font-size: 0.9rem; color: var(--text-muted);">{{ exh.venue }} • {{ exh.city }} {% if exh.dates %}({{ exh.dates }}){% endif %}</p>
-                    </div>
-                    <div>
-                        <span style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-gold); font-weight: 600;">{{ exh.get_status_display }}</span>
-                    </div>
-                </div>
-                {% endfor %}
+                <img src="/static/images/art_fitting_interior.jpg" alt="Примерка полотен в интерьере" style="border-radius: var(--radius-sm); width: 100%; height: 280px; object-fit: cover; box-shadow: 0 8px 25px rgba(0,0,0,0.06);">
             </div>
         </div>
     </div>
 </div>
 
+<!-- Interactive Gallery Slider & Modal Script -->
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    const filterBtns = document.querySelectorAll('#galleryFilters button');
-    const items = document.querySelectorAll('.gallery-item');
+    const cards = document.querySelectorAll('.artwork-folder-card');
+    const modal = document.getElementById('artworkModal23');
+    const modalCloseBtn = document.getElementById('artModalCloseBtn');
+    const modalImg = document.getElementById('artModalImg');
+    const modalTitle = document.getElementById('artModalTitle');
+    const modalCategory = document.getElementById('artModalCategory');
+    const modalYear = document.getElementById('artModalYear');
+    const modalMedium = document.getElementById('artModalMedium');
+    const modalDimensions = document.getElementById('artModalDimensions');
+    const modalDesc = document.getElementById('artModalDesc');
+    const modalPrice = document.getElementById('artModalPrice');
+    const modalCounter = document.getElementById('artModalCounter');
+    const modalPrevBtn = document.getElementById('artModalPrevBtn');
+    const modalNextBtn = document.getElementById('artModalNextBtn');
 
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            filterBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+    let activeCategoryArtworks = [];
+    let activeModalIndex = 0;
 
-            const filter = btn.getAttribute('data-filter');
-            items.forEach(item => {
-                if (filter === 'all' || item.getAttribute('data-category') === filter) {
-                    item.style.display = 'flex';
-                } else {
-                    item.style.display = 'none';
-                }
+    cards.forEach(card => {
+        const jsonEl = card.querySelector('.folder-data-json');
+        if (!jsonEl) return;
+        let artworks = [];
+        try {
+            artworks = JSON.parse(jsonEl.textContent.trim());
+        } catch (e) {
+            console.error('Failed to parse artwork folder data', e);
+            return;
+        }
+        if (!artworks || artworks.length === 0) return;
+
+        let currentIndex = 0;
+        const imgEl = card.querySelector('.folder-current-img');
+        const counterEl = card.querySelector('.slide-counter-badge');
+        const titleEl = card.querySelector('.folder-artwork-title');
+        const metaYear = card.querySelector('.meta-year');
+        const mediumEl = card.querySelector('.folder-artwork-medium');
+        const dimEl = card.querySelector('.folder-artwork-dimensions');
+        const prevBtn = card.querySelector('.prev-btn');
+        const nextBtn = card.querySelector('.next-btn');
+        const triggerModalBtn = card.querySelector('.btn-trigger-artwork-modal');
+        const slideFrame = card.querySelector('.card-slide-frame');
+
+        function updateCardDisplay(idx) {
+            currentIndex = (idx + artworks.length) % artworks.length;
+            const a = artworks[currentIndex];
+
+            imgEl.style.opacity = '0.3';
+            setTimeout(() => {
+                imgEl.src = a.image;
+                imgEl.alt = a.title;
+                imgEl.style.opacity = '1';
+            }, 120);
+
+            if (counterEl) counterEl.textContent = `${currentIndex + 1} / ${artworks.length}`;
+            if (titleEl) titleEl.textContent = `«${a.title}»`;
+            if (metaYear) metaYear.textContent = a.year;
+            if (mediumEl) mediumEl.textContent = a.medium;
+            if (dimEl) dimEl.textContent = a.dimensions;
+        }
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                updateCardDisplay(currentIndex - 1);
             });
+        }
+        if (nextBtn) {
+            nextBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                updateCardDisplay(currentIndex + 1);
+            });
+        }
+
+        function openModalForThisCard() {
+            activeCategoryArtworks = artworks;
+            activeModalIndex = currentIndex;
+            renderModal();
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        if (triggerModalBtn) {
+            triggerModalBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                openModalForThisCard();
+            });
+        }
+        if (slideFrame) {
+            slideFrame.addEventListener('click', (e) => {
+                if (e.target.closest('.slide-nav-btn')) return;
+                openModalForThisCard();
+            });
+        }
+    });
+
+    function renderModal() {
+        if (!activeCategoryArtworks || activeCategoryArtworks.length === 0) return;
+        const a = activeCategoryArtworks[activeModalIndex];
+        modalImg.src = a.image;
+        modalImg.alt = a.title;
+        modalTitle.textContent = `«${a.title}»`;
+        modalCategory.textContent = a.category_name;
+        modalYear.textContent = a.year;
+        modalMedium.textContent = a.medium;
+        modalDimensions.textContent = a.dimensions;
+        modalDesc.textContent = a.curator_note;
+        modalPrice.textContent = a.price;
+        modalCounter.textContent = `${activeModalIndex + 1} / ${activeCategoryArtworks.length}`;
+    }
+
+    if (modalPrevBtn) {
+        modalPrevBtn.addEventListener('click', () => {
+            activeModalIndex = (activeModalIndex - 1 + activeCategoryArtworks.length) % activeCategoryArtworks.length;
+            renderModal();
         });
+    }
+    if (modalNextBtn) {
+        modalNextBtn.addEventListener('click', () => {
+            activeModalIndex = (activeModalIndex + 1) % activeCategoryArtworks.length;
+            renderModal();
+        });
+    }
+
+    function closeModal() {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+
+    if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
+    if (modal) {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+    }
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal && modal.style.display === 'flex') {
+            closeModal();
+        }
     });
 });
 </script>

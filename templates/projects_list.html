@@ -1,117 +1,412 @@
 {% extends 'base.html' %}
 
 {% block title %}Наши проекты — Golden Brush Studio{% endblock %}
-{% block meta_desc %}Портфолио реализованных проектов Golden Brush Studio: комплексная отделка интерьеров, авторские фактуры, дизайнерская мебель, арт-объекты и свет.{% endblock %}
+{% block meta_desc %}Реализованные объекты Golden Brush Studio: культовые бары и рестораны (Coyote Ugly, Горыныч), бутик-отели и элитные частные резиденции под ключ.{% endblock %}
 
 {% block content %}
-<div class="projects-page-wrap" style="padding-top: 8rem; padding-bottom: 6rem; background-color: var(--bg-primary);">
+<div class="projects-page-wrap" style="padding-top: clamp(4.5rem, 6.5vh, 5.5rem); padding-bottom: 5rem; background-color: var(--bg-primary);">
     <div class="container">
-        <!-- Header -->
-        <div style="text-align: center; max-width: 960px; margin: 0 auto 3.5rem;">
-            <div class="eyebrow">Портфолио студии</div>
-            <h1 style="font-size: clamp(2rem, 4.5vw, 3.8rem); color: var(--text-main); margin: 0 0 1rem;">
+        <!-- Compact Poster Header (Audio 1 & 2 requirement: screen-fit, no large empty gaps) -->
+        <div class="projects-compact-header" style="text-align: center; max-width: 860px; margin: 0 auto clamp(1.2rem, 2.5vh, 2rem);">
+            <h1 style="font-size: clamp(1.85rem, 3.4vw, 2.65rem); font-family: var(--font-heading); font-weight: 800; color: var(--text-main); margin: 0 0 0.5rem; letter-spacing: -0.02em;">
                 Наши проекты
             </h1>
-            <p style="font-size: clamp(0.95rem, 2.2vw, 1.15rem); color: var(--text-muted); line-height: 1.8;">
-                Крупные коммерческие объекты, бутик-отели, рестораны, частные резиденции, монолитные арт-объекты и эксклюзивная дизайнерская мебель.
+            <p style="font-size: clamp(0.92rem, 1.4vw, 1.05rem); color: var(--text-muted); line-height: 1.6; margin: 0;">
+                Бары и рестораны, отели и частные резиденции под ключ
             </p>
         </div>
 
-        <!-- Filter Bar -->
-        <div style="display: flex; justify-content: center; gap: 0.75rem; margin-bottom: 3.5rem; flex-wrap: wrap;">
-            <a href="{% url 'main:projects_list' %}" 
-               class="btn btn-secondary {% if not current_category %}active{% endif %}"
-               style="font-size: 0.85rem; padding: 0.65rem 1.5rem;">
-                Все проекты
-            </a>
-            {% for cat in categories %}
-            <a href="{% url 'main:projects_list' %}?category={{ cat.slug }}" 
-               class="btn btn-secondary {% if current_category == cat.slug %}active{% endif %}"
-               style="font-size: 0.85rem; padding: 0.65rem 1.5rem;">
-                {{ cat.name }}
-            </a>
+        <!-- 3 Primary Showcase Cards (Audio 3 & 4 requirement: 3 flagship folders with arrow controls & 2/3 modal) -->
+        <div class="flagship-folders-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 2vw, 1.75rem); align-items: stretch; margin-bottom: clamp(2.5rem, 4vh, 4rem);">
+            {% for cat in flagship_categories %}
+            <article class="folder-showcase-card" id="folder-card-{{ cat.slug }}" data-cat="{{ cat.slug }}" style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 4px 20px rgba(0,0,0,0.03); transition: transform 0.25s ease, box-shadow 0.25s ease;">
+                <!-- Folder Card Top Bar -->
+                <div style="padding: 0.9rem 1.25rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-subtle); background: var(--bg-card);">
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <span style="font-family: var(--font-display); font-size: 0.78rem; font-weight: 700; color: var(--accent-bronze); text-transform: uppercase; letter-spacing: 0.08em;">
+                            0{{ forloop.counter }}
+                        </span>
+                        <h2 style="font-size: 1.02rem; font-weight: 700; margin: 0; color: var(--text-main); font-family: var(--font-heading);">
+                            {{ cat.name }}
+                        </h2>
+                    </div>
+                    <span class="slide-counter-badge" style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600; background: var(--bg-primary); padding: 0.2rem 0.6rem; border-radius: 4px; border: 1px solid var(--border-subtle);">
+                        1 / {{ cat.count }}
+                    </span>
+                </div>
+
+                <!-- Slide Image Frame with On-Card Arrows -->
+                <div class="card-slide-frame" style="position: relative; width: 100%; height: clamp(200px, 26vh, 260px); background: #111; overflow: hidden; cursor: pointer;" title="Нажмите, чтобы рассмотреть на 2/3 экрана">
+                    <img class="folder-current-img" src="{{ cat.primary_project.get_image }}" alt="{{ cat.primary_project.title }}" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s ease;">
+                    
+                    <!-- Arrow Controls directly on the card (Audio 4: "стрелочки чтобы ты можешь в мелком формате рассмотреть") -->
+                    <button type="button" class="slide-nav-btn prev-btn" aria-label="Предыдущий проект" style="position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); width: 36px; height: 36px; border-radius: 50%; background: rgba(18, 18, 18, 0.75); color: #fff; border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; cursor: pointer; backdrop-filter: blur(4px); transition: background 0.2s;">
+                        ‹
+                    </button>
+                    <button type="button" class="slide-nav-btn next-btn" aria-label="Следующий проект" style="position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); width: 36px; height: 36px; border-radius: 50%; background: rgba(18, 18, 18, 0.75); color: #fff; border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; cursor: pointer; backdrop-filter: blur(4px); transition: background 0.2s;">
+                        ›
+                    </button>
+
+                    <!-- Click to open 2/3 screen modal hint -->
+                    <div class="expand-hint-badge" style="position: absolute; bottom: 0.75rem; right: 0.75rem; background: rgba(0,0,0,0.7); color: #fff; font-size: 0.72rem; padding: 0.25rem 0.65rem; border-radius: 4px; letter-spacing: 0.04em; backdrop-filter: blur(4px); pointer-events: none;">
+                        Рассмотреть детально
+                    </div>
+                </div>
+
+                <!-- Card Body Information -->
+                <div class="card-info-wrap" style="padding: 1.25rem; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between;">
+                    <div>
+                        <div class="folder-meta-row" style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.45rem; font-weight: 500;">
+                            <span class="meta-location">{{ cat.primary_project.location }}</span> • <span class="meta-area">{{ cat.primary_project.area_sqm }} м²</span> • <span class="meta-duration">{{ cat.primary_project.duration }}</span>
+                        </div>
+                        <h3 class="folder-project-title" style="font-size: 1.08rem; line-height: 1.35; margin: 0 0 0.5rem; color: var(--text-main); font-weight: 700;">
+                            <a class="folder-project-link" href="{{ cat.primary_project.get_absolute_url }}" style="color: inherit; text-decoration: none;">
+                                {{ cat.primary_project.title }}
+                            </a>
+                        </h3>
+                        <p class="folder-project-desc" style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.5; margin: 0 0 0.85rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                            {{ cat.primary_project.short_description }}
+                        </p>
+                    </div>
+
+                    <div style="display: flex; gap: 0.6rem; align-items: center; justify-content: space-between; border-top: 1px solid var(--border-subtle); padding-top: 0.85rem; margin-top: auto;">
+                        <button type="button" class="btn btn-secondary btn-trigger-modal" style="padding: 0.55rem 0.95rem; font-size: 0.8rem;">
+                            Рассмотреть
+                        </button>
+                        <a class="btn btn-primary folder-detail-btn" href="{{ cat.primary_project.get_absolute_url }}" style="padding: 0.55rem 1.05rem; font-size: 0.8rem;">
+                            Страница кейса
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hidden JSON dataset for client-side slider & modal -->
+                <script type="application/json" class="folder-data-json">
+                    {{ cat.items_json|safe }}
+                </script>
+            </article>
             {% endfor %}
         </div>
 
-        <!-- Projects Grid -->
-        <div class="cases-gallery-grid">
-            {% for project in projects %}
-            <article class="case-item-card">
-                <a href="{{ project.get_absolute_url|default:'#' }}" class="case-thumb-wrap" style="display: block;">
-                    <img src="{{ project.get_image }}" alt="{{ project.title }}">
-                    <div class="case-tag-overlay">{{ project.category.name }}</div>
-                </a>
-                <div class="case-item-body">
-                    <div class="case-item-meta">
-                        <span>{{ project.location }}</span> • <span>{{ project.area_sqm }} м²</span> • <span>{{ project.duration }}</span>
+        <!-- 2/3 Screen Lightbox Modal (Audio 4: "стрелочку нажимаешь она у тебя чуть увеличивается на допустим 2/3 экрана") -->
+        <div id="projectModal23" class="project-modal-backdrop" style="display: none; position: fixed; inset: 0; z-index: 10000; background: rgba(10, 10, 12, 0.82); backdrop-filter: blur(8px); align-items: center; justify-content: center; padding: 1.5rem;">
+            <div class="project-modal-window" style="background: #ffffff; border-radius: var(--radius-md); width: min(1080px, 92vw); max-height: 88vh; overflow: hidden; display: grid; grid-template-columns: 1.25fr 1fr; box-shadow: 0 25px 60px rgba(0,0,0,0.3); position: relative;">
+                <!-- Close Button -->
+                <button type="button" id="modalCloseBtn" aria-label="Закрыть" style="position: absolute; top: 1rem; right: 1rem; z-index: 20; width: 40px; height: 40px; border-radius: 50%; background: rgba(0,0,0,0.6); color: #fff; border: none; font-size: 1.3rem; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+                    ✕
+                </button>
+
+                <!-- Modal Media with arrows -->
+                <div class="modal-media-col" style="position: relative; background: #0c0c0c; display: flex; align-items: center; justify-content: center; overflow: hidden; min-height: 380px;">
+                    <img id="modalImg" src="" alt="" style="width: 100%; height: 100%; object-fit: cover; max-height: 88vh;">
+                    
+                    <button type="button" id="modalPrevBtn" aria-label="Назад" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; background: rgba(0,0,0,0.65); color: #fff; border: 1px solid rgba(255,255,255,0.2); font-size: 1.4rem; cursor: pointer; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(4px);">
+                        ‹
+                    </button>
+                    <button type="button" id="modalNextBtn" aria-label="Вперед" style="position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; background: rgba(0,0,0,0.65); color: #fff; border: 1px solid rgba(255,255,255,0.2); font-size: 1.4rem; cursor: pointer; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(4px);">
+                        ›
+                    </button>
+
+                    <div id="modalCounter" style="position: absolute; bottom: 1rem; left: 1rem; background: rgba(0,0,0,0.7); color: #fff; font-size: 0.8rem; padding: 0.3rem 0.75rem; border-radius: 4px;">
+                        1 / 4
                     </div>
-                    <h3 class="case-item-title">
-                        <a href="{{ project.get_absolute_url|default:'#' }}" style="color: inherit; text-decoration: none;">
-                            {{ project.title }}
+                </div>
+
+                <!-- Modal Information & Scope -->
+                <div class="modal-info-col" style="padding: clamp(1.5rem, 3vw, 2.5rem); display: flex; flex-direction: column; justify-content: space-between; overflow-y: auto;">
+                    <div>
+                        <div id="modalCategory" style="font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-bronze); font-weight: 700; margin-bottom: 0.5rem;">
+                            Категория
+                        </div>
+                        <h2 id="modalTitle" style="font-family: var(--font-heading); font-size: clamp(1.3rem, 2.2vw, 1.75rem); color: var(--text-main); margin: 0 0 0.75rem; line-height: 1.25;">
+                            Название проекта
+                        </h2>
+                        <div id="modalMeta" style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1.25rem;">
+                            Москва • 1 200 м² • 4 месяца
+                        </div>
+                        
+                        <p id="modalDesc" style="font-size: 0.92rem; color: var(--text-main); line-height: 1.65; margin: 0 0 1.5rem;">
+                            Описание проекта...
+                        </p>
+
+                        <div style="margin-bottom: 1.5rem;">
+                            <div style="font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); font-weight: 600; margin-bottom: 0.5rem;">
+                                Реализованные работы:
+                            </div>
+                            <div id="modalScope" style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+                                <!-- Scope badges injected via JS -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; padding-top: 1.25rem; border-top: 1px solid var(--border-subtle);">
+                        <a id="modalDetailLink" href="#" class="btn btn-primary" style="flex: 1; text-align: center; padding: 0.75rem 1.25rem; font-size: 0.88rem;">
+                            Перейти к объекту
                         </a>
-                    </h3>
-                    <p class="case-item-desc">{{ project.short_description }}</p>
-                    <div class="case-item-scope">
-                        {% for scope in project.get_scope_list|slice:":3" %}
-                        <span class="scope-pill">{{ scope }}</span>
-                        {% endfor %}
+                        <button type="button" class="btn btn-secondary btn-open-contact" style="flex: 1; text-align: center; padding: 0.75rem 1.25rem; font-size: 0.88rem;">
+                            Обсудить задачу
+                        </button>
                     </div>
                 </div>
-            </article>
-            {% empty %}
-            <!-- Fallback projects -->
-            <article class="case-item-card">
-                <div class="case-thumb-wrap">
-                    <img src="/static/images/case_hotel.jpg" alt="Бутик-отель «Метрополь Арт»">
-                    <div class="case-tag-overlay">Отели & Рестораны</div>
+            </div>
+        </div>
+
+        <!-- Secondary Section for Thorough Clients (Audio 4: "если человек дотошный... разместить пониже мелким шрифтом") -->
+        <div style="margin-top: clamp(2.5rem, 5vh, 4.5rem); padding-top: clamp(2rem, 4vh, 3.5rem); border-top: 1px solid var(--border-subtle);">
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1.5rem; margin-bottom: 2rem;">
+                <div>
+                    <h2 style="font-family: var(--font-heading); font-size: clamp(1.3rem, 2.4vw, 1.8rem); color: var(--text-main); margin: 0 0 0.35rem;">
+                        Все реализованные объекты
+                    </h2>
+                    <p style="font-size: 0.88rem; color: var(--text-muted); margin: 0;">
+                        Полная подборка проектов с техническими характеристиками и перечнем работ
+                    </p>
                 </div>
-                <div class="case-item-body">
-                    <div class="case-item-meta">Москва • 1 850 м² • 3 месяца</div>
-                    <h3 class="case-item-title">Бутик-отель «Метрополь Арт»</h3>
-                    <p class="case-item-desc">Монументальные рельефные штукатурки в лобби, позолота карнизов, роспись сьютов.</p>
+
+                <!-- Clean Category Tabs -->
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;" id="allProjectsFilterBar">
+                    <button class="btn btn-secondary active" data-filter="all" style="font-size: 0.8rem; padding: 0.5rem 1.1rem;">
+                        Все объекты
+                    </button>
+                    {% for cat in categories %}
+                    <button class="btn btn-secondary" data-filter="{{ cat.slug }}" style="font-size: 0.8rem; padding: 0.5rem 1.1rem;">
+                        {{ cat.name }}
+                    </button>
+                    {% endfor %}
                 </div>
-            </article>
-            <article class="case-item-card">
-                <div class="case-thumb-wrap">
-                    <img src="/static/images/case_office.jpg" alt="Представительский офис девелопера">
-                    <div class="case-tag-overlay">Корпоративные офисы</div>
-                </div>
-                <div class="case-item-body">
-                    <div class="case-item-meta">Москва-Сити • 920 м² • 2 месяца</div>
-                    <h3 class="case-item-title">Штаб-квартира девелоперской группы</h3>
-                    <p class="case-item-desc">Бесшовный графитовый микроцемент, акцентные стены с латунной расшивкой, конференц-столы.</p>
-                </div>
-            </article>
-            <article class="case-item-card">
-                <div class="case-thumb-wrap">
-                    <img src="/static/images/art_furniture.jpg" alt="Частная вилла в Серебряном Бору">
-                    <div class="case-tag-overlay">Частные резиденции</div>
-                </div>
-                <div class="case-item-body">
-                    <div class="case-item-meta">Серебряный Бор • 650 м² • 2.5 месяца</div>
-                    <h3 class="case-item-title">Вилла в Серебряном Бору</h3>
-                    <p class="case-item-desc">Комплексная отделка стен травертином, кастомные обеденные столы из микроцемента, коллекционная живопись.</p>
-                </div>
-            </article>
-            {% endfor %}
+            </div>
+
+            <!-- Compact All Projects Grid -->
+            <div class="cases-gallery-grid" id="allProjectsGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem;">
+                {% for project in all_projects %}
+                <article class="case-item-card all-project-item" data-category="{{ project.category.slug }}" style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); overflow: hidden; display: flex; flex-direction: column;">
+                    <a href="{{ project.get_absolute_url|default:'#' }}" class="case-thumb-wrap" style="display: block; position: relative; height: 210px; overflow: hidden;">
+                        <img src="{{ project.get_image }}" alt="{{ project.title }}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;">
+                        <div class="case-tag-overlay" style="position: absolute; top: 0.75rem; left: 0.75rem; background: rgba(0,0,0,0.65); color: #fff; font-size: 0.75rem; padding: 0.25rem 0.65rem; border-radius: 4px; backdrop-filter: blur(4px);">
+                            {{ project.category.name }}
+                        </div>
+                    </a>
+                    <div class="case-item-body" style="padding: 1.25rem; display: flex; flex-direction: column; flex-grow: 1;">
+                        <div class="case-item-meta" style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.45rem;">
+                            <span>{{ project.location }}</span> • <span>{{ project.area_sqm }} м²</span> • <span>{{ project.duration }}</span>
+                        </div>
+                        <h3 class="case-item-title" style="font-size: 1.05rem; margin: 0 0 0.5rem; font-weight: 700; line-height: 1.35;">
+                            <a href="{{ project.get_absolute_url|default:'#' }}" style="color: inherit; text-decoration: none;">
+                                {{ project.title }}
+                            </a>
+                        </h3>
+                        <p class="case-item-desc" style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.5; margin: 0 0 0.85rem; flex-grow: 1;">
+                            {{ project.short_description }}
+                        </p>
+                        <div class="case-item-scope" style="display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: auto; padding-top: 0.75rem; border-top: 1px solid var(--border-subtle);">
+                            {% for scope in project.get_scope_list|slice:":3" %}
+                            <span class="scope-pill" style="font-size: 0.72rem; padding: 0.2rem 0.55rem; background: var(--bg-primary); border: 1px solid var(--border-subtle); border-radius: 4px; color: var(--text-muted);">
+                                {{ scope }}
+                            </span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
         </div>
 
         <!-- Section Link to Wall Calculator & Materials -->
-        <div style="margin-top: 5rem; background: var(--bg-secondary); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: clamp(2rem, 4vw, 3.5rem); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem;">
+        <div style="margin-top: 4rem; background: var(--bg-secondary); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: clamp(1.75rem, 3.5vw, 3rem); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
             <div style="max-width: 600px;">
-                <div class="eyebrow">Интерактивный расчет</div>
-                <h3 style="font-family: var(--font-serif); font-size: 1.8rem; color: var(--text-main); margin: 0 0 0.5rem;">
+                <h3 style="font-family: var(--font-heading); font-size: 1.35rem; color: var(--text-main); margin: 0 0 0.4rem;">
                     Рассчитать стоимость фактур по площади стен
                 </h3>
-                <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin: 0;">
-                    Выберите нужное покрытие в нашем каталоге и укажите метраж стен для моментального расчета сметы материалов и работы мастеров.
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; margin: 0;">
+                    Выберите покрытие в каталоге и укажите площадь стен для предварительного расчета сметы материалов и работы мастеров.
                 </p>
             </div>
-            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                <a href="{% url 'materials:list' %}" class="btn btn-primary">Перейти в калькулятор покрытий</a>
-                <button type="button" class="btn btn-secondary btn-open-contact">Связаться с нами</button>
+            <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                <a href="{% url 'materials:list' %}" class="btn btn-primary" style="padding: 0.75rem 1.4rem; font-size: 0.88rem;">Калькулятор покрытий</a>
+                <a href="{% url 'main:contacts' %}" class="btn btn-secondary" style="padding: 0.75rem 1.4rem; font-size: 0.88rem;">Контакты студии</a>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Interactive On-Card Slider & 2/3 Modal Script -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Setup Card Folders with Arrow Navigation
+    const cards = document.querySelectorAll('.folder-showcase-card');
+    const modal = document.getElementById('projectModal23');
+    const modalCloseBtn = document.getElementById('modalCloseBtn');
+    const modalImg = document.getElementById('modalImg');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalCategory = document.getElementById('modalCategory');
+    const modalMeta = document.getElementById('modalMeta');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalScope = document.getElementById('modalScope');
+    const modalCounter = document.getElementById('modalCounter');
+    const modalDetailLink = document.getElementById('modalDetailLink');
+    const modalPrevBtn = document.getElementById('modalPrevBtn');
+    const modalNextBtn = document.getElementById('modalNextBtn');
+
+    let activeModalCategoryProjects = [];
+    let activeModalIndex = 0;
+
+    cards.forEach(card => {
+        const jsonEl = card.querySelector('.folder-data-json');
+        if (!jsonEl) return;
+        let projects = [];
+        try {
+            projects = JSON.parse(jsonEl.textContent.trim());
+        } catch (e) {
+            console.error('Failed to parse folder data', e);
+            return;
+        }
+        if (!projects || projects.length === 0) return;
+
+        let currentIndex = 0;
+        const imgEl = card.querySelector('.folder-current-img');
+        const counterEl = card.querySelector('.slide-counter-badge');
+        const titleEl = card.querySelector('.folder-project-title');
+        const linkEl = card.querySelector('.folder-project-link');
+        const descEl = card.querySelector('.folder-project-desc');
+        const metaLocation = card.querySelector('.meta-location');
+        const metaArea = card.querySelector('.meta-area');
+        const metaDuration = card.querySelector('.meta-duration');
+        const detailBtn = card.querySelector('.folder-detail-btn');
+        const prevBtn = card.querySelector('.prev-btn');
+        const nextBtn = card.querySelector('.next-btn');
+        const triggerModalBtn = card.querySelector('.btn-trigger-modal');
+        const slideFrame = card.querySelector('.card-slide-frame');
+
+        function updateCardDisplay(idx) {
+            currentIndex = (idx + projects.length) % projects.length;
+            const p = projects[currentIndex];
+
+            imgEl.style.opacity = '0.3';
+            setTimeout(() => {
+                imgEl.src = p.image;
+                imgEl.alt = p.title;
+                imgEl.style.opacity = '1';
+            }, 120);
+
+            if (counterEl) counterEl.textContent = `${currentIndex + 1} / ${projects.length}`;
+            if (titleEl && linkEl) {
+                linkEl.textContent = p.title;
+                linkEl.href = p.url;
+            }
+            if (descEl) descEl.textContent = p.short_desc;
+            if (metaLocation) metaLocation.textContent = p.location;
+            if (metaArea) metaArea.textContent = p.area;
+            if (metaDuration) metaDuration.textContent = p.duration;
+            if (detailBtn) detailBtn.href = p.url;
+        }
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                updateCardDisplay(currentIndex - 1);
+            });
+        }
+        if (nextBtn) {
+            nextBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                updateCardDisplay(currentIndex + 1);
+            });
+        }
+
+        function openModalForThisCard() {
+            activeModalCategoryProjects = projects;
+            activeModalIndex = currentIndex;
+            renderModal();
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        if (triggerModalBtn) {
+            triggerModalBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                openModalForThisCard();
+            });
+        }
+        if (slideFrame) {
+            slideFrame.addEventListener('click', (e) => {
+                // If clicked on arrows, ignore
+                if (e.target.closest('.slide-nav-btn')) return;
+                openModalForThisCard();
+            });
+        }
+    });
+
+    // 2. Modal Functions
+    function renderModal() {
+        if (!activeModalCategoryProjects || activeModalCategoryProjects.length === 0) return;
+        const p = activeModalCategoryProjects[activeModalIndex];
+        modalImg.src = p.image;
+        modalImg.alt = p.title;
+        modalTitle.textContent = p.title;
+        modalCategory.textContent = p.category_name;
+        modalMeta.textContent = `${p.location} • ${p.area} • ${p.duration}`;
+        modalDesc.textContent = p.short_desc;
+        modalCounter.textContent = `${activeModalIndex + 1} / ${activeModalCategoryProjects.length}`;
+        modalDetailLink.href = p.url;
+
+        // Render scope tags
+        modalScope.innerHTML = '';
+        if (p.scope && p.scope.length) {
+            p.scope.forEach(sc => {
+                const span = document.createElement('span');
+                span.style.cssText = 'font-size: 0.75rem; padding: 0.25rem 0.6rem; background: var(--bg-primary); border: 1px solid var(--border-subtle); border-radius: 4px; color: var(--text-main);';
+                span.textContent = sc;
+                modalScope.appendChild(span);
+            });
+        }
+    }
+
+    if (modalPrevBtn) {
+        modalPrevBtn.addEventListener('click', () => {
+            activeModalIndex = (activeModalIndex - 1 + activeModalCategoryProjects.length) % activeModalCategoryProjects.length;
+            renderModal();
+        });
+    }
+    if (modalNextBtn) {
+        modalNextBtn.addEventListener('click', () => {
+            activeModalIndex = (activeModalIndex + 1) % activeModalCategoryProjects.length;
+            renderModal();
+        });
+    }
+
+    function closeModal() {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+
+    if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
+    if (modal) {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+    }
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal && modal.style.display === 'flex') {
+            closeModal();
+        }
+    });
+
+    // 3. Filter tabs for lower section
+    const filterBtns = document.querySelectorAll('#allProjectsFilterBar button');
+    const projectCards = document.querySelectorAll('#allProjectsGrid .all-project-item');
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const cat = btn.getAttribute('data-filter');
+            projectCards.forEach(item => {
+                if (cat === 'all' || item.getAttribute('data-category') === cat) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    });
+});
+</script>
 {% endblock %}

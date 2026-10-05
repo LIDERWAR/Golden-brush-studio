@@ -33,7 +33,7 @@ class HomePageConfig(models.Model):
     hero_eyebrow = models.CharField(
         'Hero: Надстрочник',
         max_length=200,
-        default='Ателье монументально-декоративного искусства',
+        default='',
         blank=True
     )
     hero_title = models.CharField(
@@ -49,13 +49,13 @@ class HomePageConfig(models.Model):
 
     portal1_title = models.CharField('Портал 1: Заголовок', max_length=150, default='Наши проекты')
     portal1_link = models.CharField('Портал 1: Ссылка', max_length=200, default='/projects/')
-    portal1_img_url = models.CharField('Портал 1: Фото', max_length=255, default='/static/images/hero.jpg')
+    portal1_img_url = models.CharField('Портал 1: Фото', max_length=255, default='/static/images/case_bar_coyote.jpg')
 
-    portal2_title = models.CharField('Портал 2: Заголовок', max_length=150, default='Реставрация')
-    portal2_link = models.CharField('Портал 2: Ссылка', max_length=200, default='#restoration')
-    portal2_img_url = models.CharField('Портал 2: Фото', max_length=255, default='/static/images/restoration_craft.jpg')
+    portal2_title = models.CharField('Портал 2: Заголовок', max_length=150, default='Декоративные покрытия и роспись стен')
+    portal2_link = models.CharField('Портал 2: Ссылка', max_length=200, default='/materials/')
+    portal2_img_url = models.CharField('Портал 2: Фото', max_length=255, default='/static/images/mat_mural.jpg')
 
-    portal3_title = models.CharField('Портал 3: Заголовок', max_length=150, default='Галерея')
+    portal3_title = models.CharField('Портал 3: Заголовок', max_length=150, default='Арт-галерея')
     portal3_link = models.CharField('Портал 3: Ссылка', max_length=200, default='/gallery/')
     portal3_img_url = models.CharField('Портал 3: Фото', max_length=255, default='/static/images/art_canvas.jpg')
 

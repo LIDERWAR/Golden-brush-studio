@@ -36,17 +36,68 @@ def index(request):
     return render(request, 'index.html', context)
 
 def gallery_view(request):
-    """Выделенная страница Арт-Галереи Александра Попыкина"""
-    artworks = Artwork.objects.all().select_related('category')
+    """Выделенная страница Арт-Галереи Александра Попыкина: 3 направления (Живопись и графика, Керамика, Арт-объекты)"""
+    category_slug = request.GET.get('category', '').strip()
+    all_artworks = list(Artwork.objects.all().select_related('category').order_by('order', 'id'))
+    
+    cat_keys = [
+        ('paintings-graphics', 'Живопись и графика', 'Крупноформатная станковая живопись на льняных холстах и камерная графика тушью.'),
+        ('ceramics', 'Керамика', 'Скульптурные интерьерные вазы и сосуды из шамотной глины, высокотемпературный обжиг.'),
+        ('art-objects', 'Арт-объекты', 'Монолитные арт-столики из микроцемента, рельефные стеновые панно и малые архитектурные формы.')
+    ]
+    
+    flagship_categories = []
+    for slug, title, desc in cat_keys:
+        cat_items = [a for a in all_artworks if a.category.slug == slug]
+        if cat_items:
+            items_json = []
+            for a in cat_items:
+                items_json.append({
+                    'id': a.id,
+                    'title': a.title,
+                    'slug': a.slug,
+                    'image': a.get_image,
+                    'year': f"{a.year} г.",
+                    'medium': a.medium,
+                    'dimensions': a.dimensions,
+                    'curator_note': a.curator_note,
+                    'price': a.formatted_price,
+                    'category_name': a.category.name,
+                })
+            flagship_categories.append({
+                'slug': slug,
+                'name': title,
+                'description': desc,
+                'artworks': cat_items,
+                'count': len(cat_items),
+                'primary_artwork': cat_items[0],
+                'items_json': json.dumps(items_json),
+            })
+
+    filtered_artworks = all_artworks
+    if category_slug:
+        filtered_artworks = [a for a in all_artworks if a.category.slug == category_slug]
+
     categories = ArtworkCategory.objects.all()
-    exhibitions = Exhibition.objects.all()
+    home_config = HomePageConfig.get_solo()
     
     context = {
-        'artworks': artworks,
+        'artworks': filtered_artworks,
+        'all_artworks': all_artworks,
+        'flagship_categories': flagship_categories,
         'categories': categories,
-        'exhibitions': exhibitions,
+        'current_category': category_slug,
+        'home_config': home_config,
     }
     return render(request, 'gallery.html', context)
+
+def contacts_view(request):
+    """Выделенная страница контактов студии Golden Brush Studio"""
+    home_config = HomePageConfig.get_solo()
+    context = {
+        'home_config': home_config,
+    }
+    return render(request, 'contacts.html', context)
 
 def journal_list(request):
     """Журнал Мастерской / Atelier Journal: авторские заметки, Work in Progress, фактуры и события"""
@@ -65,16 +116,55 @@ def journal_list(request):
     return render(request, 'journal.html', context)
 
 def projects_list(request):
-    """Раздел «Наши проекты»: реализованные интерьеры, декоративные покрытия, мебель, арт-объекты и свет"""
+    """Раздел «Наши проекты»: 3 флагманских направления (Бары и рестораны, Отели, Частные резиденции) + полный каталог"""
     category_slug = request.GET.get('category', '').strip()
-    projects = Project.objects.all().select_related('category')
-    if category_slug:
-        projects = projects.filter(category__slug=category_slug)
-        
-    categories = ProjectCategory.objects.all()
+    all_projects = list(Project.objects.all().select_related('category').order_by('order', 'id'))
     
+    cat_keys = [
+        ('bars-restaurants', 'Бары и рестораны', 'Культовые сетевые бары Coyote Ugly (4 заведения), ресторан «Горыныч» и концептуальные гастро-проекты.'),
+        ('hotels', 'Отели', 'Реновация лобби и представительских сьютов бутик-отелей: The Oro, Метрополь Арт.'),
+        ('residences', 'Частные резиденции', 'Комплексная отделка вилл и пентхаусов: Серебряный Бор, Патриаршие пруды, загородные усадьбы.')
+    ]
+    
+    flagship_categories = []
+    for slug, title, desc in cat_keys:
+        cat_projects = [p for p in all_projects if p.category.slug == slug]
+        if cat_projects:
+            items_json = []
+            for p in cat_projects:
+                items_json.append({
+                    'id': p.id,
+                    'title': p.title,
+                    'slug': p.slug,
+                    'url': p.get_absolute_url(),
+                    'image': p.get_image,
+                    'location': p.location,
+                    'area': f"{p.area_sqm} м²",
+                    'duration': p.duration,
+                    'short_desc': p.short_description,
+                    'scope': p.get_scope_list()[:3],
+                    'category_name': p.category.name,
+                })
+            flagship_categories.append({
+                'slug': slug,
+                'name': title,
+                'description': desc,
+                'projects': cat_projects,
+                'count': len(cat_projects),
+                'primary_project': cat_projects[0],
+                'items_json': json.dumps(items_json),
+            })
+            
+    filtered_projects = all_projects
+    if category_slug:
+        filtered_projects = [p for p in all_projects if p.category.slug == category_slug]
+
+    categories = ProjectCategory.objects.all()
+
     context = {
-        'projects': projects,
+        'projects': filtered_projects,
+        'all_projects': all_projects,
+        'flagship_categories': flagship_categories,
         'categories': categories,
         'current_category': category_slug,
     }

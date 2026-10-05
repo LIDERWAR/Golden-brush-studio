@@ -13,6 +13,7 @@ urlpatterns = [
     path('articles/<slug:slug>/', views.article_detail, name='article_detail'),  # legacy alias
     path('fonts/', views.fonts_presentation, name='fonts_presentation'),
     path('partners/', views.partners_view, name='partners'),
+    path('contacts/', views.contacts_view, name='contacts'),
     path('api/quiz-lead/', views.submit_quiz_lead, name='quiz_lead'),
     path('api/sample-box/', views.submit_sample_box, name='sample_box'),
     path('api/art-inquiry/', views.submit_art_inquiry, name='art_inquiry'),

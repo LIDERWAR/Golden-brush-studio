@@ -663,19 +663,12 @@ img {
   pointer-events: none;
 }
 
-@media (max-width: 1079px) {
-  .nav-container {
-    display: none !important;
-  }
-  .burger-btn {
-    display: inline-flex !important;
-  }
+.nav-container {
+  display: none !important;
 }
 
-@media (min-width: 1080px) {
-  .burger-btn {
-    display: none !important;
-  }
+.burger-btn {
+  display: inline-flex !important;
 }
 
 @media (max-width: 580px) {
@@ -2228,15 +2221,17 @@ img {
    NEW ARCHITECTURAL ATELIER SECTIONS (DAWALLS & GOLDSHELL INTEGRATION)
    ========================================================================== */
 
-/* Hero: Atelier & Three Grand Portals */
+/* Hero: Atelier & Three Grand Portals (Poster / Screen-fit Layout) */
 .hero-atelier {
   position: relative;
-  min-height: auto;
-  padding: clamp(7.5rem, 13vh, 11rem) 0 clamp(4rem, 6vh, 6rem);
+  min-height: calc(100vh - 75px);
+  padding: clamp(4.5rem, 7.5vh, 6rem) 0 clamp(1.5rem, 3vh, 2.5rem);
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
   overflow: hidden;
   background-color: var(--bg-primary);
+  box-sizing: border-box;
 }
 
 .hero-atelier-bg {
@@ -2265,14 +2260,14 @@ img {
 /* Hero Header Composition (Architectural Editorial Layout) */
 .hero-composition {
   width: 100%;
-  margin-bottom: clamp(2.5rem, 5.5vh, 4.5rem);
+  margin-bottom: clamp(1rem, 2.2vh, 2rem);
 }
 
 .hero-header-top {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  gap: clamp(2rem, 3.5vw, 4.5rem);
+  gap: clamp(1.5rem, 2.5vw, 3rem);
   margin-bottom: 0;
 }
 
@@ -2282,12 +2277,12 @@ img {
 }
 
 .hero-title-area .eyebrow {
-  margin-bottom: 0.85rem;
+  margin-bottom: 0.5rem;
 }
 
 .hero-atelier-title {
   font-family: var(--font-heading);
-  font-size: clamp(2.2rem, 4.2vw, 3.8rem);
+  font-size: clamp(1.6rem, 2.7vw, 2.5rem);
   line-height: 1.15;
   font-weight: 800;
   color: var(--text-main);
@@ -2304,8 +2299,8 @@ img {
 }
 
 .hero-cta-bar .btn {
-  padding: 0.95rem 2.2rem;
-  font-size: 0.88rem;
+  padding: 0.75rem 1.75rem;
+  font-size: 0.85rem;
   letter-spacing: 0.06em;
   white-space: nowrap;
 }
@@ -2314,7 +2309,7 @@ img {
 .portals-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.75rem;
+  gap: clamp(1rem, 1.8vw, 1.6rem);
 }
 
 .portal-card {
@@ -2331,14 +2326,14 @@ img {
 }
 
 .portal-card:hover {
-  transform: translateY(-8px);
+  transform: translateY(-6px);
   border-color: var(--accent-bronze);
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.09);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
 }
 
 .portal-img-wrap {
   position: relative;
-  height: clamp(240px, 24vw, 320px);
+  height: clamp(150px, 18vh, 230px);
   overflow: hidden;
 }
 
@@ -2360,7 +2355,7 @@ img {
 }
 
 .portal-content {
-  padding: 1.4rem 1.25rem;
+  padding: clamp(0.75rem, 1.4vh, 1.15rem) 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -5477,6 +5472,100 @@ img {
   border-radius: var(--radius-lg);
   padding: clamp(1.75rem, 3.5vw, 2.75rem);
   box-shadow: 0 10px 30px rgba(20, 22, 26, 0.04);
+}
+
+/* ==========================================================================
+   INTERACTIVE SHOWCASE FOLDERS & 2/3 SCREEN LIGHTBOX MODAL (PROJECTS & GALLERY)
+   ========================================================================== */
+
+.flagship-folders-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1rem, 2vw, 1.75rem);
+  align-items: stretch;
+}
+
+@media (max-width: 960px) {
+  .flagship-folders-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.folder-showcase-card {
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.folder-showcase-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(18, 18, 18, 0.08);
+}
+
+.slide-nav-btn {
+  user-select: none;
+  z-index: 10;
+  transition: background 0.2s ease, transform 0.2s ease, color 0.2s ease;
+}
+
+.slide-nav-btn:hover {
+  background: rgba(18, 18, 18, 0.95) !important;
+  color: var(--accent-gold) !important;
+  transform: translateY(-50%) scale(1.08);
+}
+
+.slide-nav-btn:active {
+  transform: translateY(-50%) scale(0.96);
+}
+
+.card-slide-frame:hover .expand-hint-badge {
+  background: rgba(197, 160, 89, 0.95) !important;
+  color: #121212 !important;
+  font-weight: 600;
+}
+
+/* 2/3 Screen Lightbox Modal */
+.project-modal-backdrop {
+  animation: modalFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.project-modal-window {
+  animation: modalScaleUp 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalScaleUp {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@media (max-width: 820px) {
+  .project-modal-window {
+    grid-template-columns: 1fr !important;
+    max-height: 92vh !important;
+    overflow-y: auto !important;
+  }
+  .modal-media-col {
+    min-height: 260px !important;
+    max-height: 320px !important;
+  }
+}
+
+/* Contacts layout */
+@media (max-width: 860px) {
+  .contacts-grid-layout {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
 }
 
 

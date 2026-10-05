@@ -50,3 +50,7 @@ class Project(models.Model):
             return self.image.url
         return self.image_url
 
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('main:project_detail', kwargs={'slug': self.slug})
+

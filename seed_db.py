@@ -20,74 +20,120 @@ if not User.objects.filter(username='admin').exists():
 else:
     print("Superuser already exists")
 
-# 2. Project Categories
-cat_horeca, _ = ProjectCategory.objects.get_or_create(name='Гостиничный сектор (HoReCa)', slug='horeca', order=1)
-cat_corp, _ = ProjectCategory.objects.get_or_create(name='Штаб-квартиры и корпоративные офисы', slug='corporate', order=2)
-cat_industrial, _ = ProjectCategory.objects.get_or_create(name='Производственные предприятия и холдинги', slug='industrial', order=3)
-cat_residence, _ = ProjectCategory.objects.get_or_create(name='Элитная недвижимость и пентхаусы', slug='residential', order=4)
+# 2. Project Categories (Синхронизировано по требованию Натальи и Александра)
+cat_bars, _ = ProjectCategory.objects.get_or_create(name='Бары и рестораны', slug='bars-restaurants', defaults={'order': 1})
+cat_hotels, _ = ProjectCategory.objects.get_or_create(name='Отели', slug='hotels', defaults={'order': 2})
+cat_residences, _ = ProjectCategory.objects.get_or_create(name='Частные резиденции', slug='residences', defaults={'order': 3})
 
-# 3. Projects
-if not Project.objects.exists():
-    Project.objects.create(
-        title='Реновация лобби и представительских зон пятизвездочного отеля The Oro',
-        slug='hotel-the-oro-lobby',
-        category=cat_horeca,
-        client_name='The Oro Hospitality Group',
-        location='Москва, Центр',
-        area_sqm=1850,
-        year=2025,
-        duration='3.5 месяца',
-        short_description='Комплексный fit-out входной группы, лобби-бара и лаунж-зон. Создание монументальной скульптурной волны из авторской известковой штукатурки с криволинейной подсветкой.',
-        scope_of_work='Инженерный демонтаж и усиление конструкций; Скульптурные рельефные стены ручной работы; Бесшовные полы терраццо с латунной расшивкой; Изготовление стойки ресепшн из цельного мрамора Calacatta; Комплексный светодизайн',
-        image_url='/static/images/case_hotel.jpg',
-        is_featured=True,
-        order=1
-    )
+# 3. Projects (Флагманы: Coyote Ugly, Горыныч, Отели, Резиденции)
+projects_data = [
+    {
+        'title': 'Культовые бары Coyote Ugly (серия из 4 заведений)',
+        'slug': 'coyote-ugly-bars',
+        'category': cat_bars,
+        'client_name': 'Coyote Ugly Saloon Russia',
+        'location': 'Москва / Санкт-Петербург / Казань / Сочи',
+        'area_sqm': 1200,
+        'year': 2024,
+        'duration': '4 месяца',
+        'short_description': 'Комплексная отделка флагманских баров сети: авторские рельефные стены с брутальной фактурой, состаренный массив дуба, монолитная барная стойка с медной обшивкой и художественная графика.',
+        'scope_of_work': 'Комплексный fit-out под ключ; Авторские фактурные штукатурки и состаренные поверхности; Монолитная барная стойка из меди и дуба; Звукоизоляция и износостойкие покрытия пола; Монтаж авторского освещения',
+        'image_url': '/static/images/case_bar_coyote.jpg',
+        'is_featured': True,
+        'order': 1
+    },
+    {
+        'title': 'Ресторан «Горыныч» — монументальная роспись и отделка',
+        'slug': 'gorynych-restaurant',
+        'category': cat_bars,
+        'client_name': 'White Rabbit Family',
+        'location': 'Москва, Рождественский бульвар',
+        'area_sqm': 680,
+        'year': 2024,
+        'duration': '2 месяца',
+        'short_description': 'Монументальное художественное панно во всю высоту зала, минеральные штукатурки с эффектом древней патины, золочение и состаренное дерево.',
+        'scope_of_work': 'Авторская настенная роспись и монументальное панно; Декоративные известковые фактуры с минеральными пигментами; Тонирование и патинирование балок; Финишная гидрофобная защита поверхностей',
+        'image_url': '/static/images/case_gorynych.jpg',
+        'is_featured': True,
+        'order': 2
+    },
+    {
+        'title': 'Отель The Oro — реновация лобби и представительских зон',
+        'slug': 'hotel-the-oro-lobby',
+        'category': cat_hotels,
+        'client_name': 'The Oro Hospitality Group',
+        'location': 'Москва, Центр',
+        'area_sqm': 1850,
+        'year': 2025,
+        'duration': '3.5 месяца',
+        'short_description': 'Комплексный fit-out входной группы, лобби-бара и лаунж-зон. Создание монументальной скульптурной волны из авторской известковой штукатурки с криволинейной подсветкой.',
+        'scope_of_work': 'Инженерный демонтаж и усиление конструкций; Скульптурные рельефные стены ручной работы; Бесшовные полы терраццо с латунной расшивкой; Изготовление стойки ресепшн из цельного мрамора Calacatta; Комплексный светодизайн',
+        'image_url': '/static/images/case_hotel.jpg',
+        'is_featured': True,
+        'order': 3
+    },
+    {
+        'title': 'Отель «Метрополь Арт» — сьюты и представительские холлы',
+        'slug': 'hotel-metropol-art',
+        'category': cat_hotels,
+        'client_name': 'Metropol Hotel Collection',
+        'location': 'Москва, Театральный проезд',
+        'area_sqm': 950,
+        'year': 2024,
+        'duration': '3 месяца',
+        'short_description': 'Премиальная отделка сьютов: венецианская штукатурка с зеркальным блеском, реставрация и золочение лепного декора, авторские фрески.',
+        'scope_of_work': 'Классическая венецианская штукатурка в 7 слоев; Золочение лепных карнизов сусальным золотом 24K; Авторская роспись потолочных плафонов; Монтаж скрытого кондиционирования',
+        'image_url': '/static/images/case_office.jpg',
+        'is_featured': True,
+        'order': 4
+    },
+    {
+        'title': 'Вилла в Серебряном Бору — комплексная отделка резиденции',
+        'slug': 'residence-serebryany-bor',
+        'category': cat_residences,
+        'client_name': 'Частный владелец',
+        'location': 'Москва, Серебряный Бор',
+        'area_sqm': 650,
+        'year': 2024,
+        'duration': '2.5 месяца',
+        'short_description': 'Комплексная отделка стен натуральным минеральным травертином, кастомные обеденные столы из микроцемента, коллекционная живопись в интерьере.',
+        'scope_of_work': 'Бесшовные покрытия стен фактурным микроцементом; Авторские декоративные панно с барельефом; Изготовление дизайнерских столов из массива дуба и латуни; Художественная интеграция картин',
+        'image_url': '/static/images/art_furniture.jpg',
+        'is_featured': True,
+        'order': 5
+    },
+    {
+        'title': 'Пентхаус на Патриарших прудах — авторские фактуры и роспись',
+        'slug': 'residence-patriarshie',
+        'category': cat_residences,
+        'client_name': 'Частный владелец',
+        'location': 'Москва, Патриаршие пруды',
+        'area_sqm': 420,
+        'year': 2025,
+        'duration': '2 месяца',
+        'short_description': 'Минималистичные матовые фактуры стен с шелковистым тактильным эффектом, латунные порталы, роспись кабинета графикой.',
+        'scope_of_work': 'Бесшовное нанесение матового известкового покрытия; Декорирование латунных порталов; Авторская графика на стенах кабинета; Защитные финишные воски',
+        'image_url': '/static/images/hero.jpg',
+        'is_featured': True,
+        'order': 6
+    },
+]
 
-    Project.objects.create(
-        title='Штаб-квартира и совет директоров инвестиционной корпорации Apex Global',
-        slug='apex-global-headquarters',
-        category=cat_corp,
-        client_name='Apex Capital Partners',
-        location='Москва-Сити',
-        area_sqm=920,
-        year=2024,
-        duration='2.5 месяца',
-        short_description='Премиальная отделка VIP-этажа: переговорная зала на 16 персон с акцентной фактурной стеной "Антрацитовый срез", стеклянными акустическими перегородками и авторским столом из массива дуба.',
-        scope_of_work='Комплексный fit-out под ключ; Акустическая подготовка и звукоизоляция 52 дБ; Авторская декоративная стена с графитовым пигментом; Изготовление переговорного стола 5.4 м из массива дуба и латуни; Монтаж скрытого мультимедиа-оборудования',
-        image_url='/static/images/case_office.jpg',
-        is_featured=True,
-        order=2
-    )
+for p_data in projects_data:
+    Project.objects.update_or_create(slug=p_data['slug'], defaults=p_data)
+print("Projects seeded cleanly for 3 categories")
 
-    Project.objects.create(
-        title='Атриум и представительский блок машиностроительного кластера',
-        slug='industrial-holding-atrium',
-        category=cat_industrial,
-        client_name='ПАО "ТехноМаш"',
-        location='Калужская область',
-        area_sqm=3400,
-        year=2024,
-        duration='5 месяцев',
-        short_description='Капитальная реновация административно-бытового корпуса промышленного предприятия. Индустриальная эстетика, высокопрочные износостойкие покрытия и монументальные акценты.',
-        scope_of_work='Замена всех инженерных сетей (ОВ, ВК, ЭОМ); Антивандальные авторские покрытия стен с устойчивостью к истиранию 50 000 циклов; Промышленные полимер-бетонные полы; Зонирование холлов и переговорных',
-        image_url='/static/images/hero.jpg',
-        is_featured=True,
-        order=3
-    )
-    print("B2B Projects seeded")
+# 4. Artwork Categories (Синхронизировано по требованию Натальи: Живопись и графика, Керамика, Арт-объекты)
+cat_paintings, _ = ArtworkCategory.objects.update_or_create(slug='paintings-graphics', defaults={'name': 'Живопись и графика', 'order': 1})
+cat_ceramics, _ = ArtworkCategory.objects.update_or_create(slug='ceramics', defaults={'name': 'Керамика', 'order': 2})
+cat_art_objects, _ = ArtworkCategory.objects.update_or_create(slug='art-objects', defaults={'name': 'Арт-объекты', 'order': 3})
 
-# 4. Artwork Categories
-cat_canvas, _ = ArtworkCategory.objects.get_or_create(name='Живопись на холсте', slug='paintings', order=1)
-cat_ceramics, _ = ArtworkCategory.objects.get_or_create(name='Скульптурная керамика', slug='ceramics', order=2)
-cat_graphics, _ = ArtworkCategory.objects.get_or_create(name='Авторская графика', slug='graphics', order=3)
-
-# 5. Artworks (Architectural Luxury & Modern Art Authority, Anti-Neuroslop)
+# 5. Artworks (Чистая презентация)
 artworks_data = [
     {
         'title': 'Композиция №14: Терра',
         'slug': 'composition-14-terra',
-        'category': cat_canvas,
+        'category': cat_paintings,
         'year': 2024,
         'dimensions': '165 × 140 см',
         'medium': 'Холст, масло, фактурная паста, мастихин',
@@ -97,6 +143,20 @@ artworks_data = [
         'image_url': '/static/images/art_canvas.jpg',
         'is_featured': True,
         'order': 1
+    },
+    {
+        'title': 'Графический лист №08: Линейный ритм',
+        'slug': 'graphic-sheet-08',
+        'category': cat_paintings,
+        'year': 2024,
+        'dimensions': '70 × 50 см (дубовый багет, музейное стекло)',
+        'medium': 'Хлопковая бумага ручного отлива, тушь, графит',
+        'status': 'available',
+        'price': '85 000 ₽',
+        'curator_note': 'Камерная графическая серия на фактурной бумаге с необрезным краем. Четкие линейные ритмы и тональные заливки тушью.',
+        'image_url': '/static/images/art_graphics.jpg',
+        'is_featured': True,
+        'order': 2
     },
     {
         'title': 'Ваза «Фактура земли»',
@@ -110,22 +170,50 @@ artworks_data = [
         'curator_note': 'Авторский скульптурный объект из крупнозернистого шамота. Естественные микротрещины и минеральный цвет глины подчеркивают первозданную красоту материала.',
         'image_url': '/static/images/art_ceramic.jpg',
         'is_featured': True,
-        'order': 2
+        'order': 3
     },
     {
-        'title': 'Графический лист №08',
-        'slug': 'graphic-sheet-08',
-        'category': cat_graphics,
-        'year': 2024,
-        'dimensions': '70 × 50 см (дубовый багет, музейное стекло)',
-        'medium': 'Хлопковая бумага ручного отлива, тушь, графит',
+        'title': 'Скульптурная чаша «Ореол»',
+        'slug': 'bowl-oreol',
+        'category': cat_ceramics,
+        'year': 2025,
+        'dimensions': 'd: 38 см, h: 18 см',
+        'medium': 'Красная глина, ангоб, матовая минеральная глазурь',
         'status': 'available',
-        'price': '85 000 ₽',
-        'curator_note': 'Камерная графическая серия на фактурной бумаге с необрезным краем. Четкие линейные ритмы и тональные заливки тушью.',
-        'image_url': '/static/images/art_graphics.jpg',
+        'price': '145 000 ₽',
+        'curator_note': 'Интерьерная керамическая чаша с шероховатой минеральной фактурой и глубоким терракотовым оттенком.',
+        'image_url': '/static/images/fresco_texture.jpg',
         'is_featured': True,
-        'order': 3
-    }
+        'order': 4
+    },
+    {
+        'title': 'Монолитный арт-столик «Скала»',
+        'slug': 'monolith-table-skala',
+        'category': cat_art_objects,
+        'year': 2024,
+        'dimensions': '55 × 45 × 48 см',
+        'medium': 'Микроцемент, композит, восковое покрытие',
+        'status': 'available',
+        'price': '220 000 ₽',
+        'curator_note': 'Интерьерный монолитный арт-объект с естественной скальной текстурой и бархатистым тактильным финишем.',
+        'image_url': '/static/images/art_furniture.jpg',
+        'is_featured': True,
+        'order': 5
+    },
+    {
+        'title': 'Стеновое арт-панно «Рельеф времени»',
+        'slug': 'wall-panel-relief-of-time',
+        'category': cat_art_objects,
+        'year': 2024,
+        'dimensions': '120 × 90 см',
+        'medium': 'Минеральный гипс, сусальное золото, патина',
+        'status': 'available',
+        'price': '270 000 ₽',
+        'curator_note': 'Объемное настенное панно с глубоким архитектурным рельефом и благородными акцентами золочения.',
+        'image_url': '/static/images/mat_basrelief.jpg',
+        'is_featured': True,
+        'order': 6
+    },
 ]
 
 # Clean up legacy neuroslop records
@@ -403,16 +491,16 @@ print("Partners seeded successfully")
 
 # 11. Home Page Config Seed
 cfg = HomePageConfig.get_solo()
-cfg.hero_eyebrow = 'Ателье монументально-декоративного искусства'
+cfg.hero_eyebrow = ''
 cfg.hero_title = 'Художественно-декоративные работы под ключ'
 cfg.hero_bg_image_url = '/static/images/fresco_texture.jpg'
 cfg.portal1_title = 'Наши проекты'
 cfg.portal1_link = '/projects/'
-cfg.portal1_img_url = '/static/images/hero.jpg'
-cfg.portal2_title = 'Реставрация'
-cfg.portal2_link = '#restoration'
-cfg.portal2_img_url = '/static/images/restoration_craft.jpg'
-cfg.portal3_title = 'Галерея'
+cfg.portal1_img_url = '/static/images/case_bar_coyote.jpg'
+cfg.portal2_title = 'Декоративные покрытия и роспись стен'
+cfg.portal2_link = '/materials/'
+cfg.portal2_img_url = '/static/images/mat_mural.jpg'
+cfg.portal3_title = 'Арт-галерея'
 cfg.portal3_link = '/gallery/'
 cfg.portal3_img_url = '/static/images/art_canvas.jpg'
 cfg.process_badge = 'Мастерская Golden Brush Studio'

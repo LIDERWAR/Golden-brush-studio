@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="47Fr9LNrZu1bTEG3ObPkQGXoqa5ECOBlJzVYOaNKUrJMpqquDq7vPFiokvpcI7Ac">
+    <meta name="csrf-token" content="C24VBxxvyyVKYltDCbXE16UVWcQoIiaBAKEZV1MYTMMlyLwAJt75LPnmqbRPMhk6">
     <title>Наши проекты — Golden Brush Studio</title>
-    <meta name="description" content="Портфолио реализованных проектов Golden Brush Studio: комплексная отделка интерьеров, авторские фактуры, дизайнерская мебель, арт-объекты и свет.">
+    <meta name="description" content="Реализованные объекты Golden Brush Studio: культовые бары и рестораны (Coyote Ugly, Горыныч), бутик-отели и элитные частные резиденции под ключ.">
     
     <!-- Design System CSS -->
     <link rel="stylesheet" href="static/css/style.css?v=20260930-v16">
@@ -32,46 +32,6 @@
                 <span class="brand-title">Golden Brush Studio</span>
                 <span class="brand-subtitle">Искусство преображения пространства</span>
             </a>
-
-            <nav class="nav-container" aria-label="Основное меню">
-                <ul class="nav-menu">
-                    <!-- 1. Проекты (Выпадающий список) -->
-                    <li class="nav-item has-dropdown">
-                        <a href="projects.html" class="nav-link dropdown-toggle" aria-expanded="false">
-                            Проекты <i class="fas fa-chevron-down nav-chevron"></i>
-                        </a>
-                        <div class="nav-dropdown-menu">
-                            <a href="materials.html#murals" class="dropdown-item">
-                                <span class="dropdown-item-title">Роспись стен</span>
-                                <span class="dropdown-item-desc">Монументальные панно, фрески и графика</span>
-                            </a>
-                            <a href="materials.html" class="dropdown-item">
-                                <span class="dropdown-item-title">Декоративные покрытия</span>
-                                <span class="dropdown-item-desc">Минеральные штукатурки, микроцемент, рельефы</span>
-                            </a>
-                            <a href="index.html#restoration" class="dropdown-item">
-                                <span class="dropdown-item-title">Реставрация</span>
-                                <span class="dropdown-item-desc">Архитектурная лепнина, позолота и мозаика</span>
-                            </a>
-                        </div>
-                    </li>
-
-                    <!-- 2. Арт-галерея -->
-                    <li class="nav-item">
-                        <a href="gallery.html" class="nav-link">Арт-галерея</a>
-                    </li>
-
-                    <!-- 3. Партнёры -->
-                    <li class="nav-item">
-                        <a href="partners.html" class="nav-link">Партнёры</a>
-                    </li>
-
-                    <!-- 4. Контакты -->
-                    <li class="nav-item">
-                        <a href="index.html#contacts" class="nav-link">Контакты</a>
-                    </li>
-                </ul>
-            </nav>
 
             <div class="header-actions">
                 <button class="burger-btn" id="burgerBtn" aria-label="Открыть навигационное меню" onclick="window.toggleMobileDrawer(event)">
@@ -101,26 +61,55 @@
             </div>
             
             <nav class="drawer-nav">
-                <div class="drawer-section-title">Навигация по разделам</div>
+                <div class="drawer-section-title">Разделы мастерской</div>
                 <ul class="drawer-menu">
-                    <li><a href="projects.html" class="drawer-link"><span class="drawer-num">01</span> <span class="drawer-text">Проекты <small>Портфолио реализованных объектов</small></span></a></li>
-                    <li style="padding-left: 2.2rem;"><a href="materials.html#murals" class="drawer-link" style="padding: 0.35rem 0;"><span class="drawer-text" style="font-size: 0.95rem;">• Роспись стен</span></a></li>
-                    <li style="padding-left: 2.2rem;"><a href="materials.html" class="drawer-link" style="padding: 0.35rem 0;"><span class="drawer-text" style="font-size: 0.95rem;">• Декоративные покрытия</span></a></li>
-                    <li style="padding-left: 2.2rem;"><a href="index.html#restoration" class="drawer-link" style="padding: 0.35rem 0;"><span class="drawer-text" style="font-size: 0.95rem;">• Реставрация</span></a></li>
-                    <li><a href="gallery.html" class="drawer-link"><span class="drawer-num">02</span> <span class="drawer-text">Арт-галерея <small>Интерьерная живопись и примерка</small></span></a></li>
-                    <li><a href="partners.html" class="drawer-link"><span class="drawer-num">03</span> <span class="drawer-text">Партнёры <small>Архитекторы, дизайнеры, девелоперы</small></span></a></li>
-                    <li><a href="index.html#contacts" class="drawer-link"><span class="drawer-num">04</span> <span class="drawer-text">Контакты студии</span></a></li>
+                    <li>
+                        <a href="projects.html" class="drawer-link">
+                            <span class="drawer-num">01</span>
+                            <span class="drawer-text">Наши проекты <small>Бары и рестораны • Отели • Резиденции</small></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="materials.html" class="drawer-link">
+                            <span class="drawer-num">02</span>
+                            <span class="drawer-text">Декоративные покрытия и роспись стен <small>Каталог фактур, фресок и финишей</small></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="gallery.html" class="drawer-link">
+                            <span class="drawer-num">03</span>
+                            <span class="drawer-text">Арт-галерея <small>Живопись и графика • Керамика • Арт-объекты</small></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="index.html#restoration" class="drawer-link">
+                            <span class="drawer-num">04</span>
+                            <span class="drawer-text">Реставрация <small>Архитектурная лепнина, позолота, мозаика</small></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="partners.html" class="drawer-link">
+                            <span class="drawer-num">05</span>
+                            <span class="drawer-text">Партнёры <small>Архитекторы, дизайнеры, девелоперы</small></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="contacts.html" class="drawer-link">
+                            <span class="drawer-num">06</span>
+                            <span class="drawer-text">Контакты <small>Адрес мастерской на ARTPLAY, телефоны, связь</small></span>
+                        </a>
+                    </li>
                 </ul>
             </nav>
 
             <div class="drawer-footer">
                 <a href="tel:+7 (495) 890-44-22" class="drawer-phone">
-                    <i class="fas fa-phone-alt"></i> +7 (495) 890-44-22
+                    +7 (495) 890-44-22
                 </a>
-                <button type="button" class="btn btn-primary btn-open-contact" style="width: 100%;">Связаться с нами</button>
+                <a href="contacts.html" class="btn btn-primary" style="width: 100%; text-align: center; text-decoration: none; margin-bottom: 0.85rem; display: block;">Связаться с нами</a>
                 <div class="drawer-messengers">
-                    <a href="https://t.me/gbstudio" target="_blank" rel="noopener" class="drawer-soc-btn" aria-label="Telegram"><i class="fab fa-telegram"></i> Telegram</a>
-                    <a href="https://wa.me/74958904422" target="_blank" rel="noopener" class="drawer-soc-btn" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                    <a href="https://t.me/gbstudio" target="_blank" rel="noopener" class="drawer-soc-btn" aria-label="Telegram">Telegram</a>
+                    <a href="https://wa.me/74958904422" target="_blank" rel="noopener" class="drawer-soc-btn" aria-label="WhatsApp">WhatsApp</a>
                 </div>
             </div>
         </div>
@@ -129,157 +118,834 @@
     <!-- Main Content -->
     <main>
         
-<div class="projects-page-wrap" style="padding-top: 8rem; padding-bottom: 6rem; background-color: var(--bg-primary);">
+<div class="projects-page-wrap" style="padding-top: clamp(4.5rem, 6.5vh, 5.5rem); padding-bottom: 5rem; background-color: var(--bg-primary);">
     <div class="container">
-        <!-- Header -->
-        <div style="text-align: center; max-width: 960px; margin: 0 auto 3.5rem;">
-            <div class="eyebrow">Портфолио студии</div>
-            <h1 style="font-size: clamp(2rem, 4.5vw, 3.8rem); color: var(--text-main); margin: 0 0 1rem;">
+        <!-- Compact Poster Header (Audio 1 & 2 requirement: screen-fit, no large empty gaps) -->
+        <div class="projects-compact-header" style="text-align: center; max-width: 860px; margin: 0 auto clamp(1.2rem, 2.5vh, 2rem);">
+            <h1 style="font-size: clamp(1.85rem, 3.4vw, 2.65rem); font-family: var(--font-heading); font-weight: 800; color: var(--text-main); margin: 0 0 0.5rem; letter-spacing: -0.02em;">
                 Наши проекты
             </h1>
-            <p style="font-size: clamp(0.95rem, 2.2vw, 1.15rem); color: var(--text-muted); line-height: 1.8;">
-                Крупные коммерческие объекты, бутик-отели, рестораны, частные резиденции, монолитные арт-объекты и эксклюзивная дизайнерская мебель.
+            <p style="font-size: clamp(0.92rem, 1.4vw, 1.05rem); color: var(--text-muted); line-height: 1.6; margin: 0;">
+                Бары и рестораны, отели и частные резиденции под ключ
             </p>
         </div>
 
-        <!-- Filter Bar -->
-        <div style="display: flex; justify-content: center; gap: 0.75rem; margin-bottom: 3.5rem; flex-wrap: wrap;">
-            <a href="projects.html" 
-               class="btn btn-secondary active"
-               style="font-size: 0.85rem; padding: 0.65rem 1.5rem;">
-                Все проекты
-            </a>
+        <!-- 3 Primary Showcase Cards (Audio 3 & 4 requirement: 3 flagship folders with arrow controls & 2/3 modal) -->
+        <div class="flagship-folders-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 2vw, 1.75rem); align-items: stretch; margin-bottom: clamp(2.5rem, 4vh, 4rem);">
             
-            <a href="/projects/?category=horeca" 
-               class="btn btn-secondary "
-               style="font-size: 0.85rem; padding: 0.65rem 1.5rem;">
-                Гостиничный сектор (HoReCa)
-            </a>
+            <article class="folder-showcase-card" id="folder-card-bars-restaurants" data-cat="bars-restaurants" style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 4px 20px rgba(0,0,0,0.03); transition: transform 0.25s ease, box-shadow 0.25s ease;">
+                <!-- Folder Card Top Bar -->
+                <div style="padding: 0.9rem 1.25rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-subtle); background: var(--bg-card);">
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <span style="font-family: var(--font-display); font-size: 0.78rem; font-weight: 700; color: var(--accent-bronze); text-transform: uppercase; letter-spacing: 0.08em;">
+                            01
+                        </span>
+                        <h2 style="font-size: 1.02rem; font-weight: 700; margin: 0; color: var(--text-main); font-family: var(--font-heading);">
+                            Бары и рестораны
+                        </h2>
+                    </div>
+                    <span class="slide-counter-badge" style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600; background: var(--bg-primary); padding: 0.2rem 0.6rem; border-radius: 4px; border: 1px solid var(--border-subtle);">
+                        1 / 2
+                    </span>
+                </div>
+
+                <!-- Slide Image Frame with On-Card Arrows -->
+                <div class="card-slide-frame" style="position: relative; width: 100%; height: clamp(200px, 26vh, 260px); background: #111; overflow: hidden; cursor: pointer;" title="Нажмите, чтобы рассмотреть на 2/3 экрана">
+                    <img class="folder-current-img" src="static/images/case_bar_coyote.jpg" alt="Культовые бары Coyote Ugly (серия из 4 заведений)" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s ease;">
+                    
+                    <!-- Arrow Controls directly on the card (Audio 4: "стрелочки чтобы ты можешь в мелком формате рассмотреть") -->
+                    <button type="button" class="slide-nav-btn prev-btn" aria-label="Предыдущий проект" style="position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); width: 36px; height: 36px; border-radius: 50%; background: rgba(18, 18, 18, 0.75); color: #fff; border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; cursor: pointer; backdrop-filter: blur(4px); transition: background 0.2s;">
+                        ‹
+                    </button>
+                    <button type="button" class="slide-nav-btn next-btn" aria-label="Следующий проект" style="position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); width: 36px; height: 36px; border-radius: 50%; background: rgba(18, 18, 18, 0.75); color: #fff; border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; cursor: pointer; backdrop-filter: blur(4px); transition: background 0.2s;">
+                        ›
+                    </button>
+
+                    <!-- Click to open 2/3 screen modal hint -->
+                    <div class="expand-hint-badge" style="position: absolute; bottom: 0.75rem; right: 0.75rem; background: rgba(0,0,0,0.7); color: #fff; font-size: 0.72rem; padding: 0.25rem 0.65rem; border-radius: 4px; letter-spacing: 0.04em; backdrop-filter: blur(4px); pointer-events: none;">
+                        Рассмотреть детально
+                    </div>
+                </div>
+
+                <!-- Card Body Information -->
+                <div class="card-info-wrap" style="padding: 1.25rem; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between;">
+                    <div>
+                        <div class="folder-meta-row" style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.45rem; font-weight: 500;">
+                            <span class="meta-location">Москва / Санкт-Петербург / Казань / Сочи</span> • <span class="meta-area">1200 м²</span> • <span class="meta-duration">4 месяца</span>
+                        </div>
+                        <h3 class="folder-project-title" style="font-size: 1.08rem; line-height: 1.35; margin: 0 0 0.5rem; color: var(--text-main); font-weight: 700;">
+                            <a class="folder-project-link" href="/projects/coyote-ugly-bars/" style="color: inherit; text-decoration: none;">
+                                Культовые бары Coyote Ugly (серия из 4 заведений)
+                            </a>
+                        </h3>
+                        <p class="folder-project-desc" style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.5; margin: 0 0 0.85rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                            Комплексная отделка флагманских баров сети: авторские рельефные стены с брутальной фактурой, состаренный массив дуба, монолитная барная стойка с медной обшивкой и художественная графика.
+                        </p>
+                    </div>
+
+                    <div style="display: flex; gap: 0.6rem; align-items: center; justify-content: space-between; border-top: 1px solid var(--border-subtle); padding-top: 0.85rem; margin-top: auto;">
+                        <button type="button" class="btn btn-secondary btn-trigger-modal" style="padding: 0.55rem 0.95rem; font-size: 0.8rem;">
+                            Рассмотреть
+                        </button>
+                        <a class="btn btn-primary folder-detail-btn" href="/projects/coyote-ugly-bars/" style="padding: 0.55rem 1.05rem; font-size: 0.8rem;">
+                            Страница кейса
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hidden JSON dataset for client-side slider & modal -->
+                <script type="application/json" class="folder-data-json">
+                    [{"id": 4, "title": "\u041a\u0443\u043b\u044c\u0442\u043e\u0432\u044b\u0435 \u0431\u0430\u0440\u044b Coyote Ugly (\u0441\u0435\u0440\u0438\u044f \u0438\u0437 4 \u0437\u0430\u0432\u0435\u0434\u0435\u043d\u0438\u0439)", "slug": "coyote-ugly-bars", "url": "/projects/coyote-ugly-bars/", "image": "/static/images/case_bar_coyote.jpg", "location": "\u041c\u043e\u0441\u043a\u0432\u0430 / \u0421\u0430\u043d\u043a\u0442-\u041f\u0435\u0442\u0435\u0440\u0431\u0443\u0440\u0433 / \u041a\u0430\u0437\u0430\u043d\u044c / \u0421\u043e\u0447\u0438", "area": "1200 \u043c\u00b2", "duration": "4 \u043c\u0435\u0441\u044f\u0446\u0430", "short_desc": "\u041a\u043e\u043c\u043f\u043b\u0435\u043a\u0441\u043d\u0430\u044f \u043e\u0442\u0434\u0435\u043b\u043a\u0430 \u0444\u043b\u0430\u0433\u043c\u0430\u043d\u0441\u043a\u0438\u0445 \u0431\u0430\u0440\u043e\u0432 \u0441\u0435\u0442\u0438: \u0430\u0432\u0442\u043e\u0440\u0441\u043a\u0438\u0435 \u0440\u0435\u043b\u044c\u0435\u0444\u043d\u044b\u0435 \u0441\u0442\u0435\u043d\u044b \u0441 \u0431\u0440\u0443\u0442\u0430\u043b\u044c\u043d\u043e\u0439 \u0444\u0430\u043a\u0442\u0443\u0440\u043e\u0439, \u0441\u043e\u0441\u0442\u0430\u0440\u0435\u043d\u043d\u044b\u0439 \u043c\u0430\u0441\u0441\u0438\u0432 \u0434\u0443\u0431\u0430, \u043c\u043e\u043d\u043e\u043b\u0438\u0442\u043d\u0430\u044f \u0431\u0430\u0440\u043d\u0430\u044f \u0441\u0442\u043e\u0439\u043a\u0430 \u0441 \u043c\u0435\u0434\u043d\u043e\u0439 \u043e\u0431\u0448\u0438\u0432\u043a\u043e\u0439 \u0438 \u0445\u0443\u0434\u043e\u0436\u0435\u0441\u0442\u0432\u0435\u043d\u043d\u0430\u044f \u0433\u0440\u0430\u0444\u0438\u043a\u0430.", "scope": ["\u041a\u043e\u043c\u043f\u043b\u0435\u043a\u0441\u043d\u044b\u0439 fit-out \u043f\u043e\u0434 \u043a\u043b\u044e\u0447", "\u0410\u0432\u0442\u043e\u0440\u0441\u043a\u0438\u0435 \u0444\u0430\u043a\u0442\u0443\u0440\u043d\u044b\u0435 \u0448\u0442\u0443\u043a\u0430\u0442\u0443\u0440\u043a\u0438 \u0438 \u0441\u043e\u0441\u0442\u0430\u0440\u0435\u043d\u043d\u044b\u0435 \u043f\u043e\u0432\u0435\u0440\u0445\u043d\u043e\u0441\u0442\u0438", "\u041c\u043e\u043d\u043e\u043b\u0438\u0442\u043d\u0430\u044f \u0431\u0430\u0440\u043d\u0430\u044f \u0441\u0442\u043e\u0439\u043a\u0430 \u0438\u0437 \u043c\u0435\u0434\u0438 \u0438 \u0434\u0443\u0431\u0430"], "category_name": "\u0411\u0430\u0440\u044b \u0438 \u0440\u0435\u0441\u0442\u043e\u0440\u0430\u043d\u044b"}, {"id": 5, "title": "\u0420\u0435\u0441\u0442\u043e\u0440\u0430\u043d \u00ab\u0413\u043e\u0440\u044b\u043d\u044b\u0447\u00bb \u2014 \u043c\u043e\u043d\u0443\u043c\u0435\u043d\u0442\u0430\u043b\u044c\u043d\u0430\u044f \u0440\u043e\u0441\u043f\u0438\u0441\u044c \u0438 \u043e\u0442\u0434\u0435\u043b\u043a\u0430", "slug": "gorynych-restaurant", "url": "/projects/gorynych-restaurant/", "image": "/static/images/case_gorynych.jpg", "location": "\u041c\u043e\u0441\u043a\u0432\u0430, \u0420\u043e\u0436\u0434\u0435\u0441\u0442\u0432\u0435\u043d\u0441\u043a\u0438\u0439 \u0431\u0443\u043b\u044c\u0432\u0430\u0440", "area": "680 \u043c\u00b2", "duration": "2 \u043c\u0435\u0441\u044f\u0446\u0430", "short_desc": "\u041c\u043e\u043d\u0443\u043c\u0435\u043d\u0442\u0430\u043b\u044c\u043d\u043e\u0435 \u0445\u0443\u0434\u043e\u0436\u0435\u0441\u0442\u0432\u0435\u043d\u043d\u043e\u0435 \u043f\u0430\u043d\u043d\u043e \u0432\u043e \u0432\u0441\u044e \u0432\u044b\u0441\u043e\u0442\u0443 \u0437\u0430\u043b\u0430, \u043c\u0438\u043d\u0435\u0440\u0430\u043b\u044c\u043d\u044b\u0435 \u0448\u0442\u0443\u043a\u0430\u0442\u0443\u0440\u043a\u0438 \u0441 \u044d\u0444\u0444\u0435\u043a\u0442\u043e\u043c \u0434\u0440\u0435\u0432\u043d\u0435\u0439 \u043f\u0430\u0442\u0438\u043d\u044b, \u0437\u043e\u043b\u043e\u0447\u0435\u043d\u0438\u0435 \u0438 \u0441\u043e\u0441\u0442\u0430\u0440\u0435\u043d\u043d\u043e\u0435 \u0434\u0435\u0440\u0435\u0432\u043e.", "scope": ["\u0410\u0432\u0442\u043e\u0440\u0441\u043a\u0430\u044f \u043d\u0430\u0441\u0442\u0435\u043d\u043d\u0430\u044f \u0440\u043e\u0441\u043f\u0438\u0441\u044c \u0438 \u043c\u043e\u043d\u0443\u043c\u0435\u043d\u0442\u0430\u043b\u044c\u043d\u043e\u0435 \u043f\u0430\u043d\u043d\u043e", "\u0414\u0435\u043a\u043e\u0440\u0430\u0442\u0438\u0432\u043d\u044b\u0435 \u0438\u0437\u0432\u0435\u0441\u0442\u043a\u043e\u0432\u044b\u0435 \u0444\u0430\u043a\u0442\u0443\u0440\u044b \u0441 \u043c\u0438\u043d\u0435\u0440\u0430\u043b\u044c\u043d\u044b\u043c\u0438 \u043f\u0438\u0433\u043c\u0435\u043d\u0442\u0430\u043c\u0438", "\u0422\u043e\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435 \u0438 \u043f\u0430\u0442\u0438\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435 \u0431\u0430\u043b\u043e\u043a"], "category_name": "\u0411\u0430\u0440\u044b \u0438 \u0440\u0435\u0441\u0442\u043e\u0440\u0430\u043d\u044b"}]
+                </script>
+            </article>
             
-            <a href="/projects/?category=corporate" 
-               class="btn btn-secondary "
-               style="font-size: 0.85rem; padding: 0.65rem 1.5rem;">
-                Штаб-квартиры и корпоративные офисы
-            </a>
+            <article class="folder-showcase-card" id="folder-card-hotels" data-cat="hotels" style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 4px 20px rgba(0,0,0,0.03); transition: transform 0.25s ease, box-shadow 0.25s ease;">
+                <!-- Folder Card Top Bar -->
+                <div style="padding: 0.9rem 1.25rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-subtle); background: var(--bg-card);">
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <span style="font-family: var(--font-display); font-size: 0.78rem; font-weight: 700; color: var(--accent-bronze); text-transform: uppercase; letter-spacing: 0.08em;">
+                            02
+                        </span>
+                        <h2 style="font-size: 1.02rem; font-weight: 700; margin: 0; color: var(--text-main); font-family: var(--font-heading);">
+                            Отели
+                        </h2>
+                    </div>
+                    <span class="slide-counter-badge" style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600; background: var(--bg-primary); padding: 0.2rem 0.6rem; border-radius: 4px; border: 1px solid var(--border-subtle);">
+                        1 / 2
+                    </span>
+                </div>
+
+                <!-- Slide Image Frame with On-Card Arrows -->
+                <div class="card-slide-frame" style="position: relative; width: 100%; height: clamp(200px, 26vh, 260px); background: #111; overflow: hidden; cursor: pointer;" title="Нажмите, чтобы рассмотреть на 2/3 экрана">
+                    <img class="folder-current-img" src="static/images/case_hotel.jpg" alt="Отель The Oro — реновация лобби и представительских зон" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s ease;">
+                    
+                    <!-- Arrow Controls directly on the card (Audio 4: "стрелочки чтобы ты можешь в мелком формате рассмотреть") -->
+                    <button type="button" class="slide-nav-btn prev-btn" aria-label="Предыдущий проект" style="position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); width: 36px; height: 36px; border-radius: 50%; background: rgba(18, 18, 18, 0.75); color: #fff; border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; cursor: pointer; backdrop-filter: blur(4px); transition: background 0.2s;">
+                        ‹
+                    </button>
+                    <button type="button" class="slide-nav-btn next-btn" aria-label="Следующий проект" style="position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); width: 36px; height: 36px; border-radius: 50%; background: rgba(18, 18, 18, 0.75); color: #fff; border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; cursor: pointer; backdrop-filter: blur(4px); transition: background 0.2s;">
+                        ›
+                    </button>
+
+                    <!-- Click to open 2/3 screen modal hint -->
+                    <div class="expand-hint-badge" style="position: absolute; bottom: 0.75rem; right: 0.75rem; background: rgba(0,0,0,0.7); color: #fff; font-size: 0.72rem; padding: 0.25rem 0.65rem; border-radius: 4px; letter-spacing: 0.04em; backdrop-filter: blur(4px); pointer-events: none;">
+                        Рассмотреть детально
+                    </div>
+                </div>
+
+                <!-- Card Body Information -->
+                <div class="card-info-wrap" style="padding: 1.25rem; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between;">
+                    <div>
+                        <div class="folder-meta-row" style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.45rem; font-weight: 500;">
+                            <span class="meta-location">Москва, Центр</span> • <span class="meta-area">1850 м²</span> • <span class="meta-duration">3.5 месяца</span>
+                        </div>
+                        <h3 class="folder-project-title" style="font-size: 1.08rem; line-height: 1.35; margin: 0 0 0.5rem; color: var(--text-main); font-weight: 700;">
+                            <a class="folder-project-link" href="/projects/hotel-the-oro-lobby/" style="color: inherit; text-decoration: none;">
+                                Отель The Oro — реновация лобби и представительских зон
+                            </a>
+                        </h3>
+                        <p class="folder-project-desc" style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.5; margin: 0 0 0.85rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                            Комплексный fit-out входной группы, лобби-бара и лаунж-зон. Создание монументальной скульптурной волны из авторской известковой штукатурки с криволинейной подсветкой.
+                        </p>
+                    </div>
+
+                    <div style="display: flex; gap: 0.6rem; align-items: center; justify-content: space-between; border-top: 1px solid var(--border-subtle); padding-top: 0.85rem; margin-top: auto;">
+                        <button type="button" class="btn btn-secondary btn-trigger-modal" style="padding: 0.55rem 0.95rem; font-size: 0.8rem;">
+                            Рассмотреть
+                        </button>
+                        <a class="btn btn-primary folder-detail-btn" href="/projects/hotel-the-oro-lobby/" style="padding: 0.55rem 1.05rem; font-size: 0.8rem;">
+                            Страница кейса
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hidden JSON dataset for client-side slider & modal -->
+                <script type="application/json" class="folder-data-json">
+                    [{"id": 1, "title": "\u041e\u0442\u0435\u043b\u044c The Oro \u2014 \u0440\u0435\u043d\u043e\u0432\u0430\u0446\u0438\u044f \u043b\u043e\u0431\u0431\u0438 \u0438 \u043f\u0440\u0435\u0434\u0441\u0442\u0430\u0432\u0438\u0442\u0435\u043b\u044c\u0441\u043a\u0438\u0445 \u0437\u043e\u043d", "slug": "hotel-the-oro-lobby", "url": "/projects/hotel-the-oro-lobby/", "image": "/static/images/case_hotel.jpg", "location": "\u041c\u043e\u0441\u043a\u0432\u0430, \u0426\u0435\u043d\u0442\u0440", "area": "1850 \u043c\u00b2", "duration": "3.5 \u043c\u0435\u0441\u044f\u0446\u0430", "short_desc": "\u041a\u043e\u043c\u043f\u043b\u0435\u043a\u0441\u043d\u044b\u0439 fit-out \u0432\u0445\u043e\u0434\u043d\u043e\u0439 \u0433\u0440\u0443\u043f\u043f\u044b, \u043b\u043e\u0431\u0431\u0438-\u0431\u0430\u0440\u0430 \u0438 \u043b\u0430\u0443\u043d\u0436-\u0437\u043e\u043d. \u0421\u043e\u0437\u0434\u0430\u043d\u0438\u0435 \u043c\u043e\u043d\u0443\u043c\u0435\u043d\u0442\u0430\u043b\u044c\u043d\u043e\u0439 \u0441\u043a\u0443\u043b\u044c\u043f\u0442\u0443\u0440\u043d\u043e\u0439 \u0432\u043e\u043b\u043d\u044b \u0438\u0437 \u0430\u0432\u0442\u043e\u0440\u0441\u043a\u043e\u0439 \u0438\u0437\u0432\u0435\u0441\u0442\u043a\u043e\u0432\u043e\u0439 \u0448\u0442\u0443\u043a\u0430\u0442\u0443\u0440\u043a\u0438 \u0441 \u043a\u0440\u0438\u0432\u043e\u043b\u0438\u043d\u0435\u0439\u043d\u043e\u0439 \u043f\u043e\u0434\u0441\u0432\u0435\u0442\u043a\u043e\u0439.", "scope": ["\u0418\u043d\u0436\u0435\u043d\u0435\u0440\u043d\u044b\u0439 \u0434\u0435\u043c\u043e\u043d\u0442\u0430\u0436 \u0438 \u0443\u0441\u0438\u043b\u0435\u043d\u0438\u0435 \u043a\u043e\u043d\u0441\u0442\u0440\u0443\u043a\u0446\u0438\u0439", "\u0421\u043a\u0443\u043b\u044c\u043f\u0442\u0443\u0440\u043d\u044b\u0435 \u0440\u0435\u043b\u044c\u0435\u0444\u043d\u044b\u0435 \u0441\u0442\u0435\u043d\u044b \u0440\u0443\u0447\u043d\u043e\u0439 \u0440\u0430\u0431\u043e\u0442\u044b", "\u0411\u0435\u0441\u0448\u043e\u0432\u043d\u044b\u0435 \u043f\u043e\u043b\u044b \u0442\u0435\u0440\u0440\u0430\u0446\u0446\u043e \u0441 \u043b\u0430\u0442\u0443\u043d\u043d\u043e\u0439 \u0440\u0430\u0441\u0448\u0438\u0432\u043a\u043e\u0439"], "category_name": "\u041e\u0442\u0435\u043b\u0438"}, {"id": 6, "title": "\u041e\u0442\u0435\u043b\u044c \u00ab\u041c\u0435\u0442\u0440\u043e\u043f\u043e\u043b\u044c \u0410\u0440\u0442\u00bb \u2014 \u0441\u044c\u044e\u0442\u044b \u0438 \u043f\u0440\u0435\u0434\u0441\u0442\u0430\u0432\u0438\u0442\u0435\u043b\u044c\u0441\u043a\u0438\u0435 \u0445\u043e\u043b\u043b\u044b", "slug": "hotel-metropol-art", "url": "/projects/hotel-metropol-art/", "image": "/static/images/case_office.jpg", "location": "\u041c\u043e\u0441\u043a\u0432\u0430, \u0422\u0435\u0430\u0442\u0440\u0430\u043b\u044c\u043d\u044b\u0439 \u043f\u0440\u043e\u0435\u0437\u0434", "area": "950 \u043c\u00b2", "duration": "3 \u043c\u0435\u0441\u044f\u0446\u0430", "short_desc": "\u041f\u0440\u0435\u043c\u0438\u0430\u043b\u044c\u043d\u0430\u044f \u043e\u0442\u0434\u0435\u043b\u043a\u0430 \u0441\u044c\u044e\u0442\u043e\u0432: \u0432\u0435\u043d\u0435\u0446\u0438\u0430\u043d\u0441\u043a\u0430\u044f \u0448\u0442\u0443\u043a\u0430\u0442\u0443\u0440\u043a\u0430 \u0441 \u0437\u0435\u0440\u043a\u0430\u043b\u044c\u043d\u044b\u043c \u0431\u043b\u0435\u0441\u043a\u043e\u043c, \u0440\u0435\u0441\u0442\u0430\u0432\u0440\u0430\u0446\u0438\u044f \u0438 \u0437\u043e\u043b\u043e\u0447\u0435\u043d\u0438\u0435 \u043b\u0435\u043f\u043d\u043e\u0433\u043e \u0434\u0435\u043a\u043e\u0440\u0430, \u0430\u0432\u0442\u043e\u0440\u0441\u043a\u0438\u0435 \u0444\u0440\u0435\u0441\u043a\u0438.", "scope": ["\u041a\u043b\u0430\u0441\u0441\u0438\u0447\u0435\u0441\u043a\u0430\u044f \u0432\u0435\u043d\u0435\u0446\u0438\u0430\u043d\u0441\u043a\u0430\u044f \u0448\u0442\u0443\u043a\u0430\u0442\u0443\u0440\u043a\u0430 \u0432 7 \u0441\u043b\u043e\u0435\u0432", "\u0417\u043e\u043b\u043e\u0447\u0435\u043d\u0438\u0435 \u043b\u0435\u043f\u043d\u044b\u0445 \u043a\u0430\u0440\u043d\u0438\u0437\u043e\u0432 \u0441\u0443\u0441\u0430\u043b\u044c\u043d\u044b\u043c \u0437\u043e\u043b\u043e\u0442\u043e\u043c 24K", "\u0410\u0432\u0442\u043e\u0440\u0441\u043a\u0430\u044f \u0440\u043e\u0441\u043f\u0438\u0441\u044c \u043f\u043e\u0442\u043e\u043b\u043e\u0447\u043d\u044b\u0445 \u043f\u043b\u0430\u0444\u043e\u043d\u043e\u0432"], "category_name": "\u041e\u0442\u0435\u043b\u0438"}]
+                </script>
+            </article>
             
-            <a href="/projects/?category=industrial" 
-               class="btn btn-secondary "
-               style="font-size: 0.85rem; padding: 0.65rem 1.5rem;">
-                Производственные предприятия и холдинги
-            </a>
-            
-            <a href="/projects/?category=residential" 
-               class="btn btn-secondary "
-               style="font-size: 0.85rem; padding: 0.65rem 1.5rem;">
-                Элитная недвижимость и пентхаусы
-            </a>
+            <article class="folder-showcase-card" id="folder-card-residences" data-cat="residences" style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 4px 20px rgba(0,0,0,0.03); transition: transform 0.25s ease, box-shadow 0.25s ease;">
+                <!-- Folder Card Top Bar -->
+                <div style="padding: 0.9rem 1.25rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-subtle); background: var(--bg-card);">
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <span style="font-family: var(--font-display); font-size: 0.78rem; font-weight: 700; color: var(--accent-bronze); text-transform: uppercase; letter-spacing: 0.08em;">
+                            03
+                        </span>
+                        <h2 style="font-size: 1.02rem; font-weight: 700; margin: 0; color: var(--text-main); font-family: var(--font-heading);">
+                            Частные резиденции
+                        </h2>
+                    </div>
+                    <span class="slide-counter-badge" style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600; background: var(--bg-primary); padding: 0.2rem 0.6rem; border-radius: 4px; border: 1px solid var(--border-subtle);">
+                        1 / 2
+                    </span>
+                </div>
+
+                <!-- Slide Image Frame with On-Card Arrows -->
+                <div class="card-slide-frame" style="position: relative; width: 100%; height: clamp(200px, 26vh, 260px); background: #111; overflow: hidden; cursor: pointer;" title="Нажмите, чтобы рассмотреть на 2/3 экрана">
+                    <img class="folder-current-img" src="static/images/art_furniture.jpg" alt="Вилла в Серебряном Бору — комплексная отделка резиденции" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s ease;">
+                    
+                    <!-- Arrow Controls directly on the card (Audio 4: "стрелочки чтобы ты можешь в мелком формате рассмотреть") -->
+                    <button type="button" class="slide-nav-btn prev-btn" aria-label="Предыдущий проект" style="position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); width: 36px; height: 36px; border-radius: 50%; background: rgba(18, 18, 18, 0.75); color: #fff; border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; cursor: pointer; backdrop-filter: blur(4px); transition: background 0.2s;">
+                        ‹
+                    </button>
+                    <button type="button" class="slide-nav-btn next-btn" aria-label="Следующий проект" style="position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); width: 36px; height: 36px; border-radius: 50%; background: rgba(18, 18, 18, 0.75); color: #fff; border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; cursor: pointer; backdrop-filter: blur(4px); transition: background 0.2s;">
+                        ›
+                    </button>
+
+                    <!-- Click to open 2/3 screen modal hint -->
+                    <div class="expand-hint-badge" style="position: absolute; bottom: 0.75rem; right: 0.75rem; background: rgba(0,0,0,0.7); color: #fff; font-size: 0.72rem; padding: 0.25rem 0.65rem; border-radius: 4px; letter-spacing: 0.04em; backdrop-filter: blur(4px); pointer-events: none;">
+                        Рассмотреть детально
+                    </div>
+                </div>
+
+                <!-- Card Body Information -->
+                <div class="card-info-wrap" style="padding: 1.25rem; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between;">
+                    <div>
+                        <div class="folder-meta-row" style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.45rem; font-weight: 500;">
+                            <span class="meta-location">Москва, Серебряный Бор</span> • <span class="meta-area">650 м²</span> • <span class="meta-duration">2.5 месяца</span>
+                        </div>
+                        <h3 class="folder-project-title" style="font-size: 1.08rem; line-height: 1.35; margin: 0 0 0.5rem; color: var(--text-main); font-weight: 700;">
+                            <a class="folder-project-link" href="/projects/residence-serebryany-bor/" style="color: inherit; text-decoration: none;">
+                                Вилла в Серебряном Бору — комплексная отделка резиденции
+                            </a>
+                        </h3>
+                        <p class="folder-project-desc" style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.5; margin: 0 0 0.85rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                            Комплексная отделка стен натуральным минеральным травертином, кастомные обеденные столы из микроцемента, коллекционная живопись в интерьере.
+                        </p>
+                    </div>
+
+                    <div style="display: flex; gap: 0.6rem; align-items: center; justify-content: space-between; border-top: 1px solid var(--border-subtle); padding-top: 0.85rem; margin-top: auto;">
+                        <button type="button" class="btn btn-secondary btn-trigger-modal" style="padding: 0.55rem 0.95rem; font-size: 0.8rem;">
+                            Рассмотреть
+                        </button>
+                        <a class="btn btn-primary folder-detail-btn" href="/projects/residence-serebryany-bor/" style="padding: 0.55rem 1.05rem; font-size: 0.8rem;">
+                            Страница кейса
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hidden JSON dataset for client-side slider & modal -->
+                <script type="application/json" class="folder-data-json">
+                    [{"id": 7, "title": "\u0412\u0438\u043b\u043b\u0430 \u0432 \u0421\u0435\u0440\u0435\u0431\u0440\u044f\u043d\u043e\u043c \u0411\u043e\u0440\u0443 \u2014 \u043a\u043e\u043c\u043f\u043b\u0435\u043a\u0441\u043d\u0430\u044f \u043e\u0442\u0434\u0435\u043b\u043a\u0430 \u0440\u0435\u0437\u0438\u0434\u0435\u043d\u0446\u0438\u0438", "slug": "residence-serebryany-bor", "url": "/projects/residence-serebryany-bor/", "image": "/static/images/art_furniture.jpg", "location": "\u041c\u043e\u0441\u043a\u0432\u0430, \u0421\u0435\u0440\u0435\u0431\u0440\u044f\u043d\u044b\u0439 \u0411\u043e\u0440", "area": "650 \u043c\u00b2", "duration": "2.5 \u043c\u0435\u0441\u044f\u0446\u0430", "short_desc": "\u041a\u043e\u043c\u043f\u043b\u0435\u043a\u0441\u043d\u0430\u044f \u043e\u0442\u0434\u0435\u043b\u043a\u0430 \u0441\u0442\u0435\u043d \u043d\u0430\u0442\u0443\u0440\u0430\u043b\u044c\u043d\u044b\u043c \u043c\u0438\u043d\u0435\u0440\u0430\u043b\u044c\u043d\u044b\u043c \u0442\u0440\u0430\u0432\u0435\u0440\u0442\u0438\u043d\u043e\u043c, \u043a\u0430\u0441\u0442\u043e\u043c\u043d\u044b\u0435 \u043e\u0431\u0435\u0434\u0435\u043d\u043d\u044b\u0435 \u0441\u0442\u043e\u043b\u044b \u0438\u0437 \u043c\u0438\u043a\u0440\u043e\u0446\u0435\u043c\u0435\u043d\u0442\u0430, \u043a\u043e\u043b\u043b\u0435\u043a\u0446\u0438\u043e\u043d\u043d\u0430\u044f \u0436\u0438\u0432\u043e\u043f\u0438\u0441\u044c \u0432 \u0438\u043d\u0442\u0435\u0440\u044c\u0435\u0440\u0435.", "scope": ["\u0411\u0435\u0441\u0448\u043e\u0432\u043d\u044b\u0435 \u043f\u043e\u043a\u0440\u044b\u0442\u0438\u044f \u0441\u0442\u0435\u043d \u0444\u0430\u043a\u0442\u0443\u0440\u043d\u044b\u043c \u043c\u0438\u043a\u0440\u043e\u0446\u0435\u043c\u0435\u043d\u0442\u043e\u043c", "\u0410\u0432\u0442\u043e\u0440\u0441\u043a\u0438\u0435 \u0434\u0435\u043a\u043e\u0440\u0430\u0442\u0438\u0432\u043d\u044b\u0435 \u043f\u0430\u043d\u043d\u043e \u0441 \u0431\u0430\u0440\u0435\u043b\u044c\u0435\u0444\u043e\u043c", "\u0418\u0437\u0433\u043e\u0442\u043e\u0432\u043b\u0435\u043d\u0438\u0435 \u0434\u0438\u0437\u0430\u0439\u043d\u0435\u0440\u0441\u043a\u0438\u0445 \u0441\u0442\u043e\u043b\u043e\u0432 \u0438\u0437 \u043c\u0430\u0441\u0441\u0438\u0432\u0430 \u0434\u0443\u0431\u0430 \u0438 \u043b\u0430\u0442\u0443\u043d\u0438"], "category_name": "\u0427\u0430\u0441\u0442\u043d\u044b\u0435 \u0440\u0435\u0437\u0438\u0434\u0435\u043d\u0446\u0438\u0438"}, {"id": 8, "title": "\u041f\u0435\u043d\u0442\u0445\u0430\u0443\u0441 \u043d\u0430 \u041f\u0430\u0442\u0440\u0438\u0430\u0440\u0448\u0438\u0445 \u043f\u0440\u0443\u0434\u0430\u0445 \u2014 \u0430\u0432\u0442\u043e\u0440\u0441\u043a\u0438\u0435 \u0444\u0430\u043a\u0442\u0443\u0440\u044b \u0438 \u0440\u043e\u0441\u043f\u0438\u0441\u044c", "slug": "residence-patriarshie", "url": "/projects/residence-patriarshie/", "image": "/static/images/hero.jpg", "location": "\u041c\u043e\u0441\u043a\u0432\u0430, \u041f\u0430\u0442\u0440\u0438\u0430\u0440\u0448\u0438\u0435 \u043f\u0440\u0443\u0434\u044b", "area": "420 \u043c\u00b2", "duration": "2 \u043c\u0435\u0441\u044f\u0446\u0430", "short_desc": "\u041c\u0438\u043d\u0438\u043c\u0430\u043b\u0438\u0441\u0442\u0438\u0447\u043d\u044b\u0435 \u043c\u0430\u0442\u043e\u0432\u044b\u0435 \u0444\u0430\u043a\u0442\u0443\u0440\u044b \u0441\u0442\u0435\u043d \u0441 \u0448\u0435\u043b\u043a\u043e\u0432\u0438\u0441\u0442\u044b\u043c \u0442\u0430\u043a\u0442\u0438\u043b\u044c\u043d\u044b\u043c \u044d\u0444\u0444\u0435\u043a\u0442\u043e\u043c, \u043b\u0430\u0442\u0443\u043d\u043d\u044b\u0435 \u043f\u043e\u0440\u0442\u0430\u043b\u044b, \u0440\u043e\u0441\u043f\u0438\u0441\u044c \u043a\u0430\u0431\u0438\u043d\u0435\u0442\u0430 \u0433\u0440\u0430\u0444\u0438\u043a\u043e\u0439.", "scope": ["\u0411\u0435\u0441\u0448\u043e\u0432\u043d\u043e\u0435 \u043d\u0430\u043d\u0435\u0441\u0435\u043d\u0438\u0435 \u043c\u0430\u0442\u043e\u0432\u043e\u0433\u043e \u0438\u0437\u0432\u0435\u0441\u0442\u043a\u043e\u0432\u043e\u0433\u043e \u043f\u043e\u043a\u0440\u044b\u0442\u0438\u044f", "\u0414\u0435\u043a\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435 \u043b\u0430\u0442\u0443\u043d\u043d\u044b\u0445 \u043f\u043e\u0440\u0442\u0430\u043b\u043e\u0432", "\u0410\u0432\u0442\u043e\u0440\u0441\u043a\u0430\u044f \u0433\u0440\u0430\u0444\u0438\u043a\u0430 \u043d\u0430 \u0441\u0442\u0435\u043d\u0430\u0445 \u043a\u0430\u0431\u0438\u043d\u0435\u0442\u0430"], "category_name": "\u0427\u0430\u0441\u0442\u043d\u044b\u0435 \u0440\u0435\u0437\u0438\u0434\u0435\u043d\u0446\u0438\u0438"}]
+                </script>
+            </article>
             
         </div>
 
-        <!-- Projects Grid -->
-        <div class="cases-gallery-grid">
-            
-            <article class="case-item-card">
-                <a href="#" class="case-thumb-wrap" style="display: block;">
-                    <img src="static/images/case_hotel.jpg" alt="Реновация лобби и представительских зон пятизвездочного отеля The Oro">
-                    <div class="case-tag-overlay">Гостиничный сектор (HoReCa)</div>
-                </a>
-                <div class="case-item-body">
-                    <div class="case-item-meta">
-                        <span>Москва, Центр</span> • <span>1850 м²</span> • <span>3.5 месяца</span>
-                    </div>
-                    <h3 class="case-item-title">
-                        <a href="#" style="color: inherit; text-decoration: none;">
-                            Реновация лобби и представительских зон пятизвездочного отеля The Oro
-                        </a>
-                    </h3>
-                    <p class="case-item-desc">Комплексный fit-out входной группы, лобби-бара и лаунж-зон. Создание монументальной скульптурной волны из авторской известковой штукатурки с криволинейной подсветкой.</p>
-                    <div class="case-item-scope">
-                        
-                        <span class="scope-pill">Инженерный демонтаж и усиление конструкций</span>
-                        
-                        <span class="scope-pill">Скульптурные рельефные стены ручной работы</span>
-                        
-                        <span class="scope-pill">Бесшовные полы терраццо с латунной расшивкой</span>
-                        
+        <!-- 2/3 Screen Lightbox Modal (Audio 4: "стрелочку нажимаешь она у тебя чуть увеличивается на допустим 2/3 экрана") -->
+        <div id="projectModal23" class="project-modal-backdrop" style="display: none; position: fixed; inset: 0; z-index: 10000; background: rgba(10, 10, 12, 0.82); backdrop-filter: blur(8px); align-items: center; justify-content: center; padding: 1.5rem;">
+            <div class="project-modal-window" style="background: #ffffff; border-radius: var(--radius-md); width: min(1080px, 92vw); max-height: 88vh; overflow: hidden; display: grid; grid-template-columns: 1.25fr 1fr; box-shadow: 0 25px 60px rgba(0,0,0,0.3); position: relative;">
+                <!-- Close Button -->
+                <button type="button" id="modalCloseBtn" aria-label="Закрыть" style="position: absolute; top: 1rem; right: 1rem; z-index: 20; width: 40px; height: 40px; border-radius: 50%; background: rgba(0,0,0,0.6); color: #fff; border: none; font-size: 1.3rem; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+                    ✕
+                </button>
+
+                <!-- Modal Media with arrows -->
+                <div class="modal-media-col" style="position: relative; background: #0c0c0c; display: flex; align-items: center; justify-content: center; overflow: hidden; min-height: 380px;">
+                    <img id="modalImg" src="" alt="" style="width: 100%; height: 100%; object-fit: cover; max-height: 88vh;">
+                    
+                    <button type="button" id="modalPrevBtn" aria-label="Назад" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; background: rgba(0,0,0,0.65); color: #fff; border: 1px solid rgba(255,255,255,0.2); font-size: 1.4rem; cursor: pointer; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(4px);">
+                        ‹
+                    </button>
+                    <button type="button" id="modalNextBtn" aria-label="Вперед" style="position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; background: rgba(0,0,0,0.65); color: #fff; border: 1px solid rgba(255,255,255,0.2); font-size: 1.4rem; cursor: pointer; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(4px);">
+                        ›
+                    </button>
+
+                    <div id="modalCounter" style="position: absolute; bottom: 1rem; left: 1rem; background: rgba(0,0,0,0.7); color: #fff; font-size: 0.8rem; padding: 0.3rem 0.75rem; border-radius: 4px;">
+                        1 / 4
                     </div>
                 </div>
-            </article>
-            
-            <article class="case-item-card">
-                <a href="#" class="case-thumb-wrap" style="display: block;">
-                    <img src="static/images/case_office.jpg" alt="Штаб-квартира и совет директоров инвестиционной корпорации Apex Global">
-                    <div class="case-tag-overlay">Штаб-квартиры и корпоративные офисы</div>
-                </a>
-                <div class="case-item-body">
-                    <div class="case-item-meta">
-                        <span>Москва-Сити</span> • <span>920 м²</span> • <span>2.5 месяца</span>
+
+                <!-- Modal Information & Scope -->
+                <div class="modal-info-col" style="padding: clamp(1.5rem, 3vw, 2.5rem); display: flex; flex-direction: column; justify-content: space-between; overflow-y: auto;">
+                    <div>
+                        <div id="modalCategory" style="font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-bronze); font-weight: 700; margin-bottom: 0.5rem;">
+                            Категория
+                        </div>
+                        <h2 id="modalTitle" style="font-family: var(--font-heading); font-size: clamp(1.3rem, 2.2vw, 1.75rem); color: var(--text-main); margin: 0 0 0.75rem; line-height: 1.25;">
+                            Название проекта
+                        </h2>
+                        <div id="modalMeta" style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1.25rem;">
+                            Москва • 1 200 м² • 4 месяца
+                        </div>
+                        
+                        <p id="modalDesc" style="font-size: 0.92rem; color: var(--text-main); line-height: 1.65; margin: 0 0 1.5rem;">
+                            Описание проекта...
+                        </p>
+
+                        <div style="margin-bottom: 1.5rem;">
+                            <div style="font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); font-weight: 600; margin-bottom: 0.5rem;">
+                                Реализованные работы:
+                            </div>
+                            <div id="modalScope" style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+                                <!-- Scope badges injected via JS -->
+                            </div>
+                        </div>
                     </div>
-                    <h3 class="case-item-title">
-                        <a href="#" style="color: inherit; text-decoration: none;">
-                            Штаб-квартира и совет директоров инвестиционной корпорации Apex Global
+
+                    <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; padding-top: 1.25rem; border-top: 1px solid var(--border-subtle);">
+                        <a id="modalDetailLink" href="#" class="btn btn-primary" style="flex: 1; text-align: center; padding: 0.75rem 1.25rem; font-size: 0.88rem;">
+                            Перейти к объекту
                         </a>
-                    </h3>
-                    <p class="case-item-desc">Премиальная отделка VIP-этажа: переговорная зала на 16 персон с акцентной фактурной стеной &quot;Антрацитовый срез&quot;, стеклянными акустическими перегородками и авторским столом из массива дуба.</p>
-                    <div class="case-item-scope">
-                        
-                        <span class="scope-pill">Комплексный fit-out под ключ</span>
-                        
-                        <span class="scope-pill">Акустическая подготовка и звукоизоляция 52 дБ</span>
-                        
-                        <span class="scope-pill">Авторская декоративная стена с графитовым пигментом</span>
-                        
+                        <button type="button" class="btn btn-secondary btn-open-contact" style="flex: 1; text-align: center; padding: 0.75rem 1.25rem; font-size: 0.88rem;">
+                            Обсудить задачу
+                        </button>
                     </div>
                 </div>
-            </article>
-            
-            <article class="case-item-card">
-                <a href="#" class="case-thumb-wrap" style="display: block;">
-                    <img src="static/images/hero.jpg" alt="Атриум и представительский блок машиностроительного кластера">
-                    <div class="case-tag-overlay">Производственные предприятия и холдинги</div>
-                </a>
-                <div class="case-item-body">
-                    <div class="case-item-meta">
-                        <span>Калужская область</span> • <span>3400 м²</span> • <span>5 месяцев</span>
-                    </div>
-                    <h3 class="case-item-title">
-                        <a href="#" style="color: inherit; text-decoration: none;">
-                            Атриум и представительский блок машиностроительного кластера
-                        </a>
-                    </h3>
-                    <p class="case-item-desc">Капитальная реновация административно-бытового корпуса промышленного предприятия. Индустриальная эстетика, высокопрочные износостойкие покрытия и монументальные акценты.</p>
-                    <div class="case-item-scope">
-                        
-                        <span class="scope-pill">Замена всех инженерных сетей (ОВ, ВК, ЭОМ)</span>
-                        
-                        <span class="scope-pill">Антивандальные авторские покрытия стен с устойчивостью к истиранию 50 000 циклов</span>
-                        
-                        <span class="scope-pill">Промышленные полимер-бетонные полы</span>
-                        
-                    </div>
+            </div>
+        </div>
+
+        <!-- Secondary Section for Thorough Clients (Audio 4: "если человек дотошный... разместить пониже мелким шрифтом") -->
+        <div style="margin-top: clamp(2.5rem, 5vh, 4.5rem); padding-top: clamp(2rem, 4vh, 3.5rem); border-top: 1px solid var(--border-subtle);">
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1.5rem; margin-bottom: 2rem;">
+                <div>
+                    <h2 style="font-family: var(--font-heading); font-size: clamp(1.3rem, 2.4vw, 1.8rem); color: var(--text-main); margin: 0 0 0.35rem;">
+                        Все реализованные объекты
+                    </h2>
+                    <p style="font-size: 0.88rem; color: var(--text-muted); margin: 0;">
+                        Полная подборка проектов с техническими характеристиками и перечнем работ
+                    </p>
                 </div>
-            </article>
-            
+
+                <!-- Clean Category Tabs -->
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;" id="allProjectsFilterBar">
+                    <button class="btn btn-secondary active" data-filter="all" style="font-size: 0.8rem; padding: 0.5rem 1.1rem;">
+                        Все объекты
+                    </button>
+                    
+                    <button class="btn btn-secondary" data-filter="bars-restaurants" style="font-size: 0.8rem; padding: 0.5rem 1.1rem;">
+                        Бары и рестораны
+                    </button>
+                    
+                    <button class="btn btn-secondary" data-filter="horeca" style="font-size: 0.8rem; padding: 0.5rem 1.1rem;">
+                        Гостиничный сектор (HoReCa)
+                    </button>
+                    
+                    <button class="btn btn-secondary" data-filter="hotels" style="font-size: 0.8rem; padding: 0.5rem 1.1rem;">
+                        Отели
+                    </button>
+                    
+                    <button class="btn btn-secondary" data-filter="corporate" style="font-size: 0.8rem; padding: 0.5rem 1.1rem;">
+                        Штаб-квартиры и корпоративные офисы
+                    </button>
+                    
+                    <button class="btn btn-secondary" data-filter="industrial" style="font-size: 0.8rem; padding: 0.5rem 1.1rem;">
+                        Производственные предприятия и холдинги
+                    </button>
+                    
+                    <button class="btn btn-secondary" data-filter="residences" style="font-size: 0.8rem; padding: 0.5rem 1.1rem;">
+                        Частные резиденции
+                    </button>
+                    
+                    <button class="btn btn-secondary" data-filter="residential" style="font-size: 0.8rem; padding: 0.5rem 1.1rem;">
+                        Элитная недвижимость и пентхаусы
+                    </button>
+                    
+                </div>
+            </div>
+
+            <!-- Compact All Projects Grid -->
+            <div class="cases-gallery-grid" id="allProjectsGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem;">
+                
+                <article class="case-item-card all-project-item" data-category="bars-restaurants" style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); overflow: hidden; display: flex; flex-direction: column;">
+                    <a href="/projects/coyote-ugly-bars/" class="case-thumb-wrap" style="display: block; position: relative; height: 210px; overflow: hidden;">
+                        <img src="static/images/case_bar_coyote.jpg" alt="Культовые бары Coyote Ugly (серия из 4 заведений)" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;">
+                        <div class="case-tag-overlay" style="position: absolute; top: 0.75rem; left: 0.75rem; background: rgba(0,0,0,0.65); color: #fff; font-size: 0.75rem; padding: 0.25rem 0.65rem; border-radius: 4px; backdrop-filter: blur(4px);">
+                            Бары и рестораны
+                        </div>
+                    </a>
+                    <div class="case-item-body" style="padding: 1.25rem; display: flex; flex-direction: column; flex-grow: 1;">
+                        <div class="case-item-meta" style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.45rem;">
+                            <span>Москва / Санкт-Петербург / Казань / Сочи</span> • <span>1200 м²</span> • <span>4 месяца</span>
+                        </div>
+                        <h3 class="case-item-title" style="font-size: 1.05rem; margin: 0 0 0.5rem; font-weight: 700; line-height: 1.35;">
+                            <a href="/projects/coyote-ugly-bars/" style="color: inherit; text-decoration: none;">
+                                Культовые бары Coyote Ugly (серия из 4 заведений)
+                            </a>
+                        </h3>
+                        <p class="case-item-desc" style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.5; margin: 0 0 0.85rem; flex-grow: 1;">
+                            Комплексная отделка флагманских баров сети: авторские рельефные стены с брутальной фактурой, состаренный массив дуба, монолитная барная стойка с медной обшивкой и художественная графика.
+                        </p>
+                        <div class="case-item-scope" style="display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: auto; padding-top: 0.75rem; border-top: 1px solid var(--border-subtle);">
+                            
+                            <span class="scope-pill" style="font-size: 0.72rem; padding: 0.2rem 0.55rem; background: var(--bg-primary); border: 1px solid var(--border-subtle); border-radius: 4px; color: var(--text-muted);">
+                                Комплексный fit-out под ключ
+                            </span>
+                            
+                            <span class="scope-pill" style="font-size: 0.72rem; padding: 0.2rem 0.55rem; background: var(--bg-primary); border: 1px solid var(--border-subtle); border-radius: 4px; color: var(--text-muted);">
+                                Авторские фактурные штукатурки и состаренные поверхности
+                            </span>
+                            
+                            <span class="scope-pill" style="font-size: 0.72rem; padding: 0.2rem 0.55rem; background: var(--bg-primary); border: 1px solid var(--border-subtle); border-radius: 4px; color: var(--text-muted);">
+                                Монолитная барная стойка из меди и дуба
+                            </span>
+                            
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="case-item-card all-project-item" data-category="corporate" style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); overflow: hidden; display: flex; flex-direction: column;">
+                    <a href="/projects/apex-global-headquarters/" class="case-thumb-wrap" style="display: block; position: relative; height: 210px; overflow: hidden;">
+                        <img src="static/images/case_office.jpg" alt="Штаб-квартира и совет директоров инвестиционной корпорации Apex Global" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;">
+                        <div class="case-tag-overlay" style="position: absolute; top: 0.75rem; left: 0.75rem; background: rgba(0,0,0,0.65); color: #fff; font-size: 0.75rem; padding: 0.25rem 0.65rem; border-radius: 4px; backdrop-filter: blur(4px);">
+                            Штаб-квартиры и корпоративные офисы
+                        </div>
+                    </a>
+                    <div class="case-item-body" style="padding: 1.25rem; display: flex; flex-direction: column; flex-grow: 1;">
+                        <div class="case-item-meta" style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.45rem;">
+                            <span>Москва-Сити</span> • <span>920 м²</span> • <span>2.5 месяца</span>
+                        </div>
+                        <h3 class="case-item-title" style="font-size: 1.05rem; margin: 0 0 0.5rem; font-weight: 700; line-height: 1.35;">
+                            <a href="/projects/apex-global-headquarters/" style="color: inherit; text-decoration: none;">
+                                Штаб-квартира и совет директоров инвестиционной корпорации Apex Global
+                            </a>
+                        </h3>
+                        <p class="case-item-desc" style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.5; margin: 0 0 0.85rem; flex-grow: 1;">
+                            Премиальная отделка VIP-этажа: переговорная зала на 16 персон с акцентной фактурной стеной &quot;Антрацитовый срез&quot;, стеклянными акустическими перегородками и авторским столом из массива дуба.
+                        </p>
+                        <div class="case-item-scope" style="display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: auto; padding-top: 0.75rem; border-top: 1px solid var(--border-subtle);">
+                            
+                            <span class="scope-pill" style="font-size: 0.72rem; padding: 0.2rem 0.55rem; background: var(--bg-primary); border: 1px solid var(--border-subtle); border-radius: 4px; color: var(--text-muted);">
+                                Комплексный fit-out под ключ
+                            </span>
+                            
+                            <span class="scope-pill" style="font-size: 0.72rem; padding: 0.2rem 0.55rem; background: var(--bg-primary); border: 1px solid var(--border-subtle); border-radius: 4px; color: var(--text-muted);">
+                                Акустическая подготовка и звукоизоляция 52 дБ
+                            </span>
+                            
+                            <span class="scope-pill" style="font-size: 0.72rem; padding: 0.2rem 0.55rem; background: var(--bg-primary); border: 1px solid var(--border-subtle); border-radius: 4px; color: var(--text-muted);">
+                                Авторская декоративная стена с графитовым пигментом
+                            </span>
+                            
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="case-item-card all-project-item" data-category="bars-restaurants" style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); overflow: hidden; display: flex; flex-direction: column;">
+                    <a href="/projects/gorynych-restaurant/" class="case-thumb-wrap" style="display: block; position: relative; height: 210px; overflow: hidden;">
+                        <img src="static/images/case_gorynych.jpg" alt="Ресторан «Горыныч» — монументальная роспись и отделка" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;">
+                        <div class="case-tag-overlay" style="position: absolute; top: 0.75rem; left: 0.75rem; background: rgba(0,0,0,0.65); color: #fff; font-size: 0.75rem; padding: 0.25rem 0.65rem; border-radius: 4px; backdrop-filter: blur(4px);">
+                            Бары и рестораны
+                        </div>
+                    </a>
+                    <div class="case-item-body" style="padding: 1.25rem; display: flex; flex-direction: column; flex-grow: 1;">
+                        <div class="case-item-meta" style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.45rem;">
+                            <span>Москва, Рождественский бульвар</span> • <span>680 м²</span> • <span>2 месяца</span>
+                        </div>
+                        <h3 class="case-item-title" style="font-size: 1.05rem; margin: 0 0 0.5rem; font-weight: 700; line-height: 1.35;">
+                            <a href="/projects/gorynych-restaurant/" style="color: inherit; text-decoration: none;">
+                                Ресторан «Горыныч» — монументальная роспись и отделка
+                            </a>
+                        </h3>
+                        <p class="case-item-desc" style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.5; margin: 0 0 0.85rem; flex-grow: 1;">
+                            Монументальное художественное панно во всю высоту зала, минеральные штукатурки с эффектом древней патины, золочение и состаренное дерево.
+                        </p>
+                        <div class="case-item-scope" style="display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: auto; padding-top: 0.75rem; border-top: 1px solid var(--border-subtle);">
+                            
+                            <span class="scope-pill" style="font-size: 0.72rem; padding: 0.2rem 0.55rem; background: var(--bg-primary); border: 1px solid var(--border-subtle); border-radius: 4px; color: var(--text-muted);">
+                                Авторская настенная роспись и монументальное панно
+                            </span>
+                            
+                            <span class="scope-pill" style="font-size: 0.72rem; padding: 0.2rem 0.55rem; background: var(--bg-primary); border: 1px solid var(--border-subtle); border-radius: 4px; color: var(--text-muted);">
+                                Декоративные известковые фактуры с минеральными пигментами
+                            </span>
+                            
+                            <span class="scope-pill" style="font-size: 0.72rem; padding: 0.2rem 0.55rem; background: var(--bg-primary); border: 1px solid var(--border-subtle); border-radius: 4px; color: var(--text-muted);">
+                                Тонирование и патинирование балок
+                            </span>
+                            
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="case-item-card all-project-item" data-category="hotels" style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); overflow: hidden; display: flex; flex-direction: column;">
+                    <a href="/projects/hotel-the-oro-lobby/" class="case-thumb-wrap" style="display: block; position: relative; height: 210px; overflow: hidden;">
+                        <img src="static/images/case_hotel.jpg" alt="Отель The Oro — реновация лобби и представительских зон" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;">
+                        <div class="case-tag-overlay" style="position: absolute; top: 0.75rem; left: 0.75rem; background: rgba(0,0,0,0.65); color: #fff; font-size: 0.75rem; padding: 0.25rem 0.65rem; border-radius: 4px; backdrop-filter: blur(4px);">
+                            Отели
+                        </div>
+                    </a>
+                    <div class="case-item-body" style="padding: 1.25rem; display: flex; flex-direction: column; flex-grow: 1;">
+                        <div class="case-item-meta" style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.45rem;">
+                            <span>Москва, Центр</span> • <span>1850 м²</span> • <span>3.5 месяца</span>
+                        </div>
+                        <h3 class="case-item-title" style="font-size: 1.05rem; margin: 0 0 0.5rem; font-weight: 700; line-height: 1.35;">
+                            <a href="/projects/hotel-the-oro-lobby/" style="color: inherit; text-decoration: none;">
+                                Отель The Oro — реновация лобби и представительских зон
+                            </a>
+                        </h3>
+                        <p class="case-item-desc" style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.5; margin: 0 0 0.85rem; flex-grow: 1;">
+                            Комплексный fit-out входной группы, лобби-бара и лаунж-зон. Создание монументальной скульптурной волны из авторской известковой штукатурки с криволинейной подсветкой.
+                        </p>
+                        <div class="case-item-scope" style="display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: auto; padding-top: 0.75rem; border-top: 1px solid var(--border-subtle);">
+                            
+                            <span class="scope-pill" style="font-size: 0.72rem; padding: 0.2rem 0.55rem; background: var(--bg-primary); border: 1px solid var(--border-subtle); border-radius: 4px; color: var(--text-muted);">
+                                Инженерный демонтаж и усиление конструкций
+                            </span>
+                            
+                            <span class="scope-pill" style="font-size: 0.72rem; padding: 0.2rem 0.55rem; background: var(--bg-primary); border: 1px solid var(--border-subtle); border-radius: 4px; color: var(--text-muted);">
+                                Скульптурные рельефные стены ручной работы
+                            </span>
+                            
+                            <span class="scope-pill" style="font-size: 0.72rem; padding: 0.2rem 0.55rem; background: var(--bg-primary); border: 1px solid var(--border-subtle); border-radius: 4px; color: var(--text-muted);">
+                                Бесшовные полы терраццо с латунной расшивкой
+                            </span>
+                            
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="case-item-card all-project-item" data-category="industrial" style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); overflow: hidden; display: flex; flex-direction: column;">
+                    <a href="/projects/industrial-holding-atrium/" class="case-thumb-wrap" style="display: block; position: relative; height: 210px; overflow: hidden;">
+                        <img src="static/images/hero.jpg" alt="Атриум и представительский блок машиностроительного кластера" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;">
+                        <div class="case-tag-overlay" style="position: absolute; top: 0.75rem; left: 0.75rem; background: rgba(0,0,0,0.65); color: #fff; font-size: 0.75rem; padding: 0.25rem 0.65rem; border-radius: 4px; backdrop-filter: blur(4px);">
+                            Производственные предприятия и холдинги
+                        </div>
+                    </a>
+                    <div class="case-item-body" style="padding: 1.25rem; display: flex; flex-direction: column; flex-grow: 1;">
+                        <div class="case-item-meta" style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.45rem;">
+                            <span>Калужская область</span> • <span>3400 м²</span> • <span>5 месяцев</span>
+                        </div>
+                        <h3 class="case-item-title" style="font-size: 1.05rem; margin: 0 0 0.5rem; font-weight: 700; line-height: 1.35;">
+                            <a href="/projects/industrial-holding-atrium/" style="color: inherit; text-decoration: none;">
+                                Атриум и представительский блок машиностроительного кластера
+                            </a>
+                        </h3>
+                        <p class="case-item-desc" style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.5; margin: 0 0 0.85rem; flex-grow: 1;">
+                            Капитальная реновация административно-бытового корпуса промышленного предприятия. Индустриальная эстетика, высокопрочные износостойкие покрытия и монументальные акценты.
+                        </p>
+                        <div class="case-item-scope" style="display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: auto; padding-top: 0.75rem; border-top: 1px solid var(--border-subtle);">
+                            
+                            <span class="scope-pill" style="font-size: 0.72rem; padding: 0.2rem 0.55rem; background: var(--bg-primary); border: 1px solid var(--border-subtle); border-radius: 4px; color: var(--text-muted);">
+                                Замена всех инженерных сетей (ОВ, ВК, ЭОМ)
+                            </span>
+                            
+                            <span class="scope-pill" style="font-size: 0.72rem; padding: 0.2rem 0.55rem; background: var(--bg-primary); border: 1px solid var(--border-subtle); border-radius: 4px; color: var(--text-muted);">
+                                Антивандальные авторские покрытия стен с устойчивостью к истиранию 50 000 циклов
+                            </span>
+                            
+                            <span class="scope-pill" style="font-size: 0.72rem; padding: 0.2rem 0.55rem; background: var(--bg-primary); border: 1px solid var(--border-subtle); border-radius: 4px; color: var(--text-muted);">
+                                Промышленные полимер-бетонные полы
+                            </span>
+                            
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="case-item-card all-project-item" data-category="hotels" style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); overflow: hidden; display: flex; flex-direction: column;">
+                    <a href="/projects/hotel-metropol-art/" class="case-thumb-wrap" style="display: block; position: relative; height: 210px; overflow: hidden;">
+                        <img src="static/images/case_office.jpg" alt="Отель «Метрополь Арт» — сьюты и представительские холлы" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;">
+                        <div class="case-tag-overlay" style="position: absolute; top: 0.75rem; left: 0.75rem; background: rgba(0,0,0,0.65); color: #fff; font-size: 0.75rem; padding: 0.25rem 0.65rem; border-radius: 4px; backdrop-filter: blur(4px);">
+                            Отели
+                        </div>
+                    </a>
+                    <div class="case-item-body" style="padding: 1.25rem; display: flex; flex-direction: column; flex-grow: 1;">
+                        <div class="case-item-meta" style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.45rem;">
+                            <span>Москва, Театральный проезд</span> • <span>950 м²</span> • <span>3 месяца</span>
+                        </div>
+                        <h3 class="case-item-title" style="font-size: 1.05rem; margin: 0 0 0.5rem; font-weight: 700; line-height: 1.35;">
+                            <a href="/projects/hotel-metropol-art/" style="color: inherit; text-decoration: none;">
+                                Отель «Метрополь Арт» — сьюты и представительские холлы
+                            </a>
+                        </h3>
+                        <p class="case-item-desc" style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.5; margin: 0 0 0.85rem; flex-grow: 1;">
+                            Премиальная отделка сьютов: венецианская штукатурка с зеркальным блеском, реставрация и золочение лепного декора, авторские фрески.
+                        </p>
+                        <div class="case-item-scope" style="display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: auto; padding-top: 0.75rem; border-top: 1px solid var(--border-subtle);">
+                            
+                            <span class="scope-pill" style="font-size: 0.72rem; padding: 0.2rem 0.55rem; background: var(--bg-primary); border: 1px solid var(--border-subtle); border-radius: 4px; color: var(--text-muted);">
+                                Классическая венецианская штукатурка в 7 слоев
+                            </span>
+                            
+                            <span class="scope-pill" style="font-size: 0.72rem; padding: 0.2rem 0.55rem; background: var(--bg-primary); border: 1px solid var(--border-subtle); border-radius: 4px; color: var(--text-muted);">
+                                Золочение лепных карнизов сусальным золотом 24K
+                            </span>
+                            
+                            <span class="scope-pill" style="font-size: 0.72rem; padding: 0.2rem 0.55rem; background: var(--bg-primary); border: 1px solid var(--border-subtle); border-radius: 4px; color: var(--text-muted);">
+                                Авторская роспись потолочных плафонов
+                            </span>
+                            
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="case-item-card all-project-item" data-category="residences" style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); overflow: hidden; display: flex; flex-direction: column;">
+                    <a href="/projects/residence-serebryany-bor/" class="case-thumb-wrap" style="display: block; position: relative; height: 210px; overflow: hidden;">
+                        <img src="static/images/art_furniture.jpg" alt="Вилла в Серебряном Бору — комплексная отделка резиденции" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;">
+                        <div class="case-tag-overlay" style="position: absolute; top: 0.75rem; left: 0.75rem; background: rgba(0,0,0,0.65); color: #fff; font-size: 0.75rem; padding: 0.25rem 0.65rem; border-radius: 4px; backdrop-filter: blur(4px);">
+                            Частные резиденции
+                        </div>
+                    </a>
+                    <div class="case-item-body" style="padding: 1.25rem; display: flex; flex-direction: column; flex-grow: 1;">
+                        <div class="case-item-meta" style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.45rem;">
+                            <span>Москва, Серебряный Бор</span> • <span>650 м²</span> • <span>2.5 месяца</span>
+                        </div>
+                        <h3 class="case-item-title" style="font-size: 1.05rem; margin: 0 0 0.5rem; font-weight: 700; line-height: 1.35;">
+                            <a href="/projects/residence-serebryany-bor/" style="color: inherit; text-decoration: none;">
+                                Вилла в Серебряном Бору — комплексная отделка резиденции
+                            </a>
+                        </h3>
+                        <p class="case-item-desc" style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.5; margin: 0 0 0.85rem; flex-grow: 1;">
+                            Комплексная отделка стен натуральным минеральным травертином, кастомные обеденные столы из микроцемента, коллекционная живопись в интерьере.
+                        </p>
+                        <div class="case-item-scope" style="display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: auto; padding-top: 0.75rem; border-top: 1px solid var(--border-subtle);">
+                            
+                            <span class="scope-pill" style="font-size: 0.72rem; padding: 0.2rem 0.55rem; background: var(--bg-primary); border: 1px solid var(--border-subtle); border-radius: 4px; color: var(--text-muted);">
+                                Бесшовные покрытия стен фактурным микроцементом
+                            </span>
+                            
+                            <span class="scope-pill" style="font-size: 0.72rem; padding: 0.2rem 0.55rem; background: var(--bg-primary); border: 1px solid var(--border-subtle); border-radius: 4px; color: var(--text-muted);">
+                                Авторские декоративные панно с барельефом
+                            </span>
+                            
+                            <span class="scope-pill" style="font-size: 0.72rem; padding: 0.2rem 0.55rem; background: var(--bg-primary); border: 1px solid var(--border-subtle); border-radius: 4px; color: var(--text-muted);">
+                                Изготовление дизайнерских столов из массива дуба и латуни
+                            </span>
+                            
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="case-item-card all-project-item" data-category="residences" style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); overflow: hidden; display: flex; flex-direction: column;">
+                    <a href="/projects/residence-patriarshie/" class="case-thumb-wrap" style="display: block; position: relative; height: 210px; overflow: hidden;">
+                        <img src="static/images/hero.jpg" alt="Пентхаус на Патриарших прудах — авторские фактуры и роспись" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;">
+                        <div class="case-tag-overlay" style="position: absolute; top: 0.75rem; left: 0.75rem; background: rgba(0,0,0,0.65); color: #fff; font-size: 0.75rem; padding: 0.25rem 0.65rem; border-radius: 4px; backdrop-filter: blur(4px);">
+                            Частные резиденции
+                        </div>
+                    </a>
+                    <div class="case-item-body" style="padding: 1.25rem; display: flex; flex-direction: column; flex-grow: 1;">
+                        <div class="case-item-meta" style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.45rem;">
+                            <span>Москва, Патриаршие пруды</span> • <span>420 м²</span> • <span>2 месяца</span>
+                        </div>
+                        <h3 class="case-item-title" style="font-size: 1.05rem; margin: 0 0 0.5rem; font-weight: 700; line-height: 1.35;">
+                            <a href="/projects/residence-patriarshie/" style="color: inherit; text-decoration: none;">
+                                Пентхаус на Патриарших прудах — авторские фактуры и роспись
+                            </a>
+                        </h3>
+                        <p class="case-item-desc" style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.5; margin: 0 0 0.85rem; flex-grow: 1;">
+                            Минималистичные матовые фактуры стен с шелковистым тактильным эффектом, латунные порталы, роспись кабинета графикой.
+                        </p>
+                        <div class="case-item-scope" style="display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: auto; padding-top: 0.75rem; border-top: 1px solid var(--border-subtle);">
+                            
+                            <span class="scope-pill" style="font-size: 0.72rem; padding: 0.2rem 0.55rem; background: var(--bg-primary); border: 1px solid var(--border-subtle); border-radius: 4px; color: var(--text-muted);">
+                                Бесшовное нанесение матового известкового покрытия
+                            </span>
+                            
+                            <span class="scope-pill" style="font-size: 0.72rem; padding: 0.2rem 0.55rem; background: var(--bg-primary); border: 1px solid var(--border-subtle); border-radius: 4px; color: var(--text-muted);">
+                                Декорирование латунных порталов
+                            </span>
+                            
+                            <span class="scope-pill" style="font-size: 0.72rem; padding: 0.2rem 0.55rem; background: var(--bg-primary); border: 1px solid var(--border-subtle); border-radius: 4px; color: var(--text-muted);">
+                                Авторская графика на стенах кабинета
+                            </span>
+                            
+                        </div>
+                    </div>
+                </article>
+                
+            </div>
         </div>
 
         <!-- Section Link to Wall Calculator & Materials -->
-        <div style="margin-top: 5rem; background: var(--bg-secondary); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: clamp(2rem, 4vw, 3.5rem); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem;">
+        <div style="margin-top: 4rem; background: var(--bg-secondary); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: clamp(1.75rem, 3.5vw, 3rem); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
             <div style="max-width: 600px;">
-                <div class="eyebrow">Интерактивный расчет</div>
-                <h3 style="font-family: var(--font-serif); font-size: 1.8rem; color: var(--text-main); margin: 0 0 0.5rem;">
+                <h3 style="font-family: var(--font-heading); font-size: 1.35rem; color: var(--text-main); margin: 0 0 0.4rem;">
                     Рассчитать стоимость фактур по площади стен
                 </h3>
-                <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin: 0;">
-                    Выберите нужное покрытие в нашем каталоге и укажите метраж стен для моментального расчета сметы материалов и работы мастеров.
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; margin: 0;">
+                    Выберите покрытие в каталоге и укажите площадь стен для предварительного расчета сметы материалов и работы мастеров.
                 </p>
             </div>
-            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                <a href="materials.html" class="btn btn-primary">Перейти в калькулятор покрытий</a>
-                <button type="button" class="btn btn-secondary btn-open-contact">Связаться с нами</button>
+            <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                <a href="materials.html" class="btn btn-primary" style="padding: 0.75rem 1.4rem; font-size: 0.88rem;">Калькулятор покрытий</a>
+                <a href="contacts.html" class="btn btn-secondary" style="padding: 0.75rem 1.4rem; font-size: 0.88rem;">Контакты студии</a>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Interactive On-Card Slider & 2/3 Modal Script -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Setup Card Folders with Arrow Navigation
+    const cards = document.querySelectorAll('.folder-showcase-card');
+    const modal = document.getElementById('projectModal23');
+    const modalCloseBtn = document.getElementById('modalCloseBtn');
+    const modalImg = document.getElementById('modalImg');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalCategory = document.getElementById('modalCategory');
+    const modalMeta = document.getElementById('modalMeta');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalScope = document.getElementById('modalScope');
+    const modalCounter = document.getElementById('modalCounter');
+    const modalDetailLink = document.getElementById('modalDetailLink');
+    const modalPrevBtn = document.getElementById('modalPrevBtn');
+    const modalNextBtn = document.getElementById('modalNextBtn');
+
+    let activeModalCategoryProjects = [];
+    let activeModalIndex = 0;
+
+    cards.forEach(card => {
+        const jsonEl = card.querySelector('.folder-data-json');
+        if (!jsonEl) return;
+        let projects = [];
+        try {
+            projects = JSON.parse(jsonEl.textContent.trim());
+        } catch (e) {
+            console.error('Failed to parse folder data', e);
+            return;
+        }
+        if (!projects || projects.length === 0) return;
+
+        let currentIndex = 0;
+        const imgEl = card.querySelector('.folder-current-img');
+        const counterEl = card.querySelector('.slide-counter-badge');
+        const titleEl = card.querySelector('.folder-project-title');
+        const linkEl = card.querySelector('.folder-project-link');
+        const descEl = card.querySelector('.folder-project-desc');
+        const metaLocation = card.querySelector('.meta-location');
+        const metaArea = card.querySelector('.meta-area');
+        const metaDuration = card.querySelector('.meta-duration');
+        const detailBtn = card.querySelector('.folder-detail-btn');
+        const prevBtn = card.querySelector('.prev-btn');
+        const nextBtn = card.querySelector('.next-btn');
+        const triggerModalBtn = card.querySelector('.btn-trigger-modal');
+        const slideFrame = card.querySelector('.card-slide-frame');
+
+        function updateCardDisplay(idx) {
+            currentIndex = (idx + projects.length) % projects.length;
+            const p = projects[currentIndex];
+
+            imgEl.style.opacity = '0.3';
+            setTimeout(() => {
+                imgEl.src = p.image;
+                imgEl.alt = p.title;
+                imgEl.style.opacity = '1';
+            }, 120);
+
+            if (counterEl) counterEl.textContent = `${currentIndex + 1} / ${projects.length}`;
+            if (titleEl && linkEl) {
+                linkEl.textContent = p.title;
+                linkEl.href = p.url;
+            }
+            if (descEl) descEl.textContent = p.short_desc;
+            if (metaLocation) metaLocation.textContent = p.location;
+            if (metaArea) metaArea.textContent = p.area;
+            if (metaDuration) metaDuration.textContent = p.duration;
+            if (detailBtn) detailBtn.href = p.url;
+        }
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                updateCardDisplay(currentIndex - 1);
+            });
+        }
+        if (nextBtn) {
+            nextBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                updateCardDisplay(currentIndex + 1);
+            });
+        }
+
+        function openModalForThisCard() {
+            activeModalCategoryProjects = projects;
+            activeModalIndex = currentIndex;
+            renderModal();
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        if (triggerModalBtn) {
+            triggerModalBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                openModalForThisCard();
+            });
+        }
+        if (slideFrame) {
+            slideFrame.addEventListener('click', (e) => {
+                // If clicked on arrows, ignore
+                if (e.target.closest('.slide-nav-btn')) return;
+                openModalForThisCard();
+            });
+        }
+    });
+
+    // 2. Modal Functions
+    function renderModal() {
+        if (!activeModalCategoryProjects || activeModalCategoryProjects.length === 0) return;
+        const p = activeModalCategoryProjects[activeModalIndex];
+        modalImg.src = p.image;
+        modalImg.alt = p.title;
+        modalTitle.textContent = p.title;
+        modalCategory.textContent = p.category_name;
+        modalMeta.textContent = `${p.location} • ${p.area} • ${p.duration}`;
+        modalDesc.textContent = p.short_desc;
+        modalCounter.textContent = `${activeModalIndex + 1} / ${activeModalCategoryProjects.length}`;
+        modalDetailLink.href = p.url;
+
+        // Render scope tags
+        modalScope.innerHTML = '';
+        if (p.scope && p.scope.length) {
+            p.scope.forEach(sc => {
+                const span = document.createElement('span');
+                span.style.cssText = 'font-size: 0.75rem; padding: 0.25rem 0.6rem; background: var(--bg-primary); border: 1px solid var(--border-subtle); border-radius: 4px; color: var(--text-main);';
+                span.textContent = sc;
+                modalScope.appendChild(span);
+            });
+        }
+    }
+
+    if (modalPrevBtn) {
+        modalPrevBtn.addEventListener('click', () => {
+            activeModalIndex = (activeModalIndex - 1 + activeModalCategoryProjects.length) % activeModalCategoryProjects.length;
+            renderModal();
+        });
+    }
+    if (modalNextBtn) {
+        modalNextBtn.addEventListener('click', () => {
+            activeModalIndex = (activeModalIndex + 1) % activeModalCategoryProjects.length;
+            renderModal();
+        });
+    }
+
+    function closeModal() {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+
+    if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
+    if (modal) {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+    }
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal && modal.style.display === 'flex') {
+            closeModal();
+        }
+    });
+
+    // 3. Filter tabs for lower section
+    const filterBtns = document.querySelectorAll('#allProjectsFilterBar button');
+    const projectCards = document.querySelectorAll('#allProjectsGrid .all-project-item');
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const cat = btn.getAttribute('data-filter');
+            projectCards.forEach(item => {
+                if (cat === 'all' || item.getAttribute('data-category') === cat) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    });
+});
+</script>
 
     </main>
 
@@ -306,6 +972,7 @@
                         <li><a href="index.html#restoration">Реставрация</a></li>
                         <li><a href="gallery.html">Арт-галерея</a></li>
                         <li><a href="partners.html">Партнёры</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
                     </ul>
                 </div>
 

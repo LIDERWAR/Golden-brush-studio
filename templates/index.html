@@ -34,25 +34,25 @@
                 </div>
             </a>
 
-            <!-- Window 2: Реставрация -->
-            <a href="{{ home_config.portal2_link|default:'#restoration' }}" class="portal-card">
+            <!-- Window 2: Декоративные покрытия и роспись стен -->
+            <a href="{{ home_config.portal2_link|default:'/materials/' }}" class="portal-card">
                 <div class="portal-img-wrap">
-                    <img src="{{ home_config.portal2_img_url|default:'/static/images/restoration_craft.jpg' }}" alt="{{ home_config.portal2_title|default:'Реставрация' }}">
+                    <img src="{{ home_config.portal2_img_url|default:'/static/images/fresco_texture.jpg' }}" alt="{{ home_config.portal2_title|default:'Декоративные покрытия и роспись стен' }}">
                     <div class="portal-glass-overlay"></div>
                 </div>
                 <div class="portal-content">
-                    <h3 class="portal-title">{{ home_config.portal2_title|default:'Реставрация' }}</h3>
+                    <h3 class="portal-title">{{ home_config.portal2_title|default:'Декоративные покрытия и роспись стен' }}</h3>
                 </div>
             </a>
 
-            <!-- Window 3: Галерея -->
+            <!-- Window 3: Арт-галерея -->
             <a href="{{ home_config.portal3_link|default:'/gallery/' }}" class="portal-card">
                 <div class="portal-img-wrap">
-                    <img src="{{ home_config.portal3_img_url|default:'/static/images/art_canvas.jpg' }}" alt="{{ home_config.portal3_title|default:'Галерея' }}">
+                    <img src="{{ home_config.portal3_img_url|default:'/static/images/art_canvas.jpg' }}" alt="{{ home_config.portal3_title|default:'Арт-галерея' }}">
                     <div class="portal-glass-overlay"></div>
                 </div>
                 <div class="portal-content">
-                    <h3 class="portal-title">{{ home_config.portal3_title|default:'Галерея' }}</h3>
+                    <h3 class="portal-title">{{ home_config.portal3_title|default:'Арт-галерея' }}</h3>
                 </div>
             </a>
         </div>

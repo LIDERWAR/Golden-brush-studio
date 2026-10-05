@@ -22,6 +22,7 @@ def build_docs():
         'fonts': ('/fonts/', 'fonts'),
         'partners': ('/partners/', 'partners'),
         'portal': ('/portal/', 'portal'),
+        'contacts': ('/contacts/', 'contacts'),
     }
 
     raw_htmls = {}
@@ -92,6 +93,9 @@ def build_docs():
         html = html.replace('href="/portal/#', 'href="portal.html#')
         html = html.replace('href="/portal/"', 'href="portal.html"')
         html = html.replace('href="/portal"', 'href="portal.html"')
+        html = html.replace('href="/contacts/#', 'href="contacts.html#')
+        html = html.replace('href="/contacts/"', 'href="contacts.html"')
+        html = html.replace('href="/contacts"', 'href="contacts.html"')
 
         if page_type == 'main':
             html = html.replace('href="/#', 'href="#')
