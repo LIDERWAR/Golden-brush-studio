@@ -619,14 +619,16 @@ img {
 }
 
 .burger-btn {
-  display: inline-flex;
+  display: inline-flex !important;
   align-items: center;
-  gap: 0.75rem;
-  background: rgba(20, 22, 26, 0.04);
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: transparent;
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
   color: var(--text-main);
-  padding: 0.58rem 1.25rem;
+  padding: 0;
   cursor: pointer;
   transition: var(--tr-fast);
 }
@@ -641,34 +643,32 @@ img {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 4px;
-  width: 18px;
+  align-items: center;
+  gap: 5px;
+  width: 22px;
   pointer-events: none;
 }
 
 .burger-lines .line {
   display: block;
   width: 100%;
-  height: 1.5px;
+  height: 1.8px;
   background-color: currentColor;
+  border-radius: 1px;
   transition: var(--tr-fast);
   pointer-events: none;
 }
 
+.burger-btn:hover .burger-lines .line {
+  background-color: var(--accent-bronze);
+}
+
 .burger-label {
-  font-size: 0.76rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  pointer-events: none;
+  display: none !important;
 }
 
 .nav-container {
   display: none !important;
-}
-
-.burger-btn {
-  display: inline-flex !important;
 }
 
 @media (max-width: 580px) {
@@ -2310,6 +2310,7 @@ img {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: clamp(1rem, 1.8vw, 1.6rem);
+  align-items: stretch;
 }
 
 .portal-card {
@@ -2320,21 +2321,25 @@ img {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  height: 100%;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
   transition: var(--tr-smooth);
   text-decoration: none;
 }
 
 .portal-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-5px);
   border-color: var(--accent-bronze);
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
 }
 
 .portal-img-wrap {
   position: relative;
-  height: clamp(150px, 18vh, 230px);
+  height: clamp(170px, 22vh, 250px);
+  width: 100%;
   overflow: hidden;
+  background: #111;
+  flex-shrink: 0;
 }
 
 .portal-img-wrap img {
@@ -2345,7 +2350,7 @@ img {
 }
 
 .portal-card:hover .portal-img-wrap img {
-  transform: scale(1.06);
+  transform: scale(1.05);
 }
 
 .portal-glass-overlay {
@@ -2355,7 +2360,9 @@ img {
 }
 
 .portal-content {
-  padding: clamp(0.75rem, 1.4vh, 1.15rem) 1rem;
+  flex: 1 1 auto;
+  min-height: 84px;
+  padding: 1rem 1.25rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2366,13 +2373,17 @@ img {
 
 .portal-title,
 .portal-card .portal-title {
-  font-family: 'Cormorant Garamond', Georgia, serif !important;
-  font-size: clamp(1.4rem, 2.2vw, 1.85rem) !important;
-  font-weight: 500 !important;
+  font-family: var(--font-heading) !important;
+  font-size: clamp(1.02rem, 1.35vw, 1.28rem) !important;
+  font-weight: 700 !important;
+  line-height: 1.32 !important;
   color: var(--text-main);
   margin: 0;
-  letter-spacing: 0.025em;
-  white-space: nowrap;
+  letter-spacing: -0.01em;
+  white-space: normal !important;
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+  text-align: center;
   transition: color var(--tr-fast);
 }
 
@@ -2402,8 +2413,6 @@ img {
   .restoration-preview-wrap {
     grid-template-columns: 1fr;
   }
-}
-  transform: translateX(4px);
 }
 
 @media (max-width: 991px) {
