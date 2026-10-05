@@ -34,65 +34,50 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 2. Mobile Menu Toggle ("Три полосочки")
-    const burgerBtn = document.getElementById('burgerBtn') || document.querySelector('.burger-btn');
-    const mobileDrawer = document.getElementById('mobileDrawer') || document.querySelector('.mobile-drawer');
-    const drawerBackdrop = document.getElementById('drawerBackdrop');
-    const drawerClose = document.getElementById('drawerClose');
-
-    window.openMobileDrawer = function() {
-        const drawer = document.getElementById('mobileDrawer') || document.querySelector('.mobile-drawer');
-        if (drawer) {
-            drawer.classList.add('active');
-            document.body.classList.add('drawer-open');
-        }
-    };
-
-    window.closeMobileDrawer = function() {
-        const drawer = document.getElementById('mobileDrawer') || document.querySelector('.mobile-drawer');
-        if (drawer) {
-            drawer.classList.remove('active');
-            document.body.classList.remove('drawer-open');
-        }
-    };
-
-    window.toggleMobileDrawer = function(e) {
-        if (e && e.preventDefault) e.preventDefault();
-        const drawer = document.getElementById('mobileDrawer') || document.querySelector('.mobile-drawer');
-        if (drawer && drawer.classList.contains('active')) {
-            window.closeMobileDrawer();
-        } else {
-            window.openMobileDrawer();
-        }
-    };
-
-    if (burgerBtn) {
-        burgerBtn.addEventListener('click', (e) => {
-            window.toggleMobileDrawer(e);
-        });
-    }
-
-    if (drawerClose) {
-        drawerClose.addEventListener('click', (e) => {
+    // 2. Mobile Menu Toggle ("Три полосочки") - harmonized with base.html controller
+    if (!window.toggleMobileDrawer) {
+        window.openMobileDrawer = function(e) {
             if (e && e.preventDefault) e.preventDefault();
-            window.closeMobileDrawer();
-        });
-    }
+            const drawer = document.getElementById('mobileDrawer') || document.querySelector('.mobile-drawer');
+            if (drawer) {
+                drawer.classList.add('active');
+                document.body.classList.add('drawer-open');
+            }
+        };
 
-    if (drawerBackdrop) {
-        drawerBackdrop.addEventListener('click', () => {
-            window.closeMobileDrawer();
-        });
-    }
+        window.closeMobileDrawer = function(e) {
+            if (e && e.preventDefault) e.preventDefault();
+            const drawer = document.getElementById('mobileDrawer') || document.querySelector('.mobile-drawer');
+            if (drawer) {
+                drawer.classList.remove('active');
+                document.body.classList.remove('drawer-open');
+            }
+        };
 
-    // Auto-close on link click
-    if (mobileDrawer) {
-        const drawerLinks = mobileDrawer.querySelectorAll('.drawer-link, .drawer-cta');
-        drawerLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                window.closeMobileDrawer();
+        window.toggleMobileDrawer = function(e) {
+            if (e && e.preventDefault) e.preventDefault();
+            const drawer = document.getElementById('mobileDrawer') || document.querySelector('.mobile-drawer');
+            if (drawer && drawer.classList.contains('active')) {
+                window.closeMobileDrawer(e);
+            } else {
+                window.openMobileDrawer(e);
+            }
+        };
+
+        const burgerBtn = document.getElementById('burgerBtn') || document.querySelector('.burger-btn');
+        const mobileDrawer = document.getElementById('mobileDrawer') || document.querySelector('.mobile-drawer');
+        const drawerBackdrop = document.getElementById('drawerBackdrop');
+        const drawerClose = document.getElementById('drawerClose');
+
+        if (burgerBtn) burgerBtn.onclick = window.toggleMobileDrawer;
+        if (drawerClose) drawerClose.onclick = window.closeMobileDrawer;
+        if (drawerBackdrop) drawerBackdrop.onclick = window.closeMobileDrawer;
+        if (mobileDrawer) {
+            const drawerLinks = mobileDrawer.querySelectorAll('.drawer-link, .drawer-cta');
+            drawerLinks.forEach(link => {
+                link.onclick = window.closeMobileDrawer;
             });
-        });
+        }
     }
 
     // Close on Escape key

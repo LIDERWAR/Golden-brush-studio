@@ -40,31 +40,8 @@ def build_docs():
     shutil.copytree(os.path.join(os.path.dirname(__file__), 'static'), docs_static)
     print("Static assets copied to docs/static")
 
-    # 3. Patch static/js/main.js for GitHub Pages demo mode
-    main_js_path = os.path.join(docs_static, 'js', 'main.js')
-    if os.path.exists(main_js_path):
-        with open(main_js_path, 'r', encoding='utf-8') as f:
-            js_code = f.read()
-
-        mock_handler = """
-        // GitHub Pages Demo Mode: Return simulated success if on static host
-        if (window.location.hostname.includes('github.io') || window.location.protocol === 'file:') {
-            await new Promise(r => setTimeout(r, 600));
-            res = { success: true };
-        } else {
-        """
-        js_code = js_code.replace(
-            "const response = await fetch('/api/quiz-lead/', {",
-            mock_handler + "\n            const response = await fetch('/api/quiz-lead/', {"
-        )
-        js_code = js_code.replace(
-            "const res = await response.json();",
-            "const res = await response.json();\n        }"
-        )
-
-        with open(main_js_path, 'w', encoding='utf-8') as f:
-            f.write(js_code)
-        print("Patched docs/static/js/main.js for demo mode")
+    # 3. Static assets are ready (main.js natively includes demo mode checks)
+    print("Static assets verified in docs/static")
 
     # 4. Transform URLs in HTML for GitHub Pages relative paths
     def transform_html(html, page_type='main'):

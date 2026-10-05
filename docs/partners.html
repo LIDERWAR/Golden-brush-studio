@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="bJayO5IOvhgaUVDRORPkplQnPEw4897wjkF4Wr5xNLahD0OqG2FTmE36msEwsrmX">
+    <meta name="csrf-token" content="bDGcFtn6J7HXu0GQPM5F7lB85xP77Hud96Gg3kVOeQzFjfxUEKvVVvlggT1SFgZD">
     <title>Партнёрская программа — Golden Brush Studio | Архитекторам, дизайнерам и скидка на краски</title>
     <meta name="description" content="Партнёрская программа Golden Brush Studio: агентские условия для дизайнеров и архитекторов, бесплатный Sample Box, 3D-текстуры и клубная скидка 12% на интерьерные краски партнера.">
     
@@ -34,7 +34,7 @@
             </a>
 
             <div class="header-actions">
-                <button class="burger-btn" id="burgerBtn" aria-label="Открыть навигационное меню" onclick="window.toggleMobileDrawer(event)">
+                <button class="burger-btn" id="burgerBtn" type="button" aria-label="Открыть навигационное меню">
                     <span class="burger-lines">
                         <span class="line line-1"></span>
                         <span class="line line-2"></span>
@@ -113,6 +113,72 @@
             </div>
         </div>
     </div>
+
+    <!-- Self-Contained Bulletproof Drawer Navigation Controller -->
+    <script>
+    (function() {
+        function initDrawerNavigation() {
+            var burger = document.getElementById('burgerBtn');
+            var drawer = document.getElementById('mobileDrawer');
+            var closeBtn = document.getElementById('drawerClose');
+            var backdrop = document.getElementById('drawerBackdrop');
+
+            function openDrawer(e) {
+                if (e) { e.preventDefault(); e.stopPropagation(); }
+                if (drawer) {
+                    drawer.classList.add('active');
+                    document.body.classList.add('drawer-open');
+                }
+            }
+            function closeDrawer(e) {
+                if (e) { e.preventDefault(); e.stopPropagation(); }
+                if (drawer) {
+                    drawer.classList.remove('active');
+                    document.body.classList.remove('drawer-open');
+                }
+            }
+            function toggleDrawer(e) {
+                if (e) { e.preventDefault(); e.stopPropagation(); }
+                if (drawer && drawer.classList.contains('active')) {
+                    closeDrawer(e);
+                } else {
+                    openDrawer(e);
+                }
+            }
+
+            window.openMobileDrawer = openDrawer;
+            window.closeMobileDrawer = closeDrawer;
+            window.toggleMobileDrawer = toggleDrawer;
+
+            if (burger) {
+                burger.onclick = toggleDrawer;
+            }
+            if (closeBtn) {
+                closeBtn.onclick = closeDrawer;
+            }
+            if (backdrop) {
+                backdrop.onclick = closeDrawer;
+            }
+
+            if (drawer) {
+                var links = drawer.querySelectorAll('.drawer-link, .drawer-cta');
+                for (var i = 0; i < links.length; i++) {
+                    links[i].addEventListener('click', closeDrawer);
+                }
+            }
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') closeDrawer(e);
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initDrawerNavigation);
+        } else {
+            initDrawerNavigation();
+        }
+    })();
+    </script>
 
     <!-- Main Content -->
     <main>
@@ -283,7 +349,7 @@
                         </div>
 
                         <form id="paintOrderForm" class="portal-form">
-                            <input type="hidden" name="csrfmiddlewaretoken" value="bJayO5IOvhgaUVDRORPkplQnPEw4897wjkF4Wr5xNLahD0OqG2FTmE36msEwsrmX">
+                            <input type="hidden" name="csrfmiddlewaretoken" value="bDGcFtn6J7HXu0GQPM5F7lB85xP77Hud96Gg3kVOeQzFjfxUEKvVVvlggT1SFgZD">
                             <input type="text" name="website_check" style="position:absolute; opacity:0; pointer-events:none; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true">
                             <input type="hidden" name="paint_brand" id="hiddenPaintBrand" value="Глубокоматовая бархатистая краска">
                             <input type="hidden" name="liters" id="hiddenPaintLiters" value="16">
@@ -345,7 +411,7 @@
 
             <div class="partner-form-card">
                 <form id="generalPartnerForm" class="portal-form">
-                    <input type="hidden" name="csrfmiddlewaretoken" value="bJayO5IOvhgaUVDRORPkplQnPEw4897wjkF4Wr5xNLahD0OqG2FTmE36msEwsrmX">
+                    <input type="hidden" name="csrfmiddlewaretoken" value="bDGcFtn6J7HXu0GQPM5F7lB85xP77Hud96Gg3kVOeQzFjfxUEKvVVvlggT1SFgZD">
                     <input type="text" name="website_check" style="position:absolute; opacity:0; pointer-events:none; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true">
                     
                     <div class="form-group">

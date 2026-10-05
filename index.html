@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="9KQunJDqzEOmpbd9GnaCa2EsGv4GGsqEhll0v509R8It8goIyy0b7lRbdjc80KF5">
+    <meta name="csrf-token" content="agOpTYq1P5SBDAewjobafpQtSBR0jtLn8JOthPYJkOKjsP5A8mBq3zAB3X3LR2gN">
     <title>Golden Brush Studio — Искусство преображения пространства | Художественно-декоративные работы под ключ</title>
     <meta name="description" content="Golden Brush Studio — художественно-декоративные работы под ключ, реставрация архитектурных элементов и авторская картинная галерея.">
     
@@ -34,7 +34,7 @@
             </a>
 
             <div class="header-actions">
-                <button class="burger-btn" id="burgerBtn" aria-label="Открыть навигационное меню" onclick="window.toggleMobileDrawer(event)">
+                <button class="burger-btn" id="burgerBtn" type="button" aria-label="Открыть навигационное меню">
                     <span class="burger-lines">
                         <span class="line line-1"></span>
                         <span class="line line-2"></span>
@@ -113,6 +113,72 @@
             </div>
         </div>
     </div>
+
+    <!-- Self-Contained Bulletproof Drawer Navigation Controller -->
+    <script>
+    (function() {
+        function initDrawerNavigation() {
+            var burger = document.getElementById('burgerBtn');
+            var drawer = document.getElementById('mobileDrawer');
+            var closeBtn = document.getElementById('drawerClose');
+            var backdrop = document.getElementById('drawerBackdrop');
+
+            function openDrawer(e) {
+                if (e) { e.preventDefault(); e.stopPropagation(); }
+                if (drawer) {
+                    drawer.classList.add('active');
+                    document.body.classList.add('drawer-open');
+                }
+            }
+            function closeDrawer(e) {
+                if (e) { e.preventDefault(); e.stopPropagation(); }
+                if (drawer) {
+                    drawer.classList.remove('active');
+                    document.body.classList.remove('drawer-open');
+                }
+            }
+            function toggleDrawer(e) {
+                if (e) { e.preventDefault(); e.stopPropagation(); }
+                if (drawer && drawer.classList.contains('active')) {
+                    closeDrawer(e);
+                } else {
+                    openDrawer(e);
+                }
+            }
+
+            window.openMobileDrawer = openDrawer;
+            window.closeMobileDrawer = closeDrawer;
+            window.toggleMobileDrawer = toggleDrawer;
+
+            if (burger) {
+                burger.onclick = toggleDrawer;
+            }
+            if (closeBtn) {
+                closeBtn.onclick = closeDrawer;
+            }
+            if (backdrop) {
+                backdrop.onclick = closeDrawer;
+            }
+
+            if (drawer) {
+                var links = drawer.querySelectorAll('.drawer-link, .drawer-cta');
+                for (var i = 0; i < links.length; i++) {
+                    links[i].addEventListener('click', closeDrawer);
+                }
+            }
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') closeDrawer(e);
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initDrawerNavigation);
+        } else {
+            initDrawerNavigation();
+        }
+    })();
+    </script>
 
     <!-- Main Content -->
     <main>
