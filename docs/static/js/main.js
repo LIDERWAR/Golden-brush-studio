@@ -72,12 +72,28 @@ document.addEventListener('DOMContentLoaded', () => {
         if (drawerClose) drawerClose.onclick = function(e) { if (e && e.preventDefault) e.preventDefault(); window.closeMobileDrawer(); };
         if (drawerBackdrop) drawerBackdrop.onclick = function(e) { if (e && e.preventDefault) e.preventDefault(); window.closeMobileDrawer(); };
         if (mobileDrawer) {
-            const drawerLinks = mobileDrawer.querySelectorAll('.drawer-link, .drawer-cta, .btn, a');
-            drawerLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    // Close drawer without preventing default link navigation
+            mobileDrawer.addEventListener('click', (e) => {
+                const link = e.target.closest('a');
+                if (!link) return;
+                if (e.button !== 0 || e.ctrlKey || e.metaKey) return;
+                const href = link.getAttribute('href');
+                if (!href || href === '#' || href === 'javascript:void(0)') return;
+                if (href.startsWith('tel:') || href.startsWith('mailto:') || link.target === '_blank') {
+                    setTimeout(window.closeMobileDrawer, 300);
+                    return;
+                }
+                if (href.startsWith('#')) {
                     window.closeMobileDrawer();
-                });
+                    const targetEl = document.querySelector(href);
+                    if (targetEl) {
+                        e.preventDefault();
+                        targetEl.scrollIntoView({ behavior: 'smooth' });
+                    }
+                    return;
+                }
+                e.preventDefault();
+                window.closeMobileDrawer();
+                window.location.href = href;
             });
         }
     }

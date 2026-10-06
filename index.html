@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="3HOgY6PW1xIddagNjBdMeBEVTDaZrHlEMVh5EbdIm8XNg8t2IL6erNbq8EFFk4K4">
+    <meta name="csrf-token" content="oLCe3Ji9QWbtJ0khOLXVaKIZAdJhtYMe5BigSHO3ZBJmMrhnpwEyLDreH0bRiDTd">
     <title>Golden Brush Studio — Искусство преображения пространства | Художественно-декоративные работы под ключ</title>
     <meta name="description" content="Golden Brush Studio — художественно-декоративные работы под ключ, реставрация архитектурных элементов и авторская картинная галерея.">
     
@@ -166,13 +166,41 @@
             }
 
             if (drawer) {
-                var links = drawer.querySelectorAll('.drawer-link, .drawer-cta, .btn, a');
-                for (var i = 0; i < links.length; i++) {
-                    links[i].addEventListener('click', function(e) {
-                        // Close drawer without preventing default link navigation
+                // Delegated click controller for reliable navigation on all devices
+                drawer.addEventListener('click', function(e) {
+                    var link = e.target.closest('a');
+                    if (!link) return;
+
+                    // Allow opening in new tab via middle-click or Ctrl/Cmd
+                    if (e.button !== 0 || e.ctrlKey || e.metaKey) {
+                        return;
+                    }
+
+                    var href = link.getAttribute('href');
+                    if (!href || href === '#' || href === 'javascript:void(0)') return;
+
+                    // Telephone, email, external messengers
+                    if (href.startsWith('tel:') || href.startsWith('mailto:') || link.target === '_blank') {
+                        setTimeout(closeDrawer, 300);
+                        return;
+                    }
+
+                    // In-page hash anchors (e.g. #restoration)
+                    if (href.startsWith('#')) {
                         closeDrawer();
-                    });
-                }
+                        var targetEl = document.querySelector(href);
+                        if (targetEl) {
+                            e.preventDefault();
+                            targetEl.scrollIntoView({ behavior: 'smooth' });
+                        }
+                        return;
+                    }
+
+                    // Guaranteed page navigation (projects.html, materials.html, etc.)
+                    e.preventDefault();
+                    closeDrawer();
+                    window.location.href = href;
+                });
             }
 
             document.addEventListener('keydown', function(e) {
@@ -193,7 +221,7 @@
         
 <!-- 1. HERO SECTION: THREE GRAND PORTALS (ARCHITECTURAL MINIMALISM) -->
 <section class="hero-atelier" id="home">
-    <div class="hero-atelier-bg" style="background-image: url('static/images/fresco_texture.jpg');"></div>
+    <div class="hero-atelier-bg" style="background-image: url('static/images/hero_plaster_texture.jpg');"></div>
     <div class="hero-atelier-overlay"></div>
 
     <div class="container hero-atelier-container">

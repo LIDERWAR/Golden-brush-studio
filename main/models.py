@@ -44,7 +44,7 @@ class HomePageConfig(models.Model):
     hero_bg_image_url = models.CharField(
         'Hero: Фоновое изображение',
         max_length=255,
-        default='/static/images/fresco_texture.jpg'
+        default='/static/images/hero_plaster_texture.jpg'
     )
 
     portal1_title = models.CharField('Портал 1: Заголовок', max_length=150, default='Наши проекты')

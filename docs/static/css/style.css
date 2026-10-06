@@ -732,26 +732,55 @@ img {
 
 .drawer-header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  padding-bottom: 1.5rem;
+  gap: 1.25rem;
+  padding-bottom: 1.25rem;
   border-bottom: 1px solid var(--border-subtle);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.drawer-header .brand-logo {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.drawer-header .brand-title {
+  font-size: clamp(1.15rem, 1.8vw, 1.35rem);
+  line-height: 1.15;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+.drawer-header .brand-subtitle {
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  line-height: 1.35;
+  white-space: normal;
+  word-break: break-word;
+  margin-top: 0.25rem;
+  display: block;
 }
 
 .drawer-close {
-  width: 40px;
-  height: 40px;
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
   border-radius: var(--radius-sm);
   background: rgba(20, 22, 26, 0.04);
   border: 1px solid var(--border-subtle);
   color: var(--text-main);
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: var(--tr-fast);
+  margin-left: auto;
 }
 
 .drawer-close:hover {
@@ -791,6 +820,11 @@ img {
   text-decoration: none;
   border-bottom: 1px solid rgba(20, 22, 26, 0.04);
   transition: var(--tr-fast);
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .drawer-num {
@@ -2239,16 +2273,17 @@ img {
   inset: 0;
   background-size: cover;
   background-position: center;
-  opacity: 0.15;
-  filter: contrast(1.1) brightness(1.05);
-  transform: scale(1.02);
+  opacity: 0.82;
+  filter: contrast(1.06) brightness(1.02);
+  transform: scale(1.01);
   transition: transform 10s ease;
 }
 
 .hero-atelier-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(250, 248, 245, 0.75) 0%, rgba(250, 248, 245, 0.97) 100%);
+  background: linear-gradient(180deg, rgba(250, 248, 245, 0.25) 0%, rgba(250, 248, 245, 0.45) 50%, rgba(250, 248, 245, 0.85) 100%);
+  pointer-events: none;
 }
 
 .hero-atelier-container {

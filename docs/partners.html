@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="A05XZoG1HMYKTovc15rsiGN7XKJgqQa8jeyMFt4N2ndkWmIrqfkUvSkCcLeWjdzy">
+    <meta name="csrf-token" content="zIkMlTJrcdXcDyZ13gsoQpBVEzFWmYcBgy0OaRfllSv5GZW7E191rikaLm7wbDjA">
     <title>Партнёрская программа — Golden Brush Studio | Архитекторам, дизайнерам и скидка на краски</title>
     <meta name="description" content="Партнёрская программа Golden Brush Studio: агентские условия для дизайнеров и архитекторов, бесплатный Sample Box, 3D-текстуры и клубная скидка 12% на интерьерные краски партнера.">
     
@@ -166,13 +166,41 @@
             }
 
             if (drawer) {
-                var links = drawer.querySelectorAll('.drawer-link, .drawer-cta, .btn, a');
-                for (var i = 0; i < links.length; i++) {
-                    links[i].addEventListener('click', function(e) {
-                        // Close drawer without preventing default link navigation
+                // Delegated click controller for reliable navigation on all devices
+                drawer.addEventListener('click', function(e) {
+                    var link = e.target.closest('a');
+                    if (!link) return;
+
+                    // Allow opening in new tab via middle-click or Ctrl/Cmd
+                    if (e.button !== 0 || e.ctrlKey || e.metaKey) {
+                        return;
+                    }
+
+                    var href = link.getAttribute('href');
+                    if (!href || href === '#' || href === 'javascript:void(0)') return;
+
+                    // Telephone, email, external messengers
+                    if (href.startsWith('tel:') || href.startsWith('mailto:') || link.target === '_blank') {
+                        setTimeout(closeDrawer, 300);
+                        return;
+                    }
+
+                    // In-page hash anchors (e.g. #restoration)
+                    if (href.startsWith('#')) {
                         closeDrawer();
-                    });
-                }
+                        var targetEl = document.querySelector(href);
+                        if (targetEl) {
+                            e.preventDefault();
+                            targetEl.scrollIntoView({ behavior: 'smooth' });
+                        }
+                        return;
+                    }
+
+                    // Guaranteed page navigation (projects.html, materials.html, etc.)
+                    e.preventDefault();
+                    closeDrawer();
+                    window.location.href = href;
+                });
             }
 
             document.addEventListener('keydown', function(e) {
@@ -357,7 +385,7 @@
                         </div>
 
                         <form id="paintOrderForm" class="portal-form">
-                            <input type="hidden" name="csrfmiddlewaretoken" value="A05XZoG1HMYKTovc15rsiGN7XKJgqQa8jeyMFt4N2ndkWmIrqfkUvSkCcLeWjdzy">
+                            <input type="hidden" name="csrfmiddlewaretoken" value="zIkMlTJrcdXcDyZ13gsoQpBVEzFWmYcBgy0OaRfllSv5GZW7E191rikaLm7wbDjA">
                             <input type="text" name="website_check" style="position:absolute; opacity:0; pointer-events:none; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true">
                             <input type="hidden" name="paint_brand" id="hiddenPaintBrand" value="Глубокоматовая бархатистая краска">
                             <input type="hidden" name="liters" id="hiddenPaintLiters" value="16">
@@ -419,7 +447,7 @@
 
             <div class="partner-form-card">
                 <form id="generalPartnerForm" class="portal-form">
-                    <input type="hidden" name="csrfmiddlewaretoken" value="A05XZoG1HMYKTovc15rsiGN7XKJgqQa8jeyMFt4N2ndkWmIrqfkUvSkCcLeWjdzy">
+                    <input type="hidden" name="csrfmiddlewaretoken" value="zIkMlTJrcdXcDyZ13gsoQpBVEzFWmYcBgy0OaRfllSv5GZW7E191rikaLm7wbDjA">
                     <input type="text" name="website_check" style="position:absolute; opacity:0; pointer-events:none; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true">
                     
                     <div class="form-group">

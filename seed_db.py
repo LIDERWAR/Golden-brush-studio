@@ -493,7 +493,7 @@ print("Partners seeded successfully")
 cfg = HomePageConfig.get_solo()
 cfg.hero_eyebrow = ''
 cfg.hero_title = 'Художественно-декоративные работы под ключ'
-cfg.hero_bg_image_url = '/static/images/fresco_texture.jpg'
+cfg.hero_bg_image_url = '/static/images/hero_plaster_texture.jpg'
 cfg.portal1_title = 'Наши проекты'
 cfg.portal1_link = '/projects/'
 cfg.portal1_img_url = '/static/images/case_bar_coyote.jpg'
