@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="Kgp13JA4V6CWVZlGU2OC4iys3EGitkCtseZKCQuubCm4rtPos9f1MsZwBMtOsd0Q">
+    <meta name="csrf-token" content="AOxNPKgmkrWWupMeAI7k23cJxPMVnOTZj20CvPE8F2bwxnZtZS0MffJeMQhBgbip">
     <title>Наши проекты — Golden Brush Studio</title>
     <meta name="description" content="Реализованные объекты Golden Brush Studio: культовые бары и рестораны (Coyote Ugly, Горыныч), бутик-отели и элитные частные резиденции под ключ.">
     
@@ -71,7 +71,7 @@
                     <li>
                         <a href="materials.html" class="drawer-link">
                             <span class="drawer-num">02</span>
-                            <span class="drawer-text">Декоративные покрытия и роспись стен <small>Каталог фактур, фресок и финишей</small></span>
+                            <span class="drawer-text">Декоративные покрытия <small>Каталог фактур, фресок и финишей</small></span>
                         </a>
                     </li>
                     <li>
@@ -123,26 +123,25 @@
             var closeBtn = document.getElementById('drawerClose');
             var backdrop = document.getElementById('drawerBackdrop');
 
-            function openDrawer(e) {
-                if (e) { e.preventDefault(); e.stopPropagation(); }
+            function openDrawer() {
                 if (drawer) {
                     drawer.classList.add('active');
                     document.body.classList.add('drawer-open');
                 }
             }
-            function closeDrawer(e) {
-                if (e) { e.preventDefault(); e.stopPropagation(); }
+            function closeDrawer() {
                 if (drawer) {
                     drawer.classList.remove('active');
                     document.body.classList.remove('drawer-open');
                 }
             }
             function toggleDrawer(e) {
-                if (e) { e.preventDefault(); e.stopPropagation(); }
+                if (e && e.preventDefault) e.preventDefault();
+                if (e && e.stopPropagation) e.stopPropagation();
                 if (drawer && drawer.classList.contains('active')) {
-                    closeDrawer(e);
+                    closeDrawer();
                 } else {
-                    openDrawer(e);
+                    openDrawer();
                 }
             }
 
@@ -154,21 +153,30 @@
                 burger.onclick = toggleDrawer;
             }
             if (closeBtn) {
-                closeBtn.onclick = closeDrawer;
+                closeBtn.onclick = function(e) {
+                    if (e && e.preventDefault) e.preventDefault();
+                    closeDrawer();
+                };
             }
             if (backdrop) {
-                backdrop.onclick = closeDrawer;
+                backdrop.onclick = function(e) {
+                    if (e && e.preventDefault) e.preventDefault();
+                    closeDrawer();
+                };
             }
 
             if (drawer) {
-                var links = drawer.querySelectorAll('.drawer-link, .drawer-cta');
+                var links = drawer.querySelectorAll('.drawer-link, .drawer-cta, .btn, a');
                 for (var i = 0; i < links.length; i++) {
-                    links[i].addEventListener('click', closeDrawer);
+                    links[i].addEventListener('click', function(e) {
+                        // Close drawer without preventing default link navigation
+                        closeDrawer();
+                    });
                 }
             }
 
             document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') closeDrawer(e);
+                if (e.key === 'Escape') closeDrawer();
             });
         }
 

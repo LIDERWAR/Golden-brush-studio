@@ -36,8 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 2. Mobile Menu Toggle ("Три полосочки") - harmonized with base.html controller
     if (!window.toggleMobileDrawer) {
-        window.openMobileDrawer = function(e) {
-            if (e && e.preventDefault) e.preventDefault();
+        window.openMobileDrawer = function() {
             const drawer = document.getElementById('mobileDrawer') || document.querySelector('.mobile-drawer');
             if (drawer) {
                 drawer.classList.add('active');
@@ -45,8 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        window.closeMobileDrawer = function(e) {
-            if (e && e.preventDefault) e.preventDefault();
+        window.closeMobileDrawer = function() {
             const drawer = document.getElementById('mobileDrawer') || document.querySelector('.mobile-drawer');
             if (drawer) {
                 drawer.classList.remove('active');
@@ -56,11 +54,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         window.toggleMobileDrawer = function(e) {
             if (e && e.preventDefault) e.preventDefault();
+            if (e && e.stopPropagation) e.stopPropagation();
             const drawer = document.getElementById('mobileDrawer') || document.querySelector('.mobile-drawer');
             if (drawer && drawer.classList.contains('active')) {
-                window.closeMobileDrawer(e);
+                window.closeMobileDrawer();
             } else {
-                window.openMobileDrawer(e);
+                window.openMobileDrawer();
             }
         };
 
@@ -70,12 +69,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const drawerClose = document.getElementById('drawerClose');
 
         if (burgerBtn) burgerBtn.onclick = window.toggleMobileDrawer;
-        if (drawerClose) drawerClose.onclick = window.closeMobileDrawer;
-        if (drawerBackdrop) drawerBackdrop.onclick = window.closeMobileDrawer;
+        if (drawerClose) drawerClose.onclick = function(e) { if (e && e.preventDefault) e.preventDefault(); window.closeMobileDrawer(); };
+        if (drawerBackdrop) drawerBackdrop.onclick = function(e) { if (e && e.preventDefault) e.preventDefault(); window.closeMobileDrawer(); };
         if (mobileDrawer) {
-            const drawerLinks = mobileDrawer.querySelectorAll('.drawer-link, .drawer-cta');
+            const drawerLinks = mobileDrawer.querySelectorAll('.drawer-link, .drawer-cta, .btn, a');
             drawerLinks.forEach(link => {
-                link.onclick = window.closeMobileDrawer;
+                link.addEventListener('click', () => {
+                    // Close drawer without preventing default link navigation
+                    window.closeMobileDrawer();
+                });
             });
         }
     }

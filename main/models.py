@@ -51,7 +51,7 @@ class HomePageConfig(models.Model):
     portal1_link = models.CharField('Портал 1: Ссылка', max_length=200, default='/projects/')
     portal1_img_url = models.CharField('Портал 1: Фото', max_length=255, default='/static/images/case_bar_coyote.jpg')
 
-    portal2_title = models.CharField('Портал 2: Заголовок', max_length=150, default='Декоративные покрытия и роспись стен')
+    portal2_title = models.CharField('Портал 2: Заголовок', max_length=150, default='Декоративные покрытия')
     portal2_link = models.CharField('Портал 2: Ссылка', max_length=200, default='/materials/')
     portal2_img_url = models.CharField('Портал 2: Фото', max_length=255, default='/static/images/mat_mural.jpg')
 
