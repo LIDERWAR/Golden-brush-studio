@@ -2535,6 +2535,10 @@ img {
   .hero-atelier {
     padding: 5rem 0 2rem;
   }
+  .hero-atelier-bg {
+    background-image: url('../images/hero_plaster_texture_mob.jpg') !important;
+    background-position: center top;
+  }
   .portals-grid {
     grid-template-columns: 1fr;
     gap: 1.25rem;
