@@ -13,9 +13,9 @@
   --bg-card-hover: #ffffff;
   --bg-glass: rgba(250, 248, 245, 0.92);
   
-  --text-main: #14161a;
-  --text-muted: #5e6472;
-  --text-subtle: #858b99;
+  --text-main: #081B3B;                   /* Фирменный глубокий индиго из макета заказчика */
+  --text-muted: #4A5B78;                  /* Приглушенный архитектурный индиго */
+  --text-subtle: #7A8CA8;                 /* Вторичный светлый индиго */
   
   --accent-bronze: #9c6f3d;
   --accent-gold: #b88a58;
@@ -24,11 +24,12 @@
   --grad-bronze: linear-gradient(135deg, #9c6f3d 0%, #b88a58 50%, #855c2f 100%);
   
   /* Customer Palette from Atelier Mockup */
-  --color-hero-navy: #192234;             /* Глубокий индиго-сланец из шрифта макета */
+  --color-hero-navy: #081B3B;             /* Фирменный глубокий индиго из макета заказчика */
+  --color-indigo: #081B3B;                /* Базовый полуночный индиго для заголовков и меню */
   --color-hero-terracotta: #8c4b27;       /* Тёплая античная бронза/терракота из шрифта макета */
   --bg-hero-plaster-card: rgba(238, 234, 228, 0.85); /* Тёплая минеральная плашка с полупрозрачностью под штукатурку */
   
-  --border-subtle: rgba(20, 22, 26, 0.08);
+  --border-subtle: rgba(8, 27, 59, 0.08);
   --border-active: rgba(156, 111, 62, 0.45);
   
   /* Typography — Concept 3: Montserrat Alternates (Основательная авторская геометрия) */
@@ -2397,7 +2398,7 @@ img {
   font-size: clamp(1.6rem, 2.7vw, 2.5rem);
   line-height: 1.15;
   font-weight: 800;
-  color: var(--color-hero-navy, #192234);
+  color: var(--color-hero-navy, #081B3B);
   margin: 0;
   letter-spacing: -0.015em;
 }
@@ -2493,7 +2494,7 @@ img {
   font-size: clamp(1.25rem, 1.85vw, 1.7rem) !important;
   font-weight: 500 !important;
   line-height: 1.25 !important;
-  color: var(--color-hero-navy, #192234);
+  color: var(--color-hero-navy, #081B3B);
   margin: 0;
   letter-spacing: 0.025em;
   white-space: normal !important;
