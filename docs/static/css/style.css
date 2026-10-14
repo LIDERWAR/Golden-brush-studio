@@ -13,7 +13,7 @@
   --bg-card-hover: #ffffff;
   --bg-glass: rgba(250, 248, 245, 0.92);
   
-  --text-main: #081A38;                   /* Фирменный глубокий индиго из макета заказчика */
+  --text-main: #081B3B;                   /* Фирменный глубокий индиго из макета заказчика */
   --text-muted: #4A5B78;                  /* Приглушенный архитектурный индиго */
   --text-subtle: #7A8CA8;                 /* Вторичный светлый индиго */
   
@@ -24,12 +24,12 @@
   --grad-bronze: linear-gradient(135deg, #9c6f3d 0%, #b88a58 50%, #855c2f 100%);
   
   /* Customer Palette from Atelier Mockup */
-  --color-hero-navy: #081A38;             /* Фирменный глубокий индиго из макета заказчика */
-  --color-indigo: #081A38;                /* Базовый полуночный индиго для заголовков и меню */
+  --color-hero-navy: #081B3B;             /* Фирменный глубокий индиго из макета заказчика */
+  --color-indigo: #081B3B;                /* Базовый полуночный индиго для заголовков и меню */
   --color-hero-terracotta: #8c4b27;       /* Тёплая античная бронза/терракота из шрифта макета */
   --bg-hero-plaster-card: rgba(238, 234, 228, 0.85); /* Тёплая минеральная плашка с полупрозрачностью под штукатурку */
   
-  --border-subtle: rgba(8, 26, 56, 0.08);
+  --border-subtle: rgba(8, 27, 59, 0.08);
   --border-active: rgba(156, 111, 62, 0.45);
   
   /* Typography — Concept 3: Montserrat Alternates (Основательная авторская геометрия) */
@@ -101,7 +101,7 @@ h1, h2, h3, h4, h5, h6, .font-serif {
   font-family: var(--font-heading);
   font-weight: 700;
   letter-spacing: -0.015em;
-  color: var(--color-indigo, #081A38);
+  color: var(--color-indigo, #081B3B);
   text-wrap: balance;
 }
 
@@ -273,7 +273,7 @@ img {
   font-size: clamp(1rem, 4.2vw, 1.6rem);
   font-weight: 800;
   letter-spacing: -0.01em;
-  color: var(--color-indigo, #081A38);
+  color: var(--color-indigo, #081B3B);
   line-height: 1.1;
   text-transform: none;
   white-space: nowrap;
@@ -322,7 +322,7 @@ img {
   font-size: 0.825rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-indigo, #081A38);
+  color: var(--color-indigo, #081B3B);
   font-weight: 600;
   position: relative;
   padding: 0.5rem 0;
@@ -428,7 +428,7 @@ img {
   font-size: 0.84rem;
   font-weight: 600;
   letter-spacing: 0.02em;
-  color: var(--color-indigo, #081A38);
+  color: var(--color-indigo, #081B3B);
   transition: color var(--tr-fast);
 }
 
@@ -911,7 +911,7 @@ img {
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--color-indigo, #081A38);
+  color: var(--color-indigo, #081B3B);
   padding: 0 0 0.75rem;
   margin-bottom: 0.5rem;
   border-bottom: 1px solid var(--border-subtle);
@@ -930,7 +930,7 @@ img {
   gap: 0.85rem;
   padding: 0.85rem 0.65rem;
   text-decoration: none;
-  border-bottom: 1px solid rgba(8, 26, 56, 0.06);
+  border-bottom: 1px solid rgba(8, 27, 59, 0.06);
   border-radius: var(--radius-sm);
   transition: var(--tr-fast);
   cursor: pointer;
@@ -959,7 +959,7 @@ img {
   font-family: var(--font-heading);
   font-size: 1.15rem;
   font-weight: 700;
-  color: var(--color-indigo, #081A38);
+  color: var(--color-indigo, #081B3B);
   line-height: 1.25;
   transition: var(--tr-fast);
 }
@@ -1518,7 +1518,7 @@ img {
 .section-title {
   font-family: var(--font-serif);
   font-size: clamp(2.2rem, 4vw, 3.2rem);
-  color: var(--color-indigo, #081A38);
+  color: var(--color-indigo, #081B3B);
   margin-top: 0.75rem;
   line-height: 1.15;
 }
@@ -2454,7 +2454,7 @@ img {
   font-size: clamp(1.6rem, 2.7vw, 2.5rem);
   line-height: 1.15;
   font-weight: 800;
-  color: var(--color-hero-navy, #081A38);
+  color: var(--color-hero-navy, #081B3B);
   margin: 0;
   letter-spacing: -0.015em;
 }
@@ -2550,7 +2550,7 @@ img {
   font-size: clamp(1.25rem, 1.85vw, 1.7rem) !important;
   font-weight: 500 !important;
   line-height: 1.25 !important;
-  color: var(--color-hero-navy, #081A38);
+  color: var(--color-hero-navy, #081B3B);
   margin: 0;
   letter-spacing: 0.025em;
   white-space: normal !important;
@@ -2606,7 +2606,7 @@ img {
 
 .restoration-slide-card:hover {
   border-color: var(--border-active);
-  box-shadow: 0 14px 34px rgba(8, 26, 56, 0.08);
+  box-shadow: 0 14px 34px rgba(8, 27, 59, 0.08);
   transform: translateY(-3px);
 }
 
@@ -2614,7 +2614,7 @@ img {
   position: relative;
   aspect-ratio: 16 / 10;
   overflow: hidden;
-  background: var(--color-indigo, #081A38);
+  background: var(--color-indigo, #081B3B);
 }
 
 .restoration-slide-img img {
@@ -2639,7 +2639,7 @@ img {
   font-family: var(--font-heading);
   font-size: 1.2rem;
   font-weight: 700;
-  color: var(--color-indigo, #081A38);
+  color: var(--color-indigo, #081B3B);
   margin: 0 0 0.65rem;
   line-height: 1.35;
 }
@@ -2665,7 +2665,7 @@ img {
   border-radius: 50%;
   border: 1px solid var(--border-subtle);
   background: #ffffff;
-  color: var(--color-indigo, #081A38);
+  color: var(--color-indigo, #081B3B);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -2675,9 +2675,9 @@ img {
 }
 
 .restoration-slider-nav:hover {
-  background: var(--color-indigo, #081A38);
+  background: var(--color-indigo, #081B3B);
   color: #ffffff;
-  border-color: var(--color-indigo, #081A38);
+  border-color: var(--color-indigo, #081B3B);
 }
 
 .restoration-slider-dots {
