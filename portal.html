@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="HsKa9QXWOh784TCs4ITXLTIp81S4tHSaW6IlpiYAivDoe3D4yLgrGGVmMPZqS8rF">
+    <meta name="csrf-token" content="3nE34v2Yi6PAytz98Dno23uskJuHZitGn7YoTjyait5cSlvDpIR7RzXLxYUBOLU8">
     <title>Личный кабинет: Пентхаус на Патриарших прудах, 240 м² — Golden Brush Studio</title>
-    <meta name="description" content="Цифровой трекер объекта Пентхаус на Патриарших прудах, 240 м²: контроль стадий работ, бэкстейдж мастерской, сметы, договор и быстрая оплата этапа через СБП.">
+    <meta name="description" content="Цифровой кабинет заказчика Golden Brush Studio: накопительная система скидок, контроль стадий работ, бэкстейдж мастерской, сметы и проектная документация.">
     
     <!-- Design System CSS -->
     <link rel="stylesheet" href="static/css/style.css?v=20261014-v24">
@@ -71,7 +71,7 @@
                     <li>
                         <a href="portal.html" class="drawer-link">
                             <span class="drawer-num">01</span>
-                            <span class="drawer-text">Личный кабинет <small>Персональные условия • Стадии и фотоотчёты</small></span>
+                            <span class="drawer-text">Личный кабинет <small>Накопительные скидки на материалы и работы</small></span>
                         </a>
                     </li>
                     <li>
@@ -101,7 +101,7 @@
                     <li>
                         <a href="partners.html" class="drawer-link">
                             <span class="drawer-num">06</span>
-                            <span class="drawer-text">Партнёры</span>
+                            <span class="drawer-text">Партнёры <small>Шкала скидок от 1 до 3 проектов • Краски -12%</small></span>
                         </a>
                     </li>
                     <li>
@@ -233,7 +233,7 @@
         
 <section class="portal-dashboard-section">
     <div class="container portal-dashboard-container">
-        <!-- Top Bar: Greeting & Object Switcher -->
+        <!-- Top Bar: Greeting & Switcher -->
         <header class="portal-header-bar">
             <div>
                 <div class="eyebrow">Личный кабинет заказчика • Golden Brush Studio</div>
@@ -241,8 +241,9 @@
                     Евгений Михайлович Воронов
                 </h1>
                 <div class="portal-meta-badges">
-                    <span class="portal-badge"><i class="fas fa-phone-alt"></i> +7 (985) 211-40-55</span>
-                    <span class="portal-badge"><i class="fas fa-building"></i> Частный заказчик / Пентхаус</span>
+                    <span class="portal-badge">+7 (985) 211-40-55</span>
+                    <span class="portal-badge">Частный заказчик / Пентхаус</span>
+                    <span class="portal-badge">Архитектурное бюро / Дизайн-студия</span>
                     <span class="portal-badge portal-badge-demo">Режим демонстрации</span>
                 </div>
             </div>
@@ -257,7 +258,73 @@
             </div>
         </header>
 
-        <!-- Project Overview Card -->
+        
+
+        <!-- 1. Loyalty Tier & Cumulative Discount Card -->
+        <div class="portal-tier-card">
+            <div class="tier-card-header">
+                <div>
+                    <div class="eyebrow">Корпоративная программа долгосрочных привилегий</div>
+                    <h2 class="tier-card-title">02. Постоянный партнер (Resident)</h2>
+                    <p class="tier-card-subtitle">
+                        Программа накопления партнерских условий: с каждым новым проектом ваша скидка возрастает
+                    </p>
+                </div>
+                
+                <div class="tier-discounts-summary">
+                    <div class="tier-discount-box">
+                        <span class="tier-discount-val">-10%</span>
+                        <span class="tier-discount-lbl">На материалы</span>
+                    </div>
+                    <div class="tier-discount-box">
+                        <span class="tier-discount-val">-5%</span>
+                        <span class="tier-discount-lbl">На комплекс работ</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stepper 3 Tiers -->
+            <div class="tier-stepper">
+                <div class="tier-step tier-step-done">
+                    <div class="tier-step-num">01</div>
+                    <div class="tier-step-content">
+                        <div class="tier-step-name">Дебютный объект</div>
+                        <div class="tier-step-perk">Материалы: <strong>-5%</strong> • Sample Box</div>
+                    </div>
+                </div>
+                <div class="tier-step-divider"></div>
+                <div class="tier-step tier-step-current">
+                    <div class="tier-step-num">02</div>
+                    <div class="tier-step-content">
+                        <div class="tier-step-name">Постоянный партнер</div>
+                        <div class="tier-step-perk">Материалы: <strong>-10%</strong> • Работы: <strong>-5%</strong></div>
+                    </div>
+                </div>
+                <div class="tier-step-divider"></div>
+                <div class="tier-step ">
+                    <div class="tier-step-num">03</div>
+                    <div class="tier-step-content">
+                        <div class="tier-step-name">Корпоративный клуб</div>
+                        <div class="tier-step-perk">Материалы: <strong>-15%</strong> • Работы: <strong>-10%</strong></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tier-progress-meta">
+                <div class="tier-progress-info">
+                    <span><strong>Совместных проектов:</strong> 1</span>
+                    <span class="tier-next-goal">До статуса «Корпоративный клуб» (материалы 15% / работы 10%)</span>
+                </div>
+                <div class="tier-action-wrap">
+                    <a href="tel:+74958904422" class="btn btn-secondary">
+                        Рассчитать следующий объект со скидкой
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        
+        <!-- 2. Project Overview Card -->
         <div class="portal-project-card">
             <div class="project-card-header">
                 <div>
@@ -303,7 +370,7 @@
             </div>
         </div>
 
-        <!-- 2 Columns: Stages Tracker (Left) & Curator + Actions (Right) -->
+        <!-- 3. Stages Tracker (Left) & Curator + Actions (Right) -->
         <div class="portal-grid-two-cols">
             <!-- Left: Stages Timeline -->
             <div class="portal-stages-col">
@@ -506,7 +573,7 @@
             </div>
         </div>
 
-        <!-- Section: Live Photo Feed (Work in Progress Backstage) -->
+        <!-- 4. Section: Live Photo Feed -->
         <section class="portal-photos-section">
             <div class="portal-section-header">
                 <h2>Живой фотоотчет со стройки и из мастерской</h2>
@@ -547,6 +614,9 @@
                 
             </div>
         </section>
+
+        
+
     </div>
 </section>
 

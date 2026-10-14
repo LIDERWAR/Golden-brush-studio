@@ -7,6 +7,22 @@ class ClientAccount(models.Model):
     full_name = models.CharField('ФИО Заказчика', max_length=150)
     email = models.EmailField('Email', blank=True, null=True)
     company = models.CharField('Организация / Бюро / Объект', max_length=200, blank=True, null=True)
+    CLIENT_TYPES = [
+        ('architect', 'Архитектор / Дизайнер интерьера'),
+        ('developer', 'Девелопер / Генподрядчик'),
+        ('private', 'Частный заказчик'),
+        ('commercial', 'Корпоративный клиент / HoReCa / Офис'),
+    ]
+
+    TIER_CHOICES = [
+        ('', 'Автоматический расчет по проектам'),
+        ('welcome', '01. Дебютный проект (Старт: 5% на материалы)'),
+        ('resident', '02. Постоянный партнер (2-й объект: 10% материалы / 5% работы)'),
+        ('corporate', '03. Корпоративный клуб (3+ объекта: 15% материалы / 10% работы)'),
+    ]
+
+    client_type = models.CharField('Профиль деятельности', max_length=50, choices=CLIENT_TYPES, default='architect')
+    custom_tier = models.CharField('Ручной уровень лояльности', max_length=30, choices=TIER_CHOICES, blank=True, default='')
     access_pin = models.CharField('Код быстрого доступа / ПИН', max_length=10, default='1234')
     notes = models.TextField('Служебные заметки Натальи / CRM', blank=True, null=True)
     created_at = models.DateTimeField('Дата регистрации', auto_now_add=True)
@@ -19,7 +35,67 @@ class ClientAccount(models.Model):
 
     def __str__(self):
         comp = f" ({self.company})" if self.company else ""
-        return f"{self.full_name}{comp} — {self.phone}"
+        return f"{self.full_name}{comp} — {self.phone} [{self.tier_name}]"
+
+    @property
+    def total_projects_count(self):
+        return self.projects.count()
+
+    @property
+    def tier_code(self):
+        if self.custom_tier:
+            return self.custom_tier
+        cnt = self.total_projects_count
+        if cnt >= 3:
+            return 'corporate'
+        elif cnt >= 2:
+            return 'resident'
+        return 'welcome'
+
+    @property
+    def tier_name(self):
+        names = {
+            'welcome': '01. Дебютный проект (Welcome)',
+            'resident': '02. Постоянный партнер (Resident)',
+            'corporate': '03. Корпоративный клуб (Corporate)',
+        }
+        return names.get(self.tier_code, '01. Дебютный проект (Welcome)')
+
+    @property
+    def discount_materials(self):
+        rates = {'welcome': 5, 'resident': 10, 'corporate': 15}
+        return rates.get(self.tier_code, 5)
+
+    @property
+    def discount_works(self):
+        rates = {'welcome': 0, 'resident': 5, 'corporate': 10}
+        return rates.get(self.tier_code, 0)
+
+    @property
+    def next_tier_info(self):
+        code = self.tier_code
+        cnt = self.total_projects_count
+        if code == 'corporate':
+            return {
+                'max_tier': True,
+                'label': 'Максимальный корпоративный статус',
+                'projects_needed': 0,
+                'progress_pct': 100,
+            }
+        elif code == 'resident':
+            return {
+                'max_tier': False,
+                'label': 'До статуса «Корпоративный клуб» (материалы 15% / работы 10%)',
+                'projects_needed': max(3 - cnt, 1),
+                'progress_pct': 66,
+            }
+        else:
+            return {
+                'max_tier': False,
+                'label': 'До статуса «Постоянный партнер» (материалы 10% / работы 5%)',
+                'projects_needed': max(2 - cnt, 1),
+                'progress_pct': 33,
+            }
 
 
 class ProjectContract(models.Model):

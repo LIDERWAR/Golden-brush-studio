@@ -18,10 +18,33 @@ class ProjectDocumentInline(admin.TabularInline):
 
 @admin.register(ClientAccount)
 class ClientAccountAdmin(admin.ModelAdmin):
-    list_display = ('full_name', 'phone', 'email', 'company', 'access_pin', 'created_at')
+    list_display = ('full_name', 'phone', 'company', 'client_type', 'get_tier_display', 'get_materials_discount', 'get_works_discount', 'access_pin', 'created_at')
     search_fields = ('full_name', 'phone', 'email', 'company')
-    list_filter = ('created_at',)
-    readonly_fields = ('created_at', 'updated_at')
+    list_filter = ('client_type', 'custom_tier', 'created_at')
+    readonly_fields = ('created_at', 'updated_at', 'get_tier_display', 'get_materials_discount', 'get_works_discount', 'total_projects_count')
+    fieldsets = (
+        ('Основная информация', {
+            'fields': ('user', 'full_name', 'phone', 'email', 'company', 'client_type', 'access_pin')
+        }),
+        ('Программа долгосрочного партнерства и скидок', {
+            'fields': ('custom_tier', 'get_tier_display', 'get_materials_discount', 'get_works_discount', 'total_projects_count')
+        }),
+        ('Служебные заметки и системная информация', {
+            'fields': ('notes', 'created_at', 'updated_at')
+        }),
+    )
+
+    def get_tier_display(self, obj):
+        return obj.tier_name
+    get_tier_display.short_description = 'Уровень привилегий'
+
+    def get_materials_discount(self, obj):
+        return f"{obj.discount_materials}%"
+    get_materials_discount.short_description = 'Скидка на материалы'
+
+    def get_works_discount(self, obj):
+        return f"{obj.discount_works}%"
+    get_works_discount.short_description = 'Скидка на работы'
 
 @admin.register(ProjectContract)
 class ProjectContractAdmin(admin.ModelAdmin):

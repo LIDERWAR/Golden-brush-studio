@@ -1,58 +1,186 @@
 {% extends 'base.html' %}
 
-{% block title %}Личный кабинет заказчика — Golden Brush Studio | Стадии объекта и документы{% endblock %}
-{% block meta_desc %}Личный кабинет клиента Golden Brush Studio: контроль стадий декоративных работ, живые фотоотчеты из мастерской и со стройки, сметы, договор и сертификат 5-летней гарантии.{% endblock %}
+{% block title %}Кабинет заказчика и Партнерская программа — Golden Brush Studio{% endblock %}
+{% block meta_desc %}Личный кабинет заказчика Golden Brush Studio: накопительная система скидок на материалы и работы, контроль стадий реализации объекта, фотоотчеты и договорная документация.{% endblock %}
 
 {% block content %}
 <section class="portal-login-section">
     <div class="container portal-login-container">
-        <div class="portal-login-card">
-            <div class="portal-login-header">
-                <div class="eyebrow">Golden Brush Studio • Client Portal</div>
-                <h1 class="portal-login-title">Личный кабинет заказчика</h1>
-                <p class="portal-login-desc">
-                    Контролируйте стадии реализации вашего интерьера, просматривайте живые фотоотчеты со стройки и скачивайте официальные документы подряда.
-                </p>
-            </div>
-
-            {% if error %}
-            <div style="background: rgba(220, 53, 69, 0.12); border: 1px solid rgba(220, 53, 69, 0.35); color: #f87171; padding: 0.85rem 1.15rem; border-radius: var(--radius-sm); margin-bottom: 1.5rem; font-size: 0.9rem; line-height: 1.5;">
-                {{ error }}
-            </div>
-            {% endif %}
-
-            <form method="POST" action="{% url 'portal:login' %}" class="portal-login-form">
-                {% csrf_token %}
-                
-                <div class="form-group">
-                    <label for="portalPhone" class="portal-label">Номер телефона</label>
-                    <input type="tel" id="portalPhone" name="phone" class="portal-input" placeholder="+7 (985) 211-40-55" required value="+7 (985) 211-40-55">
-                    <small class="portal-hint">Номер, указанный при заключении договора или в заявке</small>
+        
+        <!-- Loyalty Teaser Bar -->
+        <div class="portal-login-privilege-card">
+            <div class="eyebrow">Программа долгосрочного партнерства</div>
+            <h2 class="privilege-title">Накопительные скидки на материалы и работы</h2>
+            <p class="privilege-desc">
+                Мы заинтересованы в долгосрочных отношениях с архитекторами, дизайнерами и девелоперами. Зарегистрируйтесь в личном кабинете: с каждым последующим реализованным объектом ваша персональная скидка прогрессивно возрастает.
+            </p>
+            <div class="privilege-steps-mini">
+                <div class="mini-step">
+                    <span class="mini-step-num">01. Старт</span>
+                    <strong class="mini-step-val">-5% на материалы</strong>
+                    <span class="mini-step-sub">При регистрации объекта</span>
                 </div>
-
-                <div class="form-group">
-                    <label for="portalPin" class="portal-label">Код быстрого доступа (ПИН)</label>
-                    <input type="password" id="portalPin" name="pin" class="portal-input" placeholder="Введите 4 цифры" value="1234" maxlength="6">
-                    <small class="portal-hint">По умолчанию для демо-входа: 1234</small>
+                <div class="mini-step">
+                    <span class="mini-step-num">02. Резидент</span>
+                    <strong class="mini-step-val">-10% материалы / -5% работы</strong>
+                    <span class="mini-step-sub">Со 2-го объекта студии</span>
                 </div>
-
-                <div class="portal-form-actions">
-                    <button type="submit" class="btn btn-primary btn-portal-submit">
-                        Войти в кабинет
-                    </button>
-                    
-                    <button type="submit" name="demo" value="1" class="btn btn-secondary btn-portal-demo">
-                        Демо-доступ (пример объекта 240 м²)
-                    </button>
-                </div>
-            </form>
-
-            <div class="portal-security-badge">
-                <div class="security-text">
-                    <strong>Конфиденциальность и защита данных:</strong> Все сметные расчеты, договоры подряда и фотоотчеты изолированы и доступны исключительно заказчику объекта.
+                <div class="mini-step">
+                    <span class="mini-step-num">03. Корпоративный</span>
+                    <strong class="mini-step-val">-15% материалы / -10% работы</strong>
+                    <span class="mini-step-sub">От 3 объектов под ключ</span>
                 </div>
             </div>
         </div>
+
+        <div class="portal-login-card">
+            <!-- Nav Tabs -->
+            <div class="portal-tabs-nav" role="tablist">
+                <button type="button" class="portal-tab-btn {% if active_tab != 'register' %}active{% endif %}" id="tabBtnLogin" onclick="switchPortalTab('login')">
+                    Вход в кабинет
+                </button>
+                <button type="button" class="portal-tab-btn {% if active_tab == 'register' %}active{% endif %}" id="tabBtnRegister" onclick="switchPortalTab('register')">
+                    Регистрация и фиксация скидки
+                </button>
+            </div>
+
+            <!-- Tab 1: Login Form -->
+            <div class="portal-tab-pane {% if active_tab != 'register' %}active{% endif %}" id="paneLogin">
+                <div class="portal-login-header">
+                    <h1 class="portal-login-title">Вход в личный кабинет</h1>
+                    <p class="portal-login-desc">
+                        Введите номер телефона, указанный в договоре или при регистрации объекта.
+                    </p>
+                </div>
+
+                {% if error and active_tab != 'register' %}
+                <div class="portal-alert-box portal-alert-error">
+                    {{ error }}
+                </div>
+                {% endif %}
+
+                <form method="POST" action="{% url 'portal:login' %}" class="portal-login-form">
+                    {% csrf_token %}
+                    
+                    <div class="form-group">
+                        <label for="portalPhone" class="portal-label">Номер телефона</label>
+                        <input type="tel" id="portalPhone" name="phone" class="portal-input" placeholder="+7 (985) 211-40-55" required value="{{ login_phone|default:'+7 (985) 211-40-55' }}">
+                        <small class="portal-hint">Телефон, привязанный к вашему аккаунту</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="portalPin" class="portal-label">Код быстрого доступа (ПИН)</label>
+                        <input type="password" id="portalPin" name="pin" class="portal-input" placeholder="Введите 4 цифры" value="1234" maxlength="6">
+                        <small class="portal-hint">По умолчанию для демо-входа: 1234</small>
+                    </div>
+
+                    <div class="portal-form-actions">
+                        <button type="submit" class="btn btn-primary btn-portal-submit">
+                            Войти в кабинет
+                        </button>
+                        
+                        <button type="submit" name="demo" value="1" class="btn btn-secondary btn-portal-demo">
+                            Демо-доступ (пример объекта 240 м²)
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Tab 2: Register Form -->
+            <div class="portal-tab-pane {% if active_tab == 'register' %}active{% endif %}" id="paneRegister">
+                <div class="portal-login-header">
+                    <h1 class="portal-login-title">Регистрация в партнерском клубе</h1>
+                    <p class="portal-login-desc">
+                        Заполните контактные данные для фиксации стартовой скидки 5% на материалы и создания личного кабинета.
+                    </p>
+                </div>
+
+                {% if reg_error %}
+                <div class="portal-alert-box portal-alert-error">
+                    {{ reg_error }}
+                </div>
+                {% endif %}
+
+                <form method="POST" action="{% url 'portal:register' %}" class="portal-login-form">
+                    {% csrf_token %}
+                    <input type="text" name="website_check" style="position:absolute; opacity:0; pointer-events:none; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+                    <div class="form-group">
+                        <label for="regFullName" class="portal-label">ФИО / Контактное лицо *</label>
+                        <input type="text" id="regFullName" name="full_name" class="portal-input" placeholder="Например: Александр Романов" required value="{{ reg_data.full_name|default:'' }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="regPhone" class="portal-label">Номер телефона *</label>
+                        <input type="tel" id="regPhone" name="phone" class="portal-input" placeholder="+7 (___) ___-__-__" required value="{{ reg_data.phone|default:'' }}">
+                        <small class="portal-hint">Используется для авторизации и подтверждения смет</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="regClientType" class="portal-label">Профиль деятельности</label>
+                        <select id="regClientType" name="client_type" class="portal-input">
+                            <option value="architect" selected>Архитектор / Дизайнер интерьера</option>
+                            <option value="developer">Девелопер / Генеральный подрядчик</option>
+                            <option value="private">Частный заказчик интерьера</option>
+                            <option value="commercial">Корпоративный заказчик / HoReCa</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="regCompany" class="portal-label">Организация / Архитектурное бюро</label>
+                        <input type="text" id="regCompany" name="company" class="portal-input" placeholder="Название студии или строительного объекта" value="{{ reg_data.company|default:'' }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="regEmail" class="portal-label">Электронная почта</label>
+                        <input type="email" id="regEmail" name="email" class="portal-input" placeholder="office@studio.ru" value="{{ reg_data.email|default:'' }}">
+                        <small class="portal-hint">Для отправки официальных спецификаций и смет</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="regPin" class="portal-label">Желаемый ПИН-код для входа (4 цифры)</label>
+                        <input type="password" id="regPin" name="pin" class="portal-input" placeholder="Например: 7788" maxlength="6" value="1234">
+                        <small class="portal-hint">Используется для быстрого доступа без паролей</small>
+                    </div>
+
+                    <div class="portal-form-actions">
+                        <button type="submit" class="btn btn-primary btn-portal-submit">
+                            Зарегистрироваться и закрепить условия
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="portal-security-badge">
+                <div class="security-text">
+                    <strong>Конфиденциальность и безопасность:</strong> Все коммерческие сметы, акты и проектные договоры строго изолированы и доступны только верифицированному партнеру объекта.
+                </div>
+            </div>
+        </div>
+
     </div>
 </section>
+
+<script>
+function switchPortalTab(tabName) {
+    var paneLogin = document.getElementById('paneLogin');
+    var paneRegister = document.getElementById('paneRegister');
+    var tabBtnLogin = document.getElementById('tabBtnLogin');
+    var tabBtnRegister = document.getElementById('tabBtnRegister');
+
+    if (!paneLogin || !paneRegister) return;
+
+    if (tabName === 'register') {
+        paneLogin.classList.remove('active');
+        paneRegister.classList.add('active');
+        tabBtnLogin.classList.remove('active');
+        tabBtnRegister.classList.add('active');
+    } else {
+        paneRegister.classList.remove('active');
+        paneLogin.classList.add('active');
+        tabBtnRegister.classList.remove('active');
+        tabBtnLogin.classList.add('active');
+    }
+}
+</script>
 {% endblock %}

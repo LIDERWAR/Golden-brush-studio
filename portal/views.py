@@ -112,11 +112,27 @@ def get_demo_context():
                 'size_label': 'PDF, 410 КБ',
                 'url': '#download-warranty',
             },
-        ]
+        ],
+        'tier': {
+            'code': 'resident',
+            'name': '02. Постоянный партнер (Resident)',
+            'client_type_display': 'Архитектурное бюро / Дизайн-студия',
+            'discount_materials': 10,
+            'discount_works': 5,
+            'completed_projects': 1,
+            'current_project_number': 2,
+            'next_tier_label': 'До статуса «Корпоративный клуб» (материалы 15% / работы 10%)',
+            'projects_needed': 1,
+            'progress_pct': 66,
+            'max_tier': False,
+        },
+        'has_active_project': True,
+        'just_registered': False,
     }
 
 def portal_login(request):
     error = None
+    active_tab = request.GET.get('tab', 'login')
     if request.method == 'POST':
         phone = request.POST.get('phone', '').strip()
         pin = request.POST.get('pin', '').strip()
@@ -138,36 +154,137 @@ def portal_login(request):
             # Если у клиента установлен персональный PIN, требуем точного соответствия
             if client.access_pin and client.access_pin != pin:
                 return render(request, 'portal/login.html', {
-                    'error': 'Неверный PIN-код быстрого доступа. Проверьте 4 цифры из SMS или договора.'
+                    'error': 'Неверный PIN-код быстрого доступа. Проверьте 4 цифры из SMS или договора.',
+                    'active_tab': 'login',
+                    'login_phone': phone,
                 })
             request.session['client_phone'] = client.phone
             return redirect('portal:dashboard')
         else:
             return render(request, 'portal/login.html', {
-                'error': 'Объект с данным номером телефона пока не зарегистрирован в базе договоров. Нажмите «Демо-доступ», чтобы посмотреть пример кабинета.'
+                'error': 'Объект с данным номером пока не зарегистрирован. Перейдите во вкладку «Регистрация», чтобы зафиксировать накопительную скидку на материалы и работы.',
+                'active_tab': 'login',
+                'login_phone': phone,
             })
 
-    return render(request, 'portal/login.html')
+    return render(request, 'portal/login.html', {'active_tab': active_tab})
+
+def portal_register(request):
+    """Регистрация нового заказчика / архитектурного партнера с фиксацией скидки."""
+    if request.method == 'POST':
+        # Защита от спам-ботов
+        if request.POST.get('website_check'):
+            return redirect('portal:login')
+
+        full_name = request.POST.get('full_name', '').strip()
+        phone = request.POST.get('phone', '').strip()
+        company = request.POST.get('company', '').strip()
+        email = request.POST.get('email', '').strip()
+        client_type = request.POST.get('client_type', 'architect').strip()
+        pin = request.POST.get('pin', '').strip() or '1234'
+
+        if not full_name or not phone:
+            return render(request, 'portal/login.html', {
+                'reg_error': 'Пожалуйста, укажите имя контактного лица и номер телефона.',
+                'active_tab': 'register',
+                'reg_data': request.POST,
+            })
+
+        digits = re.sub(r'\D', '', phone)
+        if len(digits) < 10:
+            return render(request, 'portal/login.html', {
+                'reg_error': 'Номер телефона должен содержать минимум 10 цифр.',
+                'active_tab': 'register',
+                'reg_data': request.POST,
+            })
+
+        # Проверяем, существует ли уже клиент с таким номером
+        existing_client = ClientAccount.objects.filter(phone__icontains=digits[-10:]).first()
+        if existing_client:
+            request.session['client_phone'] = existing_client.phone
+            return redirect('portal:dashboard')
+
+        # Создаем профиль заказчика
+        client = ClientAccount.objects.create(
+            full_name=full_name,
+            phone=phone,
+            company=company,
+            email=email if email else None,
+            client_type=client_type,
+            access_pin=pin,
+        )
+
+        # Создаем лид для Натальи и Александра в CRM
+        try:
+            from leads.models import Lead
+            Lead.objects.create(
+                name=full_name,
+                company=company,
+                phone=phone,
+                email=email,
+                source='portal_reg',
+                object_type=f"Партнерский кабинет ({client.get_client_type_display()})",
+                service_needed="Накопительная скидка: 5% на материалы со старта",
+                message=f"Клиент зарегистрировался на сайте. Статус: {client.tier_name}. ПИН: {pin}. Контакт: {phone}",
+            )
+        except Exception:
+            pass
+
+        request.session['client_phone'] = client.phone
+        request.session['just_registered'] = True
+        return redirect('portal:dashboard')
+
+    return render(request, 'portal/login.html', {'active_tab': 'register'})
 
 def portal_dashboard(request):
     phone = request.session.get('client_phone')
+    just_registered = request.session.pop('just_registered', False)
     
-    if not phone:
-        # Default to demo preview so client or Natalia can test immediately
+    if not phone or phone == 'demo':
         demo_ctx = get_demo_context()
+        demo_ctx['just_registered'] = just_registered
         return render(request, 'portal/dashboard.html', {'data': demo_ctx, 'is_demo': True})
 
     client = ClientAccount.objects.filter(phone=phone).first()
     if not client:
+        digits = re.sub(r'\D', '', phone)
+        if len(digits) >= 10:
+            client = ClientAccount.objects.filter(phone__icontains=digits[-10:]).first()
+
+    if not client:
         demo_ctx = get_demo_context()
+        demo_ctx['just_registered'] = just_registered
         return render(request, 'portal/dashboard.html', {'data': demo_ctx, 'is_demo': True})
+
+    tier_info = client.next_tier_info
+    tier_data = {
+        'code': client.tier_code,
+        'name': client.tier_name,
+        'client_type_display': client.get_client_type_display(),
+        'discount_materials': client.discount_materials,
+        'discount_works': client.discount_works,
+        'completed_projects': client.total_projects_count,
+        'current_project_number': client.total_projects_count + 1,
+        'next_tier_label': tier_info['label'],
+        'projects_needed': tier_info['projects_needed'],
+        'progress_pct': tier_info['progress_pct'],
+        'max_tier': tier_info['max_tier'],
+    }
 
     project = client.projects.first()
     if not project:
-        demo_ctx = get_demo_context()
-        demo_ctx['client']['full_name'] = client.full_name
-        demo_ctx['client']['phone'] = client.phone
-        return render(request, 'portal/dashboard.html', {'data': demo_ctx, 'is_demo': True})
+        context = {
+            'client': client,
+            'tier': tier_data,
+            'project': None,
+            'stages': [],
+            'photos': [],
+            'documents': [],
+            'is_demo': False,
+            'has_active_project': False,
+            'just_registered': just_registered,
+        }
+        return render(request, 'portal/dashboard.html', {'data': context, 'is_demo': False})
 
     stages = project.stages.all().order_by('step_number')
     photos = project.photos.all()
@@ -175,11 +292,14 @@ def portal_dashboard(request):
 
     context = {
         'client': client,
+        'tier': tier_data,
         'project': project,
         'stages': stages,
         'photos': photos,
         'documents': documents,
         'is_demo': False,
+        'has_active_project': True,
+        'just_registered': just_registered,
     }
     return render(request, 'portal/dashboard.html', {'data': context, 'is_demo': False})
 

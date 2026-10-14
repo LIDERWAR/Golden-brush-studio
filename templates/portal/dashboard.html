@@ -1,21 +1,22 @@
 {% extends 'base.html' %}
 
-{% block title %}Личный кабинет: {{ data.project.title }} — Golden Brush Studio{% endblock %}
-{% block meta_desc %}Цифровой трекер объекта {{ data.project.title }}: контроль стадий работ, бэкстейдж мастерской, сметы, договор и быстрая оплата этапа через СБП.{% endblock %}
+{% block title %}Личный кабинет: {{ data.project.title|default:'Партнерский профиль' }} — Golden Brush Studio{% endblock %}
+{% block meta_desc %}Цифровой кабинет заказчика Golden Brush Studio: накопительная система скидок, контроль стадий работ, бэкстейдж мастерской, сметы и проектная документация.{% endblock %}
 
 {% block content %}
 <section class="portal-dashboard-section">
     <div class="container portal-dashboard-container">
-        <!-- Top Bar: Greeting & Object Switcher -->
+        <!-- Top Bar: Greeting & Switcher -->
         <header class="portal-header-bar">
             <div>
                 <div class="eyebrow">Личный кабинет заказчика • Golden Brush Studio</div>
                 <h1 class="portal-user-title">
-                    {% if data.client.full_name %}{{ data.client.full_name }}{% else %}{{ data.client.full_name }}{% endif %}
+                    {{ data.client.full_name|default:'Уважаемый заказчик' }}
                 </h1>
                 <div class="portal-meta-badges">
-                    <span class="portal-badge"><i class="fas fa-phone-alt"></i> {{ data.client.phone }}</span>
-                    {% if data.client.company %}<span class="portal-badge"><i class="fas fa-building"></i> {{ data.client.company }}</span>{% endif %}
+                    <span class="portal-badge">{{ data.client.phone }}</span>
+                    {% if data.client.company %}<span class="portal-badge">{{ data.client.company }}</span>{% endif %}
+                    {% if data.tier.client_type_display %}<span class="portal-badge">{{ data.tier.client_type_display }}</span>{% endif %}
                     {% if is_demo %}<span class="portal-badge portal-badge-demo">Режим демонстрации</span>{% endif %}
                 </div>
             </div>
@@ -30,7 +31,77 @@
             </div>
         </header>
 
-        <!-- Project Overview Card -->
+        {% if data.just_registered %}
+        <div class="portal-alert-box portal-alert-success">
+            <strong>Поздравляем с регистрацией!</strong> За вашей организацией закреплен статус <em>«{{ data.tier.name }}»</em> и стартовая скидка <strong>{{ data.tier.discount_materials }}%</strong> на премиальные материалы. Ваш ПИН-код быстрого доступа: <strong>{{ data.client.access_pin|default:'1234' }}</strong>.
+        </div>
+        {% endif %}
+
+        <!-- 1. Loyalty Tier & Cumulative Discount Card -->
+        <div class="portal-tier-card">
+            <div class="tier-card-header">
+                <div>
+                    <div class="eyebrow">Корпоративная программа долгосрочных привилегий</div>
+                    <h2 class="tier-card-title">{{ data.tier.name }}</h2>
+                    <p class="tier-card-subtitle">
+                        Программа накопления партнерских условий: с каждым новым проектом ваша скидка возрастает
+                    </p>
+                </div>
+                
+                <div class="tier-discounts-summary">
+                    <div class="tier-discount-box">
+                        <span class="tier-discount-val">-{{ data.tier.discount_materials }}%</span>
+                        <span class="tier-discount-lbl">На материалы</span>
+                    </div>
+                    <div class="tier-discount-box">
+                        <span class="tier-discount-val">{% if data.tier.discount_works > 0 %}-{{ data.tier.discount_works }}%{% else %}Базовый{% endif %}</span>
+                        <span class="tier-discount-lbl">На комплекс работ</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stepper 3 Tiers -->
+            <div class="tier-stepper">
+                <div class="tier-step {% if data.tier.code == 'welcome' %}tier-step-current{% elif data.tier.code == 'resident' or data.tier.code == 'corporate' %}tier-step-done{% endif %}">
+                    <div class="tier-step-num">01</div>
+                    <div class="tier-step-content">
+                        <div class="tier-step-name">Дебютный объект</div>
+                        <div class="tier-step-perk">Материалы: <strong>-5%</strong> • Sample Box</div>
+                    </div>
+                </div>
+                <div class="tier-step-divider"></div>
+                <div class="tier-step {% if data.tier.code == 'resident' %}tier-step-current{% elif data.tier.code == 'corporate' %}tier-step-done{% endif %}">
+                    <div class="tier-step-num">02</div>
+                    <div class="tier-step-content">
+                        <div class="tier-step-name">Постоянный партнер</div>
+                        <div class="tier-step-perk">Материалы: <strong>-10%</strong> • Работы: <strong>-5%</strong></div>
+                    </div>
+                </div>
+                <div class="tier-step-divider"></div>
+                <div class="tier-step {% if data.tier.code == 'corporate' %}tier-step-current tier-step-done{% endif %}">
+                    <div class="tier-step-num">03</div>
+                    <div class="tier-step-content">
+                        <div class="tier-step-name">Корпоративный клуб</div>
+                        <div class="tier-step-perk">Материалы: <strong>-15%</strong> • Работы: <strong>-10%</strong></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tier-progress-meta">
+                <div class="tier-progress-info">
+                    <span><strong>Совместных проектов:</strong> {{ data.tier.completed_projects }}</span>
+                    <span class="tier-next-goal">{{ data.tier.next_tier_label }}</span>
+                </div>
+                <div class="tier-action-wrap">
+                    <a href="tel:+74958904422" class="btn btn-secondary">
+                        Рассчитать следующий объект со скидкой
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        {% if data.has_active_project and data.project %}
+        <!-- 2. Project Overview Card -->
         <div class="portal-project-card">
             <div class="project-card-header">
                 <div>
@@ -76,7 +147,7 @@
             </div>
         </div>
 
-        <!-- 2 Columns: Stages Tracker (Left) & Curator + Actions (Right) -->
+        <!-- 3. Stages Tracker (Left) & Curator + Actions (Right) -->
         <div class="portal-grid-two-cols">
             <!-- Left: Stages Timeline -->
             <div class="portal-stages-col">
@@ -162,7 +233,7 @@
             </div>
         </div>
 
-        <!-- Section: Live Photo Feed (Work in Progress Backstage) -->
+        <!-- 4. Section: Live Photo Feed -->
         <section class="portal-photos-section">
             <div class="portal-section-header">
                 <h2>Живой фотоотчет со стройки и из мастерской</h2>
@@ -183,6 +254,26 @@
                 {% endfor %}
             </div>
         </section>
+
+        {% else %}
+        <!-- Empty State for new registrations without active contract yet -->
+        <div class="portal-welcome-empty-card">
+            <div class="eyebrow">Ваш первый совместный объект</div>
+            <h2 class="empty-welcome-title">Запуск проекта со стартовой скидкой {{ data.tier.discount_materials }}%</h2>
+            <p class="empty-welcome-desc">
+                Ваш партнерский профиль активирован. Чтобы прикрепить объект к трекеру, получить точный сметный расчет со скидкой и бесплатный выезд инженера-технолога на замер геометрии стен — отправьте заявку или свяжитесь с куратором мастерской.
+            </p>
+            <div class="empty-card-actions">
+                <a href="tel:+74958904422" class="btn btn-primary">
+                    Заказать аудит и замер объекта
+                </a>
+                <a href="/partners/" class="btn btn-secondary">
+                    Условия партнерской программы
+                </a>
+            </div>
+        </div>
+        {% endif %}
+
     </div>
 </section>
 {% endblock %}
