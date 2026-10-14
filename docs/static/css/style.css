@@ -101,7 +101,7 @@ h1, h2, h3, h4, h5, h6, .font-serif {
   font-family: var(--font-heading);
   font-weight: 700;
   letter-spacing: -0.015em;
-  color: var(--color-indigo, #0D1A34) !important;
+  color: var(--color-indigo, #0D1A34);
   text-wrap: balance;
 }
 
@@ -273,7 +273,7 @@ img {
   font-size: clamp(1rem, 4.2vw, 1.6rem);
   font-weight: 800;
   letter-spacing: -0.01em;
-  color: var(--color-indigo, #0D1A34) !important;
+  color: var(--color-indigo, #0D1A34);
   line-height: 1.1;
   text-transform: none;
   white-space: nowrap;
@@ -322,7 +322,7 @@ img {
   font-size: 0.825rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-indigo, #0D1A34) !important;
+  color: var(--color-indigo, #0D1A34);
   font-weight: 600;
   position: relative;
   padding: 0.5rem 0;
@@ -428,7 +428,7 @@ img {
   font-size: 0.84rem;
   font-weight: 600;
   letter-spacing: 0.02em;
-  color: var(--color-indigo, #0D1A34) !important;
+  color: var(--color-indigo, #0D1A34);
   transition: color var(--tr-fast);
 }
 
@@ -959,7 +959,7 @@ img {
   font-family: var(--font-heading);
   font-size: 1.15rem;
   font-weight: 700;
-  color: var(--color-indigo, #0D1A34) !important;
+  color: var(--color-indigo, #0D1A34);
   line-height: 1.25;
   transition: var(--tr-fast);
 }
@@ -1518,7 +1518,7 @@ img {
 .section-title {
   font-family: var(--font-serif);
   font-size: clamp(2.2rem, 4vw, 3.2rem);
-  color: var(--color-indigo, #0D1A34) !important;
+  color: var(--color-indigo, #0D1A34);
   margin-top: 0.75rem;
   line-height: 1.15;
 }
@@ -2454,7 +2454,7 @@ img {
   font-size: clamp(1.6rem, 2.7vw, 2.5rem);
   line-height: 1.15;
   font-weight: 800;
-  color: var(--color-hero-navy, #0D1A34) !important;
+  color: var(--color-hero-navy, #0D1A34);
   margin: 0;
   letter-spacing: -0.015em;
 }
@@ -2550,7 +2550,7 @@ img {
   font-size: clamp(1.25rem, 1.85vw, 1.7rem) !important;
   font-weight: 500 !important;
   line-height: 1.25 !important;
-  color: var(--color-hero-navy, #0D1A34) !important;
+  color: var(--color-hero-navy, #0D1A34);
   margin: 0;
   letter-spacing: 0.025em;
   white-space: normal !important;
