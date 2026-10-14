@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="fEr7CgJEd6SqgdYjXzmnjgVa0HBpZpmvlYB7IZ2fcSoFdm31TdKnQfciOQxpzkxK">
+    <meta name="csrf-token" content="1JmanDaS6ZQf3FtArpvjVEbtjfPOwEYq16QgT8oOAALKAfhFZQ40sAJ3c8sXWsrI">
     <title>Наши проекты — Golden Brush Studio</title>
     <meta name="description" content="Реализованные объекты Golden Brush Studio: культовые бары и рестораны (Coyote Ugly, Горыныч), бутик-отели и элитные частные резиденции под ключ.">
     
     <!-- Design System CSS -->
-    <link rel="stylesheet" href="static/css/style.css?v=20261014-v23">
+    <link rel="stylesheet" href="static/css/style.css?v=20261014-v24">
     
     <!-- Favicon Suite: Architectural Luxury GB Monogram -->
     <link rel="icon" type="image/svg+xml" href="static/images/favicon.svg">
@@ -381,16 +381,16 @@
         </div>
 
         <!-- 2/3 Screen Lightbox Modal -->
-        <div id="projectModal23" class="project-modal-backdrop" style="display: none; position: fixed; inset: 0; z-index: 10000; background: rgba(10, 10, 12, 0.82); backdrop-filter: blur(8px); align-items: center; justify-content: center; padding: 1.5rem;">
-            <div class="project-modal-window" style="background: #ffffff; border-radius: var(--radius-md); width: min(1080px, 92vw); max-height: 88vh; overflow: hidden; display: grid; grid-template-columns: 1.25fr 1fr; box-shadow: 0 25px 60px rgba(0,0,0,0.3); position: relative;">
+        <div id="projectModal23" class="project-modal-backdrop">
+            <div class="project-modal-window">
                 <!-- Close Button -->
                 <button type="button" id="modalCloseBtn" aria-label="Закрыть" style="position: absolute; top: 1rem; right: 1rem; z-index: 20; width: 40px; height: 40px; border-radius: 50%; background: rgba(0,0,0,0.6); color: #fff; border: none; font-size: 1.3rem; cursor: pointer; display: flex; align-items: center; justify-content: center;">
                     ✕
                 </button>
 
                 <!-- Modal Media with arrows -->
-                <div class="modal-media-col" style="position: relative; background: #0c0c0c; display: flex; align-items: center; justify-content: center; overflow: hidden; min-height: 380px;">
-                    <img id="modalImg" src="" alt="" style="width: 100%; height: 100%; object-fit: cover; max-height: 88vh;">
+                <div class="modal-media-col">
+                    <img id="modalImg" src="" alt="" style="width: 100%; height: 100%; object-fit: cover;">
                     
                     <button type="button" id="modalPrevBtn" aria-label="Назад" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; background: rgba(0,0,0,0.65); color: #fff; border: 1px solid rgba(255,255,255,0.2); font-size: 1.4rem; cursor: pointer; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(4px);">
                         ‹
@@ -405,23 +405,23 @@
                 </div>
 
                 <!-- Modal Information & Scope -->
-                <div class="modal-info-col" style="padding: clamp(1.5rem, 3vw, 2.5rem); display: flex; flex-direction: column; justify-content: space-between; overflow-y: auto;">
-                    <div>
+                <div class="modal-info-col">
+                    <div class="modal-info-scroll">
                         <div id="modalCategory" style="font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-bronze); font-weight: 700; margin-bottom: 0.5rem;">
                             Категория
                         </div>
-                        <h2 id="modalTitle" style="font-family: var(--font-heading); font-size: clamp(1.3rem, 2.2vw, 1.75rem); color: var(--text-main); margin: 0 0 0.75rem; line-height: 1.25;">
+                        <h2 id="modalTitle" style="font-family: var(--font-heading); font-size: clamp(1.25rem, 2vw, 1.65rem); color: var(--text-main); margin: 0 0 0.65rem; line-height: 1.25;">
                             Название проекта
                         </h2>
-                        <div id="modalMeta" style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1.25rem;">
+                        <div id="modalMeta" style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem;">
                             Москва • 1 200 м² • 4 месяца
                         </div>
                         
-                        <p id="modalDesc" style="font-size: 0.92rem; color: var(--text-main); line-height: 1.65; margin: 0 0 1.5rem;">
+                        <p id="modalDesc" style="font-size: 0.92rem; color: var(--text-main); line-height: 1.6; margin: 0 0 1.25rem;">
                             Описание проекта...
                         </p>
 
-                        <div style="margin-bottom: 1.5rem;">
+                        <div style="margin-bottom: 0.5rem;">
                             <div style="font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); font-weight: 600; margin-bottom: 0.5rem;">
                                 Реализованные работы:
                             </div>
@@ -431,7 +431,7 @@
                         </div>
                     </div>
 
-                    <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; padding-top: 1.25rem; border-top: 1px solid var(--border-subtle);">
+                    <div class="modal-actions">
                         <a id="modalDetailLink" href="#" class="btn btn-primary" style="flex: 1; text-align: center; padding: 0.75rem 1.25rem; font-size: 0.88rem;">
                             Перейти к объекту
                         </a>

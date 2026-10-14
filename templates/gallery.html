@@ -80,16 +80,16 @@
         </div>
 
         <!-- 2/3 Screen Lightbox Modal for Artworks (Prices & Curator Explanations revealed inside!) -->
-        <div id="artworkModal23" class="project-modal-backdrop" style="display: none; position: fixed; inset: 0; z-index: 10000; background: rgba(10, 10, 12, 0.85); backdrop-filter: blur(8px); align-items: center; justify-content: center; padding: 1.5rem;">
-            <div class="project-modal-window" style="background: #ffffff; border-radius: var(--radius-md); width: min(1080px, 92vw); max-height: 88vh; overflow: hidden; display: grid; grid-template-columns: 1.25fr 1fr; box-shadow: 0 25px 60px rgba(0,0,0,0.3); position: relative;">
+        <div id="artworkModal23" class="project-modal-backdrop">
+            <div class="project-modal-window">
                 <!-- Close Button -->
                 <button type="button" id="artModalCloseBtn" aria-label="Закрыть" style="position: absolute; top: 1rem; right: 1rem; z-index: 20; width: 40px; height: 40px; border-radius: 50%; background: rgba(0,0,0,0.6); color: #fff; border: none; font-size: 1.3rem; cursor: pointer; display: flex; align-items: center; justify-content: center;">
                     ✕
                 </button>
 
                 <!-- Modal Media with arrows -->
-                <div class="modal-media-col" style="position: relative; background: #0c0c0c; display: flex; align-items: center; justify-content: center; overflow: hidden; min-height: 380px;">
-                    <img id="artModalImg" src="" alt="" style="width: 100%; height: 100%; object-fit: contain; max-height: 88vh; background: #0c0c0c;">
+                <div class="modal-media-col">
+                    <img id="artModalImg" src="" alt="" style="width: 100%; height: 100%; object-fit: contain; background: #0c0c0c;">
                     
                     <button type="button" id="artModalPrevBtn" aria-label="Назад" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; background: rgba(0,0,0,0.65); color: #fff; border: 1px solid rgba(255,255,255,0.2); font-size: 1.4rem; cursor: pointer; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(4px);">
                         ‹
@@ -104,20 +104,20 @@
                 </div>
 
                 <!-- Modal Information & Curator note -->
-                <div class="modal-info-col" style="padding: clamp(1.5rem, 3vw, 2.5rem); display: flex; flex-direction: column; justify-content: space-between; overflow-y: auto;">
-                    <div>
+                <div class="modal-info-col">
+                    <div class="modal-info-scroll">
                         <div id="artModalCategory" style="font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-bronze); font-weight: 700; margin-bottom: 0.35rem;">
                             Живопись и графика
                         </div>
-                        <h2 id="artModalTitle" style="font-family: var(--font-heading); font-size: clamp(1.3rem, 2.2vw, 1.75rem); color: var(--text-main); margin: 0 0 0.35rem; line-height: 1.25;">
+                        <h2 id="artModalTitle" style="font-family: var(--font-heading); font-size: clamp(1.25rem, 2vw, 1.65rem); color: var(--text-main); margin: 0 0 0.35rem; line-height: 1.25;">
                             Название произведения
                         </h2>
-                        <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+                        <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.85rem;">
                             Автор: Александр Попыкин • <span id="artModalYear">2024 г.</span>
                         </div>
 
-                        <div style="background: var(--bg-primary); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 0.85rem 1rem; margin-bottom: 1.25rem;">
-                            <div style="font-size: 0.82rem; color: var(--text-main); margin-bottom: 0.25rem;">
+                        <div style="background: var(--bg-primary); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 0.75rem 0.95rem; margin-bottom: 1rem;">
+                            <div style="font-size: 0.82rem; color: var(--text-main); margin-bottom: 0.2rem;">
                                 <strong>Материалы:</strong> <span id="artModalMedium">Холст, масло</span>
                             </div>
                             <div style="font-size: 0.82rem; color: var(--text-main);">
@@ -125,25 +125,25 @@
                             </div>
                         </div>
 
-                        <div style="margin-bottom: 1.5rem;">
-                            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); font-weight: 600; margin-bottom: 0.4rem;">
+                        <div style="margin-bottom: 1rem;">
+                            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); font-weight: 600; margin-bottom: 0.35rem;">
                                 Кураторская экспликация:
                             </div>
-                            <p id="artModalDesc" style="font-size: 0.88rem; color: var(--text-main); line-height: 1.6; margin: 0;">
+                            <p id="artModalDesc" style="font-size: 0.88rem; color: var(--text-main); line-height: 1.55; margin: 0;">
                                 Описание работы...
                             </p>
                         </div>
 
                         <!-- Price display inside modal -->
-                        <div style="padding-top: 1rem; border-top: 1px solid var(--border-subtle); margin-bottom: 1rem; display: flex; align-items: baseline; justify-content: space-between;">
+                        <div style="padding-top: 0.85rem; border-top: 1px solid var(--border-subtle); margin-bottom: 0.5rem; display: flex; align-items: baseline; justify-content: space-between;">
                             <span style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); font-weight: 600;">Стоимость:</span>
-                            <span id="artModalPrice" style="font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; color: var(--accent-gold);">
+                            <span id="artModalPrice" style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; color: var(--accent-gold);">
                                 380 000 ₽
                             </span>
                         </div>
                     </div>
 
-                    <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; padding-top: 1rem; border-top: 1px solid var(--border-subtle);">
+                    <div class="modal-actions">
                         <button type="button" class="btn btn-primary btn-open-fitting" style="flex: 1; text-align: center; padding: 0.75rem 1.1rem; font-size: 0.88rem;">
                             Примерить в интерьере
                         </button>
