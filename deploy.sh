@@ -64,6 +64,7 @@ docker compose exec -T web python manage.py migrate --noinput
 
 echo "[+] Collecting static files..."
 docker compose exec -T web python manage.py collectstatic --noinput --clear
+docker compose exec -T nginx nginx -s reload || true
 
 # 6. Check if seed data should be populated
 if [ "$AUTO_SEED_DB" = "true" ] || [ "$AUTO_SEED_DB" = "1" ]; then

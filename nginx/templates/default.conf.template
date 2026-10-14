@@ -76,10 +76,9 @@ server {
         expires 30d;
     }
 
-    # Static files with caching
+    # Static files (always revalidate to ensure immediate updates)
     location /static/ {
         alias /app/staticfiles/;
-        expires 1h;
         add_header Cache-Control "public, no-cache, must-revalidate";
         add_header X-Content-Type-Options "nosniff" always;
         access_log off;
