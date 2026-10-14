@@ -2690,14 +2690,19 @@ img {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--border-subtle);
+  background: rgba(8, 27, 59, 0.18);
   transition: all 0.25s ease;
   cursor: pointer;
 }
 
+.restoration-slider-dot:hover {
+  background: rgba(8, 27, 59, 0.35);
+}
+
 .restoration-slider-dot.active {
-  width: 24px;
-  border-radius: 4px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
   background: var(--accent-bronze, #B08D57);
 }
 
