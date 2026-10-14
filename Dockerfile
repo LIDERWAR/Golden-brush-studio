@@ -18,6 +18,8 @@ COPY requirements.txt /app/
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
 
+# Invalidate layer cache for application code updates
+ARG CACHEBUST=1
 # Copy project code
 COPY . /app/
 

@@ -52,8 +52,8 @@ fi
 
 # 4. Build and start containers
 echo "[+] Building and starting Docker containers..."
-docker compose build --pull
-docker compose up -d
+docker compose build --build-arg CACHEBUST=$(date +%s) web
+docker compose up -d --force-recreate web nginx
 
 echo "[+] Waiting for web service to be healthy..."
 sleep 5
