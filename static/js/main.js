@@ -1109,7 +1109,7 @@ function initPhoneMask() {
 }
 window.initPhoneMask = initPhoneMask;
 
-// 14. Restoration Showcase Slider Controller
+// 14. Restoration Showcase Slider Controller (Continuous Circular Carousel)
 function initRestorationSlider() {
     const track = document.getElementById('restorationSliderTrack');
     if (!track) return;
@@ -1120,14 +1120,53 @@ function initRestorationSlider() {
     const cards = track.querySelectorAll('.restoration-slide-card');
     if (!cards.length) return;
 
+    function getStep() {
+        const firstCard = cards[0];
+        const gap = 24; // 1.5rem
+        return (firstCard.offsetWidth || 320) + gap;
+    }
+
+    function goToSlide(idx) {
+        if (idx < 0) idx = cards.length - 1;
+        if (idx >= cards.length) idx = 0;
+        const targetCard = cards[idx];
+        if (!targetCard) return;
+        const targetLeft = targetCard.offsetLeft - track.offsetLeft;
+        track.scrollTo({ left: targetLeft, behavior: 'smooth' });
+    }
+
+    function scrollNext() {
+        const step = getStep();
+        const maxScroll = track.scrollWidth - track.clientWidth;
+        if (track.scrollLeft >= maxScroll - 25) {
+            // Reached the end -> smooth circular loop to start
+            track.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+            track.scrollBy({ left: step, behavior: 'smooth' });
+        }
+    }
+
+    function scrollPrev() {
+        const step = getStep();
+        if (track.scrollLeft <= 25) {
+            // At start -> smooth circular loop to end
+            const maxScroll = track.scrollWidth - track.clientWidth;
+            track.scrollTo({ left: maxScroll, behavior: 'smooth' });
+        } else {
+            track.scrollBy({ left: -step, behavior: 'smooth' });
+        }
+    }
+
+    // Generate navigation dots for the batch
     if (dotsContainer) {
         dotsContainer.innerHTML = '';
         cards.forEach((_, idx) => {
             const dot = document.createElement('span');
             dot.className = 'restoration-slider-dot' + (idx === 0 ? ' active' : '');
-            dot.setAttribute('aria-label', `Слайд ${idx + 1}`);
+            dot.setAttribute('aria-label', `Перейти к объекту ${idx + 1}`);
             dot.addEventListener('click', () => {
-                cards[idx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+                goToSlide(idx);
+                resetAutoScroll();
             });
             dotsContainer.appendChild(dot);
         });
@@ -1135,12 +1174,12 @@ function initRestorationSlider() {
 
     function updateActiveDot() {
         if (!dotsContainer) return;
+        const step = getStep();
         const scrollLeft = track.scrollLeft;
-        const cardWidth = cards[0].offsetWidth || 300;
-        const activeIdx = Math.round(scrollLeft / (cardWidth + 24));
+        const activeIdx = Math.min(Math.round(scrollLeft / step), cards.length - 1);
         const dots = dotsContainer.querySelectorAll('.restoration-slider-dot');
         dots.forEach((dot, idx) => {
-            dot.classList.toggle('active', idx === Math.min(activeIdx, cards.length - 1));
+            dot.classList.toggle('active', idx === activeIdx);
         });
     }
 
@@ -1150,16 +1189,42 @@ function initRestorationSlider() {
 
     if (prevBtn) {
         prevBtn.addEventListener('click', () => {
-            const cardWidth = cards[0].offsetWidth + 24;
-            track.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+            scrollPrev();
+            resetAutoScroll();
         });
     }
 
     if (nextBtn) {
         nextBtn.addEventListener('click', () => {
-            const cardWidth = cards[0].offsetWidth + 24;
-            track.scrollBy({ left: cardWidth, behavior: 'smooth' });
+            scrollNext();
+            resetAutoScroll();
         });
     }
+
+    // Auto-advance loop every 4.5 seconds
+    let autoTimer = null;
+    function startAutoScroll() {
+        stopAutoScroll();
+        autoTimer = setInterval(scrollNext, 4500);
+    }
+    function stopAutoScroll() {
+        if (autoTimer) {
+            clearInterval(autoTimer);
+            autoTimer = null;
+        }
+    }
+    function resetAutoScroll() {
+        stopAutoScroll();
+        startAutoScroll();
+    }
+
+    track.addEventListener('mouseenter', stopAutoScroll);
+    track.addEventListener('mouseleave', startAutoScroll);
+    track.addEventListener('touchstart', stopAutoScroll, { passive: true });
+    track.addEventListener('touchend', () => {
+        setTimeout(startAutoScroll, 2500);
+    }, { passive: true });
+
+    startAutoScroll();
 }
 window.initRestorationSlider = initRestorationSlider;
