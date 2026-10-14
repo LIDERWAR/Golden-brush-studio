@@ -23,6 +23,7 @@ def build_docs():
         'partners': ('/partners/', 'partners'),
         'portal': ('/portal/', 'portal'),
         'contacts': ('/contacts/', 'contacts'),
+        'privacy': ('/privacy/', 'privacy'),
     }
 
     raw_htmls = {}
@@ -73,6 +74,9 @@ def build_docs():
         html = html.replace('href="/contacts/#', 'href="contacts.html#')
         html = html.replace('href="/contacts/"', 'href="contacts.html"')
         html = html.replace('href="/contacts"', 'href="contacts.html"')
+        html = html.replace('href="/privacy/#', 'href="privacy.html#')
+        html = html.replace('href="/privacy/"', 'href="privacy.html"')
+        html = html.replace('href="/privacy"', 'href="privacy.html"')
 
         if page_type == 'main':
             html = html.replace('href="/#', 'href="#')

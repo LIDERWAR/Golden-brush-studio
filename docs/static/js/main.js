@@ -138,6 +138,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 13. Universal Phone Mask (+7 (XXX) XXX-XX-XX)
     initPhoneMask();
+
+    // 14. Restoration Showcase Slider
+    initRestorationSlider();
 });
 
 // Analytics Goal Dispatcher (Yandex.Metrika)
@@ -763,6 +766,12 @@ function initLiveWallCalculator() {
             if (inputArea) inputArea.value = area;
             if (inputCost) inputCost.value = priceStr;
 
+            const prefilledMsg = `Здравствуйте! Хочу зафиксировать расчет на покрытие «${selectedName}», площадь стен: ${area} м², ориентировочная смета: ${priceStr}.`;
+            const tgBtn = document.getElementById('calcTelegramDirect');
+            const maxBtn = document.getElementById('calcMaxDirect');
+            if (tgBtn) tgBtn.href = `https://t.me/gbstudio?text=${encodeURIComponent(prefilledMsg)}`;
+            if (maxBtn) maxBtn.href = `https://wa.me/74958904422?text=${encodeURIComponent(prefilledMsg)}`;
+
             modal.classList.add('active');
             document.body.classList.add('drawer-open');
         });
@@ -1100,6 +1109,57 @@ function initPhoneMask() {
 }
 window.initPhoneMask = initPhoneMask;
 
+// 14. Restoration Showcase Slider Controller
+function initRestorationSlider() {
+    const track = document.getElementById('restorationSliderTrack');
+    if (!track) return;
 
+    const prevBtn = document.getElementById('restSliderPrev');
+    const nextBtn = document.getElementById('restSliderNext');
+    const dotsContainer = document.getElementById('restSliderDots');
+    const cards = track.querySelectorAll('.restoration-slide-card');
+    if (!cards.length) return;
 
+    if (dotsContainer) {
+        dotsContainer.innerHTML = '';
+        cards.forEach((_, idx) => {
+            const dot = document.createElement('span');
+            dot.className = 'restoration-slider-dot' + (idx === 0 ? ' active' : '');
+            dot.setAttribute('aria-label', `Слайд ${idx + 1}`);
+            dot.addEventListener('click', () => {
+                cards[idx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+            });
+            dotsContainer.appendChild(dot);
+        });
+    }
 
+    function updateActiveDot() {
+        if (!dotsContainer) return;
+        const scrollLeft = track.scrollLeft;
+        const cardWidth = cards[0].offsetWidth || 300;
+        const activeIdx = Math.round(scrollLeft / (cardWidth + 24));
+        const dots = dotsContainer.querySelectorAll('.restoration-slider-dot');
+        dots.forEach((dot, idx) => {
+            dot.classList.toggle('active', idx === Math.min(activeIdx, cards.length - 1));
+        });
+    }
+
+    track.addEventListener('scroll', () => {
+        window.requestAnimationFrame(updateActiveDot);
+    }, { passive: true });
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            const cardWidth = cards[0].offsetWidth + 24;
+            track.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+        });
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            const cardWidth = cards[0].offsetWidth + 24;
+            track.scrollBy({ left: cardWidth, behavior: 'smooth' });
+        });
+    }
+}
+window.initRestorationSlider = initRestorationSlider;

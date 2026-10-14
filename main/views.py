@@ -99,6 +99,11 @@ def contacts_view(request):
     }
     return render(request, 'contacts.html', context)
 
+def privacy_view(request):
+    """Страница политики конфиденциальности и обработки персональных данных (152-ФЗ)"""
+    home_config = HomePageConfig.get_solo()
+    return render(request, 'privacy.html', {'home_config': home_config})
+
 def journal_list(request):
     """Журнал Мастерской / Atelier Journal: авторские заметки, Work in Progress, фактуры и события"""
     category_filter = request.GET.get('category', '').strip()
@@ -122,8 +127,7 @@ def projects_list(request):
     
     cat_keys = [
         ('bars-restaurants', 'Бары и рестораны', 'Культовые сетевые бары Coyote Ugly (4 заведения), ресторан «Горыныч» и концептуальные гастро-проекты.'),
-        ('hotels', 'Отели', 'Реновация лобби и представительских сьютов бутик-отелей: The Oro, Метрополь Арт.'),
-        ('residences', 'Частные резиденции', 'Комплексная отделка вилл и пентхаусов: Серебряный Бор, Патриаршие пруды, загородные усадьбы.')
+        ('residences', 'Частные апартаменты', 'Комплексная отделка и декоративные минеральные поверхности в элитных апартаментах и пентхаусах.')
     ]
     
     flagship_categories = []

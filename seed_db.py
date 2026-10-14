@@ -336,12 +336,12 @@ if not Lead.objects.exists():
 # 9. Materials & Calculator Seed
 from materials.models import MaterialCategory, DecorativeMaterial
 
-cat_plaster, _ = MaterialCategory.objects.get_or_create(name='Минеральные штукатурки', slug='plasters', order=1)
-cat_micro, _ = MaterialCategory.objects.get_or_create(name='Бесшовный микроцемент', slug='microcement', order=2)
-cat_mural, _ = MaterialCategory.objects.get_or_create(name='Монументальная роспись', slug='murals', order=3)
-cat_gold, _ = MaterialCategory.objects.get_or_create(name='Золочение и металлы', slug='gilding', order=4)
-cat_relief, _ = MaterialCategory.objects.get_or_create(name='Скульптурные барельефы', slug='reliefs', order=5)
-cat_venice, _ = MaterialCategory.objects.get_or_create(name='Венецианские штукатурки', slug='venetian', order=6)
+cat_plaster, _ = MaterialCategory.objects.update_or_create(slug='plasters', defaults={'name': 'Минеральные штукатурки', 'order': 1})
+cat_micro, _ = MaterialCategory.objects.update_or_create(slug='microcement', defaults={'name': 'Бесшовный микроцемент', 'order': 2})
+cat_mural, _ = MaterialCategory.objects.update_or_create(slug='murals', defaults={'name': 'Монументальная роспись', 'order': 3})
+cat_gold, _ = MaterialCategory.objects.update_or_create(slug='gilding', defaults={'name': 'Золочение', 'order': 4})
+cat_relief, _ = MaterialCategory.objects.update_or_create(slug='reliefs', defaults={'name': 'Скульптурные барельефы', 'order': 5})
+cat_venice, _ = MaterialCategory.objects.update_or_create(slug='venetian', defaults={'name': 'Венецианская штукатурка', 'order': 6})
 
 materials_data = [
     {
@@ -391,24 +391,24 @@ materials_data = [
     },
     {
         'slug': 'gold',
-        'name': 'Золочение, металл & Патина',
+        'name': 'Золочение',
         'category': cat_gold,
-        'badge': 'Премиум-металл',
+        'badge': 'Сусальное золото / поталь',
         'price_per_sqm': 6200,
         'material_cost_ratio': 0.40,
         'speed_sqm_per_day': 15,
-        'short_desc': 'Сусальное золото, поталь, окисленная медь, латунь и благородная патина на рельефах и деталях.',
-        'full_desc': 'Сложные декоративные техники нанесения металлов: классическое золочение сусальным золотом и свободной поталью, жидкие металлы (латунь, бронза, цинк), химическое оксидирование с образованием аутентичной бирюзовой патины и ржавчины.',
-        'composition': 'Сусальное золото, поталь, микронизированные металлические порошки, активаторы патины',
+        'short_desc': 'Сусальное золото, поталь, деликатное окисление и благородная патина на архитектурных элементах.',
+        'full_desc': 'Классические и современные техники золочения сусальным золотом и свободной поталью, архитектурное патинирование, деликатные металлические акценты на карнизах, лепнине и стеновых плоскостях.',
+        'composition': 'Сусальное золото, поталь, закрепляющие лаки, защитные воски',
         'application_areas': 'Каминные порталы, карнизы, колонны, лепные розетки, акцентные арт-стены',
         'image_url': '/static/images/mat_gold.jpg',
         'order': 4,
     },
     {
         'slug': 'basrelief',
-        'name': 'Барельефы & 3D-панно',
+        'name': 'Скульптурные барельефы',
         'category': cat_relief,
-        'badge': 'Скульптурный рельеф',
+        'badge': 'Авторский рельеф',
         'price_per_sqm': 8500,
         'material_cost_ratio': 0.30,
         'speed_sqm_per_day': 8,
@@ -421,7 +421,7 @@ materials_data = [
     },
     {
         'slug': 'venetian',
-        'name': 'Венецианская штукатурка & Оникс',
+        'name': 'Венецианская штукатурка',
         'category': cat_venice,
         'badge': 'Полированный мрамор',
         'price_per_sqm': 5200,
@@ -512,14 +512,14 @@ cfg.metric2_val = '200+'
 cfg.metric2_lbl = 'авторских рецептур штукатурки'
 cfg.metric3_val = '100%'
 cfg.metric3_lbl = 'ручное нанесение мастерами'
-cfg.restoration_eyebrow = 'Мастерство & Наследие'
-cfg.restoration_title = 'Реставрация и оформление'
-cfg.restoration_desc = 'Бережное восстановление исторической архитектурной лепнины, мозаичных панно, сусального золота и антикварных интерьерных поверхностей.'
+cfg.restoration_eyebrow = ''
+cfg.restoration_title = 'Реставрация'
+cfg.restoration_desc = 'Восстановление архитектурных элементов, лепного декора, позолоты и авторских поверхностей на объектах любого масштаба.'
 cfg.restoration_img_url = '/static/images/restoration_craft.jpg'
 cfg.calc_guarantee_text = 'Бесплатный выезд технолога с образцами по Москве и МО • Замер и точная смета'
 cfg.contact_phone = '+7 (495) 890-44-22'
 cfg.contact_email = 'welcome@gbstudio.ru'
-cfg.contact_address = 'Москва, Центр дизайна ARTPLAY / Мастерская на Яузе'
+cfg.contact_address = 'Москва'
 cfg.telegram_url = 'https://t.me/gbstudio'
 cfg.whatsapp_url = 'https://wa.me/74958904422'
 if not hasattr(cfg, 'yandex_metrika_id') or cfg.yandex_metrika_id is None:

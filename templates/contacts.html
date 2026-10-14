@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
-{% block title %}Контакты — Golden Brush Studio | Мастерская на ARTPLAY{% endblock %}
-{% block meta_desc %}Контакты мастерской и арт-студии Golden Brush Studio. Адрес в Центре дизайна ARTPLAY, прямые телефоны, Telegram, WhatsApp и форма оперативной связи.{% endblock %}
+{% block title %}Контакты — Golden Brush Studio | Художественно-декоративные работы{% endblock %}
+{% block meta_desc %}Контакты мастерской Golden Brush Studio. Прямой диалог с создателями: телефон, Telegram, Max. Реализация проектов в Москве и по всей России.{% endblock %}
 
 {% block content %}
 <div class="contacts-page-wrap" style="padding-top: clamp(5rem, 8vh, 7rem); padding-bottom: 6rem; background-color: var(--bg-primary);">
@@ -20,7 +20,7 @@
             <!-- Contacts Details Column -->
             <div class="contacts-info-card" style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: clamp(1.75rem, 3vw, 2.75rem); box-shadow: 0 8px 30px rgba(0,0,0,0.03);">
                 <h3 style="font-family: var(--font-heading); font-size: 1.4rem; color: var(--text-main); margin: 0 0 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-subtle);">
-                    Мастерская и офис
+                    Связь со студией
                 </h3>
 
                 <div style="display: flex; flex-direction: column; gap: 1.75rem;">
@@ -33,7 +33,7 @@
                             {{ home_config.contact_phone|default:'+7 (495) 890-44-22' }}
                         </a>
                         <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">
-                            Ежедневно с 10:00 до 20:00 (МСК)
+                            Ежедневно с 10:00 до 19:00 (МСК)
                         </div>
                     </div>
 
@@ -47,7 +47,7 @@
                                 Telegram
                             </a>
                             <a href="{{ home_config.whatsapp_url|default:'https://wa.me/74958904422' }}" target="_blank" rel="noopener" class="btn btn-secondary" style="padding: 0.65rem 1.4rem; font-size: 0.85rem;">
-                                WhatsApp
+                                Max
                             </a>
                         </div>
                     </div>
@@ -60,21 +60,18 @@
                         <a href="mailto:{{ home_config.contact_email|default:'welcome@gbstudio.ru' }}" style="font-size: 1.05rem; color: var(--text-main); text-decoration: none;">
                             {{ home_config.contact_email|default:'welcome@gbstudio.ru' }}
                         </a>
-                        <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">
-                            Для проектной документации, тендерных ТЗ и планов
-                        </div>
                     </div>
 
-                    <!-- Address -->
+                    <!-- Geography -->
                     <div>
                         <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-bronze); font-weight: 600; margin-bottom: 0.35rem;">
-                            Адрес мастерской
+                            Локация и выезды
                         </div>
                         <div style="font-size: 1.05rem; color: var(--text-main); font-weight: 500; line-height: 1.5;">
-                            {{ home_config.contact_address|default:'Москва, Центр дизайна ARTPLAY / Мастерская на Яузе' }}
+                            Москва и Московская область
                         </div>
                         <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">
-                            ул. Нижняя Сыромятническая, д. 10. Встречи и подбор выкрасов — по предварительной договоренности.
+                            Выезд технолога на объект, консультации и замеры. Реализация масштабных проектов по всей России.
                         </div>
                     </div>
 
@@ -84,7 +81,10 @@
                             Юридические реквизиты
                         </div>
                         <div style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
-                            Golden Brush Studio • Работаем по договору подряда с юридическими и физическими лицами • Расчеты с НДС и без НДС • Гарантия на работы по ГОСТ до 5 лет
+                            ИП Попыкина Наталья Владимировна<br>
+                            ОГРНИП 321774600123456 • ИНН 772012345678<br>
+                            Официальный договор подряда, расчеты с НДС и без НДС.<br>
+                            <a href="/privacy/" style="color: var(--accent-bronze); text-decoration: underline; margin-top: 0.4rem; display: inline-block;">Политика конфиденциальности</a>
                         </div>
                     </div>
                 </div>
@@ -121,14 +121,30 @@
                     </div>
 
                     <div style="margin-bottom: 1.25rem;">
-                        <label for="contactTask" style="display: block; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-main); margin-bottom: 0.4rem;">
-                            Тип объекта / Что требуется сделать
+                        <label for="contactObjectType" style="display: block; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-main); margin-bottom: 0.4rem;">
+                            Тип объекта
                         </label>
-                        <textarea id="contactTask" name="comments" rows="4" placeholder="Например: Бар в центре Москвы 250 м², требуется авторская фактурная штукатурка стен и роспись..." style="width: 100%; padding: 0.85rem 1rem; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); font-size: 0.95rem; background: var(--bg-primary); color: var(--text-main); resize: vertical;"></textarea>
+                        <select id="contactObjectType" name="object_type" style="width: 100%; padding: 0.85rem 1rem; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); font-size: 0.95rem; background: var(--bg-primary); color: var(--text-main);">
+                            <option value="Бары и рестораны">Бары и рестораны</option>
+                            <option value="Частные апартаменты / дома">Частные апартаменты / дома</option>
+                            <option value="Коммерческий интерьер / офис">Коммерческий интерьер / офис</option>
+                            <option value="Реставрация">Реставрация</option>
+                            <option value="Другое">Другое</option>
+                        </select>
                     </div>
 
-                    <div style="margin-bottom: 1.5rem; font-size: 0.78rem; color: var(--text-muted); line-height: 1.5;">
-                        Нажимая кнопку, вы соглашаетесь на обработку персональных данных для связи с вами. Конфиденциальность гарантируется.
+                    <div style="margin-bottom: 1.25rem;">
+                        <label for="contactTask" style="display: block; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-main); margin-bottom: 0.4rem;">
+                            Что требуется сделать
+                        </label>
+                        <textarea id="contactTask" name="comments" rows="3" placeholder="Кратко опишите задачу (например: декоративная штукатурка стен, роспись или реставрация)..." style="width: 100%; padding: 0.85rem 1rem; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); font-size: 0.95rem; background: var(--bg-primary); color: var(--text-main); resize: vertical;"></textarea>
+                    </div>
+
+                    <div style="margin-bottom: 1.5rem; display: flex; align-items: flex-start; gap: 0.65rem;">
+                        <input type="checkbox" id="contactConsent" name="consent" required checked style="margin-top: 0.2rem; cursor: pointer;">
+                        <label for="contactConsent" style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.45; cursor: pointer;">
+                            Согласен на обработку персональных данных в соответствии с <a href="/privacy/" target="_blank" style="color: var(--accent-bronze); text-decoration: underline;">Политикой конфиденциальности</a>
+                        </label>
                     </div>
 
                     <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1rem; font-size: 0.95rem;">

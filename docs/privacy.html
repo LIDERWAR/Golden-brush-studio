@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="896ZmRtsoBQx4rEP8SSz9nT9ABi0G0aTfP3t6WzHMGhqKRapbSLJ9R25m1xVnfub">
+    <title>Политика конфиденциальности — Golden Brush Studio</title>
+    <meta name="description" content="Политика конфиденциальности и обработки персональных данных Golden Brush Studio (ИП Попыкина Н. В.) в соответствии с 152-ФЗ РФ.">
+    
+    <!-- Design System CSS -->
+    <link rel="stylesheet" href="static/css/style.css?v=20260930-v16">
+    
+    <!-- Favicon Suite: Architectural Luxury GB Monogram -->
+    <link rel="icon" type="image/svg+xml" href="static/images/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="static/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="static/images/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="static/images/apple-touch-icon.png">
+    <link rel="manifest" href="static/site.webmanifest">
+    <meta name="theme-color" content="#14161a">
+
+    <!-- FontAwesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Yandex.Metrika Analytics Suite -->
+    
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-inner">
+            <a href="index.html" class="brand-logo">
+                <span class="brand-title">Golden Brush Studio</span>
+                <span class="brand-subtitle">Искусство преображения пространства</span>
+            </a>
+
+            <div class="header-actions">
+                <a href="portal.html" class="header-profile-btn" aria-label="Личный кабинет" title="Личный кабинет">
+                    <svg class="header-profile-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </a>
+                <button class="burger-btn" id="burgerBtn" type="button" aria-label="Открыть навигационное меню">
+                    <span class="burger-lines">
+                        <span class="line line-1"></span>
+                        <span class="line line-2"></span>
+                        <span class="line line-3"></span>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Drawer ("Три полосочки") -->
+    <div class="mobile-drawer" id="mobileDrawer">
+        <div class="drawer-backdrop" id="drawerBackdrop"></div>
+        <div class="drawer-panel">
+            <div class="drawer-header">
+                <a href="index.html" class="brand-logo">
+                    <span class="brand-title">Golden Brush Studio</span>
+                    <span class="brand-subtitle">Искусство преображения пространства</span>
+                </a>
+                <button class="drawer-close" id="drawerClose" aria-label="Закрыть меню">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <nav class="drawer-nav">
+                <div class="drawer-section-title">Разделы мастерской</div>
+                <ul class="drawer-menu">
+                    <li>
+                        <a href="portal.html" class="drawer-link">
+                            <span class="drawer-num">01</span>
+                            <span class="drawer-text">Личный кабинет <small>Персональные условия • Стадии и фотоотчёты</small></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="projects.html" class="drawer-link">
+                            <span class="drawer-num">02</span>
+                            <span class="drawer-text">Наши проекты <small>Бары и рестораны • Частные апартаменты</small></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="materials.html" class="drawer-link">
+                            <span class="drawer-num">03</span>
+                            <span class="drawer-text">Декоративные покрытия <small>Каталог</small></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="gallery.html" class="drawer-link">
+                            <span class="drawer-num">04</span>
+                            <span class="drawer-text">Арт-галерея <small>Живопись и графика • Керамика • Арт-объекты</small></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="index.html#restoration" class="drawer-link">
+                            <span class="drawer-num">05</span>
+                            <span class="drawer-text">Реставрация</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="partners.html" class="drawer-link">
+                            <span class="drawer-num">06</span>
+                            <span class="drawer-text">Партнёры</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="contacts.html" class="drawer-link">
+                            <span class="drawer-num">07</span>
+                            <span class="drawer-text">Контакты <small>Telegram и Max • Ежедневно 10:00–19:00</small></span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="drawer-footer">
+                <a href="tel:+7 (495) 890-44-22" class="drawer-phone">
+                    +7 (495) 890-44-22
+                </a>
+                <a href="contacts.html" class="btn btn-primary" style="width: 100%; text-align: center; text-decoration: none; margin-bottom: 0.85rem; display: block;">Связаться с нами</a>
+                <div class="drawer-messengers">
+                    <a href="https://t.me/gbstudio" target="_blank" rel="noopener" class="drawer-soc-btn" aria-label="Telegram">Telegram</a>
+                    <a href="https://wa.me/74958904422" target="_blank" rel="noopener" class="drawer-soc-btn" aria-label="Max">Max</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Self-Contained Bulletproof Drawer Navigation Controller -->
+    <script>
+    (function() {
+        function initDrawerNavigation() {
+            var burger = document.getElementById('burgerBtn');
+            var drawer = document.getElementById('mobileDrawer');
+            var closeBtn = document.getElementById('drawerClose');
+            var backdrop = document.getElementById('drawerBackdrop');
+
+            function openDrawer() {
+                if (drawer) {
+                    drawer.classList.add('active');
+                    document.body.classList.add('drawer-open');
+                }
+            }
+            function closeDrawer() {
+                if (drawer) {
+                    drawer.classList.remove('active');
+                    document.body.classList.remove('drawer-open');
+                }
+            }
+            function toggleDrawer(e) {
+                if (e && e.preventDefault) e.preventDefault();
+                if (e && e.stopPropagation) e.stopPropagation();
+                if (drawer && drawer.classList.contains('active')) {
+                    closeDrawer();
+                } else {
+                    openDrawer();
+                }
+            }
+
+            window.openMobileDrawer = openDrawer;
+            window.closeMobileDrawer = closeDrawer;
+            window.toggleMobileDrawer = toggleDrawer;
+
+            if (burger) {
+                burger.onclick = toggleDrawer;
+            }
+            if (closeBtn) {
+                closeBtn.onclick = function(e) {
+                    if (e && e.preventDefault) e.preventDefault();
+                    closeDrawer();
+                };
+            }
+            if (backdrop) {
+                backdrop.onclick = function(e) {
+                    if (e && e.preventDefault) e.preventDefault();
+                    closeDrawer();
+                };
+            }
+
+            if (drawer) {
+                // Delegated click controller for reliable navigation on all devices
+                drawer.addEventListener('click', function(e) {
+                    var link = e.target.closest('a');
+                    if (!link) return;
+
+                    // Allow opening in new tab via middle-click or Ctrl/Cmd
+                    if (e.button !== 0 || e.ctrlKey || e.metaKey) {
+                        return;
+                    }
+
+                    var href = link.getAttribute('href');
+                    if (!href || href === '#' || href === 'javascript:void(0)') return;
+
+                    // Telephone, email, external messengers
+                    if (href.startsWith('tel:') || href.startsWith('mailto:') || link.target === '_blank') {
+                        setTimeout(closeDrawer, 300);
+                        return;
+                    }
+
+                    // In-page hash anchors (e.g. #restoration)
+                    if (href.startsWith('#')) {
+                        closeDrawer();
+                        var targetEl = document.querySelector(href);
+                        if (targetEl) {
+                            e.preventDefault();
+                            targetEl.scrollIntoView({ behavior: 'smooth' });
+                        }
+                        return;
+                    }
+
+                    // Guaranteed page navigation (projects.html, materials.html, etc.)
+                    e.preventDefault();
+                    closeDrawer();
+                    window.location.href = href;
+                });
+            }
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') closeDrawer();
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initDrawerNavigation);
+        } else {
+            initDrawerNavigation();
+        }
+    })();
+    </script>
+
+    <!-- Main Content -->
+    <main>
+        
+<section class="privacy-section" style="padding: clamp(5rem, 8vh, 7rem) 0 6rem; background-color: var(--bg-primary);">
+    <div class="container" style="max-width: 860px; margin: 0 auto;">
+        <div class="privacy-header" style="margin-bottom: 3rem; text-align: left;">
+            <div class="eyebrow">Юридическая информация</div>
+            <h1 style="font-family: var(--font-heading); font-size: clamp(2rem, 3.5vw, 2.8rem); color: var(--text-main); margin-bottom: 1rem;">
+                Политика конфиденциальности и обработки данных
+            </h1>
+            <p style="color: var(--text-muted); font-size: 0.95rem;">
+                Редакция от 14 октября 2026 года • г. Москва
+            </p>
+        </div>
+
+        <div class="privacy-content" style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: clamp(1.75rem, 4vw, 3rem); box-shadow: 0 4px 20px rgba(0,0,0,0.02); line-height: 1.8; color: var(--text-main); font-size: 0.95rem;">
+            <h3 style="font-family: var(--font-heading); color: var(--color-indigo, #081B3B); margin: 0 0 1rem;">1. Общие положения</h3>
+            <p style="margin-bottom: 1.5rem; color: var(--text-muted);">
+                Настоящая Политика обработки персональных данных (далее — «Политика») определяет порядок обработки и защиты персональной информации пользователей сайта gbstudio.ru (далее — «Сайт»), принадлежащего Индивидуальному предпринимателю Попыкиной Наталье Владимировне (ОГРНИП 321774600123456, ИНН 772012345678, далее — «Оператор»).
+            </p>
+
+            <h3 style="font-family: var(--font-heading); color: var(--color-indigo, #081B3B); margin: 1.5rem 0 1rem;">2. Цели обработки информации</h3>
+            <p style="margin-bottom: 1rem; color: var(--text-muted);">
+                Оператор осуществляет обработку персональных данных исключительно в следующих целях:
+            </p>
+            <ul style="padding-left: 1.5rem; margin-bottom: 1.5rem; color: var(--text-muted);">
+                <li>Предоставление консультаций по услугам нанесения фактурных покрытий, реставрации и приобретению предметов искусства;</li>
+                <li>Расчет предварительной стоимости и формирование коммерческих предложений;</li>
+                <li>Организация выезда технолога на объект и доставка кейсов с образцами (Sample Box);</li>
+                <li>Исполнение договоров подряда и партнерских соглашений.</li>
+            </ul>
+
+            <h3 style="font-family: var(--font-heading); color: var(--color-indigo, #081B3B); margin: 1.5rem 0 1rem;">3. Состав обрабатываемых данных</h3>
+            <p style="margin-bottom: 1.5rem; color: var(--text-muted);">
+                Оператор обрабатывает данные, добровольно предоставляемые пользователем через формы обратной связи на Сайте: имя пользователя, номер контактного телефона, адрес электронной почты, адрес объекта/доставки образцов, а также технические обезличенные данные (cookie-файлы, IP-адрес) для корректной работы сервисов аналитики.
+            </p>
+
+            <h3 style="font-family: var(--font-heading); color: var(--color-indigo, #081B3B); margin: 1.5rem 0 1rem;">4. Безопасность и нераспространение</h3>
+            <p style="margin-bottom: 1.5rem; color: var(--text-muted);">
+                Оператор принимает все необходимые организационные и технические меры для защиты персональных данных от неправомерного или случайного доступа, уничтожения, изменения, блокирования, копирования, распространения. Персональные данные никогда и ни при каких условиях не передаются третьим лицам, за исключением случаев, установленных законодательством Российской Федерации.
+            </p>
+
+            <h3 style="font-family: var(--font-heading); color: var(--color-indigo, #081B3B); margin: 1.5rem 0 1rem;">5. Контакты Оператора</h3>
+            <p style="margin-bottom: 0; color: var(--text-muted);">
+                По вопросам обработки персональных данных, их изменения или отзыва согласия на обработку вы можете обратиться по адресу электронной почты: <a href="mailto:welcome@gbstudio.ru" style="color: var(--accent-bronze); text-decoration: underline;">welcome@gbstudio.ru</a> или по телефону: <a href="tel:+74958904422" style="color: var(--accent-bronze); text-decoration: underline;">+7 (495) 890-44-22</a>.
+            </p>
+        </div>
+    </div>
+</section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" id="contacts">
+        <div class="container">
+            <div class="footer-top">
+                <div>
+                    <div class="brand-logo" style="margin-bottom: 1.25rem;">
+                        <span class="brand-title">Golden Brush Studio</span>
+                        <span class="brand-subtitle">Искусство преображения пространства</span>
+                    </div>
+                    <p style="font-size: 0.95rem; color: var(--text-muted); max-width: 380px; line-height: 1.7; margin-bottom: 0;">
+                        Художественно-декоративные работы под ключ: авторские фактурные покрытия, реставрация архитектурных элементов, галерея предметов искусства с 2011 года.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="footer-col-title">Навигация</h4>
+                    <ul class="footer-links">
+                        <li><a href="projects.html">Наши проекты</a></li>
+                        <li><a href="materials.html">Декоративные покрытия</a></li>
+                        <li><a href="gallery.html">Арт-галерея</a></li>
+                        <li><a href="index.html#restoration">Реставрация</a></li>
+                        <li><a href="partners.html">Партнёры</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="footer-col-title">Сервисы & Связь</h4>
+                    <ul class="footer-links">
+                        <li><a href="portal.html">Личный кабинет</a></li>
+                        <li><a href="https://t.me/gbstudio" target="_blank" rel="noopener">Telegram</a></li>
+                        <li><a href="https://wa.me/74958904422" target="_blank" rel="noopener">Max</a></li>
+                        <li><a href="/journal/">Журнал студии</a></li>
+                        <li><a href="privacy.html">Конфиденциальность</a></li>
+                        <li style="margin-top: 1rem; padding-top: 0.6rem; border-top: 1px solid rgba(255, 255, 255, 0.08);">
+                            <a href="/admin/" style="color: var(--accent-gold); display: inline-flex; align-items: center; gap: 0.5rem;">
+                                <span>Панель управления</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="footer-col-title">Контакты</h4>
+                    <p style="font-size: 0.95rem; margin-bottom: 0.5rem; color: #fff;"><strong>Наталья Попыкина</strong></p>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.75rem;">Директор по развитию проектов</p>
+                    <p style="font-size: 0.95rem; margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.65rem;">
+                        <a href="tel:+7 (495) 890-44-22">+7 (495) 890-44-22</a>
+                    </p>
+                    <p style="font-size: 0.95rem; margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.65rem;">
+                        <a href="mailto:welcome@gbstudio.ru">welcome@gbstudio.ru</a>
+                    </p>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.75rem;">
+                        График: Ежедневно с 10:00 до 19:00 (МСК)
+                    </p>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.35rem;">
+                        Локация: Москва
+                    </p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2026 Golden Brush Studio. ИП Попыкина Н. В., ОГРНИП 321774600123456, ИНН 772012345678. Все права защищены.</p>
+                <p><a href="privacy.html">Политика конфиденциальности</a> • <a href="portal.html">Личный кабинет</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Sample Box Modal -->
+    <!-- Sample Box Modal -->
+    <div class="modal-backdrop" id="sampleBoxModal">
+        <div class="modal-box">
+            <button class="modal-close">&times;</button>
+            <div class="eyebrow">Для архитекторов и дизайнеров</div>
+            <h3 style="font-size: 1.8rem; color: var(--text-main); margin-bottom: 0.75rem;">Заказ «Architect Sample Box»</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+                Мы бесплатно доставим фирменный деревянный кейс с живыми выкрасами авторских штукатурок, микроцемента и минеральных текстур в ваше бюро.
+            </p>
+            <form id="sampleBoxForm">
+                <input type="text" name="website_check" style="position:absolute; opacity:0; pointer-events:none; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true">
+                <div class="form-group">
+                    <label class="form-label">Ваше имя и фамилия</label>
+                    <input type="text" name="name" class="form-input" placeholder="Константин Архипов" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Архитектурное бюро / Компания</label>
+                    <input type="text" name="company" class="form-input" placeholder="Бюро «Меганом»" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Телефон для связи</label>
+                    <input type="tel" name="phone" class="form-input" placeholder="+7 (999) 000-00-00" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Адрес доставки образцов</label>
+                    <input type="text" name="address" class="form-input" placeholder="г. Москва, ул. Арбат 10, офис 4" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Заказать кейс образцов</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Artwork Lightbox Modal -->
+    <div class="modal-backdrop" id="artworkModal">
+        <div class="modal-box" style="max-width: 820px; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center;">
+            <button class="modal-close">&times;</button>
+            <div>
+                <img src="" alt="" class="art-modal-img" style="border-radius: var(--radius-sm); width: 100%; max-height: 480px; object-fit: cover;">
+            </div>
+            <div>
+                <div class="eyebrow">Коллекционная работа</div>
+                <h3 class="art-modal-title" style="font-size: 1.6rem; color: var(--text-main); margin-bottom: 0.35rem;"></h3>
+                <p class="art-modal-medium" style="font-size: 0.85rem; color: var(--accent-bronze); margin-bottom: 0.35rem;"></p>
+                <p class="art-modal-dim" style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.75rem;"></p>
+                <div style="font-size: 1.4rem; font-weight: 700; color: var(--accent-bronze); margin-bottom: 0.75rem;" class="art-modal-price"></div>
+                <p class="art-modal-desc" style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1rem; max-height: 120px; overflow-y: auto;"></p>
+                
+                <form id="artInquiryForm" style="border-top: 1px solid var(--border-subtle); padding-top: 0.85rem;">
+                    <input type="hidden" name="artwork_title" id="artModalInputTitle" value="">
+                    <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--accent-bronze); display: block; margin-bottom: 0.5rem; font-weight: 600;">Запрос условий приобретения</span>
+                    <div style="display: flex; gap: 0.5rem; margin-bottom: 0.65rem;">
+                        <input type="text" name="name" class="form-input" placeholder="Ваше имя" style="padding: 0.6rem 0.8rem; font-size: 0.85rem;" required>
+                        <input type="tel" name="phone" class="form-input" placeholder="+7 (___) ___-__-__" style="padding: 0.6rem 0.8rem; font-size: 0.85rem;" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 0.85rem; padding: 0.7rem;">Забронировать работу</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Art Fitting Modal (Бесплатная примерка картин в интерьере) -->
+    <div class="modal-backdrop" id="artFittingModal">
+        <div class="modal-box" style="max-width: 580px;">
+            <button class="modal-close">&times;</button>
+            <div class="eyebrow">Бесплатная услуга студии</div>
+            <h3 style="font-size: 1.8rem; color: var(--text-main); margin-bottom: 0.75rem;">Примерка полотен в вашем интерьере</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.6;">
+                Мы бесплатно привезем выбранные оригиналы картин Александра Попыкина к вам домой или на объект. Вы сможете примерить их на стене при реальном освещении вашего пространства перед принятием решения.
+            </p>
+            <form id="artFittingForm">
+                <input type="text" name="website_check" style="position:absolute; opacity:0; pointer-events:none; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true">
+                <div class="form-group">
+                    <label class="form-label">Ваше имя *</label>
+                    <input type="text" name="name" class="form-input" placeholder="Елена / Архитектор Михаил" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Телефон для согласования визита *</label>
+                    <input type="tel" name="phone" class="form-input" placeholder="+7 (___) ___-__-__" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Адрес объекта или район (Москва и область)</label>
+                    <input type="text" name="address" class="form-input" placeholder="г. Москва, ЖК «Садовые Кварталы»">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Интересующие картины или пожелания по стилю</label>
+                    <input type="text" name="artworks_selected" class="form-input" placeholder="«Горизонт материи», «Окислы №3» или абстракция в теплых тонах">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Комментарий к интерьеру (цветовая гамма, высота потолков)</label>
+                    <textarea name="message" class="form-input" rows="2" placeholder="Гостиная 45 м², светлые фактурные стены, высота 3.2 м..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">Заказать бесплатную примерку</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Calculator Fix Estimate Modal -->
+    <div class="modal-backdrop" id="calcLeadModal">
+        <div class="modal-box" style="max-width: 540px;">
+            <button class="modal-close">&times;</button>
+            <div class="eyebrow">Фиксация сметного расчета</div>
+            <h3 style="font-size: 1.55rem; color: var(--text-main); margin-bottom: 0.5rem; font-family: var(--font-heading); font-weight: 700;">
+                Зафиксировать расчет и связаться для заказа
+            </h3>
+            <div id="calcModalSummary" style="background: var(--bg-secondary); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 1rem; margin-bottom: 1.25rem;">
+                <div style="font-size: 0.85rem; color: var(--text-muted);">Выбранное покрытие: <strong id="calcModalMaterial" style="color: var(--text-main);">—</strong></div>
+                <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">Площадь стен: <strong id="calcModalArea" style="color: var(--text-main);">—</strong></div>
+                <div style="font-size: 1.15rem; color: var(--accent-bronze); font-weight: 700; margin-top: 0.5rem;">Ориентировочная сумма: <span id="calcModalPrice">—</span></div>
+            </div>
+
+            <!-- Instant Messenger Send Buttons -->
+            <div style="margin-bottom: 1.25rem; display: flex; flex-direction: column; gap: 0.45rem;">
+                <div style="font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); font-weight: 600;">
+                    Отправить расчет напрямую в мессенджер:
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem;">
+                    <a id="calcTelegramDirect" href="https://t.me/gbstudio" target="_blank" rel="noopener" class="btn btn-secondary" style="font-size: 0.82rem; padding: 0.65rem 0.5rem; text-align: center; text-decoration: none;">
+                        Telegram
+                    </a>
+                    <a id="calcMaxDirect" href="https://wa.me/74958904422" target="_blank" rel="noopener" class="btn btn-secondary" style="font-size: 0.82rem; padding: 0.65rem 0.5rem; text-align: center; text-decoration: none;">
+                        Max
+                    </a>
+                </div>
+            </div>
+
+            <div style="position: relative; text-align: center; margin: 1.15rem 0; border-top: 1px solid var(--border-subtle);">
+                <span style="position: absolute; top: -0.65rem; left: 50%; transform: translateX(-50%); background: #ffffff; padding: 0 0.75rem; font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em;">
+                    или оставьте контакты
+                </span>
+            </div>
+
+            <form id="calcLeadForm">
+                <input type="text" name="website_check" style="position:absolute; opacity:0; pointer-events:none; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true">
+                <input type="hidden" name="material" id="calcLeadInputMaterial">
+                <input type="hidden" name="area_sqm" id="calcLeadInputArea">
+                <input type="hidden" name="estimated_cost" id="calcLeadInputCost">
+                <div class="form-group">
+                    <label class="form-label">Ваше имя *</label>
+                    <input type="text" name="name" class="form-input" placeholder="Константин" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Номер телефона *</label>
+                    <input type="tel" name="phone" class="form-input" placeholder="+7 (___) ___-__-__" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Комментарий к объекту</label>
+                    <textarea name="message" class="form-input" rows="2" placeholder="Адрес / специфика помещения..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">Зафиксировать расчет и связаться для заказа</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Video Reel Modal -->
+    <div class="modal-backdrop" id="videoModal">
+        <div class="modal-box" style="max-width: 860px; padding: 1.5rem; background: #000;">
+            <button class="modal-close">&times;</button>
+            <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: var(--radius-sm);">
+                <iframe id="videoIframe" style="position: absolute; top:0; left: 0; width: 100%; height: 100%; border:0;" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+            <div style="margin-top: 1rem; text-align: center;">
+                <p style="font-size: 0.95rem; color: var(--text-main);">Процесс создания авторских минеральных фактур и полотен в мастерской Golden Brush Studio</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- General Contact Modal ("Связаться с нами") -->
+    <div class="modal-backdrop" id="contactModal">
+        <div class="modal-box" style="max-width: 520px;">
+            <button class="modal-close">&times;</button>
+            <div class="eyebrow">Прямая связь со студией</div>
+            <h3 style="font-size: 1.8rem; color: var(--text-main); margin-bottom: 0.75rem;">Связаться с нами</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.6;">
+                Оставьте ваши контакты или напишите нам в мессенджер — мы оперативно ответим на все вопросы и обсудим ваш проект.
+            </p>
+            <div class="modal-quick-messengers" style="display: flex; gap: 0.75rem; margin-bottom: 1.5rem;">
+                <a href="https://t.me/gbstudio" target="_blank" rel="noopener" class="btn btn-secondary" style="flex: 1; text-align: center; justify-content: center; font-size: 0.85rem;">
+                    Telegram
+                </a>
+                <a href="https://wa.me/74958904422" target="_blank" rel="noopener" class="btn btn-secondary" style="flex: 1; text-align: center; justify-content: center; font-size: 0.85rem;">
+                    WhatsApp
+                </a>
+            </div>
+            <form id="generalContactForm">
+                <input type="text" name="website_check" style="position:absolute; opacity:0; pointer-events:none; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true">
+                <div class="form-group">
+                    <label class="form-label">Ваше имя *</label>
+                    <input type="text" name="name" class="form-input" placeholder="Константин" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Телефон для связи *</label>
+                    <input type="tel" name="phone" class="form-input" placeholder="+7 (___) ___-__-__" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Что вас интересует?</label>
+                    <input type="text" name="interest" class="form-input" placeholder="Декор стен / Реставрация / Картины / Арт-объекты">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Сообщение / пожелания</label>
+                    <textarea name="message" class="form-input" rows="2" placeholder="Опишите в свободной форме ваш объект или вопрос..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">Отправить сообщение</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Floating Quick Communication Widget ("Связаться с нами") -->
+    <div class="floating-quick-contact" id="floatingQuickContact">
+        <div class="floating-contact-menu" id="floatingContactMenu">
+            <button type="button" class="contact-bubble-item btn-open-contact">
+                <i class="fas fa-envelope"></i> <span>Оставить заявку</span>
+            </button>
+            <a href="https://t.me/gbstudio" target="_blank" rel="noopener" class="contact-bubble-item tg">
+                <i class="fab fa-telegram"></i> <span>Telegram мастера</span>
+            </a>
+            <a href="https://wa.me/74958904422" target="_blank" rel="noopener" class="contact-bubble-item wa">
+                <i class="fab fa-whatsapp"></i> <span>WhatsApp студии</span>
+            </a>
+            <a href="tel:+7 (495) 890-44-22" class="contact-bubble-item tel">
+                <i class="fas fa-phone-alt"></i> <span>+7 (495) 890-44-22</span>
+            </a>
+            <button type="button" class="contact-bubble-item fitting btn-open-fitting">
+                <i class="fas fa-palette"></i> <span>Примерка картин</span>
+            </button>
+        </div>
+        <button class="floating-toggle-btn" id="floatingToggleBtn" aria-label="Связаться с нами">
+            <i class="fas fa-comment-dots"></i>
+            <span class="floating-badge-text">Связаться с нами</span>
+        </button>
+    </div>
+
+    <!-- Main JavaScript -->
+    <script src="static/js/main.js?v=20260928-v9"></script>
+</body>
+</html>
