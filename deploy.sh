@@ -46,8 +46,8 @@ fi
 
 # 3. Pull latest changes if in git repository
 if [ -d .git ]; then
-    echo "[+] Checking for git updates..."
-    git pull --no-rebase || true
+    echo "[+] Fetching and resetting to latest origin/main..."
+    git fetch origin && git reset --hard origin/main
 fi
 
 # 4. Build and start containers
