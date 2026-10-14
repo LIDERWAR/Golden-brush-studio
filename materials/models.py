@@ -49,6 +49,7 @@ class DecorativeMaterial(models.Model):
     )
     short_desc = models.TextField(
         'Краткое описание (для калькулятора и карточки)',
+        blank=True,
         help_text='1-2 емких предложения о текстуре и эстетике'
     )
     full_desc = models.TextField(
@@ -73,12 +74,14 @@ class DecorativeMaterial(models.Model):
     fire_rating = models.CharField(
         'Класс пожарной безопасности',
         max_length=100,
-        default='КМ-0 (негорючий минеральный состав)'
+        default='КМ-0 (негорючий минеральный состав)',
+        blank=True
     )
     moisture_resistance = models.CharField(
         'Стойкость к влаге и уход',
         max_length=150,
-        default='Влагостойкое, моющееся покрытие'
+        default='Влагостойкое, моющееся покрытие',
+        blank=True
     )
     image = models.ImageField(
         'Главное фото выкраса / текстуры',
@@ -89,7 +92,8 @@ class DecorativeMaterial(models.Model):
     image_url = models.CharField(
         'Резервный путь к изображению',
         max_length=255,
-        default='/static/images/hero.jpg'
+        default='/static/images/hero.jpg',
+        blank=True
     )
     show_in_calculator = models.BooleanField(
         'Отображать в калькуляторе на главной',

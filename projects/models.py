@@ -18,16 +18,16 @@ class Project(models.Model):
     slug = models.SlugField('Слаг URL', unique=True)
     category = models.ForeignKey(ProjectCategory, on_delete=models.CASCADE, related_name='projects', verbose_name='Категория')
     client_name = models.CharField('Заказчик / Бренд', max_length=150, blank=True)
-    location = models.CharField('Локация / Город', max_length=150, default='Москва')
-    area_sqm = models.PositiveIntegerField('Площадь, м²', help_text='Например: 1850')
+    location = models.CharField('Локация / Город', max_length=150, default='Москва', blank=True)
+    area_sqm = models.PositiveIntegerField('Площадь, м²', default=0, blank=True, help_text='Например: 1850')
     year = models.PositiveIntegerField('Год реализации', default=2024)
-    duration = models.CharField('Срок выполнения', max_length=100, default='3 месяца')
+    duration = models.CharField('Срок выполнения', max_length=100, default='3 месяца', blank=True)
     
-    short_description = models.TextField('Краткое описание проекта')
-    scope_of_work = models.TextField('Выполненные работы (через точку с запятой)', help_text='Например: Комплексный fit-out под ключ; Монтаж вентиляции и СКС; Авторские рельефные покрытия стен; Изготовление стола из массива дуба и латуни')
+    short_description = models.TextField('Краткое описание проекта', blank=True)
+    scope_of_work = models.TextField('Выполненные работы (через точку с запятой)', blank=True, help_text='Например: Комплексный fit-out под ключ; Монтаж вентиляции и СКС; Авторские рельефные покрытия стен; Изготовление стола из массива дуба и латуни')
     
     image = models.ImageField('Фото объекта (загрузка с диска)', upload_to='projects/', blank=True, null=True)
-    image_url = models.CharField('URL или путь к изображению', max_length=255, default='/static/images/case_hotel.jpg')
+    image_url = models.CharField('URL или путь к изображению', max_length=255, default='/static/images/case_hotel.jpg', blank=True)
     is_featured = models.BooleanField('Отображать на главной', default=True)
     order = models.PositiveIntegerField('Порядок отображения', default=0)
     
