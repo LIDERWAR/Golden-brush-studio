@@ -3,7 +3,7 @@
 {% block content %}
 <!-- 1. HERO SECTION: THREE GRAND PORTALS (ARCHITECTURAL MINIMALISM) -->
 <section class="hero-atelier" id="home">
-    <div class="hero-atelier-bg" style="background-image: url('{{ home_config.hero_bg_image_url|default:'/static/images/hero_plaster_texture.jpg' }}');"></div>
+    <div class="hero-atelier-bg" style="background-image: url('{{ home_config.get_hero_bg_image }}');"></div>
     <div class="hero-atelier-overlay"></div>
 
     <div class="container hero-atelier-container">
@@ -26,7 +26,7 @@
             <!-- Window 1: Наши проекты -->
             <a href="{{ home_config.portal1_link|default:'/projects/' }}" class="portal-card">
                 <div class="portal-img-wrap">
-                    <img src="{{ home_config.portal1_img_url|default:'/static/images/hero.jpg' }}" alt="{{ home_config.portal1_title|default:'Наши проекты' }}">
+                    <img src="{{ home_config.get_portal1_img }}" alt="{{ home_config.portal1_title|default:'Наши проекты' }}">
                     <div class="portal-glass-overlay"></div>
                 </div>
                 <div class="portal-content">
@@ -37,7 +37,7 @@
             <!-- Window 2: Декоративные покрытия -->
             <a href="{{ home_config.portal2_link|default:'/materials/' }}" class="portal-card">
                 <div class="portal-img-wrap">
-                    <img src="{{ home_config.portal2_img_url|default:'/static/images/fresco_texture.jpg' }}" alt="{{ home_config.portal2_title|default:'Декоративные покрытия' }}">
+                    <img src="{{ home_config.get_portal2_img }}" alt="{{ home_config.portal2_title|default:'Декоративные покрытия' }}">
                     <div class="portal-glass-overlay"></div>
                 </div>
                 <div class="portal-content">
@@ -48,7 +48,7 @@
             <!-- Window 3: Арт-галерея -->
             <a href="{{ home_config.portal3_link|default:'/gallery/' }}" class="portal-card">
                 <div class="portal-img-wrap">
-                    <img src="{{ home_config.portal3_img_url|default:'/static/images/art_canvas.jpg' }}" alt="{{ home_config.portal3_title|default:'Арт-галерея' }}">
+                    <img src="{{ home_config.get_portal3_img }}" alt="{{ home_config.portal3_title|default:'Арт-галерея' }}">
                     <div class="portal-glass-overlay"></div>
                 </div>
                 <div class="portal-content">

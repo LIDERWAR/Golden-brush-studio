@@ -41,23 +41,52 @@ class HomePageConfig(models.Model):
         max_length=200,
         default='Художественно-декоративные работы под ключ'
     )
+    hero_bg_image = models.ImageField(
+        'Hero: Загрузить фоновое фото',
+        upload_to='home/',
+        blank=True,
+        null=True,
+        help_text='Загрузите фото с компьютера через кнопку «Выберите файл»'
+    )
     hero_bg_image_url = models.CharField(
-        'Hero: Фоновое изображение',
+        'Hero: Резервный URL / путь',
         max_length=255,
-        default='/static/images/hero_plaster_texture.jpg'
+        default='/static/images/hero_plaster_texture.jpg',
+        blank=True
     )
 
     portal1_title = models.CharField('Портал 1: Заголовок', max_length=150, default='Наши проекты')
     portal1_link = models.CharField('Портал 1: Ссылка', max_length=200, default='/projects/')
-    portal1_img_url = models.CharField('Портал 1: Фото', max_length=255, default='/static/images/case_bar_coyote.jpg')
+    portal1_image = models.ImageField(
+        'Портал 1: Загрузить фото',
+        upload_to='home/',
+        blank=True,
+        null=True,
+        help_text='Загрузите фото с компьютера через кнопку «Выберите файл»'
+    )
+    portal1_img_url = models.CharField('Портал 1: Резервный URL / путь', max_length=255, default='/static/images/case_bar_coyote.jpg', blank=True)
 
     portal2_title = models.CharField('Портал 2: Заголовок', max_length=150, default='Декоративные покрытия')
     portal2_link = models.CharField('Портал 2: Ссылка', max_length=200, default='/materials/')
-    portal2_img_url = models.CharField('Портал 2: Фото', max_length=255, default='/static/images/mat_mural.jpg')
+    portal2_image = models.ImageField(
+        'Портал 2: Загрузить фото',
+        upload_to='home/',
+        blank=True,
+        null=True,
+        help_text='Загрузите фото с компьютера через кнопку «Выберите файл»'
+    )
+    portal2_img_url = models.CharField('Портал 2: Резервный URL / путь', max_length=255, default='/static/images/mat_mural.jpg', blank=True)
 
     portal3_title = models.CharField('Портал 3: Заголовок', max_length=150, default='Арт-галерея')
     portal3_link = models.CharField('Портал 3: Ссылка', max_length=200, default='/gallery/')
-    portal3_img_url = models.CharField('Портал 3: Фото', max_length=255, default='/static/images/art_canvas.jpg')
+    portal3_image = models.ImageField(
+        'Портал 3: Загрузить фото',
+        upload_to='home/',
+        blank=True,
+        null=True,
+        help_text='Загрузите фото с компьютера через кнопку «Выберите файл»'
+    )
+    portal3_img_url = models.CharField('Портал 3: Резервный URL / путь', max_length=255, default='/static/images/art_canvas.jpg', blank=True)
 
     # 2. Процесс мастерской (Reel & Метрики)
     process_badge = models.CharField('Процесс: Подпись на бейдже', max_length=150, default='Мастерская Golden Brush Studio')
@@ -76,7 +105,14 @@ class HomePageConfig(models.Model):
     restoration_eyebrow = models.CharField('Реставрация: Надстрочник', max_length=200, default='Мастерство & Наследие')
     restoration_title = models.CharField('Реставрация: Заголовок', max_length=200, default='Реставрация и оформление')
     restoration_desc = models.TextField('Реставрация: Описание', default='Бережное восстановление исторической архитектурной лепнины, мозаичных панно, сусального золота и антикварных интерьерных поверхностей.')
-    restoration_img_url = models.CharField('Реставрация: Фото', max_length=255, default='/static/images/restoration_craft.jpg')
+    restoration_image = models.ImageField(
+        'Реставрация: Загрузить фото',
+        upload_to='home/',
+        blank=True,
+        null=True,
+        help_text='Загрузите фото с компьютера через кнопку «Выберите файл»'
+    )
+    restoration_img_url = models.CharField('Реставрация: Резервный URL / путь', max_length=255, default='/static/images/restoration_craft.jpg', blank=True)
 
     # 4. Внутренние разделы: Калькулятор покрытий (/materials/)
     calc_guarantee_text = models.CharField('Калькулятор: Текст гарантии под кнопкой', max_length=255, default='Бесплатный выезд технолога с образцами по Москве и МО • Замер и точная смета')
@@ -104,6 +140,36 @@ class HomePageConfig(models.Model):
 
     def __str__(self):
         return f"Golden Brush Studio — Тексты и настройки (обновлено {self.updated_at.strftime('%d.%m.%Y')})"
+
+    @property
+    def get_hero_bg_image(self):
+        if self.hero_bg_image:
+            return self.hero_bg_image.url
+        return self.hero_bg_image_url or '/static/images/hero_plaster_texture.jpg'
+
+    @property
+    def get_portal1_img(self):
+        if self.portal1_image:
+            return self.portal1_image.url
+        return self.portal1_img_url or '/static/images/case_bar_coyote.jpg'
+
+    @property
+    def get_portal2_img(self):
+        if self.portal2_image:
+            return self.portal2_image.url
+        return self.portal2_img_url or '/static/images/mat_mural.jpg'
+
+    @property
+    def get_portal3_img(self):
+        if self.portal3_image:
+            return self.portal3_image.url
+        return self.portal3_img_url or '/static/images/art_canvas.jpg'
+
+    @property
+    def get_restoration_img(self):
+        if self.restoration_image:
+            return self.restoration_image.url
+        return self.restoration_img_url or '/static/images/restoration_craft.jpg'
 
     @classmethod
     def get_solo(cls):

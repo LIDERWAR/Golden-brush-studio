@@ -17,12 +17,15 @@ class HomePageConfigAdmin(admin.ModelAdmin):
             'fields': (
                 'hero_eyebrow',
                 'hero_title',
-                'hero_bg_image_url',
-                ('portal1_title', 'portal1_link', 'portal1_img_url'),
-                ('portal2_title', 'portal2_link', 'portal2_img_url'),
-                ('portal3_title', 'portal3_link', 'portal3_img_url'),
+                ('hero_bg_image', 'hero_bg_image_url'),
+                ('portal1_title', 'portal1_link'),
+                ('portal1_image', 'portal1_img_url'),
+                ('portal2_title', 'portal2_link'),
+                ('portal2_image', 'portal2_img_url'),
+                ('portal3_title', 'portal3_link'),
+                ('portal3_image', 'portal3_img_url'),
             ),
-            'description': 'Первый экран сайта и 3 больших интерактивных окна (Наши проекты, Реставрация, Галерея).'
+            'description': 'Первый экран сайта и 3 больших интерактивных окна. Нажмите «Выберите файл», чтобы загрузить фото с компьютера, либо укажите резервный путь.'
         }),
         ('2. Секция Мастерской (Видео Reel и ключевые показатели)', {
             'fields': (
@@ -40,7 +43,7 @@ class HomePageConfigAdmin(admin.ModelAdmin):
                 'restoration_eyebrow',
                 'restoration_title',
                 'restoration_desc',
-                'restoration_img_url',
+                ('restoration_image', 'restoration_img_url'),
             )
         }),
         ('4. Калькулятор материалов (раздел /materials/)', {
@@ -56,6 +59,7 @@ class HomePageConfigAdmin(admin.ModelAdmin):
                 'contact_address',
                 'telegram_url',
                 'whatsapp_url',
+                'yandex_metrika_id',
             )
         }),
     )
