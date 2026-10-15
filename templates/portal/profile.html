@@ -1,0 +1,332 @@
+{% extends 'base.html' %}
+
+{% block title %}Профиль заказчика и технические пожелания — Golden Brush Studio{% endblock %}
+{% block meta_desc %}Персональный профиль партнера Golden Brush Studio: индивидуальная карта пожеланий к фактурам, специфика пространств, накопительные скидки и консьерж-сервис.{% endblock %}
+
+{% block content %}
+<section class="portal-dashboard-section portal-profile-section">
+    <div class="container portal-dashboard-container">
+        
+        <!-- Portal Sub-Navigation (Tabs) -->
+        <div class="portal-nav-bar">
+            <a href="{% url 'portal:dashboard' %}" class="portal-nav-link">
+                Трекер объекта
+            </a>
+            <a href="{% url 'portal:profile' %}" class="portal-nav-link active">
+                Профиль и пожелания
+            </a>
+        </div>
+
+        <!-- Top Header Bar -->
+        <header class="portal-header-bar">
+            <div>
+                <div class="eyebrow">Личный кабинет партнера • Golden Brush Studio</div>
+                <h1 class="portal-user-title">
+                    {{ profile.full_name|default:'Уважаемый партнер' }}
+                </h1>
+                <div class="portal-meta-badges">
+                    <span class="portal-badge">{{ profile.phone }}</span>
+                    {% if profile.company %}<span class="portal-badge">{{ profile.company }}</span>{% endif %}
+                    {% if profile.client_type_display %}<span class="portal-badge">{{ profile.client_type_display }}</span>{% endif %}
+                    <span class="portal-badge">{{ profile.tier.name }}</span>
+                    {% if is_demo %}<span class="portal-badge portal-badge-demo">Режим демонстрации</span>{% endif %}
+                </div>
+            </div>
+
+            <div class="portal-header-actions">
+                <a href="tel:+74958904422" class="btn btn-primary">
+                    Связаться с куратором
+                </a>
+                <a href="{% url 'portal:logout' %}" class="btn btn-secondary btn-portal-logout">
+                    Выйти
+                </a>
+            </div>
+        </header>
+
+        {% if status_message %}
+        <div class="portal-alert-box portal-alert-{{ status_type }}" style="margin-bottom: 2rem;">
+            {{ status_message }}
+        </div>
+        {% endif %}
+
+        {% if is_demo %}
+        <div class="portal-alert-box portal-alert-info" style="margin-bottom: 2rem;">
+            <strong>Демонстрационный режим профиля.</strong> Вы просматриваете интерактивный пример заполненного профиля архитектора. Чтобы сохранить ваши персональные параметры, закрепить скидку на материалы и заказать образцы, перейдите к <a href="{% url 'portal:register' %}" style="color: var(--accent-gold); text-decoration: underline; font-weight: 600;">регистрации в клубе</a>.
+        </div>
+        {% endif %}
+
+        <!-- Main Layout Grid -->
+        <div class="portal-profile-layout">
+            
+            <!-- Left Main Column: Form of Wishes & Details -->
+            <div class="portal-profile-main-col">
+                <div class="portal-card profile-card">
+                    <div class="portal-card-header">
+                        <div class="eyebrow">Техническое задание & Эстетика</div>
+                        <h2 class="portal-card-title">Индивидуальная карта пожеланий заказчика</h2>
+                        <p class="portal-card-desc">
+                            Укажите приоритетные фактуры, назначение помещений и сервисные требования. Мы адаптируем технологические карты и подготовим целевые авторские образцы под ваш проект.
+                        </p>
+                    </div>
+
+                    <form method="POST" action="{% url 'portal:profile' %}" class="profile-wishes-form">
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="save_profile">
+
+                        <!-- 1. Preferred Materials & Techniques -->
+                        <div class="profile-form-section">
+                            <h3 class="profile-section-heading">01. Интересующие фактуры и художественные техники</h3>
+                            <p class="profile-section-sub">Отметьте материалы, которые планируются к реализации на вашем объекте:</p>
+                            
+                            <div class="profile-checkbox-grid">
+                                {% for code, label in material_choices %}
+                                <label class="profile-checkbox-label">
+                                    <input type="checkbox" name="preferred_materials" value="{{ code }}" {% if code in profile.preferred_materials %}checked{% endif %}>
+                                    <span class="checkbox-custom"></span>
+                                    <span class="checkbox-title">{{ label }}</span>
+                                </label>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <!-- 2. Spaces & Types of Rooms -->
+                        <div class="profile-form-section">
+                            <h3 class="profile-section-heading">02. Специфика проектируемых пространств</h3>
+                            <p class="profile-section-sub">Зоны объекта и технические требования к износостойкости:</p>
+                            
+                            <div class="profile-checkbox-grid">
+                                {% for code, label in space_choices %}
+                                <label class="profile-checkbox-label">
+                                    <input type="checkbox" name="preferred_spaces" value="{{ code }}" {% if code in profile.preferred_spaces %}checked{% endif %}>
+                                    <span class="checkbox-custom"></span>
+                                    <span class="checkbox-title">{{ label }}</span>
+                                </label>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <!-- 3. Service Options & Logistics -->
+                        <div class="profile-form-section">
+                            <h3 class="profile-section-heading">03. Сервисные опции и индивидуальные требования</h3>
+                            <p class="profile-section-sub">Специальные условия реализации и взаимодействия с мастерской:</p>
+                            
+                            <div class="profile-checkbox-grid">
+                                {% for code, label in service_choices %}
+                                <label class="profile-checkbox-label">
+                                    <input type="checkbox" name="service_options" value="{{ code }}" {% if code in profile.service_options %}checked{% endif %}>
+                                    <span class="checkbox-custom"></span>
+                                    <span class="checkbox-title">{{ label }}</span>
+                                </label>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <!-- 4. Textarea Detailed Wishes -->
+                        <div class="profile-form-section">
+                            <h3 class="profile-section-heading">04. Развернутые пожелания и технические нюансы</h3>
+                            <div class="form-group">
+                                <label for="clientWishes" class="portal-label">Описание дизайн-концепции, площадь и особые задачи</label>
+                                <textarea id="clientWishes" name="client_wishes" rows="4" class="portal-input portal-textarea" placeholder="Например: Пентхаус 240 м², высота потолков 3.4 м. Нужна монолитная бесшовная фактура микроцемента без швов на стыках с теневым профилем. Необходима предварительная колеровка под цвет паркета...">{{ profile.client_wishes }}</textarea>
+                                <small class="portal-hint">Эти данные сразу поступают арт-директору Александру Попыкину для составления технологической карты</small>
+                            </div>
+                        </div>
+
+                        <!-- 5. Delivery Address for Samples -->
+                        <div class="profile-form-section">
+                            <h3 class="profile-section-heading">05. Логистика и доставка образцов</h3>
+                            <div class="form-group">
+                                <label for="deliveryAddress" class="portal-label">Адрес доставки Architect Sample Box и проектных документов</label>
+                                <input type="text" id="deliveryAddress" name="delivery_address" class="portal-input" value="{{ profile.delivery_address }}" placeholder="г. Москва, ул. Арбат 10, архитектурное бюро, офис 4">
+                                <small class="portal-hint">По этому адресу мы бесплатно доставляем фирменные деревянные кейсы с образцами</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="prefMessenger" class="portal-label">Предпочтительный канал для оперативных согласований</label>
+                                <select id="prefMessenger" name="preferred_messenger" class="portal-input">
+                                    <option value="telegram" {% if profile.preferred_messenger == 'telegram' %}selected{% endif %}>Telegram (быстрые фотоотчеты и согласования)</option>
+                                    <option value="whatsapp" {% if profile.preferred_messenger == 'whatsapp' %}selected{% endif %}>WhatsApp</option>
+                                    <option value="phone" {% if profile.preferred_messenger == 'phone' %}selected{% endif %}>Телефонный звонок ведущего мастера</option>
+                                    <option value="email" {% if profile.preferred_messenger == 'email' %}selected{% endif %}>Официальная электронная почта</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- 6. Personal & Company Credentials -->
+                        <div class="profile-form-section">
+                            <h3 class="profile-section-heading">06. Контактные данные и настройки доступа</h3>
+                            
+                            <div class="form-grid-2">
+                                <div class="form-group">
+                                    <label for="fullName" class="portal-label">ФИО контактного лица</label>
+                                    <input type="text" id="fullName" name="full_name" class="portal-input" value="{{ profile.full_name }}" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone" class="portal-label">Номер телефона</label>
+                                    <input type="text" id="phone" name="phone" class="portal-input" value="{{ profile.phone }}" readonly style="opacity: 0.75; cursor: not-allowed;" title="Для изменения номера телефона свяжитесь с поддержкой">
+                                </div>
+                            </div>
+
+                            <div class="form-grid-2">
+                                <div class="form-group">
+                                    <label for="company" class="portal-label">Организация / Бюро / Объект</label>
+                                    <input type="text" id="company" name="company" class="portal-input" value="{{ profile.company }}" placeholder="Например: Архитектурное бюро «Форма»">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email" class="portal-label">Электронная почта</label>
+                                    <input type="email" id="email" name="email" class="portal-input" value="{{ profile.email }}" placeholder="office@studio.ru">
+                                </div>
+                            </div>
+
+                            <div class="form-grid-2">
+                                <div class="form-group">
+                                    <label for="clientType" class="portal-label">Профиль деятельности</label>
+                                    <select id="clientType" name="client_type" class="portal-input">
+                                        <option value="architect" {% if profile.client_type == 'architect' %}selected{% endif %}>Архитектор / Дизайнер интерьера</option>
+                                        <option value="developer" {% if profile.client_type == 'developer' %}selected{% endif %}>Девелопер / Генподрядчик</option>
+                                        <option value="private" {% if profile.client_type == 'private' %}selected{% endif %}>Частный заказчик</option>
+                                        <option value="commercial" {% if profile.client_type == 'commercial' %}selected{% endif %}>Корпоративный клиент / HoReCa</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="pinCode" class="portal-label">ПИН-код быстрого доступа (4 цифры)</label>
+                                    <input type="password" id="pinCode" name="pin" class="portal-input" value="{{ profile.access_pin }}" maxlength="6" placeholder="1234">
+                                    <small class="portal-hint">Используется для быстрого входа без пароля</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="profile-submit-wrap">
+                            <button type="submit" class="btn btn-primary btn-portal-save">
+                                Сохранить пожелания и реквизиты
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Right Sidebar Column: Loyalty, Concierge Actions & Team -->
+            <div class="portal-profile-side-col">
+                
+                <!-- Loyalty Card -->
+                <div class="portal-card side-loyalty-card">
+                    <div class="eyebrow">Клубный статус партнера</div>
+                    <h3 class="side-card-title">{{ profile.tier.name }}</h3>
+                    <p class="side-card-sub">Накопительные условия, закрепленные за вашей организацией:</p>
+                    
+                    <div class="tier-perks-ledger" style="margin: 1.25rem 0;">
+                        <div class="ledger-row">
+                            <span>Скидка на материалы:</span>
+                            <strong class="tier-accent-val">-{{ profile.tier.discount_materials }}%</strong>
+                        </div>
+                        <div class="ledger-row">
+                            <span>Скидка на комплекс работ:</span>
+                            <strong class="tier-accent-val">{% if profile.tier.discount_works > 0 %}-{{ profile.tier.discount_works }}%{% else %}Базовый прайс{% endif %}</strong>
+                        </div>
+                        <div class="ledger-row">
+                            <span>Премиальные краски (Италия):</span>
+                            <strong class="tier-accent-val">-12%</strong>
+                        </div>
+                        <div class="ledger-row">
+                            <span>Завершенных проектов:</span>
+                            <span>{{ profile.tier.completed_projects }}</span>
+                        </div>
+                    </div>
+
+                    <div class="side-progress-wrap">
+                        <div class="side-progress-label">
+                            <span>Прогресс статуса:</span>
+                            <span>{{ profile.tier.progress_pct }}%</span>
+                        </div>
+                        <div class="side-progress-bar">
+                            <div class="side-progress-fill" style="width: {{ profile.tier.progress_pct }}%;"></div>
+                        </div>
+                        <small class="side-goal-text">{{ profile.tier.next_tier_label }}</small>
+                    </div>
+                </div>
+
+                <!-- One-Click Concierge Services -->
+                <div class="portal-card concierge-card">
+                    <div class="eyebrow">Консьерж-сервис мастерской</div>
+                    <h3 class="side-card-title">Быстрый заказ услуг в 1 клик</h3>
+                    <p class="side-card-sub">Используются данные и адрес, сохраненные в вашем профиле:</p>
+
+                    <div class="concierge-actions-list">
+                        
+                        <!-- 1. Request Sample Box -->
+                        <form method="POST" action="{% url 'portal:profile' %}" class="concierge-action-item">
+                            {% csrf_token %}
+                            <input type="hidden" name="action" value="request_sample_box">
+                            <div class="concierge-item-info">
+                                <strong>Architect Sample Box</strong>
+                                <span>Деревянный кейс с живыми выкрасами микроцемента и штукатурок</span>
+                            </div>
+                            <button type="submit" class="btn btn-secondary concierge-btn">
+                                Заказать кейс образцов
+                            </button>
+                        </form>
+
+                        <!-- 2. Request Art Fitting -->
+                        <form method="POST" action="{% url 'portal:profile' %}" class="concierge-action-item">
+                            {% csrf_token %}
+                            <input type="hidden" name="action" value="request_art_fitting">
+                            <div class="concierge-item-info">
+                                <strong>Примерка полотен в интерьере</strong>
+                                <span>Бесплатная примерка картин Александра Попыкина на стенах объекта</span>
+                            </div>
+                            <button type="submit" class="btn btn-secondary concierge-btn">
+                                Заказать примерку картин
+                            </button>
+                        </form>
+
+                        <!-- 3. Request Laser Audit -->
+                        <form method="POST" action="{% url 'portal:profile' %}" class="concierge-action-item">
+                            {% csrf_token %}
+                            <input type="hidden" name="action" value="request_laser_audit">
+                            <div class="concierge-item-info">
+                                <strong>Аудит стен и лазерный замер</strong>
+                                <span>Выезд технолога мастерской для проверки плоскостей и влажности</span>
+                            </div>
+                            <button type="submit" class="btn btn-secondary concierge-btn">
+                                Вызвать мастера на замер
+                            </button>
+                        </form>
+
+                    </div>
+                </div>
+
+                <!-- Direct Contacts with Directors -->
+                <div class="portal-card team-contact-card">
+                    <div class="eyebrow">Персональные кураторы</div>
+                    <h3 class="side-card-title">Прямая связь с мастерской</h3>
+                    
+                    <div class="curator-profile-box">
+                        <div class="curator-meta">
+                            <strong>Наталья Попыкина</strong>
+                            <span>Директор по развитию и договорам</span>
+                        </div>
+                        <div class="curator-buttons">
+                            <a href="tel:+74958904422" class="btn btn-secondary" style="width: 100%; text-align: center;">Позвонить</a>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-top: 0.5rem;">
+                                <a href="https://t.me/gbstudio" target="_blank" rel="noopener" class="btn btn-secondary" style="text-align: center;">Telegram</a>
+                                <a href="https://wa.me/74958904422" target="_blank" rel="noopener" class="btn btn-secondary" style="text-align: center;">WhatsApp</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="curator-profile-box" style="margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid var(--border-subtle);">
+                        <div class="curator-meta">
+                            <strong>Александр Попыкин</strong>
+                            <span>Арт-директор и ведущий художник</span>
+                        </div>
+                        <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 0.35rem; line-height: 1.5;">
+                            Курирует художественное качество нанесения, колеровку авторских оттенков и оригинальные картины.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+{% endblock %}

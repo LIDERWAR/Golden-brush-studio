@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="X3lpKGiZBwEYbBMdiXqTDjTkTtu5Fh1jhNFKzuObBTUAvtIHz2UCsPmD6IUZuKsL">
+    <meta name="csrf-token" content="W8LCoRkxa55fiQKTZY1XEdlWOlZfjOWAnTnPdtZS2w9oxylTSNo1deJQ3o4hEfJ3">
     <title>Контакты — Golden Brush Studio | Художественно-декоративные работы</title>
     <meta name="description" content="Контакты мастерской Golden Brush Studio. Прямой диалог с создателями: телефон, Telegram, Max. Реализация проектов в Москве и по всей России.">
     
@@ -34,12 +34,9 @@
             </a>
 
             <div class="header-actions">
-                <a href="portal.html" class="header-profile-btn" aria-label="Личный кабинет" title="Личный кабинет">
-                    <svg class="header-profile-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
-                        <circle cx="12" cy="7" r="4"></circle>
-                    </svg>
-                </a>
+                
+                <a href="portal_login.html" class="header-login-btn">Войти</a>
+                
                 <button class="burger-btn" id="burgerBtn" type="button" aria-label="Открыть навигационное меню">
                     <span class="burger-lines">
                         <span class="line line-1"></span>
@@ -68,45 +65,53 @@
             <nav class="drawer-nav">
                 <div class="drawer-section-title">Разделы мастерской</div>
                 <ul class="drawer-menu">
+                    
                     <li>
-                        <a href="portal.html" class="drawer-link">
+                        <a href="portal_login.html" class="drawer-link">
                             <span class="drawer-num">01</span>
-                            <span class="drawer-text">Личный кабинет <small>Накопительные скидки на материалы и работы</small></span>
+                            <span class="drawer-text">Вход в кабинет <small>Накопительные скидки на материалы и работы</small></span>
                         </a>
                     </li>
                     <li>
-                        <a href="projects.html" class="drawer-link">
+                        <a href="portal_login.html?tab=register" class="drawer-link">
                             <span class="drawer-num">02</span>
+                            <span class="drawer-text">Регистрация в клубе <small>Фиксация скидки 5% со старта</small></span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="projects.html" class="drawer-link">
+                            <span class="drawer-num">03</span>
                             <span class="drawer-text">Наши проекты <small>Бары и рестораны • Частные апартаменты</small></span>
                         </a>
                     </li>
                     <li>
                         <a href="materials.html" class="drawer-link">
-                            <span class="drawer-num">03</span>
+                            <span class="drawer-num">04</span>
                             <span class="drawer-text">Декоративные покрытия <small>Каталог</small></span>
                         </a>
                     </li>
                     <li>
                         <a href="gallery.html" class="drawer-link">
-                            <span class="drawer-num">04</span>
+                            <span class="drawer-num">05</span>
                             <span class="drawer-text">Арт-галерея <small>Живопись и графика • Керамика • Арт-объекты</small></span>
                         </a>
                     </li>
                     <li>
                         <a href="index.html#restoration" class="drawer-link">
-                            <span class="drawer-num">05</span>
+                            <span class="drawer-num">06</span>
                             <span class="drawer-text">Реставрация</span>
                         </a>
                     </li>
                     <li>
                         <a href="partners.html" class="drawer-link">
-                            <span class="drawer-num">06</span>
+                            <span class="drawer-num">07</span>
                             <span class="drawer-text">Партнёры <small>Шкала скидок от 1 до 3 проектов • Краски -12%</small></span>
                         </a>
                     </li>
                     <li>
                         <a href="contacts.html" class="drawer-link">
-                            <span class="drawer-num">07</span>
+                            <span class="drawer-num">08</span>
                             <span class="drawer-text">Контакты <small>Telegram и Max • Ежедневно 10:00–19:00</small></span>
                         </a>
                     </li>
@@ -122,6 +127,7 @@
                     <a href="https://t.me/gbstudio" target="_blank" rel="noopener" class="drawer-soc-btn" aria-label="Telegram">Telegram</a>
                     <a href="https://wa.me/74958904422" target="_blank" rel="noopener" class="drawer-soc-btn" aria-label="Max">Max</a>
                 </div>
+                
             </div>
         </div>
     </div>
@@ -327,7 +333,7 @@
                 </p>
 
                 <form id="contactPageForm" class="contact-direct-form" method="POST" action="/api/quiz-lead/">
-                    <input type="hidden" name="csrfmiddlewaretoken" value="X3lpKGiZBwEYbBMdiXqTDjTkTtu5Fh1jhNFKzuObBTUAvtIHz2UCsPmD6IUZuKsL">
+                    <input type="hidden" name="csrfmiddlewaretoken" value="W8LCoRkxa55fiQKTZY1XEdlWOlZfjOWAnTnPdtZS2w9oxylTSNo1deJQ3o4hEfJ3">
                     <!-- Honeypot anti-spam -->
                     <div style="display:none !important;" aria-hidden="true">
                         <input type="text" name="website_hp" tabindex="-1" autocomplete="off">
@@ -476,7 +482,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div>
                     <h4 class="footer-col-title">Сервисы & Связь</h4>
                     <ul class="footer-links">
-                        <li><a href="portal.html">Личный кабинет</a></li>
+                        
+                        <li><a href="portal_login.html">Вход в кабинет</a></li>
+                        <li><a href="portal_login.html?tab=register">Регистрация в клубе</a></li>
+                        
                         <li><a href="https://t.me/gbstudio" target="_blank" rel="noopener">Telegram</a></li>
                         <li><a href="https://wa.me/74958904422" target="_blank" rel="noopener">Max</a></li>
                         <li><a href="/journal/">Журнал студии</a></li>
@@ -510,7 +519,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             <div class="footer-bottom">
                 <p>© 2026 Golden Brush Studio. ИП Попыкина Н. В., ОГРНИП 321774600123456, ИНН 772012345678. Все права защищены.</p>
-                <p><a href="privacy.html">Политика конфиденциальности</a> • <a href="portal.html">Личный кабинет</a></p>
+                <p><a href="privacy.html">Политика конфиденциальности</a> • <a href="portal_login.html">Личный кабинет</a></p>
             </div>
         </div>
     </footer>

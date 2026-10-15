@@ -6,6 +6,16 @@
 {% block content %}
 <section class="portal-dashboard-section">
     <div class="container portal-dashboard-container">
+        <!-- Portal Sub-Navigation (Tabs) -->
+        <div class="portal-nav-bar">
+            <a href="{% url 'portal:dashboard' %}" class="portal-nav-link active">
+                Трекер объекта
+            </a>
+            <a href="{% url 'portal:profile' %}" class="portal-nav-link">
+                Профиль и пожелания
+            </a>
+        </div>
+
         <!-- Top Bar: Greeting & Switcher -->
         <header class="portal-header-bar">
             <div>

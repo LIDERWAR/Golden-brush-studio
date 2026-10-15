@@ -26,6 +26,9 @@ class ClientAccountAdmin(admin.ModelAdmin):
         ('Основная информация', {
             'fields': ('user', 'full_name', 'phone', 'email', 'company', 'client_type', 'access_pin')
         }),
+        ('Пожелания заказчика и логистика', {
+            'fields': ('delivery_address', 'preferred_messenger', 'preferred_materials', 'preferred_spaces', 'service_options', 'client_wishes')
+        }),
         ('Программа долгосрочного партнерства и скидок', {
             'fields': ('custom_tier', 'get_tier_display', 'get_materials_discount', 'get_works_discount', 'total_projects_count')
         }),

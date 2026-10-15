@@ -306,3 +306,195 @@ def portal_dashboard(request):
 def portal_logout(request):
     request.session.flush()
     return redirect('portal:login')
+
+def portal_profile(request):
+    """Страница персонального профиля клиента с детальным учетом всех пожеланий и техзадания."""
+    phone = request.session.get('client_phone')
+    is_demo = False
+    client = None
+
+    if phone and phone != 'demo':
+        client = ClientAccount.objects.filter(phone=phone).first()
+        if not client:
+            digits = re.sub(r'\D', '', phone)
+            if len(digits) >= 10:
+                client = ClientAccount.objects.filter(phone__icontains=digits[-10:]).first()
+    elif hasattr(request, 'user') and request.user.is_authenticated and hasattr(request.user, 'client_account'):
+        client = request.user.client_account
+
+    if not client:
+        is_demo = True
+
+    MATERIAL_CHOICES = [
+        ('microcement', 'Бесшовный микроцемент (Microcement)'),
+        ('mineral_plaster', 'Минеральная фактурная штукатурка'),
+        ('travertine', 'Парижский травертин и скальный рельеф'),
+        ('basrelief', 'Скульптурные настенные барельефы'),
+        ('gold_leaf', 'Сусальное золочение, поталь и патина'),
+        ('mural', 'Авторская монументальная роспись стен'),
+        ('venetian', 'Классическая венецианская штукатурка'),
+        ('art_canvas', 'Картины и коллекционные арт-объекты Александра Попыкина'),
+    ]
+
+    SPACE_CHOICES = [
+        ('living_rooms', 'Гостиные, холлы и мастер-спальни'),
+        ('wet_zones', 'Мокрые зоны, ванные комнаты и SPA (100% гидроизоляция)'),
+        ('commercial_horeca', 'Рестораны, бары, бутики и отели (высокая износостойкость)'),
+        ('corporate_office', 'Представительские офисы и штаб-квартиры'),
+        ('facades', 'Фасады, входные группы и террасы'),
+        ('ceilings_accents', 'Сложные архитектурные потолки и купола'),
+    ]
+
+    SERVICE_CHOICES = [
+        ('sample_box', 'Доставка фирменного Architect Sample Box с живыми выкрасами'),
+        ('laser_audit', 'Выездной лазерный замер геометрии и аудит влажности стен'),
+        ('art_fitting', 'Бесплатная примерка полотен Александра Попыкина в интерьере'),
+        ('night_shifts', 'Возможность работы в ночные смены (для ТЦ и ресторанов)'),
+        ('nda_signed', 'Строгий режим конфиденциальности объекта (NDA)'),
+        ('edo_docs', 'Электронный документооборот (Диадок / КС-2 / КС-3 / НДС)'),
+    ]
+
+    status_message = None
+    status_type = 'success'
+
+    if request.method == 'POST':
+        action = request.POST.get('action', 'save_profile')
+
+        if is_demo:
+            status_message = 'В демонстрационном режиме изменения не сохраняются в базе данных. Зарегистрируйтесь в клубе, чтобы закрепить персональные условия.'
+            status_type = 'info'
+        else:
+            if action == 'request_sample_box':
+                try:
+                    from leads.models import Lead
+                    Lead.objects.create(
+                        name=client.full_name,
+                        company=client.company or '',
+                        phone=client.phone,
+                        email=client.email or '',
+                        source='profile_sample_box',
+                        object_type=f"Заказ кейса образцов ({client.get_client_type_display()})",
+                        service_needed="Architect Sample Box по адресу из профиля",
+                        message=f"Адрес доставки: {client.delivery_address or 'Уточнить у клиента'}. Связь через: {client.preferred_messenger}",
+                    )
+                    status_message = 'Заявка на Architect Sample Box принята! Образцы будут направлены по вашему адресу доставки.'
+                except Exception:
+                    status_message = 'Ошибка при создании заявки на образцы. Пожалуйста, свяжитесь с нами напрямую.'
+                    status_type = 'error'
+
+            elif action == 'request_art_fitting':
+                try:
+                    from leads.models import Lead
+                    Lead.objects.create(
+                        name=client.full_name,
+                        company=client.company or '',
+                        phone=client.phone,
+                        email=client.email or '',
+                        source='profile_art_fitting',
+                        object_type=f"Примерка картин ({client.get_client_type_display()})",
+                        service_needed="Бесплатная примерка картин в интерьере объекта",
+                        message=f"Адрес объекта: {client.delivery_address or 'Уточнить'}. Пожелания: {client.client_wishes or 'Без примечаний'}",
+                    )
+                    status_message = 'Заявка на примерку картин принята! Куратор студии свяжется с вами для согласования удобного дня.'
+                except Exception:
+                    status_message = 'Ошибка при заказе примерки.'
+                    status_type = 'error'
+
+            elif action == 'request_laser_audit':
+                try:
+                    from leads.models import Lead
+                    Lead.objects.create(
+                        name=client.full_name,
+                        company=client.company or '',
+                        phone=client.phone,
+                        email=client.email or '',
+                        source='profile_audit',
+                        object_type=f"Выездной аудит стен ({client.get_client_type_display()})",
+                        service_needed="Лазерный замер геометрии и аудит основания",
+                        message=f"Адрес объекта: {client.delivery_address or 'Уточнить'}",
+                    )
+                    status_message = 'Заявка на выездной аудит стен принята! Технолог Александр Попыкин свяжется с вами для подтверждения времени визита.'
+                except Exception:
+                    status_message = 'Ошибка при заказе аудита.'
+                    status_type = 'error'
+
+            else:
+                client.full_name = request.POST.get('full_name', client.full_name).strip()
+                client.email = request.POST.get('email', client.email or '').strip() or None
+                client.company = request.POST.get('company', client.company or '').strip() or None
+                client.client_type = request.POST.get('client_type', client.client_type)
+                client.delivery_address = request.POST.get('delivery_address', client.delivery_address or '').strip() or None
+                client.preferred_messenger = request.POST.get('preferred_messenger', client.preferred_messenger or 'telegram')
+                client.client_wishes = request.POST.get('client_wishes', client.client_wishes or '').strip() or None
+
+                pin = request.POST.get('pin', '').strip()
+                if pin and len(pin) >= 4:
+                    client.access_pin = pin
+
+                client.preferred_materials = request.POST.getlist('preferred_materials')
+                client.preferred_spaces = request.POST.getlist('preferred_spaces')
+                client.service_options = request.POST.getlist('service_options')
+                client.save()
+
+                status_message = 'Все ваши индивидуальные пожелания, технические требования и реквизиты успешно сохранены в системе мастерской.'
+
+    if is_demo:
+        demo_ctx = get_demo_context()
+        profile_data = {
+            'full_name': demo_ctx['client']['full_name'],
+            'phone': demo_ctx['client']['phone'],
+            'company': demo_ctx['client']['company'],
+            'email': demo_ctx['client']['email'],
+            'client_type': 'architect',
+            'client_type_display': 'Архитектурное бюро / Дизайн-студия',
+            'delivery_address': 'Москва, Малый Козихинский пер., 12, офис 4',
+            'preferred_messenger': 'telegram',
+            'access_pin': '1234',
+            'preferred_materials': ['microcement', 'travertine', 'basrelief'],
+            'preferred_spaces': ['living_rooms', 'wet_zones', 'commercial_horeca'],
+            'service_options': ['sample_box', 'art_fitting', 'laser_audit', 'nda_signed'],
+            'client_wishes': 'Интерьер в стиле современного теплого минимализма. Необходима бесшовная фактура стен в мастер-спальне и гостиной, устойчивая к влажной уборке. Также интересует подбор 2-3 коллекционных картин Александра Попыкина в гостиную зону.',
+            'tier': demo_ctx['tier'],
+            'project': demo_ctx['project'],
+        }
+    else:
+        tier_info = client.next_tier_info
+        profile_data = {
+            'full_name': client.full_name,
+            'phone': client.phone,
+            'company': client.company or '',
+            'email': client.email or '',
+            'client_type': client.client_type,
+            'client_type_display': client.get_client_type_display(),
+            'delivery_address': client.delivery_address or '',
+            'preferred_messenger': client.preferred_messenger or 'telegram',
+            'access_pin': client.access_pin,
+            'preferred_materials': client.preferred_materials or [],
+            'preferred_spaces': client.preferred_spaces or [],
+            'service_options': client.service_options or [],
+            'client_wishes': client.client_wishes or '',
+            'tier': {
+                'code': client.tier_code,
+                'name': client.tier_name,
+                'discount_materials': client.discount_materials,
+                'discount_works': client.discount_works,
+                'completed_projects': client.total_projects_count,
+                'next_tier_label': tier_info['label'],
+                'projects_needed': tier_info['projects_needed'],
+                'progress_pct': tier_info['progress_pct'],
+                'max_tier': tier_info['max_tier'],
+            },
+            'project': client.projects.first(),
+        }
+
+    context = {
+        'profile': profile_data,
+        'material_choices': MATERIAL_CHOICES,
+        'space_choices': SPACE_CHOICES,
+        'service_choices': SERVICE_CHOICES,
+        'is_demo': is_demo,
+        'status_message': status_message,
+        'status_type': status_type,
+    }
+    return render(request, 'portal/profile.html', context)
+

@@ -22,6 +22,7 @@ def build_docs():
         'fonts': ('/fonts/', 'fonts'),
         'partners': ('/partners/', 'partners'),
         'portal': ('/portal/', 'portal'),
+        'portal_profile': ('/portal/profile/', 'portal_profile'),
         'portal_login': ('/portal/login/', 'portal_login'),
         'contacts': ('/contacts/', 'contacts'),
         'privacy': ('/privacy/', 'privacy'),
@@ -73,6 +74,9 @@ def build_docs():
         html = html.replace('href="/portal/login/#', 'href="portal_login.html#')
         html = html.replace('href="/portal/login/"', 'href="portal_login.html"')
         html = html.replace('href="/portal/login"', 'href="portal_login.html"')
+        html = html.replace('href="/portal/profile/#', 'href="portal_profile.html#')
+        html = html.replace('href="/portal/profile/"', 'href="portal_profile.html"')
+        html = html.replace('href="/portal/profile"', 'href="portal_profile.html"')
         html = html.replace('href="/portal/#', 'href="portal.html#')
         html = html.replace('href="/portal/"', 'href="portal.html"')
         html = html.replace('href="/portal"', 'href="portal.html"')
