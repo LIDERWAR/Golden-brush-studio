@@ -7,6 +7,47 @@
 {% block content %}
 <section class="portal-dashboard-section">
     <div class="container portal-dashboard-container">
+        {% if is_master %}
+        <!-- Master Control Bar (Sasha & Natalia Studio Management) -->
+        <div class="master-control-bar">
+            <div class="master-bar-header">
+                <div>
+                    <div class="eyebrow">Режим Мастера • Управление объектами (Александр & Наталья)</div>
+                    <h2 class="master-bar-title">Панель куратора и оперативное ведение строек</h2>
+                </div>
+                <div class="master-bar-actions">
+                    <a href="/admin/" target="_blank" rel="noopener" class="btn btn-secondary master-top-btn">Панель Django</a>
+                    <button type="button" class="btn btn-primary master-top-btn" onclick="openMasterModal('modal-create-client')">Новый заказчик</button>
+                </div>
+            </div>
+
+            <div class="master-bar-controls">
+                <form method="GET" action="{% url 'portal:dashboard' %}" class="master-switcher-form">
+                    <label for="master-client-select" class="master-switcher-label">Активный объект:</label>
+                    <select id="master-client-select" name="switch_client" class="master-client-select" onchange="this.form.submit()">
+                        {% for c in all_clients %}
+                        <option value="{{ c.id }}" {% if data.client.id == c.id %}selected{% endif %}>
+                            {{ c.full_name }} — {{ c.phone }} {% if c.company %}({{ c.company }}){% endif %}
+                        </option>
+                        {% endfor %}
+                        <option value="demo" {% if is_demo %}selected{% endif %}>Демонстрационный объект (Воронов Е.М., Патриаршие пруды)</option>
+                    </select>
+                </form>
+
+                <div class="master-quick-buttons">
+                    {% if data.has_active_project and data.project and not is_demo %}
+                    <button type="button" class="btn btn-secondary master-quick-btn" onclick="openMasterModal('modal-add-photo')">Добавить фото</button>
+                    <button type="button" class="btn btn-secondary master-quick-btn" onclick="openMasterModal('modal-update-progress')">Скорректировать готовность</button>
+                    <button type="button" class="btn btn-secondary master-quick-btn" onclick="openMasterModal('modal-add-doc')">Прикрепить документ</button>
+                    <button type="button" class="btn btn-secondary master-quick-btn" onclick="openMasterModal('modal-add-stage')">Добавить этап</button>
+                    {% elif data.client and not is_demo %}
+                    <button type="button" class="btn btn-primary master-quick-btn" onclick="openMasterModal('modal-create-project')">Создать карточку объекта</button>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
         <!-- Portal Sub-Navigation (Tabs) -->
         <div class="portal-nav-bar">
             <a href="{% url 'portal:dashboard' %}" class="portal-nav-link active">
@@ -192,10 +233,27 @@
 
                             <h3 class="stage-title">{{ stage.title }}</h3>
                             <p class="stage-description">{{ stage.description }}</p>
+
+                            {% if is_master and not is_demo %}
+                            <div class="master-stage-inline-bar">
+                                <span class="master-stage-label">Статус этапа:</span>
+                                <select class="master-stage-select-input" onchange="submitStageStatusChange({{ stage.id }}, this.value)">
+                                    <option value="pending" {% if stage.status == 'pending' %}selected{% endif %}>Ожидает начала</option>
+                                    <option value="in_progress" {% if stage.status == 'in_progress' %}selected{% endif %}>В работе сейчас</option>
+                                    <option value="completed" {% if stage.status == 'completed' %}selected{% endif %}>Завершен</option>
+                                </select>
+                            </div>
+                            {% endif %}
                         </div>
                     </div>
                     {% endfor %}
                 </div>
+
+                {% if is_master and not is_demo and data.has_active_project %}
+                <div class="master-stages-footer-actions">
+                    <button type="button" class="btn btn-secondary master-quick-btn" onclick="openMasterModal('modal-add-stage')">Добавить новый этап в технологическую карту</button>
+                </div>
+                {% endif %}
             </div>
 
             <!-- Right Col: Curator Card & Project Documents -->
@@ -240,6 +298,12 @@
                         </a>
                         {% endfor %}
                     </div>
+
+                    {% if is_master and not is_demo and data.has_active_project %}
+                    <div class="master-doc-add-trigger-wrap">
+                        <button type="button" class="btn btn-secondary master-quick-btn" style="width: 100%;" onclick="openMasterModal('modal-add-doc')">Прикрепить смету или акт КС-2</button>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -250,6 +314,12 @@
                 <h2>Живой фотоотчет со стройки и из мастерской</h2>
                 <p>Фиксация этапов подготовки, нанесения фактур и контроля геометрии мастерами</p>
             </div>
+
+            {% if is_master and not is_demo and data.has_active_project %}
+            <div class="master-photo-add-trigger-wrap">
+                <button type="button" class="btn btn-secondary master-quick-btn" onclick="openMasterModal('modal-add-photo')">Опубликовать новое фото со стройки</button>
+            </div>
+            {% endif %}
 
             <div class="portal-photos-grid">
                 {% for photo in data.photos %}
@@ -281,10 +351,365 @@
                 <a href="/partners/" class="btn btn-secondary">
                     Условия партнерской программы
                 </a>
+                {% if is_master and not is_demo and data.client %}
+                <button type="button" class="btn btn-primary" onclick="openMasterModal('modal-create-project')">Создать карточку объекта для этого заказчика</button>
+                {% endif %}
             </div>
         </div>
         {% endif %}
 
     </div>
 </section>
+
+{% if is_master %}
+<!-- MASTER DASHBOARD MODALS -->
+
+<!-- 1. Modal: Add Live Photo -->
+<div id="modal-add-photo" class="master-modal-overlay" style="display: none;">
+    <div class="master-modal-box">
+        <div class="master-modal-header">
+            <h3 class="master-modal-title">Добавить фото со стройки / мастерской</h3>
+            <button type="button" class="master-modal-close" onclick="closeMasterModal('modal-add-photo')">Закрыть</button>
+        </div>
+        <form method="POST" action="{% url 'portal:dashboard' %}" enctype="multipart/form-data" class="master-modal-form">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="master_add_photo">
+            <div class="form-group">
+                <label>Файл фотографии:</label>
+                <input type="file" name="photo_file" accept="image/*" capture="environment" class="master-form-input" required>
+                <small class="master-help-text">Поддерживаются фото со смартфона на стройке или из мастерской</small>
+            </div>
+            <div class="form-group">
+                <label>Подпись к фото:</label>
+                <input type="text" name="caption" placeholder="Например: Нанесение второго слоя травертина в гостиной" class="master-form-input" required>
+            </div>
+            <div class="form-group">
+                <label>Привязка к этапу работ (опционально):</label>
+                <select name="stage_id" class="master-form-input">
+                    <option value="">Общий ход работ (без привязки к этапу)</option>
+                    {% for s in data.stages %}
+                    <option value="{{ s.id }}">Этап {{ s.step_number }}: {{ s.title }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="master-modal-actions">
+                <button type="button" class="btn btn-secondary" onclick="closeMasterModal('modal-add-photo')">Отмена</button>
+                <button type="submit" class="btn btn-primary">Опубликовать в ленту</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- 2. Modal: Update Progress & Financials -->
+<div id="modal-update-progress" class="master-modal-overlay" style="display: none;">
+    <div class="master-modal-box">
+        <div class="master-modal-header">
+            <h3 class="master-modal-title">Скорректировать прогресс и статус объекта</h3>
+            <button type="button" class="master-modal-close" onclick="closeMasterModal('modal-update-progress')">Закрыть</button>
+        </div>
+        <form method="POST" action="{% url 'portal:dashboard' %}" class="master-modal-form">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="master_update_progress">
+            <div class="form-group">
+                <label>Общая готовность объекта (%): <strong id="progress_val_label">{{ data.project.progress_percent|default:0 }}%</strong></label>
+                <input type="range" name="progress_percent" min="0" max="100" value="{{ data.project.progress_percent|default:0 }}" class="master-range-input" oninput="document.getElementById('progress_val_label').textContent = this.value + '%'">
+            </div>
+            <div class="form-group">
+                <label>Статус объекта:</label>
+                <select name="status" class="master-form-input">
+                    <option value="active" {% if data.project.status == 'active' %}selected{% endif %}>В активной работе</option>
+                    <option value="review" {% if data.project.status == 'review' %}selected{% endif %}>Приемка и технический контроль</option>
+                    <option value="completed" {% if data.project.status == 'completed' %}selected{% endif %}>Объект сдан (на 5-летней гарантии)</option>
+                </select>
+            </div>
+            <div class="form-row-2">
+                <div class="form-group">
+                    <label>Сумма по смете (₽):</label>
+                    <input type="number" name="total_amount" value="{{ data.project.total_amount|floatformat:0 }}" class="master-form-input">
+                </div>
+                <div class="form-group">
+                    <label>Оплачено (₽):</label>
+                    <input type="number" name="paid_amount" value="{{ data.project.paid_amount|floatformat:0 }}" class="master-form-input">
+                </div>
+            </div>
+            <div class="master-modal-actions">
+                <button type="button" class="btn btn-secondary" onclick="closeMasterModal('modal-update-progress')">Отмена</button>
+                <button type="submit" class="btn btn-primary">Сохранить готовность</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- 3. Modal: Add Document -->
+<div id="modal-add-doc" class="master-modal-overlay" style="display: none;">
+    <div class="master-modal-box">
+        <div class="master-modal-header">
+            <h3 class="master-modal-title">Прикрепить документ или смету</h3>
+            <button type="button" class="master-modal-close" onclick="closeMasterModal('modal-add-doc')">Закрыть</button>
+        </div>
+        <form method="POST" action="{% url 'portal:dashboard' %}" enctype="multipart/form-data" class="master-modal-form">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="master_add_document">
+            <div class="form-group">
+                <label>Название документа:</label>
+                <input type="text" name="title" placeholder="Например: Акт скрытых работ №3 по грунтовке и армированию" class="master-form-input" required>
+            </div>
+            <div class="form-group">
+                <label>Тип документа:</label>
+                <select name="doc_type" class="master-form-input">
+                    <option value="estimate">Смета и спецификация материалов</option>
+                    <option value="contract">Договор подряда</option>
+                    <option value="act">Акт скрытых работ / КС-2</option>
+                    <option value="warranty">Официальный сертификат гарантии 5 лет</option>
+                    <option value="tech">Технологическая карта нанесения</option>
+                    <option value="other">Прочий документ</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Файл документа (PDF/DOCX/XLS):</label>
+                <input type="file" name="doc_file" class="master-form-input">
+            </div>
+            <div class="form-group">
+                <label>Или внешняя ссылка на файл (Google Drive / Яндекс.Диск):</label>
+                <input type="url" name="external_url" placeholder="https://..." class="master-form-input">
+            </div>
+            <div class="form-group">
+                <label>Обозначение размера/формата:</label>
+                <input type="text" name="size_label" placeholder="PDF, 1.2 МБ (оставьте пустым для авторасчета)" class="master-form-input">
+            </div>
+            <div class="master-modal-actions">
+                <button type="button" class="btn btn-secondary" onclick="closeMasterModal('modal-add-doc')">Отмена</button>
+                <button type="submit" class="btn btn-primary">Прикрепить документ</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- 4. Modal: Add Stage -->
+<div id="modal-add-stage" class="master-modal-overlay" style="display: none;">
+    <div class="master-modal-box">
+        <div class="master-modal-header">
+            <h3 class="master-modal-title">Добавить этап в технологическую карту</h3>
+            <button type="button" class="master-modal-close" onclick="closeMasterModal('modal-add-stage')">Закрыть</button>
+        </div>
+        <form method="POST" action="{% url 'portal:dashboard' %}" class="master-modal-form">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="master_add_stage">
+            <div class="form-group">
+                <label>Порядковый номер этапа:</label>
+                <input type="number" name="step_number" value="{{ data.stages|length|add:1 }}" class="master-form-input">
+            </div>
+            <div class="form-group">
+                <label>Название этапа:</label>
+                <input type="text" name="title" placeholder="Например: Монтаж лепных декоративных тяг и карнизов" class="master-form-input" required>
+            </div>
+            <div class="form-group">
+                <label>Техническое описание:</label>
+                <textarea name="description" rows="3" placeholder="Подробности технологического процесса, используемые составы..." class="master-form-input"></textarea>
+            </div>
+            <div class="form-row-2">
+                <div class="form-group">
+                    <label>Сроки / Дата завершения:</label>
+                    <input type="text" name="date_label" placeholder="Например: 10–14 октября 2026" class="master-form-input">
+                </div>
+                <div class="form-group">
+                    <label>Текущий статус:</label>
+                    <select name="status" class="master-form-input">
+                        <option value="pending">Ожидает начала</option>
+                        <option value="in_progress">В работе сейчас</option>
+                        <option value="completed">Завершен</option>
+                    </select>
+                </div>
+            </div>
+            <div class="master-modal-actions">
+                <button type="button" class="btn btn-secondary" onclick="closeMasterModal('modal-add-stage')">Отмена</button>
+                <button type="submit" class="btn btn-primary">Добавить этап</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- 5. Modal: Create Client -->
+<div id="modal-create-client" class="master-modal-overlay" style="display: none;">
+    <div class="master-modal-box">
+        <div class="master-modal-header">
+            <h3 class="master-modal-title">Регистрация нового заказчика</h3>
+            <button type="button" class="master-modal-close" onclick="closeMasterModal('modal-create-client')">Закрыть</button>
+        </div>
+        <form method="POST" action="{% url 'portal:dashboard' %}" class="master-modal-form">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="master_create_client">
+            <div class="form-row-2">
+                <div class="form-group">
+                    <label>ФИО Заказчика / Представителя бюро:</label>
+                    <input type="text" name="full_name" placeholder="Иванов Сергей Викторович" class="master-form-input" required>
+                </div>
+                <div class="form-group">
+                    <label>Номер телефона:</label>
+                    <input type="tel" name="phone" placeholder="+7 (999) 000-00-00" class="master-form-input" required>
+                </div>
+            </div>
+            <div class="form-row-2">
+                <div class="form-group">
+                    <label>Организация / Бюро / Объект:</label>
+                    <input type="text" name="company" placeholder="Архитектурное бюро / ЖК RedSide" class="master-form-input">
+                </div>
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input type="email" name="email" placeholder="client@mail.ru" class="master-form-input">
+                </div>
+            </div>
+            <div class="form-row-2">
+                <div class="form-group">
+                    <label>Профиль деятельности:</label>
+                    <select name="client_type" class="master-form-input">
+                        <option value="architect">Архитектор / Дизайнер интерьера</option>
+                        <option value="developer">Девелопер / Генподрядчик</option>
+                        <option value="private">Частный заказчик</option>
+                        <option value="commercial">Корпоративный клиент / HoReCa / Офис</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>ПИН быстрого входа:</label>
+                    <input type="text" name="pin" value="1234" class="master-form-input">
+                </div>
+            </div>
+            <div class="master-divider" style="margin: 1.25rem 0; border-top: 1px solid rgba(255,255,255,0.1);"></div>
+            <div class="form-group">
+                <label>Название объекта (оставьте пустым, если объект создается позже):</label>
+                <input type="text" name="project_title" placeholder="Например: Апартаменты на Новом Арбате, 180 м²" class="master-form-input">
+            </div>
+            <div class="form-row-2">
+                <div class="form-group">
+                    <label>Площадь (м²):</label>
+                    <input type="text" name="total_area" value="180 м²" class="master-form-input">
+                </div>
+                <div class="form-group">
+                    <label>Сумма по смете (₽):</label>
+                    <input type="number" name="total_amount" value="650000" class="master-form-input">
+                </div>
+            </div>
+            <div class="master-modal-actions">
+                <button type="button" class="btn btn-secondary" onclick="closeMasterModal('modal-create-client')">Отмена</button>
+                <button type="submit" class="btn btn-primary">Создать профиль заказчика</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- 6. Modal: Create Project for Client -->
+<div id="modal-create-project" class="master-modal-overlay" style="display: none;">
+    <div class="master-modal-box">
+        <div class="master-modal-header">
+            <h3 class="master-modal-title">Создать карточку объекта для заказчика</h3>
+            <button type="button" class="master-modal-close" onclick="closeMasterModal('modal-create-project')">Закрыть</button>
+        </div>
+        <form method="POST" action="{% url 'portal:dashboard' %}" class="master-modal-form">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="master_create_project">
+            <div class="form-group">
+                <label>Название объекта:</label>
+                <input type="text" name="title" placeholder="Например: Пентхаус в ЖК RedSide, 210 м²" class="master-form-input" required>
+            </div>
+            <div class="form-row-2">
+                <div class="form-group">
+                    <label>Номер договора:</label>
+                    <input type="text" name="contract_number" placeholder="GB-2026/10-01" class="master-form-input">
+                </div>
+                <div class="form-group">
+                    <label>Адрес объекта:</label>
+                    <input type="text" name="address" placeholder="Москва, ул. Сергея Макеева, 9" class="master-form-input">
+                </div>
+            </div>
+            <div class="form-row-2">
+                <div class="form-group">
+                    <label>Площадь помещений:</label>
+                    <input type="text" name="total_area" value="200 м²" class="master-form-input">
+                </div>
+                <div class="form-group">
+                    <label>Ведущий технолог:</label>
+                    <input type="text" name="lead_artisan" value="Александр Попыкин" class="master-form-input">
+                </div>
+            </div>
+            <div class="form-row-2">
+                <div class="form-group">
+                    <label>Сумма по смете (₽):</label>
+                    <input type="number" name="total_amount" value="750000" class="master-form-input">
+                </div>
+                <div class="form-group">
+                    <label>Оплачено (₽):</label>
+                    <input type="number" name="paid_amount" value="375000" class="master-form-input">
+                </div>
+            </div>
+            <div class="master-modal-actions">
+                <button type="button" class="btn btn-secondary" onclick="closeMasterModal('modal-create-project')">Отмена</button>
+                <button type="submit" class="btn btn-primary">Создать карточку объекта</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+function openMasterModal(id) {
+    var modal = document.getElementById(id);
+    if (modal) {
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeMasterModal(id) {
+    var modal = document.getElementById(id);
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+}
+
+window.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        document.querySelectorAll('.master-modal-overlay').forEach(function(m) {
+            m.style.display = 'none';
+        });
+        document.body.style.overflow = '';
+    }
+});
+
+document.querySelectorAll('.master-modal-overlay').forEach(function(overlay) {
+    overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) {
+            overlay.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+    });
+});
+
+function submitStageStatusChange(stageId, newStatus) {
+    var formData = new FormData();
+    formData.append('action', 'master_update_stage');
+    formData.append('stage_id', stageId);
+    formData.append('stage_status', newStatus);
+    formData.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+    formData.append('ajax', '1');
+
+    fetch('{% url "portal:dashboard" %}', {
+        method: 'POST',
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+        },
+        body: formData
+    }).then(function(res) {
+        return res.json();
+    }).then(function(data) {
+        if (data.status === 'ok') {
+            window.location.reload();
+        } else {
+            alert('Ошибка при обновлении статуса этапа');
+        }
+    }).catch(function() {
+        window.location.reload();
+    });
+}
+</script>
+{% endif %}
 {% endblock %}

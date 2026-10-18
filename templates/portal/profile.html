@@ -8,6 +8,36 @@
 <section class="portal-dashboard-section portal-profile-section">
     <div class="container portal-dashboard-container">
         
+        {% if is_master %}
+        <!-- Master Control Bar (Sasha & Natalia Studio Management) -->
+        <div class="master-control-bar">
+            <div class="master-bar-header">
+                <div>
+                    <div class="eyebrow">Режим Мастера • Управление клиентами (Александр & Наталья)</div>
+                    <h2 class="master-bar-title">Профиль и CRM-параметры заказчика</h2>
+                </div>
+                <div class="master-bar-actions">
+                    <a href="/admin/" target="_blank" rel="noopener" class="btn btn-secondary master-top-btn">Панель Django</a>
+                    <a href="{% url 'portal:dashboard' %}" class="btn btn-secondary master-top-btn">Перейти в трекер</a>
+                </div>
+            </div>
+
+            <div class="master-bar-controls">
+                <form method="GET" action="{% url 'portal:profile' %}" class="master-switcher-form">
+                    <label for="master-client-select-prof" class="master-switcher-label">Активный клиент:</label>
+                    <select id="master-client-select-prof" name="switch_client" class="master-client-select" onchange="this.form.submit()">
+                        {% for c in all_clients %}
+                        <option value="{{ c.id }}" {% if client.id == c.id %}selected{% endif %}>
+                            {{ c.full_name }} — {{ c.phone }} {% if c.company %}({{ c.company }}){% endif %}
+                        </option>
+                        {% endfor %}
+                        <option value="demo" {% if is_demo %}selected{% endif %}>Демонстрационный профиль (Воронов Е.М.)</option>
+                    </select>
+                </form>
+            </div>
+        </div>
+        {% endif %}
+
         <!-- Portal Sub-Navigation (Tabs) -->
         <div class="portal-nav-bar">
             <a href="{% url 'portal:dashboard' %}" class="portal-nav-link">
@@ -208,6 +238,39 @@
             <!-- Right Sidebar Column: Loyalty, Concierge Actions & Team -->
             <div class="portal-profile-side-col">
                 
+                {% if is_master and not is_demo and client %}
+                <!-- Master CRM Box (Visible ONLY to Sasha & Natalia) -->
+                <div class="portal-card master-crm-card" style="border-color: rgba(197, 160, 89, 0.4); margin-bottom: 2rem;">
+                    <div class="eyebrow">Служебный раздел CRM • Александр & Наталья</div>
+                    <h3 class="side-card-title">Управление партнерским статусом и заметками</h3>
+                    <p class="side-card-sub">Закрытая служебная карточка CRM. Клиент эти данные не видит.</p>
+
+                    <form method="POST" action="{% url 'portal:profile' %}" class="master-crm-form">
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="master_update_crm">
+                        
+                        <div class="form-group" style="margin-bottom: 1.25rem;">
+                            <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: var(--accent-gold);">Ручной уровень лояльности:</label>
+                            <select name="custom_tier" class="master-form-input">
+                                <option value="" {% if not profile.custom_tier %}selected{% endif %}>Автоматический расчет по проектам</option>
+                                <option value="welcome" {% if profile.custom_tier == 'welcome' %}selected{% endif %}>01. Дебютный проект (Welcome: 5% материалы)</option>
+                                <option value="resident" {% if profile.custom_tier == 'resident' %}selected{% endif %}>02. Постоянный партнер (Resident: 10% материалы / 5% работы)</option>
+                                <option value="corporate" {% if profile.custom_tier == 'corporate' %}selected{% endif %}>03. Корпоративный клуб (Corporate: 15% материалы / 10% работы)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 1.25rem;">
+                            <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: #fff;">Служебные заметки Натальи / CRM:</label>
+                            <textarea name="notes" rows="4" class="master-form-input" placeholder="История звонков, договоренности о выезде, скидки на выкрасы, особые требования к объекту...">{{ profile.notes }}</textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">
+                            Сохранить параметры CRM
+                        </button>
+                    </form>
+                </div>
+                {% endif %}
+
                 <!-- Loyalty Card -->
                 <div class="portal-card side-loyalty-card">
                     <div class="eyebrow">Клубный статус партнера</div>

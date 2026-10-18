@@ -130,6 +130,16 @@ def get_demo_context():
         'just_registered': False,
     }
 
+from django.contrib.auth import authenticate, login as django_login, logout as django_logout
+
+def check_is_master(request):
+    """Проверка прав мастера / администратора мастерской (Александр Попыкин, Наталья, staff/superuser)."""
+    if hasattr(request, 'user') and request.user.is_authenticated and (request.user.is_staff or request.user.is_superuser):
+        return True
+    if request.session.get('is_master_mode'):
+        return True
+    return False
+
 def portal_login(request):
     error = None
     active_tab = request.GET.get('tab', 'login')
@@ -141,9 +151,18 @@ def portal_login(request):
         # 1. Явный демо-доступ для демонстрации интерфейса
         if demo or phone.lower() == 'demo':
             request.session['client_phone'] = 'demo'
+            request.session['is_master_mode'] = False
             return redirect('portal:dashboard')
 
-        # 2. Поиск реального договора по номеру телефона
+        # 2. Аутентификация администратора / мастера студии (Александр Попыкин, Наталья, admin)
+        user = authenticate(request, username=phone, password=pin)
+        if user is not None and (user.is_staff or user.is_superuser):
+            django_login(request, user)
+            request.session['is_master_mode'] = True
+            request.session['client_phone'] = 'master'
+            return redirect('portal:dashboard')
+
+        # 3. Поиск реального договора по номеру телефона
         digits = re.sub(r'\D', '', phone)
         if len(digits) >= 10:
             client = ClientAccount.objects.filter(phone__icontains=digits[-10:]).first()
@@ -159,10 +178,11 @@ def portal_login(request):
                     'login_phone': phone,
                 })
             request.session['client_phone'] = client.phone
+            request.session['is_master_mode'] = False
             return redirect('portal:dashboard')
         else:
             return render(request, 'portal/login.html', {
-                'error': 'Объект с данным номером пока не зарегистрирован. Перейдите во вкладку «Регистрация», чтобы зафиксировать накопительную скидку на материалы и работы.',
+                'error': 'Объект с данным номером пока не зарегистрирован. Перейдите во вкладку «Регистрация» или проверьте введенные данные.',
                 'active_tab': 'login',
                 'login_phone': phone,
             })
@@ -237,24 +257,246 @@ def portal_register(request):
     return render(request, 'portal/login.html', {'active_tab': 'register'})
 
 def portal_dashboard(request):
-    phone = request.session.get('client_phone')
+    is_master = check_is_master(request)
+    all_clients = ClientAccount.objects.all().order_by('-created_at') if is_master else []
     just_registered = request.session.pop('just_registered', False)
-    
-    if not phone or phone == 'demo':
+
+    # Переключение клиента для режима Мастера
+    if is_master:
+        switch_id = request.GET.get('switch_client') or request.POST.get('switch_client')
+        if switch_id:
+            request.session['master_active_client_id'] = switch_id
+
+    # Определение активного клиента
+    client = None
+    is_demo = False
+
+    if is_master:
+        active_id = request.session.get('master_active_client_id')
+        if active_id == 'demo':
+            is_demo = True
+        elif active_id:
+            try:
+                client = ClientAccount.objects.filter(id=int(active_id)).first()
+            except (ValueError, TypeError):
+                client = None
+        if not client and not is_demo:
+            client = ClientAccount.objects.first()
+            if client:
+                request.session['master_active_client_id'] = client.id
+            else:
+                is_demo = True
+    else:
+        phone = request.session.get('client_phone')
+        if not phone or phone == 'demo':
+            is_demo = True
+        else:
+            client = ClientAccount.objects.filter(phone=phone).first()
+            if not client:
+                digits = re.sub(r'\D', '', phone)
+                if len(digits) >= 10:
+                    client = ClientAccount.objects.filter(phone__icontains=digits[-10:]).first()
+            if not client:
+                is_demo = True
+
+    # Обработка действий Мастера (POST)
+    if request.method == 'POST' and is_master:
+        action = request.POST.get('action')
+
+        if action == 'master_update_stage':
+            stage_id = request.POST.get('stage_id')
+            stage_status = request.POST.get('stage_status')
+            try:
+                stage = ProjectStage.objects.get(id=stage_id)
+                stage.status = stage_status
+                stage.save()
+                if request.headers.get('x-requested-with') == 'XMLHttpRequest' or request.POST.get('ajax'):
+                    return JsonResponse({'status': 'ok', 'stage_id': stage.id, 'new_status': stage.status, 'status_display': stage.get_status_display()})
+            except ProjectStage.DoesNotExist:
+                if request.headers.get('x-requested-with') == 'XMLHttpRequest' or request.POST.get('ajax'):
+                    return JsonResponse({'status': 'error', 'message': 'Этап не найден'}, status=404)
+            return redirect('portal:dashboard')
+
+        elif action == 'master_add_photo':
+            if client and client.projects.exists():
+                proj = client.projects.first()
+                photo_file = request.FILES.get('photo_file')
+                caption = request.POST.get('caption', '').strip()
+                stage_id = request.POST.get('stage_id')
+                stage = ProjectStage.objects.filter(id=stage_id, project=proj).first() if stage_id else None
+                if photo_file:
+                    StageUpdatePhoto.objects.create(
+                        project=proj,
+                        stage=stage,
+                        image=photo_file,
+                        caption=caption or 'Фотоотчет со стройки'
+                    )
+            return redirect('portal:dashboard')
+
+        elif action == 'master_update_progress':
+            if client and client.projects.exists():
+                proj = client.projects.first()
+                try:
+                    pct = int(request.POST.get('progress_percent', proj.progress_percent))
+                    proj.progress_percent = max(0, min(100, pct))
+                except (ValueError, TypeError):
+                    pass
+                new_status = request.POST.get('status')
+                if new_status in dict(ProjectContract.STATUS_CHOICES):
+                    proj.status = new_status
+                try:
+                    total = float(request.POST.get('total_amount', proj.total_amount))
+                    proj.total_amount = total
+                except (ValueError, TypeError):
+                    pass
+                try:
+                    paid = float(request.POST.get('paid_amount', proj.paid_amount))
+                    proj.paid_amount = paid
+                except (ValueError, TypeError):
+                    pass
+                proj.save()
+            return redirect('portal:dashboard')
+
+        elif action == 'master_add_stage':
+            if client and client.projects.exists():
+                proj = client.projects.first()
+                title = request.POST.get('title', '').strip()
+                desc = request.POST.get('description', '').strip()
+                date_lbl = request.POST.get('date_label', '').strip()
+                status = request.POST.get('status', 'pending')
+                step_num = proj.stages.count() + 1
+                try:
+                    step_num = int(request.POST.get('step_number', step_num))
+                except (ValueError, TypeError):
+                    pass
+                if title:
+                    ProjectStage.objects.create(
+                        project=proj,
+                        step_number=step_num,
+                        title=title,
+                        description=desc,
+                        date_label=date_lbl,
+                        status=status
+                    )
+            return redirect('portal:dashboard')
+
+        elif action == 'master_add_document':
+            if client and client.projects.exists():
+                proj = client.projects.first()
+                title = request.POST.get('title', '').strip()
+                doc_type = request.POST.get('doc_type', 'estimate')
+                size_label = request.POST.get('size_label', '').strip()
+                doc_file = request.FILES.get('doc_file')
+                external_url = request.POST.get('external_url', '').strip() or None
+                if title and (doc_file or external_url):
+                    if doc_file and not size_label:
+                        size_mb = doc_file.size / (1024 * 1024)
+                        if size_mb < 1:
+                            size_label = f"PDF, {max(1, int(doc_file.size / 1024))} КБ"
+                        else:
+                            size_label = f"PDF, {size_mb:.1f} МБ"
+                    ProjectDocument.objects.create(
+                        project=proj,
+                        title=title,
+                        doc_type=doc_type,
+                        file=doc_file,
+                        external_url=external_url,
+                        size_label=size_label or 'PDF'
+                    )
+            return redirect('portal:dashboard')
+
+        elif action == 'master_create_client':
+            full_name = request.POST.get('full_name', '').strip()
+            phone = request.POST.get('phone', '').strip()
+            company = request.POST.get('company', '').strip()
+            email = request.POST.get('email', '').strip() or None
+            client_type = request.POST.get('client_type', 'architect')
+            pin = request.POST.get('pin', '').strip() or '1234'
+            project_title = request.POST.get('project_title', '').strip()
+
+            if full_name and phone:
+                new_client = ClientAccount.objects.create(
+                    full_name=full_name,
+                    phone=phone,
+                    company=company,
+                    email=email,
+                    client_type=client_type,
+                    access_pin=pin,
+                )
+                if project_title:
+                    proj = ProjectContract.objects.create(
+                        client=new_client,
+                        title=project_title,
+                        contract_number=request.POST.get('contract_number', '').strip() or f"GB-{new_client.id:04d}",
+                        address=request.POST.get('address', '').strip() or 'Москва',
+                        total_area=request.POST.get('total_area', '200 м²').strip(),
+                        total_amount=request.POST.get('total_amount', 750000) or 750000,
+                        paid_amount=request.POST.get('paid_amount', 375000) or 375000,
+                        progress_percent=15,
+                        lead_artisan='Александр Попыкин',
+                        status='active',
+                    )
+                    starter_stages = [
+                        (1, 'Выездной аудит и лазерный замер геометрии стен', 'Инженерное обследование плоскостей, оценка влажности основания.', 'completed', 'Завершен'),
+                        (2, 'Колеровка и согласование авторских образцов (Sample Box)', 'Изготовление планшетов с фактурами для утверждения заказчиком.', 'in_progress', 'В процессе'),
+                        (3, 'Подготовка основания и армирование', 'Нанесение грунтовки глубокого проникновения и адгезионного слоя.', 'pending', 'Ожидает начала'),
+                        (4, 'Художественное нанесение фактурных слоев', 'Ручная формовка минеральной фактуры шпателем.', 'pending', 'Ожидает начала'),
+                        (5, 'Финишная гидрофобизация, защитный лак и сдача', 'Нанесение защитного полиуретанового лака и подписание КС-2.', 'pending', 'Ожидает начала'),
+                    ]
+                    for num, st_title, st_desc, st_stat, st_date in starter_stages:
+                        ProjectStage.objects.create(
+                            project=proj,
+                            step_number=num,
+                            title=st_title,
+                            description=st_desc,
+                            status=st_stat,
+                            date_label=st_date
+                        )
+                request.session['master_active_client_id'] = new_client.id
+                return redirect('portal:dashboard')
+
+        elif action == 'master_create_project':
+            if client:
+                title = request.POST.get('title', '').strip() or 'Новый премиальный интерьер'
+                proj = ProjectContract.objects.create(
+                    client=client,
+                    title=title,
+                    contract_number=request.POST.get('contract_number', '').strip() or f"GB-{client.id:04d}",
+                    address=request.POST.get('address', '').strip() or 'Москва',
+                    total_area=request.POST.get('total_area', '200 м²').strip(),
+                    total_amount=request.POST.get('total_amount', 800000) or 800000,
+                    paid_amount=request.POST.get('paid_amount', 400000) or 400000,
+                    progress_percent=10,
+                    lead_artisan='Александр Попыкин',
+                    status='active',
+                )
+                starter_stages = [
+                    (1, 'Выездной аудит и лазерный замер геометрии стен', 'Инженерное обследование плоскостей, оценка влажности основания.', 'completed', 'Завершен'),
+                    (2, 'Колеровка и согласование авторских образцов (Sample Box)', 'Изготовление планшетов с фактурами для утверждения заказчиком.', 'in_progress', 'В процессе'),
+                    (3, 'Подготовка основания и армирование', 'Нанесение грунтовки глубокого проникновения и адгезионного слоя.', 'pending', 'Ожидает начала'),
+                    (4, 'Художественное нанесение фактурных слоев', 'Ручная формовка минеральной фактуры шпателем.', 'pending', 'Ожидает начала'),
+                    (5, 'Финишная гидрофобизация, защитный лак и сдача', 'Нанесение защитного полиуретанового лака и подписание КС-2.', 'pending', 'Ожидает начала'),
+                ]
+                for num, st_title, st_desc, st_stat, st_date in starter_stages:
+                    ProjectStage.objects.create(
+                        project=proj,
+                        step_number=num,
+                        title=st_title,
+                        description=st_desc,
+                        status=st_stat,
+                        date_label=st_date
+                    )
+                return redirect('portal:dashboard')
+
+    if is_demo or not client:
         demo_ctx = get_demo_context()
         demo_ctx['just_registered'] = just_registered
-        return render(request, 'portal/dashboard.html', {'data': demo_ctx, 'is_demo': True})
-
-    client = ClientAccount.objects.filter(phone=phone).first()
-    if not client:
-        digits = re.sub(r'\D', '', phone)
-        if len(digits) >= 10:
-            client = ClientAccount.objects.filter(phone__icontains=digits[-10:]).first()
-
-    if not client:
-        demo_ctx = get_demo_context()
-        demo_ctx['just_registered'] = just_registered
-        return render(request, 'portal/dashboard.html', {'data': demo_ctx, 'is_demo': True})
+        return render(request, 'portal/dashboard.html', {
+            'data': demo_ctx,
+            'is_demo': True,
+            'is_master': is_master,
+            'all_clients': all_clients,
+        })
 
     tier_info = client.next_tier_info
     tier_data = {
@@ -283,47 +525,103 @@ def portal_dashboard(request):
             'is_demo': False,
             'has_active_project': False,
             'just_registered': just_registered,
+            'is_master': is_master,
+            'all_clients': all_clients,
         }
-        return render(request, 'portal/dashboard.html', {'data': context, 'is_demo': False})
+        return render(request, 'portal/dashboard.html', {
+            'data': context,
+            'is_demo': False,
+            'is_master': is_master,
+            'all_clients': all_clients,
+        })
 
     stages = project.stages.all().order_by('step_number')
     photos = project.photos.all()
     documents = project.documents.all()
+
+    formatted_photos = []
+    for ph in photos:
+        formatted_photos.append({
+            'caption': ph.caption,
+            'display_url': ph.get_display_url(),
+            'date': ph.created_at.strftime('%d.%m.%Y'),
+        })
+
+    formatted_docs = []
+    for doc in documents:
+        formatted_docs.append({
+            'title': doc.title,
+            'doc_type_display': doc.get_doc_type_display(),
+            'size_label': doc.size_label,
+            'url': doc.file.url if doc.file else (doc.external_url or '#'),
+        })
 
     context = {
         'client': client,
         'tier': tier_data,
         'project': project,
         'stages': stages,
-        'photos': photos,
-        'documents': documents,
+        'photos': formatted_photos,
+        'documents': formatted_docs,
         'is_demo': False,
         'has_active_project': True,
         'just_registered': just_registered,
+        'is_master': is_master,
+        'all_clients': all_clients,
     }
-    return render(request, 'portal/dashboard.html', {'data': context, 'is_demo': False})
+    return render(request, 'portal/dashboard.html', {
+        'data': context,
+        'is_demo': False,
+        'is_master': is_master,
+        'all_clients': all_clients,
+    })
 
 def portal_logout(request):
+    django_logout(request)
     request.session.flush()
     return redirect('portal:login')
 
 def portal_profile(request):
     """Страница персонального профиля клиента с детальным учетом всех пожеланий и техзадания."""
-    phone = request.session.get('client_phone')
+    is_master = check_is_master(request)
+    all_clients = ClientAccount.objects.all().order_by('-created_at') if is_master else []
+
+    # Переключение клиента для режима Мастера
+    if is_master:
+        switch_id = request.GET.get('switch_client') or request.POST.get('switch_client')
+        if switch_id:
+            request.session['master_active_client_id'] = switch_id
+
     is_demo = False
     client = None
 
-    if phone and phone != 'demo':
-        client = ClientAccount.objects.filter(phone=phone).first()
+    if is_master:
+        active_id = request.session.get('master_active_client_id')
+        if active_id == 'demo':
+            is_demo = True
+        elif active_id:
+            try:
+                client = ClientAccount.objects.filter(id=int(active_id)).first()
+            except (ValueError, TypeError):
+                client = None
+        if not client and not is_demo:
+            client = ClientAccount.objects.first()
+            if client:
+                request.session['master_active_client_id'] = client.id
+            else:
+                is_demo = True
+    else:
+        phone = request.session.get('client_phone')
+        if phone and phone != 'demo':
+            client = ClientAccount.objects.filter(phone=phone).first()
+            if not client:
+                digits = re.sub(r'\D', '', phone)
+                if len(digits) >= 10:
+                    client = ClientAccount.objects.filter(phone__icontains=digits[-10:]).first()
+        elif hasattr(request, 'user') and request.user.is_authenticated and hasattr(request.user, 'client_account'):
+            client = request.user.client_account
         if not client:
-            digits = re.sub(r'\D', '', phone)
-            if len(digits) >= 10:
-                client = ClientAccount.objects.filter(phone__icontains=digits[-10:]).first()
-    elif hasattr(request, 'user') and request.user.is_authenticated and hasattr(request.user, 'client_account'):
-        client = request.user.client_account
-
-    if not client:
-        is_demo = True
+            is_demo = True
 
     MATERIAL_CHOICES = [
         ('microcement', 'Бесшовный микроцемент (Microcement)'),
@@ -360,7 +658,13 @@ def portal_profile(request):
     if request.method == 'POST':
         action = request.POST.get('action', 'save_profile')
 
-        if is_demo:
+        if is_master and action == 'master_update_crm' and client:
+            client.custom_tier = request.POST.get('custom_tier', '')
+            client.notes = request.POST.get('notes', '').strip() or None
+            client.save()
+            status_message = 'Служебные параметры CRM и персональный уровень лояльности успешно сохранены.'
+            status_type = 'success'
+        elif is_demo:
             status_message = 'В демонстрационном режиме изменения не сохраняются в базе данных. Зарегистрируйтесь в клубе, чтобы закрепить персональные условия.'
             status_type = 'info'
         else:
@@ -438,9 +742,10 @@ def portal_profile(request):
 
                 status_message = 'Все ваши индивидуальные пожелания, технические требования и реквизиты успешно сохранены в системе мастерской.'
 
-    if is_demo:
+    if is_demo or not client:
         demo_ctx = get_demo_context()
         profile_data = {
+            'id': None,
             'full_name': demo_ctx['client']['full_name'],
             'phone': demo_ctx['client']['phone'],
             'company': demo_ctx['client']['company'],
@@ -450,6 +755,8 @@ def portal_profile(request):
             'delivery_address': 'Москва, Малый Козихинский пер., 12, офис 4',
             'preferred_messenger': 'telegram',
             'access_pin': '1234',
+            'custom_tier': '',
+            'notes': 'Партнерский статус подтвержден. Заказчику интересны фактуры травертина и микроцемента для пентхауса.',
             'preferred_materials': ['microcement', 'travertine', 'basrelief'],
             'preferred_spaces': ['living_rooms', 'wet_zones', 'commercial_horeca'],
             'service_options': ['sample_box', 'art_fitting', 'laser_audit', 'nda_signed'],
@@ -460,6 +767,7 @@ def portal_profile(request):
     else:
         tier_info = client.next_tier_info
         profile_data = {
+            'id': client.id,
             'full_name': client.full_name,
             'phone': client.phone,
             'company': client.company or '',
@@ -469,6 +777,8 @@ def portal_profile(request):
             'delivery_address': client.delivery_address or '',
             'preferred_messenger': client.preferred_messenger or 'telegram',
             'access_pin': client.access_pin,
+            'custom_tier': client.custom_tier,
+            'notes': client.notes or '',
             'preferred_materials': client.preferred_materials or [],
             'preferred_spaces': client.preferred_spaces or [],
             'service_options': client.service_options or [],
@@ -489,10 +799,13 @@ def portal_profile(request):
 
     context = {
         'profile': profile_data,
+        'client': client,
         'material_choices': MATERIAL_CHOICES,
         'space_choices': SPACE_CHOICES,
         'service_choices': SERVICE_CHOICES,
         'is_demo': is_demo,
+        'is_master': is_master,
+        'all_clients': all_clients,
         'status_message': status_message,
         'status_type': status_type,
     }
