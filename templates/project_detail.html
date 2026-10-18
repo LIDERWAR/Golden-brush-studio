@@ -1,7 +1,14 @@
 {% extends 'base.html' %}
 
-{% block title %}{{ project.title }} — Кейс Fit-Out GB STUDIO{% endblock %}
+{% block title %}{{ project.title }} — Проект Golden Brush Studio{% endblock %}
 {% block meta_desc %}{{ project.short_description }}{% endblock %}
+{% block canonical %}https://gbstudio.ru/projects/{{ project.slug }}/{% endblock %}
+{% block og_title %}{{ project.title }} — Golden Brush Studio{% endblock %}
+{% block og_desc %}{{ project.short_description }}{% endblock %}
+{% block og_url %}https://gbstudio.ru/projects/{{ project.slug }}/{% endblock %}
+{% if project.get_image %}
+{% block og_image %}https://gbstudio.ru{{ project.get_image }}{% endblock %}
+{% endif %}
 
 {% block content %}
 <section style="padding-top: 8rem; padding-bottom: 6rem; background-color: var(--bg-primary);">

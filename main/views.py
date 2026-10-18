@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.views.decorators.http import require_POST
 import json
 import re
@@ -580,5 +580,81 @@ def submit_paint_order(request):
         return JsonResponse({'success': False, 'error': str(e)}, status=500)
 
 
+def robots_txt(request):
+    """Генерация файла robots.txt для поисковых систем (Яндекс, Google)"""
+    lines = [
+        "User-agent: *",
+        "Allow: /",
+        "Disallow: /admin/",
+        "Disallow: /portal/",
+        "Disallow: /api/",
+        "",
+        "Host: https://gbstudio.ru",
+        "Sitemap: https://gbstudio.ru/sitemap.xml",
+    ]
+    return HttpResponse("\n".join(lines), content_type="text/plain; charset=utf-8")
 
 
+def sitemap_xml(request):
+    """Динамическая генерация XML-карты сайта (sitemap.xml)"""
+    base_url = "https://gbstudio.ru"
+
+    static_pages = [
+        ('/', '1.0', 'weekly'),
+        ('/projects/', '0.9', 'weekly'),
+        ('/materials/', '0.9', 'weekly'),
+        ('/gallery/', '0.9', 'weekly'),
+        ('/partners/', '0.8', 'monthly'),
+        ('/journal/', '0.8', 'weekly'),
+        ('/contacts/', '0.7', 'monthly'),
+        ('/privacy/', '0.3', 'yearly'),
+    ]
+
+    urls = []
+    # 1. Основные разделы
+    for path, priority, changefreq in static_pages:
+        urls.append(f"""  <url>
+    <loc>{base_url}{path}</loc>
+    <changefreq>{changefreq}</changefreq>
+    <priority>{priority}</priority>
+  </url>""")
+
+    # 2. Проекты портфолио
+    try:
+        for p in Project.objects.all():
+            urls.append(f"""  <url>
+    <loc>{base_url}/projects/{p.slug}/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>""")
+    except Exception:
+        pass
+
+    # 3. Декоративные покрытия
+    try:
+        for m in DecorativeMaterial.objects.filter(is_active=True):
+            urls.append(f"""  <url>
+    <loc>{base_url}/materials/{m.slug}/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>""")
+    except Exception:
+        pass
+
+    # 4. Статьи Журнала Мастерской
+    try:
+        for art in Article.objects.filter(is_published=True):
+            urls.append(f"""  <url>
+    <loc>{base_url}/journal/{art.slug}/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>""")
+    except Exception:
+        pass
+
+    xml_content = f"""<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{chr(10).join(urls)}
+</urlset>"""
+
+    return HttpResponse(xml_content.strip(), content_type="application/xml; charset=utf-8")

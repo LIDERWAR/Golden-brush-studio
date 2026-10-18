@@ -141,6 +141,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 14. Restoration Showcase Slider
     initRestorationSlider();
+
+    // 15. Universal Analytics Click Tracking (Messengers, Phone)
+    initUniversalClickTracking();
 });
 
 // Analytics Goal Dispatcher (Yandex.Metrika)
@@ -152,10 +155,38 @@ window.triggerGoal = function(goalName, params) {
                 ym(counterId, 'reachGoal', goalName, params);
             }
         }
+        console.log(`[Analytics Metrika] Goal reached: "${goalName}"`, params || {});
     } catch (e) {
         console.warn('Analytics goal dispatch warning:', e);
     }
 };
+
+// Universal Click Tracking for Direct Conversions
+function initUniversalClickTracking() {
+    document.addEventListener('click', (e) => {
+        const link = e.target.closest('a');
+        if (!link) return;
+
+        const href = link.getAttribute('href') || '';
+        
+        // 1. Telegram clicks
+        if (href.includes('t.me')) {
+            window.triggerGoal('click_telegram', { href });
+        }
+        // 2. WhatsApp clicks
+        else if (href.includes('wa.me') || href.includes('whatsapp.com')) {
+            window.triggerGoal('click_whatsapp', { href });
+        }
+        // 3. Direct Phone call clicks
+        else if (href.startsWith('tel:')) {
+            window.triggerGoal('click_phone', { phone: href.replace('tel:', '') });
+        }
+        // 4. Max messenger clicks
+        else if (href.includes('max') || link.classList.contains('max-btn') || link.innerText.toLowerCase().includes('max')) {
+            window.triggerGoal('click_messenger_max', { href });
+        }
+    });
+}
 
 // Universal Modal Closer
 function initUniversalModalCloser() {
@@ -518,6 +549,7 @@ function initLightbox() {
                     res = await response.json();
                 }
                 if (res.success) {
+                    window.triggerGoal('lead_art_booking');
                     window.triggerGoal('lead_art_fitting');
                     modal.classList.remove('active');
                     showToast('Запрос на бронирование отправлен! Мы свяжемся с вами в течение 15 минут.');
@@ -886,6 +918,7 @@ function initArtFittingModal() {
                 });
                 const data = await res.json();
                 if (data.success) {
+                    window.triggerGoal('lead_art_fitting');
                     showToast(data.message || 'Заявка на примерку принята!');
                     form.reset();
                     modal.classList.remove('active');

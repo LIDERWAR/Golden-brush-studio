@@ -3,9 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="BxptW5yt5FM6RPhQjscZG5oeXVQ6pVuj2i1GLHdOX6Qf6xSQchz3f6M8cYV8KmhM">
+    <meta name="csrf-token" content="GU6zyN6AcwRx4xUSTuCfcGhQ8oduzSLML1TNdOF9NnsOwVk87pzLPU74D3uNYpMB">
     <title>Профиль заказчика и технические пожелания — Golden Brush Studio</title>
     <meta name="description" content="Персональный профиль партнера Golden Brush Studio: индивидуальная карта пожеланий к фактурам, специфика пространств, накопительные скидки и консьерж-сервис.">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="canonical" href="https://gbstudio.ru/portal/profile/">
+
+    <!-- Open Graph / Facebook / VK / Telegram / WhatsApp -->
+    <meta property="og:site_name" content="Golden Brush Studio">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://gbstudio.ru/portal/profile/">
+    <meta property="og:title" content="Golden Brush Studio — Искусство преображения пространства">
+    <meta property="og:description" content="Художественно-декоративные работы под ключ: авторские покрытия, реставрация архитектурных элементов, галерея предметов искусства с 2011 года.">
+    <meta property="og:image" content="https://gbstudio.ru/static/images/hero_plaster_texture.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Golden Brush Studio">
+    <meta property="og:locale" content="ru_RU">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Golden Brush Studio — Искусство преображения пространства">
+    <meta name="twitter:description" content="Художественно-декоративные работы под ключ: авторские фактурные покрытия, микроцемент, реставрация.">
+    <meta name="twitter:image" content="https://gbstudio.ru/static/images/hero_plaster_texture.jpg">
+
+    <!-- Schema.org Microdata (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "HomeAndConstructionBusiness",
+                "@id": "https://gbstudio.ru/#organization",
+                "name": "Golden Brush Studio",
+                "alternateName": "Студия художественно-декоративных работ Golden Brush",
+                "url": "https://gbstudio.ru/",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://gbstudio.ru/static/images/apple-touch-icon.png",
+                    "width": 180,
+                    "height": 180
+                },
+                "image": "https://gbstudio.ru/static/images/hero_plaster_texture.jpg",
+                "description": "Художественно-декоративные работы под ключ: авторские фактурные покрытия, микроцемент, реставрация архитектурных элементов, галерея предметов искусства с 2011 года.",
+                "telephone": "+7 (495) 890-44-22",
+                "email": "welcome@gbstudio.ru",
+                "priceRange": "₽₽₽",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Москва",
+                    "addressCountry": "RU"
+                },
+                "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": 55.7558,
+                    "longitude": 37.6173
+                },
+                "openingHoursSpecification": {
+                    "@type": "OpeningHoursSpecification",
+                    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+                    "opens": "10:00",
+                    "closes": "19:00"
+                },
+                "sameAs": [
+                    "https://t.me/gbstudio"
+                ]
+            },
+            {
+                "@type": "WebSite",
+                "@id": "https://gbstudio.ru/#website",
+                "url": "https://gbstudio.ru/",
+                "name": "Golden Brush Studio",
+                "publisher": {
+                    "@id": "https://gbstudio.ru/#organization"
+                },
+                "inLanguage": "ru-RU"
+            }
+        ]
+    }
+    </script>
+    
     
     <!-- Design System CSS -->
     <link rel="stylesheet" href="static/css/style.css?v=20261014-v24">
@@ -299,7 +376,7 @@
                     </div>
 
                     <form method="POST" action="/portal/profile/" class="profile-wishes-form">
-                        <input type="hidden" name="csrfmiddlewaretoken" value="BxptW5yt5FM6RPhQjscZG5oeXVQ6pVuj2i1GLHdOX6Qf6xSQchz3f6M8cYV8KmhM">
+                        <input type="hidden" name="csrfmiddlewaretoken" value="GU6zyN6AcwRx4xUSTuCfcGhQ8oduzSLML1TNdOF9NnsOwVk87pzLPU74D3uNYpMB">
                         <input type="hidden" name="action" value="save_profile">
 
                         <!-- 1. Preferred Materials & Techniques -->
@@ -585,7 +662,7 @@
                         
                         <!-- 1. Request Sample Box -->
                         <form method="POST" action="/portal/profile/" class="concierge-action-item">
-                            <input type="hidden" name="csrfmiddlewaretoken" value="BxptW5yt5FM6RPhQjscZG5oeXVQ6pVuj2i1GLHdOX6Qf6xSQchz3f6M8cYV8KmhM">
+                            <input type="hidden" name="csrfmiddlewaretoken" value="GU6zyN6AcwRx4xUSTuCfcGhQ8oduzSLML1TNdOF9NnsOwVk87pzLPU74D3uNYpMB">
                             <input type="hidden" name="action" value="request_sample_box">
                             <div class="concierge-item-info">
                                 <strong>Architect Sample Box</strong>
@@ -598,7 +675,7 @@
 
                         <!-- 2. Request Art Fitting -->
                         <form method="POST" action="/portal/profile/" class="concierge-action-item">
-                            <input type="hidden" name="csrfmiddlewaretoken" value="BxptW5yt5FM6RPhQjscZG5oeXVQ6pVuj2i1GLHdOX6Qf6xSQchz3f6M8cYV8KmhM">
+                            <input type="hidden" name="csrfmiddlewaretoken" value="GU6zyN6AcwRx4xUSTuCfcGhQ8oduzSLML1TNdOF9NnsOwVk87pzLPU74D3uNYpMB">
                             <input type="hidden" name="action" value="request_art_fitting">
                             <div class="concierge-item-info">
                                 <strong>Примерка полотен в интерьере</strong>
@@ -611,7 +688,7 @@
 
                         <!-- 3. Request Laser Audit -->
                         <form method="POST" action="/portal/profile/" class="concierge-action-item">
-                            <input type="hidden" name="csrfmiddlewaretoken" value="BxptW5yt5FM6RPhQjscZG5oeXVQ6pVuj2i1GLHdOX6Qf6xSQchz3f6M8cYV8KmhM">
+                            <input type="hidden" name="csrfmiddlewaretoken" value="GU6zyN6AcwRx4xUSTuCfcGhQ8oduzSLML1TNdOF9NnsOwVk87pzLPU74D3uNYpMB">
                             <input type="hidden" name="action" value="request_laser_audit">
                             <div class="concierge-item-info">
                                 <strong>Аудит стен и лазерный замер</strong>

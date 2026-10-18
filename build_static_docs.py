@@ -113,7 +113,35 @@ def build_docs():
     with open(os.path.join(root_dir, '.nojekyll'), 'w', encoding='utf-8') as f:
         f.write('')
 
-    print("All pages (index, gallery, materials, projects, fonts) generated successfully in root and docs!")
+    # 5. Fetch and save SEO files: robots.txt and sitemap.xml
+    print("Generating robots.txt and sitemap.xml...")
+    res_robots = client.get('/robots.txt')
+    if res_robots.status_code == 200:
+        robots_content = res_robots.content.decode('utf-8')
+        for target_path in [
+            os.path.join(docs_dir, 'robots.txt'),
+            os.path.join(root_dir, 'robots.txt'),
+            os.path.join(root_dir, 'static', 'robots.txt'),
+            os.path.join(docs_static, 'robots.txt'),
+        ]:
+            with open(target_path, 'w', encoding='utf-8') as f:
+                f.write(robots_content)
+        print("robots.txt generated and distributed successfully.")
+
+    res_sitemap = client.get('/sitemap.xml')
+    if res_sitemap.status_code == 200:
+        sitemap_content = res_sitemap.content.decode('utf-8')
+        for target_path in [
+            os.path.join(docs_dir, 'sitemap.xml'),
+            os.path.join(root_dir, 'sitemap.xml'),
+            os.path.join(root_dir, 'static', 'sitemap.xml'),
+            os.path.join(docs_static, 'sitemap.xml'),
+        ]:
+            with open(target_path, 'w', encoding='utf-8') as f:
+                f.write(sitemap_content)
+        print("sitemap.xml generated and distributed successfully.")
+
+    print("All pages (index, gallery, materials, projects, fonts) and SEO assets generated successfully in root and docs!")
 
 if __name__ == '__main__':
     build_docs()

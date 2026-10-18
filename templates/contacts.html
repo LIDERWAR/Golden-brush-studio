@@ -2,6 +2,10 @@
 
 {% block title %}Контакты — Golden Brush Studio | Художественно-декоративные работы{% endblock %}
 {% block meta_desc %}Контакты мастерской Golden Brush Studio. Прямой диалог с создателями: телефон, Telegram, Max. Реализация проектов в Москве и по всей России.{% endblock %}
+{% block canonical %}https://gbstudio.ru/contacts/{% endblock %}
+{% block og_title %}Контакты студии — Golden Brush Studio | Москва{% endblock %}
+{% block og_desc %}Прямой диалог с создателями и мастерами Golden Brush Studio: телефон, Telegram, WhatsApp, Max. Обсуждение проектов и заказ выкрасов.{% endblock %}
+{% block og_url %}https://gbstudio.ru/contacts/{% endblock %}
 
 {% block content %}
 <div class="contacts-page-wrap" style="padding-top: clamp(5rem, 8vh, 7rem); padding-bottom: 6rem; background-color: var(--bg-primary);">
@@ -203,6 +207,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         function showSuccess() {
+            if (window.triggerGoal) {
+                window.triggerGoal('lead_contacts_page');
+            }
             form.reset();
             status.style.display = 'block';
             status.style.color = '#1e7e34';

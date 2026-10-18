@@ -3,9 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="W8LCoRkxa55fiQKTZY1XEdlWOlZfjOWAnTnPdtZS2w9oxylTSNo1deJQ3o4hEfJ3">
+    <meta name="csrf-token" content="UdQOzR6aSO7POSq15epivtZXiWBcxBQfZkD2eSFJtFI6ggQhj9mO8HPbNBSvW8R4">
     <title>Контакты — Golden Brush Studio | Художественно-декоративные работы</title>
     <meta name="description" content="Контакты мастерской Golden Brush Studio. Прямой диалог с создателями: телефон, Telegram, Max. Реализация проектов в Москве и по всей России.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://gbstudio.ru/contacts/">
+
+    <!-- Open Graph / Facebook / VK / Telegram / WhatsApp -->
+    <meta property="og:site_name" content="Golden Brush Studio">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://gbstudio.ru/contacts/">
+    <meta property="og:title" content="Контакты студии — Golden Brush Studio | Москва">
+    <meta property="og:description" content="Прямой диалог с создателями и мастерами Golden Brush Studio: телефон, Telegram, WhatsApp, Max. Обсуждение проектов и заказ выкрасов.">
+    <meta property="og:image" content="https://gbstudio.ru/static/images/hero_plaster_texture.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Golden Brush Studio">
+    <meta property="og:locale" content="ru_RU">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Golden Brush Studio — Искусство преображения пространства">
+    <meta name="twitter:description" content="Художественно-декоративные работы под ключ: авторские фактурные покрытия, микроцемент, реставрация.">
+    <meta name="twitter:image" content="https://gbstudio.ru/static/images/hero_plaster_texture.jpg">
+
+    <!-- Schema.org Microdata (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "HomeAndConstructionBusiness",
+                "@id": "https://gbstudio.ru/#organization",
+                "name": "Golden Brush Studio",
+                "alternateName": "Студия художественно-декоративных работ Golden Brush",
+                "url": "https://gbstudio.ru/",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://gbstudio.ru/static/images/apple-touch-icon.png",
+                    "width": 180,
+                    "height": 180
+                },
+                "image": "https://gbstudio.ru/static/images/hero_plaster_texture.jpg",
+                "description": "Художественно-декоративные работы под ключ: авторские фактурные покрытия, микроцемент, реставрация архитектурных элементов, галерея предметов искусства с 2011 года.",
+                "telephone": "+7 (495) 890-44-22",
+                "email": "welcome@gbstudio.ru",
+                "priceRange": "₽₽₽",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Москва",
+                    "addressCountry": "RU"
+                },
+                "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": 55.7558,
+                    "longitude": 37.6173
+                },
+                "openingHoursSpecification": {
+                    "@type": "OpeningHoursSpecification",
+                    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+                    "opens": "10:00",
+                    "closes": "19:00"
+                },
+                "sameAs": [
+                    "https://t.me/gbstudio"
+                ]
+            },
+            {
+                "@type": "WebSite",
+                "@id": "https://gbstudio.ru/#website",
+                "url": "https://gbstudio.ru/",
+                "name": "Golden Brush Studio",
+                "publisher": {
+                    "@id": "https://gbstudio.ru/#organization"
+                },
+                "inLanguage": "ru-RU"
+            }
+        ]
+    }
+    </script>
+    
     
     <!-- Design System CSS -->
     <link rel="stylesheet" href="static/css/style.css?v=20261014-v24">
@@ -333,7 +410,7 @@
                 </p>
 
                 <form id="contactPageForm" class="contact-direct-form" method="POST" action="/api/quiz-lead/">
-                    <input type="hidden" name="csrfmiddlewaretoken" value="W8LCoRkxa55fiQKTZY1XEdlWOlZfjOWAnTnPdtZS2w9oxylTSNo1deJQ3o4hEfJ3">
+                    <input type="hidden" name="csrfmiddlewaretoken" value="UdQOzR6aSO7POSq15epivtZXiWBcxBQfZkD2eSFJtFI6ggQhj9mO8HPbNBSvW8R4">
                     <!-- Honeypot anti-spam -->
                     <div style="display:none !important;" aria-hidden="true">
                         <input type="text" name="website_hp" tabindex="-1" autocomplete="off">
@@ -436,6 +513,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         function showSuccess() {
+            if (window.triggerGoal) {
+                window.triggerGoal('lead_contacts_page');
+            }
             form.reset();
             status.style.display = 'block';
             status.style.color = '#1e7e34';

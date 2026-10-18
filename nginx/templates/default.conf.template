@@ -76,6 +76,22 @@ server {
         expires 30d;
     }
 
+    # SEO: Robots.txt & Sitemap.xml
+    location = /robots.txt {
+        proxy_pass http://django_app;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        access_log off;
+        log_not_found off;
+    }
+
+    location = /sitemap.xml {
+        proxy_pass http://django_app;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        access_log off;
+    }
+
     # Static files (always revalidate to ensure immediate updates)
     location /static/ {
         alias /app/staticfiles/;

@@ -5,7 +5,84 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token }}">
     <title>{% block title %}Golden Brush Studio — Искусство преображения пространства | Художественно-декоративные работы под ключ{% endblock %}</title>
-    <meta name="description" content="{% block meta_desc %}Golden Brush Studio — художественно-декоративные работы под ключ, реставрация архитектурных элементов и авторская картинная галерея.{% endblock %}">
+    <meta name="description" content="{% block meta_desc %}Golden Brush Studio — художественно-декоративные работы под ключ, авторские фактурные покрытия, микроцемент, реставрация архитектурных элементов и картинная галерея с 2011 года.{% endblock %}">
+    <meta name="robots" content="{% block robots %}index, follow{% endblock %}">
+    <link rel="canonical" href="{% block canonical %}https://gbstudio.ru{{ request.path|default:'/' }}{% endblock %}">
+
+    <!-- Open Graph / Facebook / VK / Telegram / WhatsApp -->
+    <meta property="og:site_name" content="Golden Brush Studio">
+    <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+    <meta property="og:url" content="{% block og_url %}https://gbstudio.ru{{ request.path|default:'/' }}{% endblock %}">
+    <meta property="og:title" content="{% block og_title %}{% block title_og %}Golden Brush Studio — Искусство преображения пространства{% endblock %}{% endblock %}">
+    <meta property="og:description" content="{% block og_desc %}{% block meta_desc_og %}Художественно-декоративные работы под ключ: авторские покрытия, реставрация архитектурных элементов, галерея предметов искусства с 2011 года.{% endblock %}{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}https://gbstudio.ru/static/images/hero_plaster_texture.jpg{% endblock %}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Golden Brush Studio">
+    <meta property="og:locale" content="ru_RU">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{% block twitter_title %}{% block title_tw %}Golden Brush Studio — Искусство преображения пространства{% endblock %}{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_desc %}{% block meta_desc_tw %}Художественно-декоративные работы под ключ: авторские фактурные покрытия, микроцемент, реставрация.{% endblock %}{% endblock %}">
+    <meta name="twitter:image" content="{% block twitter_image %}https://gbstudio.ru/static/images/hero_plaster_texture.jpg{% endblock %}">
+
+    <!-- Schema.org Microdata (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "HomeAndConstructionBusiness",
+                "@id": "https://gbstudio.ru/#organization",
+                "name": "Golden Brush Studio",
+                "alternateName": "Студия художественно-декоративных работ Golden Brush",
+                "url": "https://gbstudio.ru/",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://gbstudio.ru/static/images/apple-touch-icon.png",
+                    "width": 180,
+                    "height": 180
+                },
+                "image": "https://gbstudio.ru/static/images/hero_plaster_texture.jpg",
+                "description": "Художественно-декоративные работы под ключ: авторские фактурные покрытия, микроцемент, реставрация архитектурных элементов, галерея предметов искусства с 2011 года.",
+                "telephone": "{{ home_config.contact_phone|default:'+7 (495) 890-44-22' }}",
+                "email": "{{ home_config.contact_email|default:'welcome@gbstudio.ru' }}",
+                "priceRange": "₽₽₽",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Москва",
+                    "addressCountry": "RU"
+                },
+                "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": 55.7558,
+                    "longitude": 37.6173
+                },
+                "openingHoursSpecification": {
+                    "@type": "OpeningHoursSpecification",
+                    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+                    "opens": "10:00",
+                    "closes": "19:00"
+                },
+                "sameAs": [
+                    "{{ home_config.telegram_url|default:'https://t.me/gbstudio' }}"
+                ]
+            },
+            {
+                "@type": "WebSite",
+                "@id": "https://gbstudio.ru/#website",
+                "url": "https://gbstudio.ru/",
+                "name": "Golden Brush Studio",
+                "publisher": {
+                    "@id": "https://gbstudio.ru/#organization"
+                },
+                "inLanguage": "ru-RU"
+            }
+        ]
+    }
+    </script>
+    {% block page_schema %}{% endblock %}
     
     <!-- Design System CSS -->
     <link rel="stylesheet" href="/static/css/style.css?v=20261014-v24">

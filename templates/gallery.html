@@ -2,6 +2,31 @@
 
 {% block title %}Арт-галерея — Golden Brush Studio | Александр Попыкин{% endblock %}
 {% block meta_desc %}Официальная арт-галерея Golden Brush Studio. Автор произведений — художник Александр Попыкин. Интерьерная живопись, графика, керамика и арт-объекты для оформления частных резиденций, представительских офисов и пентхаусов.{% endblock %}
+{% block canonical %}https://gbstudio.ru/gallery/{% endblock %}
+{% block og_title %}Арт-галерея — Golden Brush Studio | Художник Александр Попыкин{% endblock %}
+{% block og_desc %}Интерьерная живопись, графика, керамика и арт-объекты для оформления частных и общественных пространств с сервисом примерки в интерьере.{% endblock %}
+{% block og_image %}https://gbstudio.ru/static/images/art_canvas.jpg{% endblock %}
+{% block og_url %}https://gbstudio.ru/gallery/{% endblock %}
+
+{% block page_schema %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "ArtGallery",
+    "name": "Арт-галерея Golden Brush Studio",
+    "alternateName": "Коллекция произведений Александра Попыкина",
+    "url": "https://gbstudio.ru/gallery/",
+    "image": "https://gbstudio.ru/static/images/art_canvas.jpg",
+    "description": "Интерьерная живопись, графика, керамика и арт-объекты Александра Попыкина для частных и общественных пространств.",
+    "telephone": "+74958904422",
+    "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Москва",
+        "addressCountry": "RU"
+    }
+}
+</script>
+{% endblock %}
 
 {% block content %}
 <div class="gallery-page-wrap" style="padding-top: clamp(4.5rem, 6.5vh, 5.5rem); padding-bottom: 5rem; background-color: var(--bg-primary);">

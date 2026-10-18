@@ -1,7 +1,42 @@
 {% extends 'base.html' %}
 
-{% block title %}{{ article.title }} — Журнал Мастерской | GB STUDIO{% endblock %}
+{% block title %}{{ article.title }} — Журнал Мастерской | Golden Brush Studio{% endblock %}
 {% block meta_desc %}{{ article.summary }}{% endblock %}
+{% block canonical %}https://gbstudio.ru/journal/{{ article.slug }}/{% endblock %}
+{% block og_title %}{{ article.title }} — Golden Brush Studio{% endblock %}
+{% block og_desc %}{{ article.summary }}{% endblock %}
+{% block og_url %}https://gbstudio.ru/journal/{{ article.slug }}/{% endblock %}
+{% if article.hero_image %}
+{% block og_image %}https://gbstudio.ru{{ article.hero_image.url }}{% endblock %}
+{% endif %}
+
+{% block page_schema %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "{{ article.title|escapejs }}",
+    "description": "{{ article.summary|escapejs }}",
+    "author": {
+        "@type": "Person",
+        "name": "Александр Попыкин"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Golden Brush Studio",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://gbstudio.ru/static/images/apple-touch-icon.png"
+        }
+    },
+    "datePublished": "{{ article.created_at|date:'c' }}",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://gbstudio.ru/journal/{{ article.slug }}/"
+    }
+}
+</script>
+{% endblock %}
 
 {% block content %}
 <article style="padding-top: 8rem; padding-bottom: 6rem; background-color: var(--bg-primary);">
