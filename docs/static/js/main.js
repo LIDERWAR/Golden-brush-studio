@@ -1000,6 +1000,9 @@ function initGeneralContactModal() {
     document.querySelectorAll('.btn-open-contact').forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
+            if (typeof window.closeMobileDrawer === 'function') {
+                window.closeMobileDrawer();
+            }
             contactModal.classList.add('active');
             document.body.classList.add('drawer-open');
         });
