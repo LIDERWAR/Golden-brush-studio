@@ -38,13 +38,16 @@
             <!-- Nav Tabs -->
             <div class="portal-tabs-nav" role="tablist">
                 <button type="button" class="portal-tab-btn {% if active_tab == 'login' or not active_tab or active_tab not in 'master,register' %}active{% endif %}" id="tabBtnLogin" onclick="switchPortalTab('login')">
-                    Вход для заказчика
+                    <span class="tab-text-full">Вход заказчика</span>
+                    <span class="tab-text-mobile">Заказчик</span>
                 </button>
                 <button type="button" class="portal-tab-btn {% if active_tab == 'master' %}active{% endif %}" id="tabBtnMaster" onclick="switchPortalTab('master')">
-                    Вход для куратора (Мастера)
+                    <span class="tab-text-full">Вход куратора</span>
+                    <span class="tab-text-mobile">Куратор</span>
                 </button>
                 <button type="button" class="portal-tab-btn {% if active_tab == 'register' %}active{% endif %}" id="tabBtnRegister" onclick="switchPortalTab('register')">
-                    Регистрация
+                    <span class="tab-text-full">Регистрация</span>
+                    <span class="tab-text-mobile">Регистрация</span>
                 </button>
             </div>
 

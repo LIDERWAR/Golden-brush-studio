@@ -6131,26 +6131,29 @@ img {
 
 /* Portal Tabs Nav */
 .portal-tabs-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
   border-bottom: 1px solid var(--border-subtle);
-  margin-bottom: 2rem;
+  margin-bottom: 2.25rem;
+  width: 100%;
 }
 
 .portal-tab-btn {
   background: none;
   border: none;
-  padding: 0.85rem 1.25rem;
+  padding: 0.9rem 0.5rem;
   font-family: var(--font-sans);
   font-size: 0.92rem;
   font-weight: 600;
   color: var(--text-muted);
   cursor: pointer;
   position: relative;
-  transition: color var(--tr-fast);
+  transition: color var(--tr-fast), border-color var(--tr-fast);
   border-bottom: 2px solid transparent;
   margin-bottom: -1px;
+  text-align: center;
+  white-space: nowrap;
 }
 
 .portal-tab-btn:hover {
@@ -6160,6 +6163,24 @@ img {
 .portal-tab-btn.active {
   color: var(--text-main);
   border-bottom-color: var(--accent-bronze);
+  font-weight: 700;
+}
+
+.tab-text-mobile {
+  display: none;
+}
+
+@media (max-width: 520px) {
+  .portal-tab-btn {
+    padding: 0.75rem 0.25rem;
+    font-size: 0.84rem;
+  }
+  .tab-text-full {
+    display: none;
+  }
+  .tab-text-mobile {
+    display: inline;
+  }
 }
 
 .portal-tab-pane {
