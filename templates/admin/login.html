@@ -1,0 +1,49 @@
+{% extends "registration/base.html" %}
+{% load i18n jazzmin %}
+{% get_jazzmin_settings request as jazzmin_settings %}
+{% get_jazzmin_ui_tweaks as jazzmin_ui %}
+
+{% block content %}
+    <p class="login-box-msg">{{ jazzmin_settings.welcome_sign }}</p>
+    <form action="{{ app_path }}" method="post">
+        {% csrf_token %}
+        {% if user.is_authenticated %}
+            <div class="callout callout-danger" style="background: rgba(220, 53, 69, 0.15); border-left: 4px solid #dc3545; padding: 0.75rem 1rem; margin-bottom: 1rem; border-radius: 4px; color: #ff8591;">
+                <p style="margin: 0;">
+                    Вы уже авторизованы как {{ username }}, но этот аккаунт не имеет прав администратора.
+                </p>
+            </div>
+        {% endif %}
+        {% if form.errors %}
+            <div class="callout callout-danger" style="background: rgba(220, 53, 69, 0.15); border-left: 4px solid #dc3545; padding: 0.75rem 1rem; margin-bottom: 1rem; border-radius: 4px; color: #ff8591;">
+                {% if form.non_field_errors %}
+                    {% for error in form.non_field_errors %}
+                        <p style="margin: 0;">{{ error }}</p>
+                    {% endfor %}
+                {% else %}
+                    <p style="margin: 0;">Неверное имя пользователя или пароль.</p>
+                {% endif %}
+            </div>
+        {% endif %}
+        <div class="input-group mb-3">
+            <input type="text" name="username" class="form-control" placeholder="Имя пользователя (admin)" required autocomplete="username">
+            <span class="input-group-text">
+                <i class="fas fa-user"></i>
+            </span>
+        </div>
+        <div class="input-group mb-3">
+            <input type="password" name="password" class="form-control" placeholder="Пароль" required autocomplete="current-password">
+            <span class="input-group-text">
+                <i class="fas fa-lock"></i>
+            </span>
+        </div>
+        <div class="d-grid">
+            <button type="submit" class="btn btn-primary">
+                Войти в панель управления
+            </button>
+        </div>
+        <div class="admin-back-site">
+            <a href="/">← На главную Golden Brush Studio</a>
+        </div>
+    </form>
+{% endblock %}

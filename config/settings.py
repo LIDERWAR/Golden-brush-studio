@@ -137,12 +137,21 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 TELEGRAM_BOT_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN', '')
 TELEGRAM_CHAT_ID = os.environ.get('TELEGRAM_CHAT_ID', '')
 
+# Authentication URLs
+LOGIN_URL = '/portal/login/?tab=master'
+LOGIN_REDIRECT_URL = '/admin/'
+LOGOUT_REDIRECT_URL = '/'
+
 # JAZZMIN Settings for Luxury Architectural & Art Atelier
 JAZZMIN_SETTINGS = {
     "site_title": "GB STUDIO",
     "site_header": "GB STUDIO | FIT-OUT & ART",
     "site_brand": "GB STUDIO",
     "site_icon": "images/favicon-32x32.png",
+    "site_logo": "images/android-chrome-192x192.png",
+    "login_logo": "images/android-chrome-192x192.png",
+    "login_logo_dark": "images/android-chrome-192x192.png",
+    "site_logo_classes": "brand-image img-circle elevation-3",
     "welcome_sign": "Панель управления проектами и заявками GB STUDIO",
     "copyright": "GB STUDIO © 2026",
     "search_model": ["leads.Lead", "materials.DecorativeMaterial"],
