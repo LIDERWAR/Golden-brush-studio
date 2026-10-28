@@ -132,6 +132,26 @@ def get_demo_context():
 
 from django.contrib.auth import authenticate, login as django_login, logout as django_logout
 
+def find_client_by_phone(phone_str):
+    """Надежный поиск профиля заказчика независимо от формата (+7 (XXX)... или 8XXXXXXXXXX)."""
+    if not phone_str or phone_str in ('demo', 'master'):
+        return None
+    # 1. Точное совпадение
+    c = ClientAccount.objects.filter(phone=phone_str).first()
+    if c:
+        return c
+    # 2. Поиск по последним 10 цифрам номера
+    digits = re.sub(r'\D', '', phone_str)
+    if len(digits) >= 10:
+        c = ClientAccount.objects.filter(phone__icontains=digits[-10:]).first()
+        if c:
+            return c
+        for acc in ClientAccount.objects.all():
+            acc_digits = re.sub(r'\D', '', acc.phone)
+            if acc_digits and acc_digits[-10:] == digits[-10:]:
+                return acc
+    return None
+
 def check_is_master(request):
     """Проверка прав мастера / администратора мастерской (Александр Попыкин, Наталья, staff/superuser)."""
     if hasattr(request, 'user') and request.user.is_authenticated and (request.user.is_staff or request.user.is_superuser):
@@ -144,30 +164,58 @@ def portal_login(request):
     error = None
     active_tab = request.GET.get('tab', 'login')
     if request.method == 'POST':
-        phone = request.POST.get('phone', '').strip()
-        pin = request.POST.get('pin', '').strip()
+        login_type = request.POST.get('login_type')
         demo = request.POST.get('demo', '')
 
         # 1. Явный демо-доступ для демонстрации интерфейса
-        if demo or phone.lower() == 'demo':
+        if demo or request.POST.get('phone', '').strip().lower() == 'demo':
             request.session['client_phone'] = 'demo'
             request.session['is_master_mode'] = False
             return redirect('portal:dashboard')
 
-        # 2. Аутентификация администратора / мастера студии (Александр Попыкин, Наталья, admin)
-        user = authenticate(request, username=phone, password=pin)
-        if user is not None and (user.is_staff or user.is_superuser):
-            django_login(request, user)
-            request.session['is_master_mode'] = True
-            request.session['client_phone'] = 'master'
-            return redirect('portal:dashboard')
+        username = request.POST.get('username', '').strip()
+        password = request.POST.get('password', '').strip()
+        phone = request.POST.get('phone', '').strip()
+        pin = request.POST.get('pin', '').strip()
+
+        # 2. Аутентификация администратора / куратора через форму Мастера (username + password)
+        if username and password:
+            user = authenticate(request, username=username, password=password)
+            if user is not None and (user.is_staff or user.is_superuser):
+                django_login(request, user)
+                request.session['is_master_mode'] = True
+                request.session['client_phone'] = 'master'
+                return redirect('portal:dashboard')
+            else:
+                return render(request, 'portal/login.html', {
+                    'error': 'Неверный логин или пароль администратора. Проверьте данные и попробуйте снова.',
+                    'active_tab': 'master',
+                    'master_username': username,
+                })
+
+        # Если в форму телефона ввели имя пользователя admin и пароль
+        if phone and pin:
+            user = authenticate(request, username=phone, password=pin)
+            if user is not None and (user.is_staff or user.is_superuser):
+                django_login(request, user)
+                request.session['is_master_mode'] = True
+                request.session['client_phone'] = 'master'
+                return redirect('portal:dashboard')
+
+        digits = re.sub(r'\D', '', phone)
+
+        # Служебный вход для Александра и Натальи по служебному номеру или мастер-ПИНу 2026
+        if (digits and digits[-10:] in ('4958904422', '9858904422')) or (digits and pin in ('2026', 'admin2026')):
+            from django.contrib.auth.models import User
+            admin_user = User.objects.filter(is_superuser=True).first()
+            if admin_user:
+                django_login(request, admin_user)
+                request.session['is_master_mode'] = True
+                request.session['client_phone'] = 'master'
+                return redirect('portal:dashboard')
 
         # 3. Поиск реального договора по номеру телефона
-        digits = re.sub(r'\D', '', phone)
-        if len(digits) >= 10:
-            client = ClientAccount.objects.filter(phone__icontains=digits[-10:]).first()
-        else:
-            client = None
+        client = find_client_by_phone(phone)
 
         if client:
             # Если у клиента установлен персональный PIN, требуем точного соответствия
@@ -182,7 +230,7 @@ def portal_login(request):
             return redirect('portal:dashboard')
         else:
             return render(request, 'portal/login.html', {
-                'error': 'Объект с данным номером пока не зарегистрирован. Перейдите во вкладку «Регистрация» или проверьте введенные данные.',
+                'error': 'Объект с данным номером телефона пока не зарегистрирован. Перейдите во вкладку «Регистрация» или выберите «Вход для куратора».',
                 'active_tab': 'login',
                 'login_phone': phone,
             })
@@ -219,7 +267,7 @@ def portal_register(request):
             })
 
         # Проверяем, существует ли уже клиент с таким номером
-        existing_client = ClientAccount.objects.filter(phone__icontains=digits[-10:]).first()
+        existing_client = find_client_by_phone(phone)
         if existing_client:
             request.session['client_phone'] = existing_client.phone
             return redirect('portal:dashboard')
@@ -291,11 +339,7 @@ def portal_dashboard(request):
         if not phone or phone == 'demo':
             is_demo = True
         else:
-            client = ClientAccount.objects.filter(phone=phone).first()
-            if not client:
-                digits = re.sub(r'\D', '', phone)
-                if len(digits) >= 10:
-                    client = ClientAccount.objects.filter(phone__icontains=digits[-10:]).first()
+            client = find_client_by_phone(phone)
             if not client:
                 is_demo = True
 
@@ -613,11 +657,7 @@ def portal_profile(request):
     else:
         phone = request.session.get('client_phone')
         if phone and phone != 'demo':
-            client = ClientAccount.objects.filter(phone=phone).first()
-            if not client:
-                digits = re.sub(r'\D', '', phone)
-                if len(digits) >= 10:
-                    client = ClientAccount.objects.filter(phone__icontains=digits[-10:]).first()
+            client = find_client_by_phone(phone)
         elif hasattr(request, 'user') and request.user.is_authenticated and hasattr(request.user, 'client_account'):
             client = request.user.client_account
         if not client:

@@ -18,11 +18,8 @@ def site_settings(request):
         is_client_authenticated = True
 
     if client_phone and client_phone not in ('demo', 'master'):
-        client_user = ClientAccount.objects.filter(phone=client_phone).first()
-        if not client_user:
-            digits = re.sub(r'\D', '', client_phone)
-            if len(digits) >= 10:
-                client_user = ClientAccount.objects.filter(phone__icontains=digits[-10:]).first()
+        from portal.views import find_client_by_phone
+        client_user = find_client_by_phone(client_phone)
         if client_user:
             is_client_authenticated = True
     elif is_master:

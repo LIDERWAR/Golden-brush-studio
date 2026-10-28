@@ -6132,6 +6132,7 @@ img {
 /* Portal Tabs Nav */
 .portal-tabs-nav {
   display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
   border-bottom: 1px solid var(--border-subtle);
   margin-bottom: 2rem;

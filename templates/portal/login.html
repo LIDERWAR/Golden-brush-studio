@@ -37,24 +37,27 @@
         <div class="portal-login-card">
             <!-- Nav Tabs -->
             <div class="portal-tabs-nav" role="tablist">
-                <button type="button" class="portal-tab-btn {% if active_tab != 'register' %}active{% endif %}" id="tabBtnLogin" onclick="switchPortalTab('login')">
-                    Вход в кабинет
+                <button type="button" class="portal-tab-btn {% if active_tab == 'login' or not active_tab or active_tab not in 'master,register' %}active{% endif %}" id="tabBtnLogin" onclick="switchPortalTab('login')">
+                    Вход для заказчика
+                </button>
+                <button type="button" class="portal-tab-btn {% if active_tab == 'master' %}active{% endif %}" id="tabBtnMaster" onclick="switchPortalTab('master')">
+                    Вход для куратора (Мастера)
                 </button>
                 <button type="button" class="portal-tab-btn {% if active_tab == 'register' %}active{% endif %}" id="tabBtnRegister" onclick="switchPortalTab('register')">
-                    Регистрация и фиксация скидки
+                    Регистрация
                 </button>
             </div>
 
-            <!-- Tab 1: Login Form -->
-            <div class="portal-tab-pane {% if active_tab != 'register' %}active{% endif %}" id="paneLogin">
+            <!-- Tab 1: Client Login Form -->
+            <div class="portal-tab-pane {% if active_tab == 'login' or not active_tab or active_tab not in 'master,register' %}active{% endif %}" id="paneLogin">
                 <div class="portal-login-header">
-                    <h1 class="portal-login-title">Вход в личный кабинет</h1>
+                    <h1 class="portal-login-title">Вход в личный кабинет заказчика</h1>
                     <p class="portal-login-desc">
                         Введите номер телефона, указанный в договоре или при регистрации объекта.
                     </p>
                 </div>
 
-                {% if error and active_tab != 'register' %}
+                {% if error and active_tab != 'register' and active_tab != 'master' %}
                 <div class="portal-alert-box portal-alert-error">
                     {{ error }}
                 </div>
@@ -84,10 +87,61 @@
                             Демо-доступ (пример объекта 240 м²)
                         </button>
                     </div>
+
+                    <div style="margin-top: 1.5rem; text-align: center;">
+                        <button type="button" onclick="switchPortalTab('master')" style="background: none; border: none; color: var(--accent-bronze, #926f34); font-size: 0.86rem; cursor: pointer; text-decoration: underline; font-weight: 600; padding: 0.25rem;">
+                            Вход для Александра и Натальи (по логину и паролю)
+                        </button>
+                    </div>
                 </form>
             </div>
 
-            <!-- Tab 2: Register Form -->
+            <!-- Tab 2: Master / Admin Login Form (Sasha & Natalia) -->
+            <div class="portal-tab-pane {% if active_tab == 'master' %}active{% endif %}" id="paneMaster">
+                <div class="portal-login-header">
+                    <h1 class="portal-login-title">Вход для куратора мастерской</h1>
+                    <p class="portal-login-desc">
+                        Режим Мастера: оперативная публикация фотоотчетов со стройки, контроль объектов и CRM.
+                    </p>
+                </div>
+
+                {% if error and active_tab == 'master' %}
+                <div class="portal-alert-box portal-alert-error">
+                    {{ error }}
+                </div>
+                {% endif %}
+
+                <form method="POST" action="{% url 'portal:login' %}" class="portal-login-form">
+                    {% csrf_token %}
+                    <input type="hidden" name="login_type" value="master">
+                    
+                    <div class="form-group">
+                        <label for="masterUsername" class="portal-label">Логин администратора</label>
+                        <input type="text" id="masterUsername" name="username" class="portal-input" placeholder="admin" required value="{{ master_username|default:'' }}" autocomplete="username">
+                        <small class="portal-hint">Имя пользователя (по умолчанию: admin)</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="masterPassword" class="portal-label">Пароль</label>
+                        <input type="password" id="masterPassword" name="password" class="portal-input" placeholder="Введите пароль администратора" required autocomplete="current-password">
+                        <small class="portal-hint">Пароль доступа к управлению студией</small>
+                    </div>
+
+                    <div class="portal-form-actions">
+                        <button type="submit" class="btn btn-primary btn-portal-submit">
+                            Войти как куратор
+                        </button>
+                    </div>
+
+                    <div style="margin-top: 1.5rem; text-align: center;">
+                        <button type="button" onclick="switchPortalTab('login')" style="background: none; border: none; color: var(--accent-bronze, #926f34); font-size: 0.86rem; cursor: pointer; text-decoration: underline; font-weight: 600; padding: 0.25rem;">
+                            Вернуться к входу для заказчиков по телефону
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Tab 3: Register Form -->
             <div class="portal-tab-pane {% if active_tab == 'register' %}active{% endif %}" id="paneRegister">
                 <div class="portal-login-header">
                     <h1 class="portal-login-title">Регистрация в партнерском клубе</h1>
@@ -169,24 +223,33 @@
 
 <script>
 function switchPortalTab(tabName) {
-    var paneLogin = document.getElementById('paneLogin');
-    var paneRegister = document.getElementById('paneRegister');
-    var tabBtnLogin = document.getElementById('tabBtnLogin');
-    var tabBtnRegister = document.getElementById('tabBtnRegister');
+    var panes = {
+        'login': document.getElementById('paneLogin'),
+        'master': document.getElementById('paneMaster'),
+        'register': document.getElementById('paneRegister')
+    };
+    var btns = {
+        'login': document.getElementById('tabBtnLogin'),
+        'master': document.getElementById('tabBtnMaster'),
+        'register': document.getElementById('tabBtnRegister')
+    };
 
-    if (!paneLogin || !paneRegister) return;
-
-    if (tabName === 'register') {
-        paneLogin.classList.remove('active');
-        paneRegister.classList.add('active');
-        tabBtnLogin.classList.remove('active');
-        tabBtnRegister.classList.add('active');
-    } else {
-        paneRegister.classList.remove('active');
-        paneLogin.classList.add('active');
-        tabBtnRegister.classList.remove('active');
-        tabBtnLogin.classList.add('active');
+    for (var key in panes) {
+        if (panes[key]) panes[key].classList.remove('active');
+        if (btns[key]) btns[key].classList.remove('active');
     }
+
+    if (panes[tabName]) panes[tabName].classList.add('active');
+    if (btns[tabName]) btns[tabName].classList.add('active');
 }
+
+// Auto-switch tab if url has ?tab=master or ?tab=register
+document.addEventListener('DOMContentLoaded', function() {
+    var urlParams = new URLSearchParams(window.location.search);
+    var tab = urlParams.get('tab');
+    if (tab && (tab === 'master' || tab === 'register' || tab === 'login')) {
+        switchPortalTab(tab);
+    }
+});
 </script>
 {% endblock %}
